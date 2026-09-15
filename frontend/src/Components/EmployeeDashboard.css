@@ -1,0 +1,4874 @@
+/* ============================================================
+   GLOBAL
+============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+.employee-page {
+  width: 1440px;
+  height: 1024px;
+
+  margin: 0 auto;
+
+  display: flex;
+
+  overflow: hidden;
+
+  background: #eef7fc;
+
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+
+.employee-sidebar {
+  position: relative;
+
+  width: 240px;
+  min-width: 240px;
+
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: linear-gradient(
+    180deg,
+    #e9f9f7 0%,
+    #eaf8f8 100%
+  );
+
+  border: 1px solid #cbd8dc;
+
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+
+  overflow: hidden;
+
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease;
+}
+
+
+/* ============================================================
+   LOGO
+============================================================ */
+
+.sidebar-logo {
+  width: 100%;
+  height: 121px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 8px;
+
+  border-bottom: 1px solid #cbd8dc;
+
+  flex-shrink: 0;
+}
+
+.sidebar-logo img {
+  width: 108px;
+  height: auto;
+
+  display: block;
+}
+
+
+.hrms-section {
+  position: relative;
+
+  width: calc(100% - 28px);
+  margin: 0 14px;
+
+  height: 77px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  border-bottom: none;
+
+  background: transparent;
+}
+
+
+/* CURVED / BEND LINE */
+.hrms-section::after {
+  content: "";
+
+  position: absolute;
+
+  left: 8%;
+  right: 8%;
+
+  bottom: -1px;
+
+  height: 12px;
+
+  border-bottom: 2px solid #b9d0d2;
+
+  border-radius: 0 0 50% 50%;
+
+  pointer-events: none;
+}
+/* ============================================================
+   HRMS LOGO
+============================================================ */
+
+.hrms-section::after {
+  content: "";
+
+  position: absolute;
+
+  left: 12%;
+  right: 0;
+
+  bottom: -1px;
+
+  height: 8px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #dce7e8 10%,
+    #707879 35%,
+    #171717 50%,
+    #707879 65%,
+    #dce7e8 90%,
+    transparent 100%
+  );
+
+  border-radius: 50%;
+  transform: scaleY(0.35);
+}
+
+
+/* REMOVE HRMS DROPDOWN ARROW */
+.hrms-arrow {
+  display: none;
+}
+
+
+
+/* ============================================================
+   HRMS TEXT
+============================================================ */
+
+.hrms-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+/* HRMS */
+.hrms-text .hrms-title {
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #000000;
+  letter-spacing: 0.05em;
+}
+
+/* Employee Portal */
+.hrms-text .hrms-subtitle {
+  margin-top: 3px;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+
+  background: linear-gradient(
+    90deg,
+    #18b84b 0%,
+    #18ad7b 45%,
+    #159fd3 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+/* ============================================================
+   EXPAND ROW
+============================================================ */
+
+.sidebar-expand-row {
+  width: 100%;
+
+  height: 41px;
+  min-height: 41px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  padding-right: 10px;
+
+  background: transparent;
+
+  border: none;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   EXPAND BUTTON
+============================================================ */
+
+.sidebar-expand-button {
+  width: 30px;
+  height: 30px;
+
+  padding: 0;
+
+  margin: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  color: #003f58;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.sidebar-expand-button:hover {
+  background: #d2f6ed;
+
+  border-radius: 5px;
+}
+
+.expand-icon {
+  width: 20px;
+  height: 20px;
+
+  color: #003f58;
+
+  stroke: #003f58;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   SIDEBAR MENU
+============================================================ */
+
+.sidebar-menu {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 3px 8px 10px;
+}
+
+.sidebar-menu::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-menu::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sidebar-menu::-webkit-scrollbar-thumb {
+  background: #8ed7d1;
+
+  border-radius: 10px;
+}
+
+
+/* ============================================================
+   MENU SECTION
+============================================================ */
+
+.menu-section {
+  width: 100%;
+}
+
+
+/* ============================================================
+   SECTION TITLE
+============================================================ */
+
+.section-title {
+  width: 100%;
+
+  height: 39px;
+
+  padding: 0 10px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border: none;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  color: #005270;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.2px;
+
+  text-align: left;
+}
+
+.section-title:hover {
+  color: #003f58;
+}
+
+.section-arrow {
+  color: #005270;
+
+  transition: transform 0.2s ease;
+
+  flex-shrink: 0;
+}
+
+.section-arrow.open {
+  transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   SECTION ITEMS
+============================================================ */
+
+.section-items {
+  width: 100%;
+}
+
+
+/* ============================================================
+   SIDEBAR ITEM
+============================================================ */
+
+.sidebar-item {
+  position: relative;
+
+  width: 100%;
+
+  height: 45px;
+  min-height: 45px;
+
+  padding: 0 12px 0 29px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+
+  border: none;
+
+  border-radius: 7px;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  color: #000;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  text-align: left;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+
+/* ============================================================
+   HOVER
+   FIGMA = #D2F6ED
+============================================================ */
+
+.sidebar-item:hover {
+  background: #d2f6ed;
+
+  color: #000;
+}
+
+
+/* ============================================================
+   ACTIVE
+   BG   = #D2F6ED
+   SIDE = #19B968
+============================================================ */
+
+.sidebar-item.active {
+  background: #d2f6ed;
+
+  color: #000;
+
+  font-weight: 600;
+}
+
+.sidebar-item.active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 5px;
+
+  border-radius: 7px 0 0 7px;
+
+  background: #19b968;
+}
+
+
+/* ============================================================
+   ICON WRAPPER
+============================================================ */
+
+.menu-icon-wrapper {
+  width: 22px;
+  min-width: 22px;
+
+  height: 22px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ============================================================
+   NORMAL ICONS
+   FIGMA DEFAULT = #334155
+============================================================ */
+
+.menu-icon {
+  width: 20px;
+  height: 20px;
+
+  object-fit: contain;
+
+  display: block;
+
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(24%)
+    sepia(13%)
+    saturate(1000%)
+    hue-rotate(176deg)
+    brightness(91%)
+    contrast(88%);
+}
+
+
+/* ============================================================
+   ACTIVE NORMAL ICON
+   FIGMA ACTIVE = #124235
+============================================================ */
+
+.sidebar-item.active .menu-icon {
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(23%)
+    sepia(23%)
+    saturate(1014%)
+    hue-rotate(116deg)
+    brightness(85%)
+    contrast(91%);
+}
+
+
+/* ============================================================
+   LEAVE ICON
+   IMPORTANT:
+   Do NOT apply the dark filter.
+   This keeps the imported Figma calendar icon's
+   original black/red colors.
+============================================================ */
+
+.sidebar-item .leave-menu-icon {
+  filter: none;
+
+  width: 20px;
+  height: 20px;
+}
+
+.sidebar-item.active .leave-menu-icon {
+  filter: none;
+}
+
+
+/* ============================================================
+   GOALS ICON
+   Keep target icon dark like Figma.
+============================================================ */
+
+.sidebar-item .goals-menu-icon {
+  filter:
+    brightness(0)
+    saturate(100%);
+}
+
+.sidebar-item.active .goals-menu-icon {
+  filter:
+    brightness(0)
+    saturate(100%);
+}
+
+
+/* ============================================================
+   LABEL
+============================================================ */
+
+.menu-label {
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  line-height: 1;
+}
+
+
+/* ============================================================
+   COLLAPSED ITEMS
+============================================================ */
+
+.collapsed-section-items {
+  width: 100%;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 0;
+}
+
+.collapsed-item {
+  position: relative;
+
+  width: 100%;
+
+  height: 45px;
+  min-height: 45px;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.collapsed-item:hover {
+  background: #d2f6ed;
+}
+
+.collapsed-item.active {
+  background: #d2f6ed;
+}
+
+.collapsed-item.active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 5px;
+
+  border-radius: 5px 0 0 5px;
+
+  background: #19b968;
+}
+
+
+/* ============================================================
+   COLLAPSED ICON
+============================================================ */
+
+.collapsed-icon {
+  width: 21px;
+  height: 21px;
+
+  object-fit: contain;
+
+  display: block;
+
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(24%)
+    sepia(13%)
+    saturate(1000%)
+    hue-rotate(176deg)
+    brightness(91%)
+    contrast(88%);
+}
+
+
+/* ============================================================
+   COLLAPSED LEAVE
+   Keep original Figma colors.
+============================================================ */
+
+.collapsed-leave-icon {
+  filter: none;
+}
+
+
+/* ============================================================
+   COLLAPSED GOALS
+   Dark Figma target icon.
+============================================================ */
+
+.collapsed-goals-icon {
+  filter:
+    brightness(0)
+    saturate(100%);
+}
+
+
+/* ============================================================
+   SIDEBAR BOTTOM
+============================================================ */
+
+.sidebar-bottom {
+  flex-shrink: 0;
+
+  width: 100%;
+
+  padding: 5px 13px 15px;
+
+  background: transparent;
+}
+
+
+/* ============================================================
+   SETTINGS
+============================================================ */
+
+.settings-button {
+  width: 100%;
+
+  height: 43px;
+
+  padding-right: 7px;
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  cursor: pointer;
+
+  color: #283238;
+}
+
+.settings-button:hover {
+  color: #124235;
+}
+
+
+/* ============================================================
+   NEED HELP
+============================================================ */
+
+.help-button {
+  width: 100%;
+
+  height: 59px;
+
+  padding: 0 19px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 15px;
+
+  border: none;
+
+  border-radius: 9px;
+
+  background: linear-gradient(
+    90deg,
+    #a9dfb9 0%,
+    #b9f5dc 100%
+  );
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 16px;
+
+  font-weight: 500;
+
+  color: #000;
+}
+
+.help-button:hover {
+  background: #d2f6ed;
+}
+
+.help-icon {
+  width: 40px;
+  height: 40px;
+
+  border-radius: 9px;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    145deg,
+    #168b3c,
+    #38ce68
+  );
+
+  color: white;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   SIDEBAR LINKS
+============================================================ */
+
+.sidebar-links {
+  width: 100%;
+
+  padding-top: 20px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 5px;
+
+  color: #003f57;
+
+  font-size: 11px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   COLLAPSED SIDEBAR
+============================================================ */
+
+.sidebar-collapsed .employee-sidebar {
+  width: 72px;
+  min-width: 72px;
+}
+
+
+/* ============================================================
+   COLLAPSED LOGO
+============================================================ */
+
+.sidebar-collapsed .sidebar-logo {
+  height: 104px;
+}
+
+.sidebar-collapsed .sidebar-logo img {
+  width: 49px;
+}
+
+
+/* ============================================================
+   COLLAPSED HRMS
+============================================================ */
+
+.sidebar-collapsed .hrms-section {
+  width: 100%;
+
+  margin: 0;
+
+  height: 68px;
+
+  justify-content: center;
+
+  border-bottom: none;
+}
+
+.sidebar-collapsed .hrms-section::after {
+  left: 8%;
+  right: 8%;
+
+  bottom: -1px;
+
+  height: 10px;
+
+  border-bottom: 2px solid #b9d0d2;
+
+  border-radius: 0 0 50% 50%;
+}
+
+.sidebar-collapsed .hrms-text {
+  display: none;
+}
+
+.sidebar-collapsed .hrms-arrow {
+  display: none;
+}
+
+.sidebar-collapsed .hrms-logo {
+  width: 35px;
+  height: 35px;
+}
+
+.sidebar-collapsed .hrms-logo img {
+  width: 35px;
+  height: 35px;
+}
+
+/* ============================================================
+   COLLAPSED EXPAND BUTTON
+============================================================ */
+
+.sidebar-collapsed .sidebar-expand-row {
+  width: 100%;
+  height: 41px;
+  min-height: 41px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border-bottom: none;
+  background: transparent;
+}
+
+.sidebar-collapsed .sidebar-expand-button {
+  width: 30px;
+  height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.sidebar-collapsed .expand-icon {
+  width: 20px;
+  height: 20px;
+
+  stroke: #003f58;
+  stroke-width: 2.4;
+}
+
+
+/* ============================================================
+   COLLAPSED MENU
+   NO SPACING BETWEEN SECTIONS
+============================================================ */
+
+.sidebar-collapsed .sidebar-menu {
+  flex: 1;
+
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  padding: 0 8px 5px;
+}
+
+
+/* ============================================================
+   REMOVE SECTION TITLE COMPLETELY
+============================================================ */
+
+.sidebar-collapsed .menu-section {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  display: block;
+}
+
+.sidebar-collapsed .section-title {
+  display: none;
+
+  width: 0;
+  height: 0;
+
+  margin: 0;
+  padding: 0;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   COLLAPSED ICON CONTAINER
+============================================================ */
+
+.sidebar-collapsed .collapsed-section-items {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 0;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* ============================================================
+   COLLAPSED ITEM
+============================================================ */
+
+.sidebar-collapsed .collapsed-item {
+  position: relative;
+
+  width: 100%;
+  height: 45px;
+  min-height: 45px;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 6px;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   COLLAPSED HOVER
+============================================================ */
+
+.sidebar-collapsed .collapsed-item:hover {
+  background: #d2f6ed;
+}
+
+
+/* ============================================================
+   COLLAPSED ACTIVE
+============================================================ */
+
+.sidebar-collapsed .collapsed-item.active {
+  background: #d2f6ed;
+}
+
+
+/* ============================================================
+   COLLAPSED ACTIVE GREEN LINE
+============================================================ */
+
+.sidebar-collapsed .collapsed-item.active::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 5px;
+
+  border-radius: 5px 0 0 5px;
+
+  background: #19b968;
+}
+
+
+/* ============================================================
+   COLLAPSED ICON
+============================================================ */
+
+.sidebar-collapsed .collapsed-icon {
+  width: 21px;
+  height: 21px;
+
+  object-fit: contain;
+
+  display: block;
+
+  filter:
+    brightness(0)
+    saturate(100%)
+    invert(24%)
+    sepia(13%)
+    saturate(1000%)
+    hue-rotate(176deg)
+    brightness(91%)
+    contrast(88%);
+}
+
+
+/* ============================================================
+   COLLAPSED BOTTOM
+============================================================ */
+
+.sidebar-collapsed .sidebar-bottom {
+  width: 100%;
+
+  flex-shrink: 0;
+
+  padding: 5px 8px 10px;
+
+  background: transparent;
+}
+
+.sidebar-collapsed .settings-button {
+  width: 100%;
+  height: 45px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+  background: transparent;
+}
+
+/* ============================================================
+   RIGHT SIDE
+============================================================ */
+
+.employee-right {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 100vh;
+
+  display: flex;
+
+  flex-direction: column;
+
+  background: #eef7fc;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.employee-header {
+  height: 59px;
+
+  min-height: 59px;
+
+  padding: 0 17px 0 35px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background: #e7f5ff;
+
+  border-bottom: 1px solid #cad9df;
+}
+
+
+/* ============================================================
+   SEARCH
+============================================================ */
+
+.header-search {
+  width: 425px;
+  height: 44px;
+
+  padding: 0 17px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  background: white;
+
+  border: 1px solid #b9c9d0;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.header-search svg {
+  color: #343b40;
+
+  flex-shrink: 0;
+}
+
+.header-search input {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: 12px;
+
+  color: #333;
+}
+
+.header-search input::placeholder {
+  color: #969da2;
+}
+
+
+/* ============================================================
+   HEADER ACTIONS
+============================================================ */
+
+.header-actions {
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+/* ============================================================
+   HEADER BUTTON
+============================================================ */
+
+/* ============================================================
+   HEADER ICON BUTTONS
+============================================================ */
+
+.header-icon-button {
+  width: 40px;
+  height: 40px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  cursor: pointer;
+
+  color: #171717;
+
+  border-radius: 50%;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.15s ease;
+}
+
+
+/* ============================================================
+   SUN / MOON HOVER
+============================================================ */
+
+.theme-button:hover {
+  background: #d2f6ed;
+
+  color: #003f58;
+
+  transform: scale(1.05);
+}
+
+
+/* ============================================================
+   SUN / MOON ACTIVE
+============================================================ */
+
+.theme-button.theme-active {
+  background: #d2f6ed;
+
+  color: #003f58;
+}
+
+
+/* ============================================================
+   ICON
+============================================================ */
+
+.theme-button svg {
+  color: currentColor;
+
+  display: block;
+}
+
+
+/* ============================================================
+   ACTIVE HOVER
+============================================================ */
+
+.theme-button.theme-active:hover {
+  background: #c3f0e5;
+
+  color: #003f58;
+}
+
+
+/* ============================================================
+   NOTIFICATION
+============================================================ */
+
+.notification {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+
+  top: 3px;
+  right: 4px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #ffd11a;
+}
+
+
+/* ============================================================
+   HEADER DIVIDER
+============================================================ */
+
+.header-divider {
+  width: 1px;
+  height: 42px;
+
+  margin: 0 6px;
+
+  background: #c9d5db;
+}
+
+
+/* ============================================================
+   PROFILE
+============================================================ */
+
+.employee-profile {
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.profile-image {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  border: 2px solid #1fce6b;
+
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  color: #0a5d48;
+
+  background: #d8f7e8;
+}
+
+.profile-details {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  white-space: nowrap;
+}
+
+.employee-name {
+  font-size: 16px;
+
+  font-weight: 700;
+
+  color: #06334b;
+}
+
+.employee-role {
+  margin-top: 4px;
+
+  font-size: 11px;
+
+  font-weight: 500;
+
+  color: #07577a;
+}
+
+.employee-role span {
+  padding: 0 2px;
+}
+
+/* ============================================================
+   PROFILE DROPDOWN
+============================================================ */
+
+.employee-profile {
+  position: relative;
+
+  height: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+
+/* ============================================================
+   PROFILE ARROW BUTTON
+============================================================ */
+
+.profile-arrow-button {
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+
+  margin-left: 2px;
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  color: #000;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+
+/* HOVER */
+
+.profile-arrow-button:hover {
+  background: #d2f6ed;
+
+  color: #003f58;
+}
+
+
+/* ARROW */
+
+.profile-arrow {
+  color: currentColor;
+
+  transition: transform 0.2s ease;
+}
+
+
+/* ARROW OPEN */
+
+.profile-arrow.open {
+  transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   PROFILE DROPDOWN
+============================================================ */
+
+.profile-dropdown {
+  position: absolute;
+
+  top: calc(100% - 4px);
+
+  right: 0;
+
+  min-width: 150px;
+
+  padding: 8px;
+
+  background: #ffffff;
+
+  border: 1px solid #cbd8dc;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.15);
+
+  z-index: 1000;
+}
+
+
+/* ============================================================
+   LOGOUT BUTTON
+============================================================ */
+
+.logout-button {
+  width: 100%;
+
+  height: 40px;
+
+  padding: 0 14px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  display: flex;
+
+  align-items: center;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  font-weight: 500;
+
+  color: #111827;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease;
+}
+
+
+/* LOGOUT HOVER */
+
+.logout-button:hover {
+  background: #d2f6ed;
+
+  color: #003f58;
+}
+
+
+
+/* ============================================================
+   MAIN
+============================================================ */
+
+.employee-main {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow: auto;
+
+  background: #eef7fc;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.employee-footer {
+  height: 64px;
+
+  min-height: 64px;
+
+  padding: 0 27px 0 58px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-top: 1px solid #b7ddd8;
+
+  background: #eef7fc;
+
+  color: #8a9298;
+
+  font-size: 13px;
+
+  font-weight: 500;
+
+  letter-spacing: 0.2px;
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.footer-links a {
+  color: #07577a;
+  text-decoration: none;
+  cursor: pointer;
+  transition: color 0.18s ease;
+}
+
+.footer-links a:hover {
+  color: #19b968;
+  text-decoration: underline;
+}
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1000px) {
+
+  .header-search {
+    width: 300px;
+  }
+
+  .employee-name {
+    font-size: 14px;
+  }
+
+  .employee-role {
+    font-size: 10px;
+  }
+
+}
+
+
+@media (max-width: 800px) {
+
+  .employee-sidebar {
+    width: 72px;
+
+    min-width: 72px;
+  }
+
+  .sidebar-logo {
+    height: 104px;
+  }
+
+  .sidebar-logo img {
+    width: 49px;
+  }
+
+  .hrms-section {
+    width: 100%;
+
+    margin: 0;
+
+    justify-content: center;
+  }
+
+  .hrms-text,
+  .hrms-arrow {
+    display: none;
+  }
+
+  .sidebar-expand-row {
+    border: none;
+  }
+
+  .section-title {
+    height: 1px;
+
+    overflow: hidden;
+
+    padding: 0;
+  }
+
+  .section-title span {
+    display: none;
+  }
+
+  .section-arrow {
+    display: none;
+  }
+
+  .sidebar-menu {
+    padding: 0 8px;
+  }
+
+  .sidebar-item {
+    display: none;
+  }
+
+  .collapsed-section-items {
+    display: flex;
+  }
+
+  .help-button,
+  .sidebar-links {
+    display: none;
+  }
+
+  .settings-button {
+    justify-content: center;
+
+    padding: 0;
+  }
+
+  .employee-header {
+    padding-left: 18px;
+  }
+
+  .header-search {
+    width: 250px;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .header-search {
+    width: 180px;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
+  .profile-details,
+  .profile-arrow,
+  .header-divider {
+    display: none;
+  }
+
+  .employee-footer {
+    padding: 0 10px;
+
+    font-size: 10px;
+  }
+
+  .footer-links {
+    display: none;
+  }
+
+}
+/* ============================================================
+   LIGHT / DARK MODE
+   ============================================================ */
+
+.employee-page {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* ============================================================
+   THEME BUTTONS
+   ============================================================ */
+
+.header-icon-button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  background: transparent;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  color: #111827;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+
+/* Hover */
+
+.header-icon-button:hover {
+  background: #d5f5f0;
+}
+
+
+/* Active theme */
+
+.header-icon-button.theme-active {
+  background: #d5f5f0;
+  color: #006f75;
+}
+
+
+/* Click effect */
+
+.header-icon-button:active {
+  transform: scale(0.94);
+}
+
+
+/* ============================================================
+   LIGHT MODE
+   ============================================================ */
+
+.employee-page.light-mode {
+  background: #edf8fc;
+  color: #111827;
+}
+
+.employee-page.light-mode .employee-header {
+  background: #edf8fc;
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+.employee-page.dark-mode {
+  background: #111827;
+  color: #f9fafb;
+}
+
+.employee-page.dark-mode .employee-header {
+  background: #111827;
+  border-bottom-color: #374151;
+}
+
+.employee-page.dark-mode .employee-sidebar {
+  background: #111827;
+  border-right-color: #374151;
+}
+
+.employee-page.dark-mode .header-icon-button {
+  color: #f9fafb;
+}
+
+.employee-page.dark-mode .header-icon-button:hover,
+.employee-page.dark-mode .header-icon-button.theme-active {
+  background: #263f45;
+  color: #5eead4;
+}
+
+.employee-page.dark-mode .employee-name,
+.employee-page.dark-mode .profile-details {
+  color: #f9fafb;
+}
+
+.employee-page.dark-mode .employee-role {
+  color: #9ca3af;
+}
+/* ============================================================
+   FULL DARK / NIGHT THEME
+   Add this at the VERY END of Dashboard.css
+============================================================ */
+
+.employee-page.dark-mode {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+
+.employee-page.dark-mode .employee-sidebar {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+.employee-page.dark-mode .sidebar-logo {
+  border-bottom-color: #334155;
+}
+
+.employee-page.dark-mode .hrms-section {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .hrms-section::after {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #334155 15%,
+    #64748b 35%,
+    #94a3b8 50%,
+    #64748b 65%,
+    #334155 85%,
+    transparent 100%
+  );
+}
+
+
+/* ============================================================
+   EXPAND BUTTON
+============================================================ */
+
+.employee-page.dark-mode .sidebar-expand-button {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .expand-icon {
+  color: #f8fafc;
+  stroke: #f8fafc;
+}
+
+.employee-page.dark-mode .sidebar-expand-button:hover {
+  background: #263548;
+}
+
+
+/* ============================================================
+   SECTION TITLES
+============================================================ */
+
+.employee-page.dark-mode .section-title {
+  color: #38bdf8;
+}
+
+.employee-page.dark-mode .section-title:hover {
+  color: #7dd3fc;
+}
+
+.employee-page.dark-mode .section-arrow {
+  color: #38bdf8;
+}
+
+
+/* ============================================================
+   SIDEBAR ITEMS
+============================================================ */
+
+.employee-page.dark-mode .sidebar-item {
+  color: #e2e8f0;
+}
+
+.employee-page.dark-mode .sidebar-item:hover {
+  background: #263548;
+  color: #ffffff;
+}
+
+.employee-page.dark-mode .sidebar-item.active {
+  background: #1f3b38;
+  color: #ffffff;
+}
+
+.employee-page.dark-mode .sidebar-item.active::before {
+  background: #19b968;
+}
+
+
+/* ============================================================
+   NORMAL ICONS
+   Remove the old dark filter in night mode
+============================================================ */
+
+.employee-page.dark-mode .menu-icon {
+  filter: brightness(0) invert(1);
+}
+
+.employee-page.dark-mode .sidebar-item.active .menu-icon {
+  filter: brightness(0) invert(1);
+}
+
+
+/* ============================================================
+   LEAVE ICON
+============================================================ */
+
+.employee-page.dark-mode .sidebar-item .leave-menu-icon,
+.employee-page.dark-mode .sidebar-item.active .leave-menu-icon {
+  filter: none;
+}
+
+
+/* ============================================================
+   GOALS ICON
+============================================================ */
+
+.employee-page.dark-mode .sidebar-item .goals-menu-icon,
+.employee-page.dark-mode .sidebar-item.active .goals-menu-icon {
+  filter: brightness(0) invert(1);
+}
+
+
+/* ============================================================
+   COLLAPSED SIDEBAR ITEMS
+============================================================ */
+
+.employee-page.dark-mode .collapsed-item {
+  color: #e2e8f0;
+}
+
+.employee-page.dark-mode .collapsed-item:hover {
+  background: #263548;
+}
+
+.employee-page.dark-mode .collapsed-item.active {
+  background: #1f3b38;
+}
+
+.employee-page.dark-mode .collapsed-item.active::before {
+  background: #19b968;
+}
+
+
+/* ============================================================
+   COLLAPSED ICONS
+============================================================ */
+
+.employee-page.dark-mode .collapsed-icon {
+  filter: brightness(0) invert(1);
+}
+
+.employee-page.dark-mode .collapsed-leave-icon {
+  filter: none;
+}
+
+.employee-page.dark-mode .collapsed-goals-icon {
+  filter: brightness(0) invert(1);
+}
+
+
+/* ============================================================
+   SIDEBAR SCROLLBAR
+============================================================ */
+
+.employee-page.dark-mode .sidebar-menu::-webkit-scrollbar-thumb {
+  background: #4adeca;
+}
+
+
+/* ============================================================
+   RIGHT SIDE
+============================================================ */
+
+.employee-page.dark-mode .employee-right {
+  background: #0f172a;
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.employee-page.dark-mode .employee-header {
+  background: #111827;
+  border-bottom-color: #334155;
+}
+
+
+/* ============================================================
+   SEARCH
+============================================================ */
+
+.employee-page.dark-mode .header-search {
+  background: #1e293b;
+  border-color: #475569;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.employee-page.dark-mode .header-search svg {
+  color: #e2e8f0;
+}
+
+.employee-page.dark-mode .header-search input {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .header-search input::placeholder {
+  color: #94a3b8;
+}
+
+
+/* ============================================================
+   HEADER ICONS
+============================================================ */
+
+.employee-page.dark-mode .header-icon-button {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .header-icon-button:hover {
+  background: #263548;
+  color: #5eead4;
+}
+
+.employee-page.dark-mode .header-icon-button.theme-active {
+  background: #23424a;
+  color: #5eead4;
+}
+
+.employee-page.dark-mode .header-icon-button.theme-active:hover {
+  background: #2b5158;
+  color: #99f6e4;
+}
+
+
+/* ============================================================
+   NOTIFICATION
+============================================================ */
+
+.employee-page.dark-mode .notification-dot {
+  background: #facc15;
+}
+
+
+/* ============================================================
+   HEADER DIVIDER
+============================================================ */
+
+.employee-page.dark-mode .header-divider {
+  background: #475569;
+}
+
+
+/* ============================================================
+   PROFILE
+============================================================ */
+
+.employee-page.dark-mode .profile-image {
+  background: #173c35;
+  border-color: #19b968;
+  color: #5eead4;
+}
+
+.employee-page.dark-mode .employee-name {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .employee-role {
+  color: #94a3b8;
+}
+
+.employee-page.dark-mode .profile-arrow {
+  color: #f8fafc;
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+============================================================ */
+
+.employee-page.dark-mode .employee-main {
+  background: #0f172a;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.employee-page.dark-mode .employee-footer {
+  background: #0f172a;
+  border-top-color: #334155;
+  color: #94a3b8;
+}
+
+
+/* ============================================================
+   SETTINGS
+============================================================ */
+
+.employee-page.dark-mode .settings-button {
+  color: #e2e8f0;
+}
+
+.employee-page.dark-mode .settings-button:hover {
+  color: #5eead4;
+}
+
+
+/* ============================================================
+   NEED HELP
+============================================================ */
+
+.employee-page.dark-mode .help-button {
+  background: linear-gradient(
+    90deg,
+    #164e3b 0%,
+    #14532d 100%
+  );
+
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .help-button:hover {
+  background: #1f3b38;
+}
+
+.employee-page.dark-mode .help-icon {
+  background: linear-gradient(
+    145deg,
+    #16a34a,
+    #22c55e
+  );
+
+  color: #ffffff;
+}
+
+
+/* ============================================================
+   SIDEBAR LINKS
+============================================================ */
+
+.employee-page.dark-mode .sidebar-links {
+  color: #38bdf8;
+}
+
+
+/* ============================================================
+   TRANSITION
+============================================================ */
+
+.employee-page.dark-mode,
+.employee-page.dark-mode .employee-sidebar,
+.employee-page.dark-mode .employee-right,
+.employee-page.dark-mode .employee-header,
+.employee-page.dark-mode .employee-main,
+.employee-page.dark-mode .employee-footer,
+.employee-page.dark-mode .sidebar-item,
+.employee-page.dark-mode .collapsed-item,
+.employee-page.dark-mode .header-icon-button {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* ============================================================
+   HRMS TEXT - LIGHT / DARK THEME
+============================================================ */
+
+/* LIGHT MODE */
+.employee-page.light-mode .hrms-title {
+  color: #000000;
+}
+
+/* NIGHT / DARK MODE */
+.employee-page.dark-mode .hrms-title {
+  color: #ffffff;
+}
+
+/* Employee Portal keeps the same gradient in both themes */
+.employee-page.light-mode .hrms-subtitle,
+.employee-page.dark-mode .hrms-subtitle {
+  background: linear-gradient(
+    90deg,
+    #18b84b 0%,
+    #18ad7b 45%,
+    #159fd3 100%
+  );
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+/* ============================================================
+   ADDITIONAL HRMS TEXT STYLING
+============================================================ */
+
+.employee-page.light-mode .hrms-title {
+  color: #000000;
+}
+
+.employee-page.dark-mode .hrms-title {
+  color: #ffffff;
+}
+
+/* ============================================================
+   PROFILE ARROW + DROPDOWN THEME
+   ============================================================ */
+
+/* ---------- LIGHT MODE PROFILE ARROW ---------- */
+
+.employee-page.light-mode .profile-arrow-button {
+  color: #111827;
+}
+
+.employee-page.light-mode .profile-arrow-button:hover {
+  background: #d5f5f0;
+  color: #006f75;
+}
+
+
+/* ---------- DARK MODE PROFILE ARROW ---------- */
+
+.employee-page.dark-mode .profile-arrow-button {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .profile-arrow-button:hover {
+  background: #263f45;
+  color: #5eead4;
+}
+
+
+/* ---------- DARK MODE DROPDOWN ---------- */
+
+.employee-page.dark-mode .profile-dropdown {
+  background: #111827;
+  border-color: #334155;
+
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.45);
+}
+
+
+/* ---------- DARK MODE LOGOUT ---------- */
+
+.employee-page.dark-mode .logout-button {
+  background: transparent;
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .logout-button:hover {
+  background: #263f45;
+  color: #5eead4;
+}
+
+/* ============================================================
+   FOOTER LINKS - DARK MODE
+============================================================ */
+
+.employee-page.dark-mode .footer-links a {
+  color: #cbd5e1;
+}
+
+.employee-page.dark-mode .footer-links a:hover {
+  color: #5eead4;
+  text-decoration: underline;
+}
+
+
+/* ---------- LIGHT MODE LOGOUT ---------- */
+
+.employee-page.light-mode .logout-button {
+  background: transparent;
+  color: #111827;
+}
+
+.employee-page.light-mode .logout-button:hover {
+  background: #d5f5f0;
+  color: #006f75;
+}
+
+
+/* ---------- ARROW OPEN STATE ---------- */
+
+.profile-arrow-button:hover .profile-arrow {
+  color: currentColor;
+}
+/* ============================================================
+   FOOTER LINKS
+============================================================ */
+
+.footer-links a {
+  color: #6b7280;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    text-decoration 0.2s ease;
+}
+
+/* ============================================================
+   FOOTER LINKS - HOVER
+============================================================ */
+
+.footer-links a:hover {
+  color: #00a8a8;
+  text-decoration: underline;
+}
+
+/* ============================================================
+   FIGMA EMPLOYEE DASHBOARD
+   ATTENDANCE CARD
+   ============================================================ */
+
+.dashboard-welcome {
+  width: 100%;
+  height: 161px;
+  min-height: 161px;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  padding: 25px 38px 17px 42px;
+
+  background: linear-gradient(
+    180deg,
+    #f6fbfe 0%,
+    #edf7fc 100%
+  );
+
+  border-bottom: 1px solid #e0edf2;
+}
+
+
+.welcome-content {
+  display: flex;
+  flex-direction: column;
+}
+
+
+.welcome-small {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 15px;
+  font-weight: 600;
+
+  line-height: 20px;
+
+  color: #111827;
+}
+
+
+.welcome-title {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-top: 0;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 29px;
+  font-weight: 700;
+
+  line-height: 34px;
+
+  color: #000000;
+}
+
+
+.welcome-hand {
+  display: inline-flex;
+
+  font-size: 34px;
+  line-height: 34px;
+
+  transform-origin: 70% 70%;
+  animation: welcome-wave 2.5s ease-in-out infinite;
+}
+
+
+@keyframes welcome-wave {
+
+  0%,
+  60%,
+  100% {
+    transform: rotate(0deg);
+  }
+
+  10%,
+  30% {
+    transform: rotate(14deg);
+  }
+
+  20%,
+  40% {
+    transform: rotate(-8deg);
+  }
+
+}
+
+
+.welcome-description {
+  margin-top: 2px;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  line-height: 21px;
+
+  color: #111827;
+}
+
+
+.welcome-quote {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  margin-top: 7px;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 10px;
+  font-weight: 500;
+
+  color: #a3a8ac;
+}
+
+
+.quote-line {
+  width: 30px;
+  height: 2px;
+
+  flex-shrink: 0;
+
+  background: linear-gradient(
+    90deg,
+    #17d8c0,
+    #20d97d
+  );
+
+  border-radius: 10px;
+}
+
+
+/* ============================================================
+   DATE
+   ============================================================ */
+
+/* ============================================================
+   DASHBOARD DATE
+   FIGMA STYLE
+   ============================================================ */
+
+.dashboard-date {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 9px;
+}
+
+/* Header calendar PNG */
+.dashboard-calendar-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  max-width: 36px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Date text area */
+.dashboard-date-content {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 125px;
+}
+
+/* Monday */
+.dashboard-day {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 18px;
+
+  color: #111827;
+}
+
+/* 10 Sep 2026 */
+.dashboard-date-content strong {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  line-height: 23px;
+
+  color: #111827;
+}
+
+/* Green → Blue gradient line */
+.date-gradient-line {
+  width: 55px;
+  height: 4px;
+
+  margin-top: 3px;
+
+  border-radius: 10px;
+
+  background: linear-gradient(
+    90deg,
+    #38d67d 0%,
+    #4cc7ec 100%
+  );
+}
+
+/* ============================================================
+   DASHBOARD ACTION BUTTONS
+   FIGMA STYLE
+   ============================================================ */
+
+.dashboard-actions {
+  width: 100%;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 12px;
+  padding: 4px 10px;
+
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   COMMON ACTION BUTTON
+   FIGMA:
+   Gradient background + bold font
+   ============================================================ */
+
+.dashboard-action {
+  height: 26px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  outline: none;
+
+  border-radius: 13px;
+
+  padding: 0;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+
+  color: #06334b;
+
+  /* FIGMA GRADIENT */
+  background: linear-gradient(
+    100deg,
+    #c8f2d2 0%,
+    #8bdcd3 52%,
+    #bde9df 100%
+  );
+
+  cursor: pointer;
+  white-space: nowrap;
+
+  box-sizing: border-box;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+
+/* ============================================================
+   EDIT WIDGET
+   FIGMA SIZE = 91 × 26
+   ============================================================ */
+
+.edit-widget {
+  width: 91px;
+  height: 26px;
+}
+
+
+/* ============================================================
+   MANAGE DASHBOARD
+   FIGMA SIZE = 142 × 26
+   ============================================================ */
+
+.manage-dashboard {
+  width: 142px;
+  height: 26px;
+}
+
+
+/* ============================================================
+   ADD BUTTON
+   FIGMA SIZE = 28 × 28
+   SAME GRADIENT
+   ============================================================ */
+
+.add-widget {
+  width: 28px;
+  height: 28px;
+
+  border-radius: 8px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  font-weight: 700;
+
+  line-height: 1;
+
+  color: #06334b;
+
+  background: linear-gradient(
+    100deg,
+    #c8f2d2 0%,
+    #8bdcd3 52%,
+    #bde9df 100%
+  );
+
+  border: none;
+}
+
+
+/* ============================================================
+   EXPORT BUTTON
+   KEEP BLUE LIKE FIGMA
+   ============================================================ */
+
+.export-dashboard {
+  width: 79px;
+  height: 26px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  border-radius: 13px;
+
+  background: #55b8df;
+
+  color: #ffffff;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.export-dashboard svg {
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   HOVER
+   KEEP GRADIENT
+   ============================================================ */
+
+.dashboard-action:hover {
+  transform: translateY(-1px);
+
+  background: linear-gradient(
+    100deg,
+    #c8f2d2 0%,
+    #8bdcd3 52%,
+    #bde9df 100%
+  );
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.10);
+}
+
+
+/* ============================================================
+   ACTIVE
+   ============================================================ */
+
+.dashboard-action:active {
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 800px) {
+  .dashboard-actions {
+    padding-right: 10px;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-actions {
+    justify-content: flex-start;
+    overflow-x: hidden;
+  }
+}
+/* ============================================================
+   CARD GRID
+   FIGMA:
+   4 CARDS
+   288px × 372px
+   ============================================================ */
+
+.dashboard-cards {
+  width: 100%;
+  padding: 10px 10px 30px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 288px);
+  gap: 10px;
+
+  align-items: start;
+  overflow-x: hidden;
+}
+/* Tablet */
+@media (max-width: 1200px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(3, 288px);
+  }
+}
+
+/* Small tablet */
+@media (max-width: 900px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(2, 288px);
+  }
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  .dashboard-cards {
+    grid-template-columns: 288px;
+  }
+}
+
+
+/* ============================================================
+   DASHBOARD CARDS
+   FIGMA = 288px × 372px
+   ============================================================ */
+
+.dashboard-cards {
+  width: 100%;
+
+  padding: 10px 10px 30px;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 288px);
+
+  gap: 10px;
+
+  align-items: start;
+
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   ATTENDANCE CARD
+   FIGMA SIZE = 288px × 342px
+   ============================================================ */
+
+.figma-attendance-card {
+  position: relative;
+  width: 288px;
+  min-width: 288px;
+  max-width: 288px;
+
+  height: 342px;
+min-height: 342px;
+max-height: 342px;
+
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+  overflow: hidden;
+
+  box-sizing: border-box;
+
+  border: 1px solid #dce8ed;
+  border-radius: 12px;
+
+  background: #f4f9fc;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.14);
+}
+
+.figma-attendance-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 5px 12px rgba(0, 0, 0, 0.16);
+}
+
+/* ============================================================
+   CARD TITLE
+   ============================================================ */
+
+.attendance-card-title {
+  width: 100%;
+  height: 38px;
+  min-height: 38px;
+
+  margin: 0;
+  padding: 4px 10px 2px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  box-sizing: border-box;
+  flex-shrink: 0;
+
+  background: transparent;
+  border-radius: 0;
+
+  font-family: "Poppins", Arial, sans-serif;
+}
+
+.attendance-card-title h2 {
+  margin: 0;
+  padding: 0;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 27px;
+
+  color: #111111;
+}
+
+
+/* ============================================================
+   PRESENT / ABSENT
+   ============================================================ */
+
+.attendance-status {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  white-space: nowrap;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+
+  color: #111111;
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+}
+
+.status-dot.present {
+  background: #2fc58a;
+}
+
+.status-dot.absent {
+  background: #e52d3b;
+}
+
+
+/* ============================================================
+   EMPLOYEE INFORMATION
+   ============================================================ */
+
+.attendance-employee {
+  height: 65px;
+  min-height: 65px;
+
+  margin: 0 10px;
+
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+.attendance-profile {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+  border-radius: 50%;
+
+  background: #d9edf7;
+}
+
+.attendance-profile img,
+.attendance-profile svg {
+  width: 56px;
+  height: 56px;
+
+  display: block;
+
+  object-fit: cover;
+}
+
+.attendance-employee-details {
+  width: 91px;
+  min-width: 0;
+
+  margin-left: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.attendance-employee-details strong {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+
+  color: #111111;
+
+  white-space: nowrap;
+}
+
+.attendance-employee-details span {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 15px;
+
+  color: #111111;
+}
+
+.attendance-employee-details small {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 13px;
+
+  color: #666666;
+}
+
+.attendance-info-divider {
+  width: 1px;
+  height: 31px;
+
+  margin: 0 9px;
+
+  flex-shrink: 0;
+
+  background: #aeb8bd;
+}
+
+
+/* ============================================================
+   DATE
+   ============================================================ */
+
+.attendance-date {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  flex: 1;
+}
+
+.attendance-date img,
+.attendance-date svg,
+.attendance-date-icon {
+  width: 21px;
+  height: 21px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+}
+
+.attendance-date strong {
+  white-space: nowrap;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 12px;
+
+  color: #111111;
+}
+
+.attendance-date span {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 11px;
+
+  color: #777777;
+}
+
+
+/* ============================================================
+   CHECK IN / CHECK OUT
+   FIGMA SIZE = 278px × 67px
+   ============================================================ */
+
+.attendance-check-row {
+  width: calc(100% - 10px);
+
+  height: 67px;
+  min-height: 67px;
+  max-height: 67px;
+
+  flex-shrink: 0;
+
+  margin: 5px 5px 0;
+  padding: 8px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  background: #e3f1f7;
+}
+
+.check-box {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+}
+
+.check-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+.check-icon img {
+  width: 20px;
+  height: 20px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+
+/* CHECK IN - GREEN */
+
+.check-in-icon {
+  background: #c9f1e2;
+}
+
+.check-in-icon img {
+  filter:
+    invert(52%)
+    sepia(44%)
+    saturate(720%)
+    hue-rotate(111deg)
+    brightness(87%)
+    contrast(91%);
+}
+
+
+/* CHECK OUT - RED + INVERTED */
+
+.check-out-icon {
+  background: #f5cdd4;
+}
+
+.check-out-icon img {
+  filter:
+    invert(17%)
+    sepia(96%)
+    saturate(4977%)
+    hue-rotate(347deg)
+    brightness(91%)
+    contrast(118%);
+
+  transform: rotate(180deg);
+}
+
+
+/* CHECK TEXT */
+
+.check-content {
+  min-width: 0;
+
+  margin-left: 6px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.check-content span {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 12px;
+
+  color: #666666;
+}
+
+.check-content strong {
+  white-space: nowrap;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 17px;
+
+  color: #111111;
+}
+
+.check-content small {
+  width: fit-content;
+
+  margin-top: 2px;
+  padding: 2px 7px;
+
+  border-radius: 10px;
+
+  background: #9ee5bd;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 7px;
+  font-weight: 600;
+  line-height: 11px;
+
+  color: #155b3c;
+}
+
+
+/* ============================================================
+   WORKING HOURS
+   ============================================================ */
+
+.working-hours {
+  height: 73px;
+  min-height: 73px;
+
+  margin: 7px 10px 0;
+
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+}
+
+.working-hours-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: #cfeaf8;
+}
+
+.working-hours-icon img,
+.working-hours-icon svg {
+  width: 22px;
+  height: 22px;
+
+  display: block;
+
+  object-fit: contain;
+
+  color: #159bd1;
+  stroke: #159bd1;
+}
+
+.working-hours-content {
+  flex: 1;
+  min-width: 0;
+
+  margin-left: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.working-hours-content > span {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 13px;
+
+  color: #666666;
+}
+
+.working-hours-content > strong {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+
+  color: #111111;
+}
+
+.progress-row {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+}
+
+.progress-bar {
+  flex: 1;
+
+  height: 7px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #d4d4d4;
+}
+
+.progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  transition: width 0.3s ease;
+
+  background: #2bb478;
+}
+
+
+/* FIGMA PROGRESS VARIANTS */
+
+.progress-fill.progress-green {
+  background: #2bb478;
+}
+
+.progress-fill.progress-blue {
+  background: #159bd1;
+}
+
+.progress-fill.progress-yellow {
+  background: #ffd84d;
+}
+
+.progress-fill.progress-red {
+  background: #e60000;
+}
+
+.progress-row b {
+  flex-shrink: 0;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 7px;
+  font-weight: 500;
+
+  color: #111111;
+}
+
+.working-hours-content small {
+  margin-top: 1px;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 7px;
+  font-weight: 400;
+  line-height: 10px;
+
+  color: #666666;
+}
+
+
+/* ============================================================
+   SHIFT TIMING
+   FIGMA SIZE
+   ============================================================ */
+
+.shift-timing {
+  width: 278px;
+  min-width: 278px;
+  max-width: 278px;
+
+  height: 52px;
+  min-height: 52px;
+  max-height: 52px;
+
+  margin: 2px 5px 0;
+  padding: 7px 10px;
+
+  display: flex;
+  align-items: center;
+
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  border-radius: 9px;
+  background: #dceef7;
+}
+
+.shift-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.shift-icon img,
+.shift-icon svg {
+  width: 22px;
+  height: 22px;
+
+  display: block;
+
+  object-fit: contain;
+}
+
+.shift-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  margin-left: 5px;
+}
+
+.shift-content span {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 11px;
+
+  color: #666666;
+}
+
+.shift-content strong {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 14px;
+
+  color: #111111;
+
+  white-space: nowrap;
+}
+
+.shift-content small {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 11px;
+
+  color: #666666;
+}
+
+
+/* ============================================================
+   LOCATION
+   ============================================================ */
+
+.attendance-location {
+  display: none;
+}
+
+
+/* ============================================================
+   VIEW DETAILS
+   FIGMA = 288px × 43px
+   ============================================================ */
+
+.attendance-view-details {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 43px;
+
+  margin: 0;
+  padding: 0;
+
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  box-sizing: border-box;
+
+  background: #c1e4f3;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+
+  color: #159bd1;
+}
+
+.attendance-view-details:hover {
+  background: #b6def0;
+  color: #0789bf;
+}
+
+.attendance-view-details svg {
+  width: 21px;
+  height: 21px;
+
+  flex-shrink: 0;
+
+  stroke-width: 2;
+}
+
+/* ============================================================
+   EMPTY CARDS
+   SAME FIGMA SIZE AS ATTENDANCE CARD
+   ============================================================ */
+
+.figma-empty-card {
+  width: 288px;
+  min-width: 288px;
+  max-width: 288px;
+
+  height: 342px;
+  min-height: 342px;
+  max-height: 342px;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+  border: 1px solid #dce8ed;
+
+  background: #f4f9fc;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.14);
+}
+
+.dashboard-cards {
+  width: 100%;
+  padding: 10px 10px 30px;
+  display: grid;
+  grid-template-columns: repeat(4, 288px);
+  gap: 10px;
+  align-items: start;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(4, 288px);
+    gap: 10px;
+  }
+}
+
+@media (max-width: 800px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(4, 288px);
+    gap: 10px;
+    padding-left: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .dashboard-cards {
+    grid-template-columns: repeat(4, 288px);
+    gap: 8px;
+    padding-left: 8px;
+  }
+}
+
+
+/* ============================================================
+   FINAL FIGMA ATTENDANCE CARD FIX
+   FIGMA SIZE: 288px × 342px
+   ============================================================ */
+
+
+/* ============================================================
+   CARD GRID
+   ============================================================ */
+
+.dashboard-cards {
+  width: 100%;
+  padding: 10px 10px 30px;
+
+  display: grid;
+  grid-template-columns: repeat(4, 288px);
+
+  gap: 10px;
+  align-items: start;
+
+  overflow-x: hidden;
+}
+
+
+/* ============================================================
+   ATTENDANCE CARD
+   FIGMA: 288 × 342
+   ============================================================ */
+
+.figma-attendance-card {
+  position: relative;
+
+  width: 288px;
+  min-width: 288px;
+  max-width: 288px;
+
+  height: 342px;
+  min-height: 342px;
+  max-height: 342px;
+
+  flex-shrink: 0;
+
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+  margin: 0;
+
+  border-radius: 10px;
+  border: 1px solid #dce8ed;
+
+  background: #f4f9fc;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.14);
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   CARD TITLE
+   ============================================================ */
+
+.attendance-card-title {
+  width: 100%;
+  height: 35px;
+  min-height: 35px;
+
+  flex-shrink: 0;
+
+  margin: 0;
+  padding: 5px 10px 3px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: transparent;
+
+  border-radius: 10px 10px 0 0;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 27px;
+
+  color: #000000;
+}
+
+
+/* TITLE TEXT */
+
+.attendance-card-title h2 {
+  margin: 0;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 27px;
+
+  color: #000000;
+}
+
+
+/* ============================================================
+   PRESENT / ABSENT STATUS
+   ============================================================ */
+
+.attendance-status {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  margin-left: auto;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+
+  color: #111111;
+}
+
+.status-dot {
+  width: 9px;
+  height: 9px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+}
+
+.status-dot.present {
+  background: #2fc48a;
+}
+
+.status-dot.absent {
+  background: #e53935;
+}
+
+
+/* ============================================================
+   EMPLOYEE INFORMATION
+   ============================================================ */
+
+.attendance-employee {
+  width: auto;
+
+  height: 65px;
+  min-height: 65px;
+
+  flex-shrink: 0;
+
+  margin: 0 10px;
+
+  display: flex;
+  align-items: center;
+}
+
+
+/* ============================================================
+   PROFILE
+   ============================================================ */
+
+.attendance-profile {
+  width: 56px;
+  height: 56px;
+
+  min-width: 56px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+
+  border-radius: 50%;
+
+  background: #d8edf6;
+
+  color: #20384c;
+}
+
+.attendance-profile img {
+  width: 56px;
+  height: 56px;
+
+  object-fit: cover;
+
+  display: block;
+
+  border-radius: 50%;
+}
+
+.attendance-profile svg {
+  width: 56px;
+  height: 56px;
+}
+
+
+/* ============================================================
+   EMPLOYEE DETAILS
+   ============================================================ */
+
+.attendance-employee-details {
+  width: 76px;
+  min-width: 76px;
+
+  margin-left: 8px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+.attendance-employee-details strong {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 14px;
+
+  color: #111111;
+}
+
+.attendance-employee-details span {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 15px;
+
+  color: #111111;
+}
+
+.attendance-employee-details small {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 13px;
+
+  color: #666666;
+}
+
+
+/* ============================================================
+   DIVIDER
+   ============================================================ */
+
+.attendance-info-divider {
+  width: 1px;
+  height: 31px;
+
+  margin: 0 9px;
+
+  flex-shrink: 0;
+
+  background: #aeb8bd;
+}
+
+
+/* ============================================================
+   DATE
+   ============================================================ */
+.attendance-date {
+  flex: 1;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+
+  overflow: hidden;
+}
+
+.attendance-date img,
+.attendance-date svg {
+  width: 21px;
+  height: 21px;
+  min-width: 21px;
+
+  flex-shrink: 0;
+
+  object-fit: contain;
+}
+
+.attendance-date div {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+}
+
+.attendance-date strong {
+  white-space: nowrap;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+  line-height: 12px;
+
+  color: #111111;
+}
+
+.attendance-date span {
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 11px;
+
+  color: #777777;
+}
+
+/* ============================================================
+   CHECK IN / CHECK OUT
+   FIGMA HEIGHT = 65px
+   ============================================================ */
+
+/* ============================================================
+   CHECK IN / CHECK OUT
+   FIGMA SIZE: 278px × 67px
+   ============================================================ */
+
+.attendance-check-row {
+  width: 278px;
+  min-width: 278px;
+  max-width: 278px;
+
+  height: 67px;
+  min-height: 67px;
+  max-height: 67px;
+
+  margin: 5px 5px 0;
+  padding: 7px 8px;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 6px;
+
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  border-radius: 10px;
+  background: #e0f0f7;
+}
+
+
+/* ============================================================
+   CHECK BOX
+   ============================================================ */
+
+.check-box {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   CHECK ICON
+   ============================================================ */
+
+.check-icon {
+  width: 36px;
+  height: 36px;
+
+  min-width: 36px;
+  min-height: 36px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+
+/* ICON SIZE */
+
+.check-icon svg,
+.check-icon img {
+  width: 20px;
+  height: 20px;
+
+  display: block;
+  object-fit: contain;
+}
+
+
+/* ============================================================
+   CHECK IN — GREEN
+   ============================================================ */
+
+.check-in-icon {
+  background: #c9f0e3;
+  color: #20ad7c;
+}
+
+
+/* ============================================================
+   CHECK OUT — RED
+   ============================================================ */
+
+.check-out-icon {
+  background: #f3ced6;
+  color: #e61c31;
+}
+
+
+/* CHECK OUT INVERTED DIRECTION */
+
+.check-out-icon svg {
+  transform: rotate(180deg);
+}
+
+.check-out-icon img {
+  transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   CHECK CONTENT
+   ============================================================ */
+
+.check-content {
+  min-width: 0;
+
+  margin-left: 6px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+
+/* LABEL */
+
+.check-content span {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 9px;
+  font-weight: 400;
+
+  line-height: 12px;
+
+  color: #666666;
+}
+
+
+/* TIME */
+
+.check-content strong {
+  margin: 0;
+
+  white-space: nowrap;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  line-height: 17px;
+
+  color: #111111;
+}
+
+
+/* STATUS */
+
+.check-content small {
+  width: fit-content;
+
+  margin-top: 2px;
+  padding: 2px 7px;
+
+  border-radius: 10px;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 7px;
+  font-weight: 600;
+
+  line-height: 11px;
+}
+
+
+/* ON TIME */
+
+.check-content small.on-time {
+  background: #9ee5bd;
+  color: #155b3c;
+}
+
+
+/* DELAY */
+
+.check-content small.delay {
+  background: #f4a6aa;
+  color: #a60000;
+}
+
+
+/* FALLBACK */
+
+.check-content small:not(.delay) {
+  background: #9ee5bd;
+  color: #155b3c;
+}
+
+/* ============================================================
+   WORKING HOURS
+   FIGMA HEIGHT = 68px
+   ============================================================ */
+
+.working-hours {
+  height: 56px;
+  min-height: 56px;
+
+  flex-shrink: 0;
+
+  margin: 4px 10px 0;
+
+  display: flex;
+  align-items: center;
+}
+
+/* ============================================================
+   WORKING HOURS ICON
+   ============================================================ */
+
+/* ============================================================
+   WORKING HOURS ICON
+   FIGMA COLOUR = BLUE
+   ============================================================ */
+
+.working-hours-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  /* Figma light blue background */
+  background: #cfeaf8;
+}
+
+.working-hours-icon img,
+.working-hours-icon svg {
+  width: 22px;
+  height: 22px;
+  object-fit: contain;
+  display: block;
+}
+
+/* Figma clock icon colour */
+.working-hours-icon img {
+  filter: invert(52%) sepia(88%) saturate(1185%) hue-rotate(165deg)
+          brightness(88%) contrast(91%);
+}
+
+/* If the icon is rendered as inline SVG */
+.working-hours-icon svg {
+  color: #159bd1;
+  stroke: #159bd1;
+}
+
+/* ============================================================
+   WORKING HOURS CONTENT
+   ============================================================ */
+
+.working-hours-content {
+  flex: 1;
+
+  min-width: 0;
+
+  margin-left: 10px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.working-hours-content > span {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 13px;
+
+  color: #777777;
+}
+
+.working-hours-content > strong {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 22px;
+
+  color: #111111;
+}
+
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+
+.progress-row {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 4px;
+}
+
+.progress-bar {
+  flex: 1;
+
+  height: 7px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: #d4d4d4;
+}
+
+.progress-fill {
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: #2bb478;
+}
+
+.progress-row b {
+  flex-shrink: 0;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 7px;
+  font-weight: 500;
+
+  color: #111111;
+}
+
+.working-hours-content small {
+  margin-top: 1px;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 7px;
+  font-weight: 400;
+  line-height: 10px;
+
+  color: #777777;
+}
+
+
+/* ============================================================
+   SHIFT TIMING
+   FIGMA: 278 × 52
+   ============================================================ */
+
+.attendance-view-details {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 43px;
+  min-height: 43px;
+
+  margin: 0;
+  padding: 0 24px 0 0;
+
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  cursor: pointer;
+
+  background: #c1e4f4;
+
+  font-family: "Poppins", Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+
+  color: #159bd1;
+}
+
+
+/* ============================================================
+   SHIFT ICON
+   ============================================================ */
+
+/* ============================================================
+   SHIFT TIMING ICON
+   FIGMA COLOUR = GREEN
+   ============================================================ */
+
+.shift-icon {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Figma green */
+  color: #16885f;
+}
+
+.shift-icon img,
+.shift-icon img {
+  filter: invert(42%) sepia(45%) saturate(1017%) hue-rotate(111deg)
+          brightness(91%) contrast(91%);
+}
+
+/* ============================================================
+   SHIFT CONTENT
+   ============================================================ */
+
+.shift-content {
+  min-width: 0;
+
+  margin-left: 5px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.shift-content span {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 11px;
+
+  color: #73777a;
+}
+
+.shift-content strong {
+  white-space: nowrap;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 14px;
+
+  color: #111111;
+}
+
+.shift-content small {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 8px;
+  font-weight: 400;
+  line-height: 11px;
+
+  color: #777777;
+}
+
+
+/* ============================================================
+   VIEW DETAILS
+   FIXED FOOTER
+   FIGMA: 288 × 43
+   ============================================================ */
+
+.attendance-view-details {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 43px;
+  min-height: 43px;
+
+  margin: 0;
+  padding: 0 24px 0 0;
+
+  border: none;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 8px;
+
+  flex-shrink: 0;
+
+  cursor: pointer;
+
+  background: #c1e4f4;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 16px;
+
+  color: #159bd1;
+}
+
+.attendance-view-details:hover {
+  background: #b6def0;
+  color: #0789bf;
+}
+
+
+/* ============================================================
+   VIEW DETAILS ARROW
+   ============================================================ */
+
+.attendance-view-details svg {
+  width: 21px;
+  height: 21px;
+
+  flex-shrink: 0;
+
+  stroke-width: 2;
+}
+
+.details-arrow {
+  font-size: 23px;
+  font-weight: 400;
+  line-height: 1;
+}
+
+
+/* ============================================================
+   EMPTY CARDS
+   SAME SIZE AS ATTENDANCE CARD
+   ============================================================ */
+
+.figma-empty-card {
+  width: 288px;
+  min-width: 288px;
+  max-width: 288px;
+
+  height: 342px;
+  min-height: 342px;
+  max-height: 342px;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  border: 1px solid #dce8ed;
+
+  background: #f4f9fc;
+
+  box-shadow:
+    0 3px 8px rgba(0, 0, 0, 0.14);
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+}
+
+
+
+
+/* ============================================================
+   FINAL ATTENDANCE CARD SIZE
+   FIGMA: 288px × 342px
+   ============================================================ */
+
+.figma-attendance-card {
+  width: 288px;
+  min-width: 288px;
+  max-width: 288px;
+
+  height: 342px;
+  min-height: 342px;
+  max-height: 342px;
+
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 0;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+  border: 1px solid #dce8ed;
+
+  background: #f4f9fc;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   DASHBOARD ACTION BUTTONS - FIGMA
+   ============================================================ */
+
+.dashboard-actions .dashboard-action {
+  font-family: "Poppins", Arial, sans-serif;
+  font-weight: 700;
+  color: #003b5c;
+}
+
+/* ------------------------------------------------------------
+   EDIT WIDGET
+   ------------------------------------------------------------ */
+
+.dashboard-actions .edit-widget {
+  font-weight: 700;
+  color: #003b5c;
+
+  background: linear-gradient(
+    90deg,
+    #c4f2d2 0%,
+    #9fe3d6 55%,
+    #a8dfdb 100%
+  );
+}
+
+/* ------------------------------------------------------------
+   MANAGE DASHBOARD
+   ------------------------------------------------------------ */
+
+.dashboard-actions .manage-dashboard {
+  font-weight: 700;
+  color: #003b5c;
+
+  background: linear-gradient(
+    90deg,
+    #c4f2d2 0%,
+    #9fe3d6 55%,
+    #a8dfdb 100%
+  );
+}
+
+/* ------------------------------------------------------------
+   PLUS
+   ------------------------------------------------------------ */
+
+.dashboard-actions .add-widget {
+  font-weight: 700;
+  color: #003b5c;
+
+  background: linear-gradient(
+    90deg,
+    #c4f2d2 0%,
+    #9fe3d6 55%,
+    #a8dfdb 100%
+  );
+}
+
+/* ------------------------------------------------------------
+   EXPORT BUTTON
+   Text = BLACK
+   Icon = WHITE
+   ------------------------------------------------------------ */
+
+.dashboard-actions .export-dashboard {
+  font-weight: 700;
+  color: #000000;
+}
+
+/* Export icon ONLY */
+.dashboard-actions .export-dashboard svg {
+  color: #ffffff;
+  stroke: #ffffff;
+  fill: none;
+  flex-shrink: 0;
+}
+
+/* ============================================================
+   FINAL NIGHT / DARK THEME FIX
+   Keep all existing sizes and layout unchanged
+   ============================================================ */
+
+.employee-page.dark-mode {
+  background: #0f172a;
+  color: #f8fafc;
+}
+
+/* SIDEBAR */
+.employee-page.dark-mode .employee-sidebar {
+  background: #0f172a;
+  border-color: #334155;
+}
+
+/* RIGHT SIDE */
+.employee-page.dark-mode .employee-right,
+.employee-page.dark-mode .employee-main {
+  background: #0f172a;
+}
+
+/* HEADER */
+.employee-page.dark-mode .employee-header {
+  background: #111827;
+  border-bottom-color: #334155;
+}
+
+/* SEARCH */
+.employee-page.dark-mode .header-search {
+  background: #1e293b;
+  border-color: #475569;
+}
+
+.employee-page.dark-mode .header-search input {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .header-search input::placeholder {
+  color: #94a3b8;
+}
+
+/* HEADER ICONS */
+.employee-page.dark-mode .header-icon-button {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .header-icon-button:hover,
+.employee-page.dark-mode .header-icon-button.theme-active {
+  background: #263548;
+  color: #5eead4;
+}
+
+/* PROFILE */
+.employee-page.dark-mode .employee-name {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .employee-role {
+  color: #94a3b8;
+}
+
+.employee-page.dark-mode .profile-arrow-button {
+  color: #f8fafc;
+}
+
+/* WELCOME */
+.employee-page.dark-mode .dashboard-welcome {
+  background: #0f172a;
+  border-bottom-color: #334155;
+}
+
+.employee-page.dark-mode .welcome-small,
+.employee-page.dark-mode .welcome-title,
+.employee-page.dark-mode .welcome-description,
+.employee-page.dark-mode .dashboard-day,
+.employee-page.dark-mode .dashboard-date-content strong {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .welcome-quote {
+  color: #94a3b8;
+}
+
+/* SIDEBAR ITEMS */
+.employee-page.dark-mode .sidebar-item {
+  color: #e2e8f0;
+}
+
+.employee-page.dark-mode .sidebar-item:hover {
+  background: #263548;
+  color: #ffffff;
+}
+
+.employee-page.dark-mode .sidebar-item.active {
+  background: #1f3b38;
+  color: #ffffff;
+}
+
+/* ============================================================
+   ATTENDANCE CARD
+   ============================================================ */
+
+.employee-page.dark-mode .figma-attendance-card,
+.employee-page.dark-mode .figma-empty-card {
+  background: #1e293b;
+  border-color: #334155;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* CARD TITLE */
+.employee-page.dark-mode .attendance-card-title {
+  background: #1e293b;
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .attendance-card-title h2 {
+  color: #f8fafc;
+}
+
+/* EMPLOYEE DETAILS */
+.employee-page.dark-mode .attendance-employee-details strong,
+.employee-page.dark-mode .attendance-employee-details span,
+.employee-page.dark-mode .attendance-date strong,
+.employee-page.dark-mode .check-content strong,
+.employee-page.dark-mode .working-hours-content > strong,
+.employee-page.dark-mode .progress-row b,
+.employee-page.dark-mode .shift-content strong,
+.employee-page.dark-mode .location-content strong {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .attendance-employee-details small,
+.employee-page.dark-mode .attendance-date span,
+.employee-page.dark-mode .check-content span,
+.employee-page.dark-mode .working-hours-content > span,
+.employee-page.dark-mode .working-hours-content small,
+.employee-page.dark-mode .shift-content span,
+.employee-page.dark-mode .shift-content small,
+.employee-page.dark-mode .location-content span {
+  color: #94a3b8;
+}
+
+/* DIVIDER */
+.employee-page.dark-mode .attendance-info-divider {
+  background: #475569;
+}
+
+/* CHECK IN / CHECK OUT */
+.employee-page.dark-mode .attendance-check-row {
+  background: #263548;
+}
+
+/* WORKING HOURS */
+.employee-page.dark-mode .progress-bar {
+  background: #475569;
+}
+
+/* SHIFT */
+.employee-page.dark-mode .shift-timing {
+  background: #263548;
+}
+
+/* VIEW DETAILS */
+.employee-page.dark-mode .attendance-view-details {
+  background: #1e4b61;
+  color: #5eead4;
+}
+
+.employee-page.dark-mode .attendance-view-details:hover {
+  background: #285b73;
+}
+
+/* FOOTER */
+.employee-page.dark-mode .employee-footer {
+  background: #0f172a;
+  border-top-color: #334155;
+  color: #94a3b8;
+}
+
+.employee-page.dark-mode .footer-links a {
+  color: #cbd5e1;
+}
+
+.employee-page.dark-mode .footer-links a:hover {
+  color: #5eead4;
+}
+
+/* HELP BUTTON */
+.employee-page.dark-mode .help-button {
+  color: #f8fafc;
+}
+
+/* PROFILE DROPDOWN */
+.employee-page.dark-mode .profile-dropdown {
+  background: #111827;
+  border-color: #334155;
+}
+
+/* ATTENDANCE CARD - DARK THEME */
+.employee-page.dark-mode .attendance-status {
+  color: #ffffff;
+}
+
+.employee-page.dark-mode .attendance-date svg {
+  color: #ffffff;
+  stroke: #ffffff;
+}
+
+.employee-page.dark-mode .attendance-date i {
+  color: #ffffff;
+}
+
+.employee-page.dark-mode .attendance-date .date-icon {
+  color: #ffffff;
+}
+

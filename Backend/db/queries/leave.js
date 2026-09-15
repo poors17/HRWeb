@@ -1,0 +1,98 @@
+const pool = require('../../config/db');
+
+async function getEmployeeIdByUserId(userId) {
+  const result = await pool.query('SELECT id FROM employees WHERE user_id = $1', [userId]);
+  return result.rows[0]?.id || null;
+}
+
+async function createLeaveRequest(data) {
+  const result = await pool.query(
+    `INSERT INTO leave_requests
+       (employee_id, leave_type_id, start_date, end_date, total_days, reason)
+     VALUES ($1, $2, $3, $4, $5, $6)
+     RETURNING *`,
+    [data.employeeId, data.leaveTypeId, data.startDate, data.endDate, data.totalDays, data.reason || null]
+  );
+  return result.rows[0];
+}
+
+async function getLeaveRequestsByEmployee(employeeId) {
+  const result = await pool.query(
+    `SELECT lr.*, lt.name AS leave_type_name
+     FROM leave_requests lr
+     LEFT JOIN leave_types lt ON lt.id = lr.leave_type_id
+     WHERE lr.employee_id = $1
+     ORDER BY lr.created_at DESC`,
+    [employeeId]
+  );
+  return result.rows;
+}
+
+async function getPendingLeaveRequests() {
+  const result = await pool.query(
+    `SELECT lr.*, lt.name AS leave_type_name, e.employee_code, e.full_name
+     FROM leave_requests lr
+     LEFT JOIN leave_types lt ON lt.id = lr.leave_type_id
+     LEFT JOIN employees e ON e.id = lr.employee_id
+     WHERE lr.status IN ('Pending', 'Manager Approved')
+     ORDER BY lr.created_at ASC`
+  );
+  return result.rows;
+}
+
+async function getLeaveRequestById(id) {
+  const result = await pool.query(
+    `SELECT lr.*, e.user_id
+     FROM leave_requests lr
+     LEFT JOIN employees e ON e.id = lr.employee_id
+     WHERE lr.id = $1`,
+    [id]
+  );
+  return result.rows[0] || null;
+}
+
+async function updateLeaveRequestStatus(id, status, approvedBy) {
+  const result = await pool.query(
+    `UPDATE leave_requests
+     SET status = $1, approved_by = $2, updated_at = NOW()
+     WHERE id = $3
+     RETURNING *`,
+    [status, approvedBy, id]
+  );
+  return result.rows[0] || null;
+}
+
+async function getLeaveBalance(employeeId, year) {
+  const result = await pool.query(
+    `SELECT lb.*, lt.name AS leave_type_name, lt.default_days_per_year
+     FROM leave_balances lb
+     JOIN leave_types lt ON lt.id = lb.leave_type_id
+     WHERE lb.employee_id = $1 AND lb.year = $2
+     ORDER BY lt.name`,
+    [employeeId, year]
+  );
+  return result.rows;
+}
+
+async function deductLeaveBalance(employeeId, leaveTypeId, year, days) {
+  const result = await pool.query(
+    `UPDATE leave_balances
+     SET used_days = used_days + $4
+     WHERE employee_id = $1 AND leave_type_id = $2 AND year = $3
+       AND used_days + $4 <= total_days
+     RETURNING *`,
+    [employeeId, leaveTypeId, year, days]
+  );
+  return result.rows[0] || null;
+}
+
+module.exports = {
+  getEmployeeIdByUserId,
+  createLeaveRequest,
+  getLeaveRequestsByEmployee,
+  getPendingLeaveRequests,
+  getLeaveRequestById,
+  updateLeaveRequestStatus,
+  getLeaveBalance,
+  deductLeaveBalance,
+};
