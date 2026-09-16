@@ -15,6 +15,8 @@ import {
   Upload
 } from "lucide-react";
 
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+
 import "./EmployeeDashboard.css";
 
 // ============================================================
@@ -151,7 +153,7 @@ function EmployeeDashboard({ employee = null }) {
     const token = localStorage.getItem("token");
     if (!token) return;
 
-    fetch("http://localhost:5000/api/dashboard/my-summary", {
+    fetch(`${API_URL}/api/dashboard/my-summary`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
