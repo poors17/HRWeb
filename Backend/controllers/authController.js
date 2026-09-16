@@ -6,6 +6,7 @@ const {
   updateRefreshToken,
   findUserById,
 } = require('../db/queries/users');
+const { findEmployeeByCode } = require('../db/queries/employees');
 
 function createAccessToken(user) {
   return jwt.sign(
@@ -29,6 +30,8 @@ function publicUser(user) {
     name: user.name,
     email: user.email,
     role: user.role,
+    employeeId: user.employee_id,
+    employeeCode: user.employee_code,
   };
 }
 
@@ -66,16 +69,16 @@ async function signup(req, res) {
 }
 
 async function login(req, res) {
-  const { email, password } = req.body;
+  const { employeeId, password } = req.body;
 
-  if (!validEmail(email) || typeof password !== 'string' || !password) {
-    return res.status(400).json({ message: 'Valid email and password are required' });
+  if (typeof employeeId !== 'string' || !employeeId.trim() || typeof password !== 'string' || !password) {
+    return res.status(400).json({ message: 'Employee ID and password are required' });
   }
 
   try {
-    const user = await findUserByEmail(email);
+    const user = await findEmployeeByCode(employeeId.trim());
     if (!user || !user.is_active || !(await bcrypt.compare(password, user.password_hash))) {
-      return res.status(401).json({ message: 'Invalid email or password' });
+      return res.status(401).json({ message: 'Invalid employee ID or password' });
     }
 
     const token = createAccessToken(user);

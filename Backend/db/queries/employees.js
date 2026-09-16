@@ -76,6 +76,40 @@ async function getEmployeeById(id) {
   return result.rows[0] || null;
 }
 
+async function findEmployeeByCode(employeeCode) {
+  const result = await pool.query(
+    `SELECT e.id AS employee_id, e.user_id, e.employee_code, e.full_name,
+            u.id, u.name, u.email, u.password_hash, u.role_id, u.is_active,
+            u.refresh_token, r.name AS role
+     FROM employees e
+     JOIN users u ON u.id = e.user_id
+     LEFT JOIN roles r ON r.id = u.role_id
+     WHERE LOWER(e.employee_code) = LOWER($1)`,
+    [employeeCode]
+  );
+
+  return result.rows[0] || null;
+}
+
+async function getMyDashboardSummary(userId) {
+  const result = await pool.query(
+    `SELECT e.id AS employee_id, e.employee_code, e.full_name,
+            d.name AS department_name, dg.name AS designation_name,
+            b.name AS branch_name, b.location AS branch_location,
+            s.name AS shift_name, s.start_time AS shift_start_time,
+            s.end_time AS shift_end_time
+     FROM employees e
+     LEFT JOIN departments d ON d.id = e.department_id
+     LEFT JOIN designations dg ON dg.id = e.designation_id
+     LEFT JOIN branches b ON b.id = e.branch_id
+     LEFT JOIN shifts s ON s.id = e.shift_id
+     WHERE e.user_id = $1`,
+    [userId]
+  );
+
+  return result.rows[0] || null;
+}
+
 async function updateEmployee(id, data) {
   const updates = employeeFields.filter((field) => data[field] !== undefined);
   if (!updates.length) return getEmployeeById(id);
@@ -120,6 +154,8 @@ module.exports = {
   createEmployee,
   getAllEmployees,
   getEmployeeById,
+  findEmployeeByCode,
+  getMyDashboardSummary,
   updateEmployee,
   updateEmployeeStatus,
   transferEmployee,

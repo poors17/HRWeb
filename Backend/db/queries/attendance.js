@@ -5,6 +5,17 @@ async function getEmployeeIdByUserId(userId) {
   return result.rows[0]?.id || null;
 }
 
+async function getTodayAttendanceByEmployee(employeeId) {
+  const result = await pool.query(
+    `SELECT punch_in, punch_out, status, working_hours
+     FROM attendance
+     WHERE employee_id = $1 AND date = CURRENT_DATE`,
+    [employeeId]
+  );
+
+  return result.rows[0] || null;
+}
+
 async function markPunchIn(employeeId, date, time) {
   const result = await pool.query(
     `INSERT INTO attendance (employee_id, date, punch_in, status)
@@ -78,6 +89,7 @@ async function getAttendanceByDate(date) {
 
 module.exports = {
   getEmployeeIdByUserId,
+  getTodayAttendanceByEmployee,
   markPunchIn,
   markPunchOut,
   markWfh,

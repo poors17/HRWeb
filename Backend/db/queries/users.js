@@ -1,5 +1,10 @@
 const pool = require('../../config/db');
 
+async function countUsers() {
+  const result = await pool.query('SELECT COUNT(*)::int AS count FROM users');
+  return result.rows[0].count;
+}
+
 async function findUserByEmail(email) {
   const result = await pool.query(
     `SELECT u.id, u.name, u.email, u.password_hash, u.role_id, u.is_active,
@@ -45,6 +50,7 @@ async function findUserById(id) {
 }
 
 module.exports = {
+  countUsers,
   findUserByEmail,
   createUser,
   updateRefreshToken,

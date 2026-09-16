@@ -19,28 +19,10 @@ function Login1() {
   const [message, setMessage] = useState("");
   const [empIdError, setEmpIdError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-
-    // Temporary login credentials
-    const users = [
-      {
-        empId: "10001",
-        password: "123",
-        role: "Admin",
-      },
-      {
-        empId: "10002",
-        password: "1234",
-        role: "Employee",
-      },
-      {
-        empId: "10003",
-        password: "k1234",
-        role: "Employee",
-      },
-    ];
 
     // Reset previous errors
     setMessage("");
@@ -67,31 +49,43 @@ function Login1() {
       return;
     }
 
-    // Check user
-    const user = users.find(
-      (item) =>
-        item.empId === empId &&
-        item.password === password
-    );
+    setLoading(true);
 
-    if (!user) {
-      setMessage("ID or Password incorrect. Please try again");
+    try {
+      const response = await fetch("http://localhost:5000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ employeeId: empId, password }),
+      });
+      const data = await response.json();
+
+      if (!response.ok) {
+        setMessage(data.message);
+        setEmpIdError(true);
+        setPasswordError(true);
+        setLoading(false);
+        return;
+      }
+
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      localStorage.setItem("empId", data.employeeCode || empId);
+      localStorage.setItem("role", data.user.role);
+
+      if (data.user.role === "Super Admin") {
+        navigate("/dashboard");
+      } else {
+        navigate("/employee-dashboard");
+      }
+    } catch (error) {
+      setMessage("Unable to reach the server. Please try again.");
       setEmpIdError(true);
       setPasswordError(true);
-      return;
+      setLoading(false);
     }
-
-    // Save login information
-    localStorage.setItem("isLoggedIn", "true");
-    localStorage.setItem("empId", user.empId);
-    localStorage.setItem("role", user.role);
-
-    // Navigate to dashboard
-    if (user.role === "Employee") {
-  navigate("/employee-dashboard");
-} else if (user.role === "Admin") {
-  navigate("/dashboard");
-}
   };
 
   return (
@@ -311,8 +305,9 @@ function Login1() {
               <button
                 type="submit"
                 className="login-button"
+                disabled={loading}
               >
-                LOGIN
+                {loading ? "LOGGING IN..." : "LOGIN"}
               </button>
 
             </div>
