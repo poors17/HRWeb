@@ -621,12 +621,8 @@ function EmployeeDashboard({ employee = null }) {
                     type="button"
                     className="logout-button"
                     onClick={() => {
-                      localStorage.removeItem("isLoggedIn");
-                      localStorage.removeItem("token");
-                      localStorage.removeItem("refreshToken");
-                      localStorage.removeItem("empId");
-                      localStorage.removeItem("role");
-                      navigate("/");
+                      localStorage.clear();
+                      navigate("/login", { replace: true });
                     }}
                   >
                     Logout

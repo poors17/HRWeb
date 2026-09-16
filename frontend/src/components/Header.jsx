@@ -8,6 +8,7 @@ import {
   ChevronDown,
   CircleUserRound,
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 import "./Header.css";
 
@@ -18,6 +19,12 @@ const Header = ({
 
   const [profileOpen, setProfileOpen] =
     React.useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate("/login", { replace: true });
+  };
 
   return (
     <header className="employee-header">
@@ -154,6 +161,7 @@ const Header = ({
               <button
                 type="button"
                 className="logout-button"
+                onClick={handleLogout}
               >
                 Logout
               </button>

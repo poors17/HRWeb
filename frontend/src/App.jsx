@@ -6,6 +6,8 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+import Login1 from "./pages/Login1";
+import ProtectedRoute, { PublicRoute } from "./pages/ProtectedRoute";
 
 import EmployeeDashboard
   from "./pages/EmployeeDashboard";
@@ -20,25 +22,32 @@ function App() {
 
       <Routes>
 
-        <Route
-          path="/employee-dashboard"
-          element={
-            <EmployeeDashboard />
-          }
-        />
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login1 />} />
+        </Route>
 
-        <Route
-          path="/attendance"
-          element={
-            <AttendanceDetails />
-          }
-        />
+        <Route element={<ProtectedRoute />}>
+          <Route
+            path="/dashboard"
+            element={<EmployeeDashboard />}
+          />
+
+          <Route
+            path="/employee-dashboard"
+            element={<EmployeeDashboard />}
+          />
+
+          <Route
+            path="/attendance"
+            element={<AttendanceDetails />}
+          />
+        </Route>
 
         <Route
           path="*"
           element={
             <Navigate
-              to="/employee-dashboard"
+              to="/login"
               replace
             />
           }
