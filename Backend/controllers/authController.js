@@ -77,7 +77,11 @@ async function login(req, res) {
 
   try {
     const user = await findEmployeeByCode(employeeId.trim());
-    if (!user || !user.is_active || !(await bcrypt.compare(password, user.password_hash))) {
+    if (!user || !user.is_active || !user.password_hash) {
+      return res.status(401).json({ message: 'Invalid employee ID or password' });
+    }
+
+    if (!(await bcrypt.compare(password, user.password_hash))) {
       return res.status(401).json({ message: 'Invalid employee ID or password' });
     }
 
@@ -87,8 +91,8 @@ async function login(req, res) {
 
     return res.json({ token, refreshToken, user: publicUser(user) });
   } catch (error) {
-    console.error('Login error:', error.message);
-    return res.status(500).json({ message: 'Unable to log in' });
+    console.error('LOGIN ERROR:', error);
+    return res.status(500).json({ message: error.message });
   }
 }
 
