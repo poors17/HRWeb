@@ -1,0 +1,162 @@
+@import url(
+  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
+);
+
+
+/* ============================================================
+   GLOBAL
+============================================================ */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", Arial, sans-serif;
+
+  background: #eef7fc;
+
+  color: #000;
+}
+
+
+/* ============================================================
+   MAIN APPLICATION
+============================================================ */
+
+.employee-page {
+  width: 100%;
+  height: 100vh;
+
+  display: flex;
+
+  overflow: hidden;
+
+  background: #eef7fc;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  color: #000;
+
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease;
+}
+
+
+/* ============================================================
+   RIGHT AREA
+============================================================ */
+
+.employee-right {
+  flex: 1;
+
+  min-width: 0;
+
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  background: #eef7fc;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+============================================================ */
+
+.employee-main {
+  flex: 1;
+
+  min-height: 0;
+
+  overflow: auto;
+
+  background: #eef7fc;
+}
+
+
+/* ============================================================
+   LIGHT MODE
+============================================================ */
+
+.employee-page.light-mode {
+  background: #edf8fc;
+
+  color: #111827;
+}
+
+.employee-page.light-mode .employee-right,
+.employee-page.light-mode .employee-main {
+  background: #eef7fc;
+}
+
+
+/* ============================================================
+   DARK MODE
+============================================================ */
+
+.employee-page.dark-mode {
+  background: #0f172a;
+
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .employee-right,
+.employee-page.dark-mode .employee-main {
+  background: #0f172a;
+}
+
+
+/* ============================================================
+   TRANSITIONS
+============================================================ */
+
+.employee-page,
+.employee-page .employee-sidebar,
+.employee-page .employee-right,
+.employee-page .employee-header,
+.employee-page .employee-main,
+.employee-page .employee-footer,
+.employee-page .sidebar-item,
+.employee-page .collapsed-item,
+.employee-page .header-icon-button {
+  transition:
+    background-color 0.25s ease,
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 800px) {
+
+  .employee-right {
+    width: calc(100% - 72px);
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .employee-right {
+    width: calc(100% - 64px);
+  }
+
+}

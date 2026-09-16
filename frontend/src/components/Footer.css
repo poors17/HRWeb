@@ -1,0 +1,102 @@
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.employee-footer {
+  height: 59px;
+  min-height: 59px;
+
+  padding: 0 27px 0 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  border-top: 1px solid #b7ddd8;
+
+  background: #eef7fc;
+
+  color: #8a9298;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  letter-spacing: 0.2px;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   LINKS
+============================================================ */
+
+.footer-links {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  white-space: nowrap;
+}
+
+.footer-links a {
+  color: #07577a;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: color 0.18s ease;
+}
+
+.footer-links a:hover {
+  color: #19b968;
+
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 600px) {
+
+  .employee-footer {
+    padding: 0 10px;
+
+    font-size: 10px;
+  }
+
+  .footer-links {
+    display: none;
+  }
+
+}
+
+
+/* ============================================================
+   DARK MODE
+============================================================ */
+
+.employee-page.dark-mode .employee-footer {
+  background: #0f172a;
+
+  border-top-color: #334155;
+
+  color: #94a3b8;
+}
+
+.employee-page.dark-mode .footer-links a {
+  color: #cbd5e1;
+}
+
+.employee-page.dark-mode .footer-links a:hover {
+  color: #5eead4;
+
+  text-decoration: underline;
+}

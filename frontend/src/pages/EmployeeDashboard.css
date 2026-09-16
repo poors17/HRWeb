@@ -4872,3 +4872,1568 @@ max-height: 342px;
   color: #ffffff;
 }
 
+/* ============================================================
+   ATTENDANCE DETAILS PAGE
+   ============================================================ */
+
+.attendance-details-page {
+  width: 100%;
+  height: 100%;
+
+  padding: 16px 14px 20px;
+
+  box-sizing: border-box;
+
+  overflow-y: auto;
+}
+
+
+/* ============================================================
+   BACK BUTTON
+   ============================================================ */
+
+.attendance-back-button {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  border: none;
+
+  background: #e3e6e8;
+
+  color: #5f6468;
+
+  border-radius: 7px;
+
+  padding: 5px 11px;
+
+  font-size: 12px;
+
+  font-weight: 500;
+
+  cursor: pointer;
+
+  margin-bottom: 7px;
+}
+
+.attendance-back-button:hover {
+  background: #d8dcde;
+}
+
+
+/* ============================================================
+   TITLE
+   ============================================================ */
+
+.attendance-details-heading {
+  margin-bottom: 10px;
+}
+
+.attendance-details-heading h1 {
+  margin: 0;
+
+  font-size: 21px;
+
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  color: #111;
+}
+
+.attendance-details-heading p {
+  margin: 4px 0 0;
+
+  font-size: 12px;
+
+  color: #70777b;
+}
+
+
+/* ============================================================
+   EMPLOYEE HEADER
+   ============================================================ */
+
+.attendance-details-employee {
+  width: 100%;
+
+  min-height: 84px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  border-radius: 9px;
+
+  padding: 9px 16px;
+
+  margin-bottom: 9px;
+}
+
+.attendance-details-employee-left {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+}
+
+.attendance-details-profile {
+  width: 65px;
+  height: 65px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  overflow: hidden;
+
+  border: 2px solid #1fc797;
+
+  background: #d9eeec;
+
+  color: #677275;
+}
+
+.attendance-details-profile img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+}
+
+.attendance-details-employee-info h2 {
+  margin: 0 0 2px;
+
+  font-size: 20px;
+
+  font-weight: 700;
+
+  color: #111;
+}
+
+.attendance-details-employee-info p {
+  margin: 0 0 2px;
+
+  font-size: 13px;
+
+  color: #747b80;
+}
+
+.attendance-details-employee-info span {
+  font-size: 12px;
+
+  color: #747b80;
+}
+
+
+/* ============================================================
+   DATE
+   ============================================================ */
+
+.attendance-details-date-section {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-end;
+
+  gap: 7px;
+}
+
+.attendance-details-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 4px 17px;
+
+  border-radius: 15px;
+
+  background: #c7f1d7;
+
+  color: #169052;
+
+  font-size: 11px;
+
+  font-weight: 700;
+
+  text-transform: none;
+}
+
+.attendance-details-status span {
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  background: #199653;
+}
+
+.attendance-details-date {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  color: #454a4d;
+
+  font-size: 12px;
+}
+
+.attendance-details-date svg {
+  color: #43505a;
+}
+
+
+/* ============================================================
+   SUMMARY CARDS
+   ============================================================ */
+
+.attendance-details-summary {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr 1.15fr;
+
+  gap: 48px;
+
+  margin-bottom: 14px;
+}
+
+.attendance-summary-box {
+  min-height: 69px;
+
+  border-radius: 9px;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 9px 12px;
+
+  box-sizing: border-box;
+}
+
+.checkin-box {
+  background: #dcf3eb;
+}
+
+.checkout-box {
+  background: #f1dce0;
+}
+
+.working-box {
+  background: #dceef7;
+}
+
+.attendance-summary-icon {
+  width: 42px;
+  height: 42px;
+
+  border-radius: 50%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  margin-right: 11px;
+
+  flex-shrink: 0;
+}
+
+.attendance-summary-icon img {
+  width: 23px;
+  height: 23px;
+
+  object-fit: contain;
+}
+
+.checkin-icon {
+  background: #b7ead7;
+}
+
+.checkout-icon {
+  background: #f2bfc5;
+}
+
+.checkout-icon img {
+  filter: hue-rotate(120deg);
+}
+
+.working-icon {
+  background: #b9e1f2;
+}
+
+.summary-icon {
+  color: #159cd0;
+}
+
+.attendance-summary-content {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 1px;
+}
+
+.attendance-summary-content span {
+  font-size: 10px;
+
+  color: #73797d;
+}
+
+.attendance-summary-content strong {
+  font-size: 17px;
+
+  line-height: 1.1;
+
+  color: #1c2529;
+}
+
+.attendance-summary-content small {
+  width: fit-content;
+
+  padding: 2px 7px;
+
+  border-radius: 5px;
+
+  background: #67d7a4;
+
+  color: #087e4d;
+
+  font-size: 8px;
+
+  font-weight: 700;
+}
+
+.attendance-summary-percentage {
+  margin-left: auto;
+
+  padding: 8px 12px;
+
+  border-radius: 8px;
+
+  background: #8edeb5;
+
+  color: #087d4d;
+
+  font-size: 16px;
+
+  font-weight: 700;
+}
+
+
+/* ============================================================
+   DETAILS GRID
+   ============================================================ */
+
+.attendance-details-grid {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1.12fr 1fr 1fr;
+
+  gap: 14px;
+}
+
+.attendance-detail-card {
+  min-height: 117px;
+
+  box-sizing: border-box;
+
+  padding: 9px 10px;
+
+  border: 1px solid #d7e0e4;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.attendance-detail-card-title {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  margin-bottom: 9px;
+}
+
+.attendance-detail-card-title h3 {
+  margin: 0;
+
+  font-size: 12px;
+
+  font-weight: 700;
+
+  color: #263338;
+}
+
+.detail-title-icon {
+  width: 29px;
+  height: 29px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border-radius: 50%;
+}
+
+.detail-title-icon img {
+  width: 17px;
+  height: 17px;
+
+  object-fit: contain;
+}
+
+.login-detail-icon {
+  background: #d4edfc;
+}
+
+.location-detail-icon {
+  background: #d4f1e7;
+}
+
+.shift-detail-icon {
+  background: #e4dbff;
+
+  color: #895ee2;
+}
+
+.status-detail-icon {
+  background: #ffe5c5;
+
+  color: #f29c35;
+}
+
+.attendance-detail-row {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 6px;
+
+  font-size: 9px;
+}
+
+.attendance-detail-row span {
+  color: #737a7e;
+
+  flex-shrink: 0;
+}
+
+.attendance-detail-row strong {
+  text-align: right;
+
+  color: #343a3d;
+
+  font-weight: 600;
+}
+
+.green-status {
+  color: #19aa65 !important;
+}
+
+
+/* ============================================================
+   WORKING HOURS PROGRESS
+   ============================================================ */
+
+.attendance-working-progress {
+  grid-column: span 2;
+
+  min-height: 77px;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+
+  border: 1px solid #d7e0e4;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.attendance-working-progress h3 {
+  margin: 0 0 7px;
+
+  font-size: 13px;
+
+  color: #2d5364;
+}
+
+.attendance-progress-row {
+  display: flex;
+
+  align-items: center;
+
+  gap: 18px;
+}
+
+.attendance-progress-bar {
+  flex: 1;
+
+  height: 13px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: #d8e4e5;
+}
+
+.attendance-progress-fill {
+  height: 100%;
+
+  background: #2faf7b;
+
+  border-radius: 20px;
+}
+
+.attendance-progress-row strong {
+  font-size: 17px;
+
+  color: #111;
+}
+
+.attendance-working-progress > span {
+  display: block;
+
+  margin-top: 4px;
+
+  font-size: 10px;
+
+  color: #777f83;
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+.employee-page.dark-mode .attendance-details-heading h1 {
+  color: #f2f5f6;
+}
+
+.employee-page.dark-mode .attendance-details-heading p {
+  color: #aab3b7;
+}
+
+.employee-page.dark-mode .attendance-details-employee {
+  background: rgba(35, 43, 47, 0.9);
+}
+
+.employee-page.dark-mode .attendance-details-employee-info h2 {
+  color: #f4f6f7;
+}
+
+.employee-page.dark-mode .attendance-details-employee-info p,
+.employee-page.dark-mode .attendance-details-employee-info span {
+  color: #aeb7bb;
+}
+
+.employee-page.dark-mode .attendance-details-date {
+  color: #e0e5e7;
+}
+
+.employee-page.dark-mode .attendance-detail-card,
+.employee-page.dark-mode .attendance-working-progress {
+  background: rgba(35, 43, 47, 0.75);
+
+  border-color: #465157;
+}
+
+.employee-page.dark-mode .attendance-detail-card-title h3 {
+  color: #e9eef0;
+}
+
+.employee-page.dark-mode .attendance-detail-row strong {
+  color: #e1e7e9;
+}
+
+.employee-page.dark-mode .attendance-detail-row span {
+  color: #aab3b7;
+}
+
+.employee-page.dark-mode .attendance-working-progress h3 {
+  color: #a9d8e8;
+}
+
+.employee-page.dark-mode .attendance-progress-row strong {
+  color: #f1f4f5;
+}
+
+.employee-page.dark-mode .attendance-working-progress > span {
+  color: #aab3b7;
+}
+
+.employee-page.dark-mode .attendance-back-button {
+  background: #394247;
+
+  color: #dce2e5;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1200px) {
+
+  .attendance-details-summary {
+    gap: 15px;
+  }
+
+  .attendance-details-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .attendance-working-progress {
+    grid-column: span 2;
+  }
+
+}
+
+
+@media (max-width: 900px) {
+
+  .attendance-details-summary {
+    grid-template-columns: 1fr;
+  }
+
+  .attendance-details-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .attendance-working-progress {
+    grid-column: span 1;
+  }
+
+  .attendance-details-employee {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 12px;
+  }
+
+  .attendance-details-date-section {
+    align-items: flex-start;
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .attendance-details-page {
+    padding: 12px;
+  }
+
+  .attendance-details-employee-left {
+    align-items: flex-start;
+  }
+
+  .attendance-details-profile {
+    width: 55px;
+    height: 55px;
+  }
+
+  .attendance-details-employee-info h2 {
+    font-size: 17px;
+  }
+
+  .attendance-summary-box {
+    min-height: 65px;
+  }
+
+}
+/* ============================================================
+   FINAL FIX
+   FIXED HEADER + FIXED FOOTER
+   ONLY MAIN CONTENT SCROLLS
+   ============================================================ */
+
+/* ------------------------------------------------------------
+   FULL APPLICATION
+   ------------------------------------------------------------ */
+
+.employee-page {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+
+  display: flex;
+
+  overflow: hidden;
+}
+
+
+/* ------------------------------------------------------------
+   SIDEBAR
+   ------------------------------------------------------------ */
+
+.employee-sidebar {
+  width: 240px;
+  min-width: 240px;
+  height: 100vh;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  z-index: 1000;
+
+  overflow: hidden;
+}
+
+
+/* ------------------------------------------------------------
+   RIGHT SIDE
+   ------------------------------------------------------------ */
+
+.employee-right {
+  width: calc(100% - 240px);
+  height: 100vh;
+
+  margin-left: 240px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  overflow: hidden;
+
+  min-width: 0;
+}
+
+
+/* ------------------------------------------------------------
+   HEADER
+   ------------------------------------------------------------ */
+
+.employee-header {
+  width: 100%;
+  height: 72px;
+  min-height: 72px;
+
+  position: fixed;
+  top: 0;
+  left: 240px;
+  right: 0;
+
+  z-index: 900;
+
+  flex-shrink: 0;
+}
+
+
+/* ------------------------------------------------------------
+   MAIN CONTENT
+   ONLY THIS AREA SCROLLS
+   ------------------------------------------------------------ */
+
+.employee-main {
+  width: 100%;
+  height: calc(100vh - 72px - 62px);
+
+  margin-top: 72px;
+  margin-bottom: 62px;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  flex: none;
+}
+
+
+/* ------------------------------------------------------------
+   FOOTER
+   ------------------------------------------------------------ */
+
+.employee-footer {
+  width: calc(100% - 240px);
+  height: 62px;
+  min-height: 62px;
+
+  position: fixed;
+  left: 240px;
+  bottom: 0;
+
+  z-index: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 27px;
+
+  flex-shrink: 0;
+}
+
+
+/* ------------------------------------------------------------
+   MAIN SCROLLBAR
+   ------------------------------------------------------------ */
+
+.employee-main::-webkit-scrollbar {
+  width: 6px;
+}
+
+.employee-main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.employee-main::-webkit-scrollbar-thumb {
+  background: #b8d8d8;
+  border-radius: 10px;
+}
+
+.employee-main::-webkit-scrollbar-thumb:hover {
+  background: #8fc3c3;
+}
+
+
+/* ============================================================
+   SIDEBAR COLLAPSED
+   ============================================================ */
+
+.employee-page.sidebar-collapsed .employee-sidebar {
+  width: 72px;
+  min-width: 72px;
+}
+
+.employee-page.sidebar-collapsed .employee-right {
+  width: calc(100% - 72px);
+  margin-left: 72px;
+}
+
+.employee-page.sidebar-collapsed .employee-header {
+  left: 72px;
+}
+
+.employee-page.sidebar-collapsed .employee-footer {
+  width: calc(100% - 72px);
+  left: 72px;
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+.employee-page.dark-mode .employee-right {
+  background: #0f172a;
+}
+
+.employee-page.dark-mode .employee-main {
+  background: #0f172a;
+}
+
+.employee-page.dark-mode .employee-header {
+  background: #111827;
+  border-bottom-color: #334155;
+}
+
+.employee-page.dark-mode .employee-footer {
+  background: #0f172a;
+  border-top-color: #334155;
+}
+
+
+/* ============================================================
+   LARGE LAPTOP
+   ============================================================ */
+
+@media (max-width: 1200px) {
+
+  .employee-sidebar {
+    width: 220px;
+    min-width: 220px;
+  }
+
+  .employee-right {
+    width: calc(100% - 220px);
+    margin-left: 220px;
+  }
+
+  .employee-header {
+    left: 220px;
+  }
+
+  .employee-footer {
+    width: calc(100% - 220px);
+    left: 220px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-sidebar {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-right {
+    width: calc(100% - 72px);
+    margin-left: 72px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-header {
+    left: 72px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-footer {
+    width: calc(100% - 72px);
+    left: 72px;
+  }
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .employee-sidebar {
+    width: 200px;
+    min-width: 200px;
+  }
+
+  .employee-right {
+    width: calc(100% - 200px);
+    margin-left: 200px;
+  }
+
+  .employee-header {
+    left: 200px;
+  }
+
+  .employee-footer {
+    width: calc(100% - 200px);
+    left: 200px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-sidebar {
+    width: 72px;
+    min-width: 72px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-right {
+    width: calc(100% - 72px);
+    margin-left: 72px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-header {
+    left: 72px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-footer {
+    width: calc(100% - 72px);
+    left: 72px;
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .employee-sidebar {
+    width: 0;
+    min-width: 0;
+
+    transform: translateX(-100%);
+  }
+
+  .employee-right {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .employee-header {
+    left: 0;
+  }
+
+  .employee-footer {
+    width: 100%;
+    left: 0;
+  }
+
+  .employee-main {
+    height: calc(100vh - 72px - 58px);
+
+    margin-top: 72px;
+    margin-bottom: 58px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-sidebar {
+    width: 0;
+    min-width: 0;
+  }
+
+  .employee-page.sidebar-collapsed .employee-right {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .employee-page.sidebar-collapsed .employee-header {
+    left: 0;
+  }
+
+  .employee-page.sidebar-collapsed .employee-footer {
+    width: 100%;
+    left: 0;
+  }
+
+  .employee-footer {
+    height: 58px;
+    min-height: 58px;
+  }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 500px) {
+
+  .employee-main {
+    height: calc(100vh - 72px - 58px);
+  }
+
+  .employee-footer {
+    height: 58px;
+    min-height: 58px;
+  }
+}
+
+/* ============================================================
+   FINAL FIGMA DESKTOP LAYOUT
+   SIDEBAR = 240px
+   ============================================================ */
+
+.employee-page {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+
+  display: flex;
+
+  overflow: hidden;
+
+  background: #edf8fc;
+}
+
+
+/* ============================================================
+   SIDEBAR
+   EXACT FIGMA WIDTH
+   ============================================================ */
+
+.employee-sidebar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 240px;
+  min-width: 240px;
+
+  height: 100vh;
+  min-height: 100vh;
+
+  z-index: 1000;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   RIGHT SIDE
+   STARTS AFTER 240px SIDEBAR
+   ============================================================ */
+
+.employee-right {
+  width: calc(100% - 240px);
+
+  height: 100vh;
+
+  margin-left: 240px;
+
+  min-width: 0;
+  min-height: 0;
+
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+
+.employee-header {
+  position: fixed;
+
+  top: 0;
+  left: 240px;
+  right: 0;
+
+  width: auto;
+
+  height: 72px;
+  min-height: 72px;
+
+  z-index: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 20px 0 35px;
+
+  box-sizing: border-box;
+
+  background: #edf8fc;
+
+  border-bottom: 1px solid #d2e0e6;
+}
+
+
+/* ============================================================
+   HEADER SEARCH
+   ============================================================ */
+
+.header-search {
+  width: 350px;
+  height: 42px;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   HEADER RIGHT
+   ============================================================ */
+
+.header-right {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  margin-left: auto;
+
+  flex-shrink: 0;
+
+  min-width: max-content;
+}
+
+
+/* ============================================================
+   PROFILE
+   ============================================================ */
+
+.profile-area {
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  flex-shrink: 0;
+
+  min-width: max-content;
+}
+
+.profile-image {
+  width: 50px;
+  height: 50px;
+
+  min-width: 50px;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+
+  border: 3px solid #20c89b;
+
+  background: #fff;
+
+  box-sizing: border-box;
+}
+
+.profile-image img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  display: block;
+}
+
+.profile-text {
+  display: flex;
+  flex-direction: column;
+
+  gap: 2px;
+
+  min-width: 110px;
+}
+
+.profile-text strong {
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 18px;
+
+  color: #111827;
+
+  white-space: nowrap;
+}
+
+.profile-text span {
+  font-size: 10px;
+
+  line-height: 14px;
+
+  color: #28718d;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+   ============================================================ */
+
+.employee-main {
+  width: 100%;
+
+  height: calc(100vh - 72px - 62px);
+
+  margin-top: 72px;
+  margin-bottom: 62px;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  box-sizing: border-box;
+
+  background: #edf8fc;
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+
+.employee-footer {
+  position: fixed;
+
+  left: 240px;
+  right: 0;
+  bottom: 0;
+
+  width: auto;
+
+  height: 62px;
+  min-height: 62px;
+
+  z-index: 900;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 0 27px;
+
+  box-sizing: border-box;
+
+  background: #edf8fc;
+
+  border-top: 1px solid #b8dfe1;
+}
+
+
+/* ============================================================
+   SIDEBAR SCROLLBAR
+   ============================================================ */
+
+.employee-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.employee-sidebar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.employee-sidebar::-webkit-scrollbar-thumb {
+  background: #9ed8d4;
+
+  border-radius: 10px;
+}
+
+
+/* ============================================================
+   MAIN CONTENT SCROLLBAR
+   ============================================================ */
+
+.employee-main::-webkit-scrollbar {
+  width: 5px;
+}
+
+.employee-main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.employee-main::-webkit-scrollbar-thumb {
+  background: #b8d8d8;
+
+  border-radius: 10px;
+}
+
+
+/* ============================================================
+   DESKTOP — 1440px
+   ============================================================ */
+
+@media (min-width: 1201px) {
+
+  .employee-sidebar {
+    width: 240px;
+    min-width: 240px;
+  }
+
+  .employee-right {
+    width: calc(100% - 240px);
+    margin-left: 240px;
+  }
+
+  .employee-header {
+    left: 240px;
+    right: 0;
+    width: auto;
+  }
+
+  .employee-footer {
+    left: 240px;
+    right: 0;
+    width: auto;
+  }
+}
+
+
+/* ============================================================
+   TABLET
+   ============================================================ */
+
+@media (max-width: 1200px) and (min-width: 769px) {
+
+  .employee-sidebar {
+    width: 240px;
+    min-width: 240px;
+  }
+
+  .employee-right {
+    width: calc(100% - 240px);
+    margin-left: 240px;
+  }
+
+  .employee-header {
+    left: 240px;
+    right: 0;
+    width: auto;
+
+    padding-left: 25px;
+    padding-right: 15px;
+  }
+
+  .employee-footer {
+    left: 240px;
+    right: 0;
+    width: auto;
+  }
+
+  .header-search {
+    width: 280px;
+  }
+
+  .header-right {
+    gap: 10px;
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .employee-sidebar {
+    width: 0;
+    min-width: 0;
+
+    transform: translateX(-100%);
+  }
+
+  .employee-right {
+    width: 100%;
+
+    margin-left: 0;
+  }
+
+  .employee-header {
+    left: 0;
+    right: 0;
+
+    width: 100%;
+
+    padding: 0 15px;
+  }
+
+  .employee-footer {
+    left: 0;
+    right: 0;
+
+    width: 100%;
+  }
+
+  .header-search {
+    width: 220px;
+  }
+
+  .profile-text {
+    display: none;
+  }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
+@media (max-width: 500px) {
+
+  .header-search {
+    width: 150px;
+  }
+
+  .header-right {
+    gap: 4px;
+  }
+
+  .profile-area {
+    display: none;
+  }
+
+  .employee-footer {
+    justify-content: center;
+  }
+
+  .copyright {
+    display: none;
+  }
+}
+
+/* ============================================================
+   FINAL HRMS DESKTOP FRAME
+   FIGMA: 240px SIDEBAR
+   ============================================================ */
+
+@media (min-width: 1201px) {
+
+  .employee-sidebar {
+    width: 240px !important;
+    min-width: 240px !important;
+  }
+
+  .employee-right {
+    width: calc(100% - 240px) !important;
+    margin-left: 240px !important;
+  }
+
+  .employee-header {
+    left: 240px !important;
+    width: calc(100% - 240px) !important;
+  }
+
+  .employee-footer {
+    left: 240px !important;
+    width: calc(100% - 240px) !important;
+  }
+}
+
+
+/* ============================================================
+   ATTENDANCE MAIN
+   ============================================================ */
+
+.employee-main {
+  width: 100%;
+
+  min-width: 0;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+
+/* ============================================================
+   ATTENDANCE PAGE INSIDE MAIN
+   ============================================================ */
+
+.employee-main .attendance-details-page {
+  width: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+}

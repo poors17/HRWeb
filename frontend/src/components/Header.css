@@ -1,0 +1,486 @@
+/* ============================================================
+   HEADER
+============================================================ */
+
+.employee-header {
+  height: 72px;
+  min-height: 72px;
+
+  padding: 0 17px 0 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: #e7f5ff;
+
+  border-bottom: 1px solid #cad9df;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   SEARCH
+============================================================ */
+
+.header-search {
+  width: 425px;
+  height: 44px;
+
+  padding: 0 17px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+
+  background: #ffffff;
+
+  border: 1px solid #b9c9d0;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.12);
+}
+
+.header-search svg {
+  color: #343b40;
+
+  flex-shrink: 0;
+}
+
+.header-search input {
+  width: 100%;
+  height: 100%;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 12px;
+
+  color: #333;
+}
+
+.header-search input::placeholder {
+  color: #969da2;
+}
+
+
+/* ============================================================
+   ACTIONS
+============================================================ */
+
+.header-actions {
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 14px;
+}
+
+
+/* ============================================================
+   HEADER ICON BUTTON
+============================================================ */
+
+.header-icon-button {
+  width: 42px;
+  height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  color: #171717;
+
+  transition:
+    background-color 0.18s ease,
+    color 0.18s ease,
+    transform 0.15s ease;
+}
+
+.header-icon-button:hover {
+  background: #d2f6ed;
+
+  color: #003f58;
+
+  transform: scale(1.05);
+}
+
+.header-icon-button.theme-active {
+  background: #d2f6ed;
+
+  color: #003f58;
+}
+
+
+/* ============================================================
+   NOTIFICATION
+============================================================ */
+
+.notification {
+  position: relative;
+}
+
+.notification-dot {
+  position: absolute;
+
+  top: 3px;
+  right: 4px;
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #ffd11a;
+}
+
+
+/* ============================================================
+   DIVIDER
+============================================================ */
+
+.header-divider {
+  width: 1px;
+  height: 42px;
+
+  margin: 0 6px;
+
+  background: #c9d5db;
+}
+
+
+/* ============================================================
+   PROFILE
+============================================================ */
+
+.employee-profile {
+  position: relative;
+
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.profile-image {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+
+  border: 2px solid #1fce6b;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  overflow: hidden;
+
+  color: #0a5d48;
+
+  background: #d8f7e8;
+}
+
+.profile-details {
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  white-space: nowrap;
+}
+
+.employee-name {
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 16px;
+  font-weight: 700;
+
+  color: #06334b;
+}
+
+.employee-role {
+  margin-top: 4px;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  color: #07577a;
+}
+
+.employee-role span {
+  padding: 0 2px;
+}
+
+
+/* ============================================================
+   PROFILE ARROW
+============================================================ */
+
+.profile-arrow-button {
+  width: 32px;
+  height: 32px;
+
+  padding: 0;
+  margin-left: 2px;
+
+  border: none;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  color: #000;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.profile-arrow-button:hover {
+  background: #d2f6ed;
+
+  color: #003f58;
+}
+
+.profile-arrow {
+  color: currentColor;
+
+  transition: transform 0.2s ease;
+}
+
+.profile-arrow.open {
+  transform: rotate(180deg);
+}
+
+
+/* ============================================================
+   PROFILE DROPDOWN
+============================================================ */
+
+.profile-dropdown {
+  position: absolute;
+
+  top: calc(100% - 4px);
+
+  right: 0;
+
+  min-width: 150px;
+
+  padding: 8px;
+
+  background: #ffffff;
+
+  border: 1px solid #cbd8dc;
+
+  border-radius: 8px;
+
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.15);
+
+  z-index: 1000;
+}
+
+.logout-button {
+  width: 100%;
+
+  height: 40px;
+
+  padding: 0 14px;
+
+  border: none;
+
+  border-radius: 6px;
+
+  background: transparent;
+
+  display: flex;
+  align-items: center;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  font-family: "Poppins", Arial, sans-serif;
+
+  font-size: 14px;
+  font-weight: 500;
+
+  color: #111827;
+}
+
+.logout-button:hover {
+  background: #d2f6ed;
+
+  color: #003f58;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+============================================================ */
+
+@media (max-width: 1000px) {
+
+  .header-search {
+    width: 300px;
+  }
+
+  .employee-name {
+    font-size: 14px;
+  }
+
+  .employee-role {
+    font-size: 10px;
+  }
+
+}
+
+@media (max-width: 800px) {
+
+  .employee-header {
+    padding-left: 18px;
+  }
+
+  .header-search {
+    width: 250px;
+  }
+
+}
+
+@media (max-width: 600px) {
+
+  .header-search {
+    width: 180px;
+  }
+
+  .header-actions {
+    gap: 4px;
+  }
+
+  .profile-details,
+  .profile-arrow-button,
+  .header-divider {
+    display: none;
+  }
+
+  .profile-image {
+    width: 38px;
+    height: 38px;
+  }
+
+}
+
+
+/* ============================================================
+   DARK MODE
+============================================================ */
+
+.employee-page.dark-mode .employee-header {
+  background: #111827;
+
+  border-bottom-color: #334155;
+}
+
+.employee-page.dark-mode .header-search {
+  background: #1e293b;
+
+  border-color: #475569;
+
+  box-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.35);
+}
+
+.employee-page.dark-mode .header-search svg {
+  color: #e2e8f0;
+}
+
+.employee-page.dark-mode .header-search input {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .header-search input::placeholder {
+  color: #94a3b8;
+}
+
+.employee-page.dark-mode .header-icon-button {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .header-icon-button:hover,
+.employee-page.dark-mode .header-icon-button.theme-active {
+  background: #263f45;
+
+  color: #5eead4;
+}
+
+.employee-page.dark-mode .notification-dot {
+  background: #facc15;
+}
+
+.employee-page.dark-mode .header-divider {
+  background: #475569;
+}
+
+.employee-page.dark-mode .profile-image {
+  background: #173c35;
+
+  border-color: #19b968;
+
+  color: #5eead4;
+}
+
+.employee-page.dark-mode .employee-name {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .employee-role {
+  color: #94a3b8;
+}
+
+.employee-page.dark-mode .profile-arrow-button {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .profile-dropdown {
+  background: #111827;
+
+  border-color: #334155;
+}
+
+.employee-page.dark-mode .logout-button {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .logout-button:hover {
+  background: #263f45;
+
+  color: #5eead4;
+}
