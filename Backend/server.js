@@ -37,6 +37,9 @@ const allowedOrigins = [
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.json({ status: 'ok', message: 'HRMS backend running' });
+});
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
 app.use('/api', organizationRoutes);

@@ -54,13 +54,16 @@ function Login1() {
     setLoading(true);
 
     try {
-      const response = await fetch(`${API_URL}/api/auth/login`, {
+      const loginUrl = `${API_URL}/api/auth/login`;
+      console.log("Login request URL:", loginUrl);
+      const response = await fetch(loginUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({ employeeId: empId, password }),
       });
+      console.log("Login response status:", response.status);
       const data = await response.json();
 
       if (!response.ok) {
@@ -83,6 +86,7 @@ function Login1() {
         navigate("/employee-dashboard");
       }
     } catch (error) {
+      console.error("Login request failed:", error);
       setMessage("Unable to reach the server. Please try again.");
       setEmpIdError(true);
       setPasswordError(true);
