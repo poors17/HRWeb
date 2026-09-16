@@ -9,7 +9,7 @@ import warning from "../assets/warning-svgrepo-com (1).svg";
 import { EyeOffIcon, EyeIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:5000";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function Login1() {
   const navigate = useNavigate();

@@ -29,11 +29,13 @@ const reportRoutes = require('./routes/reportRoutes');
 
 const app = express();
 const port = Number(process.env.PORT) || 5000;
-const corsOptions = process.env.FRONTEND_URL
-  ? { origin: process.env.FRONTEND_URL }
-  : undefined;
+const allowedOrigins = [
+  process.env.FRONTEND_URL || 'https://hrms-frontend-zvmc.onrender.com',
+  'https://hrms-frontend-zvmc.onrender.com',
+  'http://localhost:5173',
+];
 
-app.use(cors(corsOptions));
+app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/employees', employeeRoutes);
