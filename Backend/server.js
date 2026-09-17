@@ -37,6 +37,9 @@ const allowedOrigins = [
 
 app.use(cors({ origin: allowedOrigins, credentials: true }));
 app.use(express.json());
+app.get('/api/health', (req, res) => {
+  res.status(200).json({ status: 'ok', service: 'hrms-backend' });
+});
 app.get('/', (req, res) => {
   res.json({ status: 'ok', message: 'HRMS backend running' });
 });
@@ -63,10 +66,6 @@ app.use('/api/audit-logs', auditLogRoutes);
 app.use('/api/notifications', notificationRoutes);
 app.use('/api/announcements', announcementRoutes);
 app.use('/api/reports', reportRoutes);
-
-app.get('/api/health', (req, res) => {
-  res.status(200).json({ status: 'ok', service: 'hrms-backend' });
-});
 
 async function startServer() {
   try {
