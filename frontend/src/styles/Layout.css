@@ -1,10 +1,7 @@
-@import url(
-  "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
-);
-
-
 /* ============================================================
-   GLOBAL
+   LAYOUT.CSS
+   COMMON RESPONSIVE APPLICATION SHELL
+   Figma reference: 1440 x 1024
 ============================================================ */
 
 * {
@@ -15,18 +12,15 @@ html,
 body,
 #root {
   width: 100%;
-  min-height: 100%;
-
+  min-width: 0;
+  height: 100%;
   margin: 0;
   padding: 0;
 }
 
 body {
   font-family: "Poppins", Arial, sans-serif;
-
   background: #eef7fc;
-
-  color: #000;
 }
 
 
@@ -37,55 +31,170 @@ body {
 .employee-page {
   width: 100%;
   height: 100vh;
+  min-width: 0;
+  min-height: 0;
 
   display: flex;
+  flex-direction: row;
 
   overflow: hidden;
 
   background: #eef7fc;
+  color: #111827;
 
   font-family: "Poppins", Arial, sans-serif;
-
-  color: #000;
-
-  transition:
-    background-color 0.25s ease,
-    color 0.25s ease;
 }
 
 
 /* ============================================================
-   RIGHT AREA
+   SIDEBAR
+   Expanded  = 240px
+   Collapsed = 72px
+
+   Sidebar.jsx already uses employee-sidebar.
+============================================================ */
+
+.employee-page .employee-sidebar {
+  flex: 0 0 240px;
+
+  width: 240px;
+  min-width: 240px;
+  max-width: 240px;
+
+  height: 100vh;
+  min-height: 0;
+
+  overflow: hidden;
+
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease,
+    max-width 0.25s ease;
+}
+
+
+/* ============================================================
+   COLLAPSED SIDEBAR
+============================================================ */
+
+.employee-page.sidebar-collapsed .employee-sidebar {
+  flex: 0 0 72px;
+
+  width: 72px;
+  min-width: 72px;
+  max-width: 72px;
+}
+
+
+/* ============================================================
+   RIGHT SIDE
+
+   IMPORTANT:
+   Do NOT use margin-left.
+   Do NOT use position:absolute.
+   Do NOT use fixed 1200/1440 widths.
+
+   Flex automatically moves this area when sidebar expands.
 ============================================================ */
 
 .employee-right {
-  flex: 1;
+  flex: 1 1 auto;
 
+  width: auto;
   min-width: 0;
+  max-width: none;
 
   height: 100vh;
+  min-height: 0;
 
   display: flex;
   flex-direction: column;
 
+  overflow: hidden;
+
   background: #eef7fc;
 
-  overflow: hidden;
+  transition:
+    width 0.25s ease,
+    background-color 0.25s ease;
 }
 
 
 /* ============================================================
-   MAIN CONTENT
+   HEADER
+
+   Header stays fixed inside right area.
+   It will NOT scroll with main content.
+============================================================ */
+
+.employee-right .employee-header {
+  flex: 0 0 59px;
+
+  width: 100%;
+  height: 59px;
+  min-height: 59px;
+
+  position: relative;
+
+  z-index: 20;
+}
+
+
+/* ============================================================
+   MAIN
+
+   ONLY THIS AREA IS ALLOWED TO SCROLL.
 ============================================================ */
 
 .employee-main {
-  flex: 1;
+  flex: 1 1 auto;
 
+  width: 100%;
+  min-width: 0;
   min-height: 0;
 
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   background: #eef7fc;
+
+  position: relative;
+}
+
+
+/* Main scrollbar */
+
+.employee-main::-webkit-scrollbar {
+  width: 7px;
+}
+
+.employee-main::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.employee-main::-webkit-scrollbar-thumb {
+  background: #8ed7d1;
+  border-radius: 10px;
+}
+
+
+/* ============================================================
+   FOOTER
+
+   Footer stays fixed at the bottom of right area.
+   It will NOT scroll with main content.
+============================================================ */
+
+.employee-right .employee-footer {
+  flex: 0 0 64px;
+
+  width: 100%;
+  height: 64px;
+  min-height: 64px;
+
+  position: relative;
+
+  z-index: 20;
 }
 
 
@@ -94,8 +203,7 @@ body {
 ============================================================ */
 
 .employee-page.light-mode {
-  background: #edf8fc;
-
+  background: #eef7fc;
   color: #111827;
 }
 
@@ -111,7 +219,6 @@ body {
 
 .employee-page.dark-mode {
   background: #0f172a;
-
   color: #f8fafc;
 }
 
@@ -122,41 +229,268 @@ body {
 
 
 /* ============================================================
-   TRANSITIONS
+   COMMON TRANSITION
 ============================================================ */
 
 .employee-page,
-.employee-page .employee-sidebar,
-.employee-page .employee-right,
-.employee-page .employee-header,
-.employee-page .employee-main,
-.employee-page .employee-footer,
-.employee-page .sidebar-item,
-.employee-page .collapsed-item,
-.employee-page .header-icon-button {
+.employee-sidebar,
+.employee-right,
+.employee-header,
+.employee-main,
+.employee-footer {
   transition:
     background-color 0.25s ease,
     color 0.25s ease,
-    border-color 0.25s ease;
+    border-color 0.25s ease,
+    width 0.25s ease;
 }
 
 
 /* ============================================================
-   RESPONSIVE
+   DESKTOP
+   Figma reference: 1440 x 1024
+
+   IMPORTANT:
+   1440 x 1024 is the DESIGN REFERENCE,
+   NOT a fixed browser size.
 ============================================================ */
 
-@media (max-width: 800px) {
+@media (min-width: 1201px) {
 
-  .employee-right {
-    width: calc(100% - 72px);
+  .employee-page {
+    width: 100%;
+    height: 100vh;
   }
 
+  .employee-sidebar {
+    flex-basis: 240px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-sidebar {
+    flex-basis: 72px;
+  }
+
+  .employee-header {
+    flex-basis: 59px;
+  }
+
+  .employee-footer {
+    flex-basis: 64px;
+  }
 }
 
-@media (max-width: 600px) {
 
-  .employee-right {
-    width: calc(100% - 64px);
+/* ============================================================
+   LAPTOP
+   993px - 1200px
+============================================================ */
+
+@media (max-width: 1200px) {
+
+  .employee-page {
+    width: 100%;
+    height: 100vh;
   }
 
+  .employee-right {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .employee-main {
+    min-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /*
+     Keep sidebar expanded if user expanded it.
+     Main area automatically becomes smaller.
+  */
+
+  .employee-page.sidebar-expanded .employee-sidebar {
+    flex-basis: 220px;
+
+    width: 220px;
+    min-width: 220px;
+    max-width: 220px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-sidebar {
+    flex-basis: 72px;
+
+    width: 72px;
+    min-width: 72px;
+    max-width: 72px;
+  }
+}
+
+
+/* ============================================================
+   TABLET
+   769px - 992px
+============================================================ */
+
+@media (max-width: 992px) {
+
+  .employee-page.sidebar-expanded .employee-sidebar {
+    flex-basis: 200px;
+
+    width: 200px;
+    min-width: 200px;
+    max-width: 200px;
+  }
+
+  .employee-page.sidebar-collapsed .employee-sidebar {
+    flex-basis: 72px;
+
+    width: 72px;
+    min-width: 72px;
+    max-width: 72px;
+  }
+
+  .employee-right {
+    min-width: 0;
+  }
+
+  .employee-main {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+/* ============================================================
+   MOBILE
+   576px - 768px
+============================================================ */
+
+@media (max-width: 768px) {
+
+  .employee-page {
+    width: 100%;
+    height: 100vh;
+
+    overflow: hidden;
+  }
+
+  /*
+     Mobile sidebar stays collapsed.
+     The right content uses the remaining width.
+  */
+
+  .employee-sidebar {
+    flex: 0 0 72px !important;
+
+    width: 72px !important;
+    min-width: 72px !important;
+    max-width: 72px !important;
+  }
+
+  .employee-right {
+    flex: 1 1 auto;
+
+    width: auto;
+    min-width: 0;
+
+    height: 100vh;
+  }
+
+  .employee-header {
+    flex: 0 0 59px;
+
+    width: 100%;
+    min-width: 0;
+  }
+
+  .employee-main {
+    flex: 1 1 auto;
+
+    width: 100%;
+    min-width: 0;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .employee-footer {
+    flex: 0 0 56px;
+
+    width: 100%;
+    height: 56px;
+    min-height: 56px;
+  }
+}
+
+
+/* ============================================================
+   SMALL MOBILE
+   <= 576px
+============================================================ */
+
+@media (max-width: 576px) {
+
+  .employee-sidebar {
+    flex: 0 0 64px !important;
+
+    width: 64px !important;
+    min-width: 64px !important;
+    max-width: 64px !important;
+  }
+
+  .employee-right {
+    flex: 1 1 auto;
+
+    width: auto;
+    min-width: 0;
+  }
+
+  .employee-header {
+    flex-basis: 56px;
+
+    height: 56px;
+    min-height: 56px;
+  }
+
+  .employee-main {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .employee-footer {
+    flex-basis: 52px;
+
+    height: 52px;
+    min-height: 52px;
+  }
+}
+
+
+/* ============================================================
+   VERY SMALL DEVICES
+============================================================ */
+
+@media (max-width: 400px) {
+
+  .employee-sidebar {
+    flex-basis: 60px !important;
+
+    width: 60px !important;
+    min-width: 60px !important;
+    max-width: 60px !important;
+  }
+
+  .employee-header {
+    flex-basis: 54px;
+
+    height: 54px;
+    min-height: 54px;
+  }
+
+  .employee-footer {
+    flex-basis: 48px;
+
+    height: 48px;
+    min-height: 48px;
+  }
 }

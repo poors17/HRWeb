@@ -17,7 +17,8 @@ body,
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: #000000;
+  background: #eef5f8;
+  color: #10233f;
   overflow-x: hidden;
 }
 
@@ -29,22 +30,22 @@ body {
 .login-page {
   position: relative;
 
-  width: min(1200px, 92vw);
-  height: min(800px, 88vh);
-
-  min-height: 600px;
+  width: min(1200px, 94vw);
+  min-height: 680px;
+  height: 88vh;
 
   margin: 6vh auto;
 
   display: flex;
+  flex-direction: row;
 
   overflow: hidden;
 
-  border-radius: 20px;
-
   background: #ffffff;
 
-  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.18);
+  border-radius: 20px;
+
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.15);
 }
 
 
@@ -84,7 +85,35 @@ body {
 }
 
 
-/* Bottom square logo */
+/* =========================================================
+   LEFT HEADING
+========================================================= */
+
+.login-title {
+  position: absolute;
+
+  top: 35px;
+  left: 35px;
+  right: 30px;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(32px, 3.2vw, 48px);
+  line-height: 1.2;
+
+  font-weight: 700;
+
+  z-index: 3;
+
+  opacity: 0.95;
+}
+
+
+/* =========================================================
+   BOTTOM LOGO
+========================================================= */
 
 .bottom-logo {
   position: absolute;
@@ -101,32 +130,9 @@ body {
 }
 
 
-/* Left heading */
-
-.login-title {
-  position: absolute;
-
-  top: 35px;
-  left: 35px;
-  right: 30px;
-
-  margin: 0;
-
-  color: #ffffff;
-
-  font-size: clamp(32px, 3.2vw, 48px);
-
-  line-height: 1.2;
-
-  font-weight: bold;
-
-  z-index: 3;
-
-  opacity: 0.92;
-}
-
-
-/* Copyright */
+/* =========================================================
+   COPYRIGHT
+========================================================= */
 
 .login-right-text {
   position: absolute;
@@ -141,14 +147,13 @@ body {
   color: #ffffff;
 
   font-size: 12px;
-
   font-weight: 600;
 
   white-space: nowrap;
 
   z-index: 3;
 
-  opacity: 0.55;
+  opacity: 0.7;
 }
 
 
@@ -233,7 +238,9 @@ body {
 }
 
 
-/* Subtitle */
+/* =========================================================
+   SUBTITLE
+========================================================= */
 
 .para {
   width: 100%;
@@ -363,19 +370,19 @@ body {
 /* Input */
 
 .input-box input {
-  width: 100%;
-  height: 100%;
+  width: 100% !important;
+  height: 100% !important;
 
   min-width: 0;
 
-  padding: 0;
+  padding: 0 !important;
 
-  border: none;
-  outline: none;
+  border: none !important;
+  outline: none !important;
 
-  background: transparent;
+  background: transparent !important;
 
-  font-size: 14px;
+  font-size: 14px !important;
 
   color: #333333;
 }
@@ -390,7 +397,7 @@ body {
 
 /* Error */
 
-.input-error {
+.input-box.input-error {
   border: 2px solid #d90000 !important;
 }
 
@@ -423,7 +430,7 @@ body {
 
 
 /* =========================================================
-   REMEMBER / FORGOT
+   REMEMBER ME / FORGOT PASSWORD
 ========================================================= */
 
 .login-links {
@@ -495,6 +502,7 @@ body {
 
 .forgot-password {
   margin: 0;
+
   padding: 0;
 
   border: none;
@@ -551,7 +559,7 @@ body {
 
   font-size: 14px;
 
-  font-weight: bold;
+  font-weight: 700;
 
   cursor: pointer;
 
@@ -593,7 +601,7 @@ body {
 
 
 /* =========================================================
-   LAPTOP / SMALL DESKTOP
+   LAPTOP
 ========================================================= */
 
 @media (max-width: 1200px) {
@@ -601,11 +609,11 @@ body {
   .login-page {
     width: 94vw;
 
-    height: 86vh;
+    height: 88vh;
 
-    min-height: 600px;
+    min-height: 620px;
 
-    margin: 7vh auto;
+    margin: 6vh auto;
   }
 
   .login-left {
@@ -779,6 +787,10 @@ body {
 
 @media (max-width: 600px) {
 
+  body {
+    background: #eef5f8;
+  }
+
   .login-page {
     width: 96vw;
 
@@ -877,7 +889,7 @@ body {
   }
 
   .input-box input {
-    font-size: 13px;
+    font-size: 13px !important;
   }
 
   .login-links {
@@ -914,6 +926,10 @@ body {
 ========================================================= */
 
 @media (max-width: 400px) {
+
+  .login-page {
+    width: 96vw;
+  }
 
   .login-left {
     height: 250px;
@@ -963,14 +979,14 @@ body {
   .need {
     margin-top: 40px !important;
   }
-
+}
 
 
 /* =========================================================
-   SHORT DESKTOP SCREEN
+   SHORT LAPTOP / DESKTOP SCREEN
 ========================================================= */
 
-@media (min-width: 901px) and (max-height: 700px) {
+@media (min-width: 901px) and (max-height: 750px) {
 
   .login-page {
     height: 92vh;
@@ -1019,507 +1035,5 @@ body {
 
   .need {
     margin-top: 40px !important;
-  }
-}
-
-/* =========================================================
-   DESKTOP - 1440 x 1024 DESIGN
-   Center the complete login page
-   ========================================================= */
-
-@media screen and (min-width: 1400px) {
-
-  html,
-  body,
-  #root {
-    width: 100%;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #eef2f7;
-    overflow: auto;
-  }
-
-  .login-page {
-    width: 1440px;
-    height: 1024px;
-
-    flex-shrink: 0;
-
-    display: flex;
-    flex-direction: row;
-
-    margin: 0;
-    padding: 0;
-
-    border-radius: 0;
-    overflow: hidden;
-
-    background: #ffffff;
-  }
-
-  /* ================= LEFT SIDE ================= */
-
-  .login-left {
-    width: 58%;
-    height: 100%;
-
-    position: relative;
-    overflow: hidden;
-
-    background: #001c12;
-  }
-
-  .login-image {
-    position: absolute;
-
-    width: 100%;
-    height: 100%;
-
-    left: 0;
-    top: 0;
-
-    object-fit: cover;
-    object-position: center;
-  }
-
-  .login-title {
-    position: absolute;
-
-    top: 24px;
-    left: 18px;
-
-    margin: 0;
-
-    z-index: 2;
-
-    font-size: 28px;
-    line-height: 1.15;
-    font-weight: 700;
-  }
-
-  .bottom-logo {
-    position: absolute;
-
-    width: 82px;
-    height: 82px;
-
-    left: 18px;
-    bottom: 18px;
-
-    object-fit: contain;
-
-    z-index: 3;
-  }
-
-  .login-right-text {
-    position: absolute;
-
-    bottom: 12px;
-    left: 0;
-
-    width: 100%;
-
-    margin: 0;
-
-    text-align: center;
-
-    font-size: 8px;
-    font-weight: 600;
-
-    z-index: 3;
-  }
-
-  /* ================= RIGHT SIDE ================= */
-
-  .login-right {
-    width: 42%;
-    height: 100%;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: #f8faf9;
-  }
-
-  .login-card {
-    width: 344px;
-    height: 100%;
-
-    padding: 16px 8px;
-
-    box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-
-    background: transparent;
-  }
-
-  /* ================= LOGO ================= */
-
-  .login-logo {
-    width: 70px;
-    height: auto;
-
-    margin-top: 0;
-    margin-left: 0;
-
-    object-fit: contain;
-  }
-
-  /* ================= WELCOME ================= */
-
-  .logo-name {
-    margin-top: 55px;
-    margin-bottom: 4px;
-
-    font-size: 20px;
-    line-height: 1.1;
-
-    text-align: center;
-  }
-
-  .logo-name span {
-    font-size: 20px !important;
-  }
-
-  .para {
-    margin-top: 0;
-    margin-bottom: 28px;
-
-    font-size: 8px;
-    font-weight: 600;
-
-    text-align: center;
-  }
-
-  /* ================= ERROR MESSAGE ================= */
-
-  .login-message-space {
-    height: 32px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    margin-bottom: 4px;
-  }
-
-  .login-message {
-    width: 220px;
-    min-height: 28px;
-
-    margin: 0;
-    padding: 5px 8px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    gap: 5px;
-
-    border-radius: 5px;
-
-    background: #f8d7da;
-    color: #dc0000;
-
-    font-size: 8px;
-    font-weight: 600;
-
-    line-height: 1.1;
-    text-align: center;
-  }
-
-  .login-message img {
-    width: 14px !important;
-    height: 14px !important;
-    flex-shrink: 0;
-  }
-}
-
-  /* ================= LABEL ================= */
-
-  .input-label {
-    display: block;
-
-    margin-top: 8px;
-    margin-bottom: 4px;
-
-    font-size: 8px;
-    font-weight: 700;
-
-    color: #000;
-  }
-
-
-  /* ================= INPUT ================= */
-
-  .input-box {
-    width: 100%;
-    height: 32px;
-
-    box-sizing: border-box;
-
-    display: flex;
-    align-items: center;
-
-    border: 1px solid #a7a7a7;
-    border-radius: 3px;
-
-    background: #fff;
-  }
-
-  .input-box input {
-    width: 100% !important;
-    height: 30px !important;
-
-    padding: 0 8px !important;
-
-    border: none !important;
-    outline: none !important;
-
-    background: transparent !important;
-
-    font-size: 8px !important;
-  }
-
-  .input-box.input-error {
-    border: 1px solid red;
-  }
-
-
-  /* ================= PASSWORD ICON ================= */
-
-  .password-icon {
-    width: 25px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    cursor: pointer;
-
-    color: #777;
-  }
-
-  .password-icon svg {
-    width: 13px;
-    height: 13px;
-  }
-
-
-  /* ================= LINKS ================= */
-
-  .login-links {
-    width: 100%;
-
-    margin-top: 5px;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .signin-text {
-    display: flex;
-    align-items: center;
-    gap: 3px;
-
-    margin: 0;
-
-    font-size: 7px;
-    color: #777;
-  }
-
-  .signin-text input {
-    width: 10px;
-    height: 10px;
-
-    margin: 0;
-  }
-
-  .forgot-password {
-    padding: 0;
-
-    border: none;
-    background: transparent;
-
-    font-size: 7px;
-    color: #777;
-
-    cursor: pointer;
-  }
-
-
-  /* ================= LOGIN BUTTON ================= */
-
-  .login-button-container {
-    display: flex;
-    justify-content: center;
-
-    margin-top: 16px;
-  }
-
-  .login-button {
-    width: 78px;
-    height: 28px;
-
-    border: none;
-    border-radius: 4px;
-
-    background: #2399cf;
-    color: #fff;
-
-    font-size: 8px;
-    font-weight: 700;
-
-    cursor: pointer;
-  }
-
-  .login-button:hover {
-    background: #1d8abb;
-  }
-
-
-  /* ================= HR SUPPORT ================= */
-
-  .need {
-    margin-top: auto;
-    margin-bottom: 30px;
-
-    font-size: 7px;
-    font-weight: 500;
-
-    text-align: center;
-
-    color: #777;
-  }
-
-  .need span {
-    color: #2399cf;
-  }
-}
-
-/* =========================================================
-   FINAL DESKTOP FIX
-   VIEWPORT: 1440 x 1024
-   FIXED LOGIN PAGE: 1440 x 1024
-   CENTERED ON DESKTOP
-   ========================================================= */
-
-@media screen and (min-width: 1400px) {
-
-  html,
-  body,
-  #root {
-    width: 100%;
-    min-width: 100%;
-    min-height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-
-  body {
-    background: #000000;
-    overflow: auto;
-  }
-
-  #root {
-    width: 100%;
-    min-height: 100vh;
-  }
-
-  .login-page {
-    width: 1440px;
-    height: 1024px;
-
-    min-width: 1440px;
-    max-width: 1440px;
-
-    min-height: 1024px;
-    max-height: 1024px;
-
-    margin: 0 auto;
-
-    display: flex;
-    flex-direction: row;
-
-    border-radius: 20px;
-    overflow: hidden;
-
-    background: #ffffff;
-
-    flex-shrink: 0;
-  }
-
-  /* ================= LEFT SIDE ================= */
-
-  .login-left {
-    width: 58%;
-    height: 100%;
-
-    flex: 0 0 58%;
-
-    position: relative;
-    overflow: hidden;
-
-    background: #001c12;
-  }
-
-  .login-image {
-    position: absolute;
-
-    width: 100%;
-    height: 100%;
-
-    left: 0;
-    top: 0;
-
-    object-fit: cover;
-    object-position: center;
-  }
-
-  /* ================= RIGHT SIDE ================= */
-
-  .login-right {
-    width: 42%;
-    height: 100%;
-
-    flex: 0 0 42%;
-
-    position: relative;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    background: #ffffff;
-
-    overflow: hidden;
-  }
-
-  .login-card {
-    width: 344px;
-    height: 100%;
-
-    min-width: 344px;
-    max-width: 344px;
-
-    padding: 16px 8px;
-
-    box-sizing: border-box;
-
-    display: flex;
-    flex-direction: column;
-
-    background: transparent;
   }
 }

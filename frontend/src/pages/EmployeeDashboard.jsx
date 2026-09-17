@@ -67,7 +67,7 @@ const EmployeeDashboard = ({ employee = null }) => {
 
     date:
       employee?.date ||
-      "Thursday, 12 September 2026",
+      "Thurs,12 Sept 2026",
 
     today: employee?.today || "Today",
 
@@ -212,11 +212,11 @@ const EmployeeDashboard = ({ employee = null }) => {
 
           <div className="dashboard-date">
 
-            <img
-              src={calenderIcon}
-              alt="Calendar"
-              className="dashboard-calendar-icon"
-            />
+           <img
+    src={calendar}
+    alt="Calendar"
+    className="calendar-icon"
+  />
 
             <div className="dashboard-date-content">
 

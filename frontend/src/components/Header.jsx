@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   Search,
@@ -8,31 +9,41 @@ import {
   ChevronDown,
   CircleUserRound,
 } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 import "./Header.css";
 
-const Header = ({
-  darkMode,
-  setDarkMode,
-}) => {
-
-  const [profileOpen, setProfileOpen] =
-    React.useState(false);
+const Header = ({ darkMode, setDarkMode }) => {
   const navigate = useNavigate();
 
+  const [profileOpen, setProfileOpen] = React.useState(false);
+
+  // ==========================================
+  // LOGOUT
+  // ==========================================
+
   const handleLogout = () => {
-    localStorage.clear();
+    // Clear login information
+    localStorage.removeItem("isLoggedIn");
+    localStorage.removeItem("token");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("empId");
+    localStorage.removeItem("role");
+
+    // Close profile menu
+    setProfileOpen(false);
+
+    // Go to login page
     navigate("/login", { replace: true });
   };
 
   return (
     <header className="employee-header">
 
-      {/* SEARCH */}
+      {/* ==========================================
+          SEARCH
+      ========================================== */}
 
       <div className="header-search">
-
         <Search
           size={20}
           strokeWidth={2}
@@ -42,15 +53,17 @@ const Header = ({
           type="text"
           placeholder="Search here....."
         />
-
       </div>
 
-
-      {/* HEADER ACTIONS */}
+      {/* ==========================================
+          HEADER ACTIONS
+      ========================================== */}
 
       <div className="header-actions">
 
-        {/* LIGHT */}
+        {/* ==========================================
+            LIGHT MODE
+        ========================================== */}
 
         <button
           type="button"
@@ -59,6 +72,7 @@ const Header = ({
           }`}
           onClick={() => setDarkMode(false)}
           title="Light Mode"
+          aria-label="Light Mode"
         >
           <Sun
             size={24}
@@ -66,8 +80,9 @@ const Header = ({
           />
         </button>
 
-
-        {/* DARK */}
+        {/* ==========================================
+            DARK MODE
+        ========================================== */}
 
         <button
           type="button"
@@ -76,6 +91,7 @@ const Header = ({
           }`}
           onClick={() => setDarkMode(true)}
           title="Dark Mode"
+          aria-label="Dark Mode"
         >
           <Moon
             size={24}
@@ -83,42 +99,45 @@ const Header = ({
           />
         </button>
 
-
-        {/* NOTIFICATION */}
+        {/* ==========================================
+            NOTIFICATION
+        ========================================== */}
 
         <button
           type="button"
           className="header-icon-button notification"
+          aria-label="Notifications"
         >
-
           <Bell
             size={23}
             strokeWidth={2}
           />
 
           <span className="notification-dot"></span>
-
         </button>
 
-
-        {/* DIVIDER */}
+        {/* ==========================================
+            DIVIDER
+        ========================================== */}
 
         <div className="header-divider"></div>
 
-
-        {/* PROFILE */}
+        {/* ==========================================
+            PROFILE
+        ========================================== */}
 
         <div className="employee-profile">
 
-          <div className="profile-image">
+          {/* PROFILE IMAGE */}
 
+          <div className="profile-image">
             <CircleUserRound
               size={28}
               strokeWidth={1.8}
             />
-
           </div>
 
+          {/* PROFILE DETAILS */}
 
           <div className="profile-details">
 
@@ -132,6 +151,9 @@ const Header = ({
 
           </div>
 
+          {/* ==========================================
+              PROFILE ARROW
+          ========================================== */}
 
           <button
             type="button"
@@ -142,8 +164,8 @@ const Header = ({
               )
             }
             aria-label="Profile menu"
+            aria-expanded={profileOpen}
           >
-
             <ChevronDown
               size={18}
               strokeWidth={2.5}
@@ -151,9 +173,11 @@ const Header = ({
                 profileOpen ? "open" : ""
               }`}
             />
-
           </button>
 
+          {/* ==========================================
+              PROFILE DROPDOWN
+          ========================================== */}
 
           {profileOpen && (
             <div className="profile-dropdown">

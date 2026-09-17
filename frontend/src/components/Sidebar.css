@@ -57,7 +57,7 @@
 
 
 /* ============================================================
-   HRMS
+   HRMS SECTION
 ============================================================ */
 
 .hrms-section {
@@ -80,7 +80,9 @@
 }
 
 
-/* curved line */
+/* ============================================================
+   HRMS BEND LINE
+============================================================ */
 
 .hrms-section::after {
   content: "";
@@ -154,6 +156,8 @@
   color: #000000;
 
   letter-spacing: 0.05em;
+
+  white-space: nowrap;
 }
 
 .hrms-subtitle {
@@ -165,6 +169,8 @@
   font-weight: 600;
 
   letter-spacing: 0.05em;
+
+  white-space: nowrap;
 
   background: linear-gradient(
     90deg,
@@ -181,7 +187,7 @@
 
 
 /* ============================================================
-   EXPAND ROW
+   EXPAND / COLLAPSE ROW
 ============================================================ */
 
 .sidebar-expand-row {
@@ -437,7 +443,9 @@
 }
 
 
-/* LEAVE */
+/* ============================================================
+   LEAVE
+============================================================ */
 
 .sidebar-item .leave-menu-icon {
   filter: none;
@@ -451,7 +459,9 @@
 }
 
 
-/* GOALS */
+/* ============================================================
+   GOALS
+============================================================ */
 
 .sidebar-item .goals-menu-icon {
   filter:
@@ -493,37 +503,6 @@
   padding: 5px 13px 15px;
 
   background: transparent;
-}
-
-
-/* ============================================================
-   SETTINGS
-============================================================ */
-
-.settings-button {
-  width: 100%;
-
-  height: 43px;
-
-  padding-right: 7px;
-
-  border: none;
-
-  background: transparent;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: flex-end;
-
-  cursor: pointer;
-
-  color: #283238;
-}
-
-.settings-button:hover {
-  color: #124235;
 }
 
 
@@ -615,49 +594,179 @@
 
 
 /* ============================================================
+   EXPANDED SIDEBAR
+============================================================ */
+
+.sidebar-expanded {
+  width: 240px;
+  min-width: 240px;
+}
+
+
+/* ============================================================
    COLLAPSED SIDEBAR
 ============================================================ */
 
 .sidebar-collapsed {
-  width: 72px;
-  min-width: 72px;
+  width: 58px;
+  min-width: 58px;
 }
+
+
+/* ============================================================
+   COLLAPSED LOGO
+============================================================ */
 
 .sidebar-collapsed .sidebar-logo {
   height: 104px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .sidebar-collapsed .sidebar-logo img {
   width: 49px;
 }
 
+
+/* ============================================================
+   COLLAPSED HRMS
+============================================================ */
+
 .sidebar-collapsed .hrms-section {
   width: 100%;
 
+  height: 105px;
+
   margin: 0;
 
-  height: 68px;
+  padding: 5px 0 10px;
 
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
   justify-content: center;
+
+  gap: 2px;
+
+  overflow: visible;
 }
+
+
+/* HRMS logo */
+
+.sidebar-collapsed .hrms-logo {
+  width: 26px;
+  height: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+
+.sidebar-collapsed .hrms-logo img {
+  width: 26px;
+  height: 26px;
+
+  object-fit: contain;
+}
+
+
+/* HRMS text */
 
 .sidebar-collapsed .hrms-text {
-  display: none;
-}
+  width: 72px !important;
 
-.sidebar-collapsed .hrms-section::after {
-  left: 8%;
-  right: 8%;
-}
+  display: flex !important;
+  flex-direction: column;
 
-.sidebar-collapsed .sidebar-expand-row {
+  align-items: center;
   justify-content: center;
 
-  padding: 0;
+  overflow: visible !important;
+
+  visibility: visible !important;
+  opacity: 1 !important;
 }
 
+.sidebar-collapsed .hrms-title {
+  font-size: 9px !important;
+  line-height: 10px;
+
+  white-space: nowrap;
+}
+
+.sidebar-collapsed .hrms-subtitle {
+  font-size: 6px !important;
+  line-height: 8px;
+
+  white-space: nowrap;
+}
+
+/* ============================================================
+   COLLAPSED BEND LINE
+============================================================ */
+
+.sidebar-collapsed .hrms-section::after {
+  content: "";
+
+  position: absolute;
+
+  left: 5%;
+  right: 5%;
+
+  bottom: 0;
+
+  height: 5px;
+
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    #dce7e8 10%,
+    #8b999a 30%,
+    #667071 45%,
+    #667071 55%,
+    #8b999a 70%,
+    #dce7e8 90%,
+    transparent 100%
+  );
+
+  border-radius: 50%;
+
+  transform: scaleY(0.25);
+
+  transform-origin: center;
+}
+
+
+/* ============================================================
+   COLLAPSED EXPAND BUTTON
+============================================================ */
+
+.sidebar-collapsed .sidebar-expand-row {
+  width: 100%;
+
+  justify-content: center;
+
+  padding-right: 0;
+}
+
+.sidebar-collapsed .sidebar-expand-button {
+  width: 30px;
+  height: 30px;
+}
+
+
+/* ============================================================
+   COLLAPSED MENU
+============================================================ */
+
 .sidebar-collapsed .sidebar-menu {
-  padding: 0 8px 5px;
+  padding: 0 4px 5px;
 }
 
 .sidebar-collapsed .section-title {
@@ -670,6 +779,11 @@
   display: flex;
   flex-direction: column;
 }
+
+
+/* ============================================================
+   COLLAPSED ITEMS
+============================================================ */
 
 .collapsed-item {
   position: relative;
@@ -710,12 +824,17 @@
   top: 0;
   bottom: 0;
 
-  width: 5px;
+  width: 4px;
 
-  border-radius: 5px 0 0 5px;
+  border-radius: 4px 0 0 4px;
 
   background: #19b968;
 }
+
+
+/* ============================================================
+   COLLAPSED ICONS
+============================================================ */
 
 .collapsed-icon {
   width: 21px;
@@ -746,55 +865,11 @@
 
 
 /* ============================================================
-   RESPONSIVE
+   COLLAPSED BOTTOM
 ============================================================ */
 
-@media (max-width: 800px) {
-  .employee-sidebar {
-    width: 72px;
-    min-width: 72px;
-  }
-
-  .sidebar-logo {
-    height: 104px;
-  }
-
-  .sidebar-logo img {
-    width: 49px;
-  }
-
-  .hrms-section {
-    width: 100%;
-    margin: 0;
-
-    justify-content: center;
-  }
-
-  .hrms-text {
-    display: none;
-  }
-
-  .sidebar-menu {
-    padding: 0 8px;
-  }
-
-  .section-title {
-    display: none;
-  }
-
-  .sidebar-item {
-    display: none;
-  }
-
-  .collapsed-section-items {
-    display: flex;
-  }
-
-  .help-button,
-  .sidebar-links,
-  .settings-button {
-    display: none;
-  }
+.sidebar-collapsed .sidebar-bottom {
+  display: none;
 }
 
 
@@ -907,7 +982,127 @@
 .employee-page.dark-mode .sidebar-links {
   color: #38bdf8;
 }
+/* ==========================================
+   COLLAPSED SIDEBAR WIDTH
+========================================== */
 
-.employee-page.dark-mode .settings-button {
-  color: #e2e8f0;
+/* ============================================================
+   FINAL SIDEBAR WIDTH
+============================================================ */
+
+.employee-sidebar.sidebar-expanded {
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+
+  flex: 0 0 240px !important;
+}
+
+/* ============================================================
+   FINAL SIDEBAR WIDTH
+============================================================ */
+
+.employee-sidebar.sidebar-expanded {
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+
+  flex: 0 0 240px !important;
+}
+
+.employee-sidebar.sidebar-collapsed {
+  width: 72px !important;
+  min-width: 72px !important;
+  max-width: 72px !important;
+
+  flex: 0 0 72px !important;
+}
+/* ============================================================
+   COLLAPSED HRMS
+============================================================ */
+
+.employee-sidebar.sidebar-collapsed .hrms-section {
+  width: 72px !important;
+  height: 105px !important;
+
+  margin: 0 !important;
+  padding: 5px 0 10px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  gap: 2px !important;
+
+  overflow: visible !important;
+}
+
+.employee-sidebar.sidebar-collapsed .hrms-logo {
+  width: 27px !important;
+  height: 27px !important;
+}
+
+.employee-sidebar.sidebar-collapsed .hrms-logo img {
+  width: 27px !important;
+  height: 27px !important;
+}
+
+.employee-sidebar.sidebar-collapsed .hrms-text {
+  width: 72px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  overflow: visible !important;
+
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.employee-sidebar.sidebar-collapsed .hrms-title {
+  font-size: 9px !important;
+  line-height: 10px !important;
+
+  white-space: nowrap !important;
+}
+
+.employee-sidebar.sidebar-collapsed .hrms-subtitle {
+  font-size: 5px !important;
+  line-height: 7px !important;
+
+  white-space: nowrap !important;
+}
+
+/* ============================================================
+   RESPONSIVE - SIDEBAR
+============================================================ */
+
+@media (max-width: 1200px) {
+
+  .employee-sidebar.sidebar-expanded {
+    width: 240px !important;
+    min-width: 240px !important;
+    max-width: 240px !important;
+  }
+
+  .employee-sidebar.sidebar-collapsed {
+    width: 72px !important;
+    min-width: 72px !important;
+    max-width: 72px !important;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .employee-sidebar.sidebar-collapsed {
+    width: 72px !important;
+    min-width: 72px !important;
+    max-width: 72px !important;
+  }
 }

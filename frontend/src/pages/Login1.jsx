@@ -9,10 +9,12 @@ import warning from "../assets/warning-svgrepo-com (1).svg";
 import { EyeOffIcon, EyeIcon } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
-const API_URL = import.meta.env.VITE_API_URL;
-
 function Login1() {
   const navigate = useNavigate();
+
+  // ================================
+  // STATE
+  // ================================
 
   const [empId, setEmpId] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +25,35 @@ function Login1() {
   const [passwordError, setPasswordError] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleLogin = async (e) => {
+  // ================================
+  // FRONTEND TEST USERS
+  // ================================
+  // These are only for frontend testing.
+  // No backend or API is required.
+
+  const users = [
+    {
+      empId: "10002",
+      password: "123456",
+      role: "Employee",
+    },
+    {
+      empId: "admin",
+      password: "admin123",
+      role: "Admin",
+    },
+    {
+      empId: "superadmin",
+      password: "super123",
+      role: "Super Admin",
+    },
+  ];
+
+  // ================================
+  // LOGIN FUNCTION
+  // ================================
+
+  const handleLogin = (e) => {
     e.preventDefault();
 
     // Reset previous errors
@@ -31,74 +61,106 @@ function Login1() {
     setEmpIdError(false);
     setPasswordError(false);
 
-    // Validation
+    // ================================
+    // VALIDATION
+    // ================================
+
     if (!empId && !password) {
       setMessage("Enter the ID and Password");
+
       setEmpIdError(true);
       setPasswordError(true);
+
       return;
     }
 
     if (!empId) {
       setMessage("Enter the ID");
+
       setEmpIdError(true);
+
       return;
     }
 
     if (!password) {
       setMessage("Enter the Password");
+
       setPasswordError(true);
+
       return;
     }
 
+    // ================================
+    // FRONTEND LOGIN
+    // ================================
+
     setLoading(true);
 
-    try {
-      const loginUrl = `${API_URL}/api/auth/login`;
-      console.log("Login request URL:", loginUrl);
-      const response = await fetch(loginUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ employeeId: empId, password }),
-      });
-      console.log("Login response status:", response.status);
-      const data = await response.json();
+    // Small delay to show login loading state
+    setTimeout(() => {
+      const user = users.find(
+        (item) =>
+          item.empId === empId &&
+          item.password === password
+      );
 
-      if (!response.ok) {
-        setMessage(data.message);
+      // ================================
+      // INVALID LOGIN
+      // ================================
+
+      if (!user) {
+        setMessage(
+          "ID or Password incorrect. Please try again"
+        );
+
         setEmpIdError(true);
         setPasswordError(true);
+
         setLoading(false);
+
         return;
       }
 
-      localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      localStorage.setItem("empId", data.employeeCode || empId);
-      localStorage.setItem("role", data.user.role);
+      // ================================
+      // SAVE LOGIN INFORMATION
+      // ================================
 
-      if (data.user.role === "Super Admin") {
-        navigate("/dashboard");
+      localStorage.setItem("isLoggedIn", "true");
+      localStorage.setItem("empId", user.empId);
+      localStorage.setItem("role", user.role);
+
+      // ================================
+      // NAVIGATION
+      // ================================
+
+      if (user.role === "Super Admin") {
+        navigate("/dashboard", { replace: true });
+      } else if (user.role === "Admin") {
+        navigate("/dashboard", { replace: true });
       } else {
-        navigate("/employee-dashboard");
+        navigate("/employee-dashboard", {
+          replace: true,
+        });
       }
-    } catch (error) {
-      console.error("Login request failed:", error);
-      setMessage("Unable to reach the server. Please try again.");
-      setEmpIdError(true);
-      setPasswordError(true);
+
       setLoading(false);
-    }
+    }, 500);
   };
+
+  // ================================
+  // JSX
+  // ================================
 
   return (
     <div className="login-page">
 
-      {/* LEFT SIDE */}
+      {/* =================================
+          LEFT SIDE
+      ================================= */}
+
       <div className="login-left">
+
+        {/* BACKGROUND IMAGE */}
 
         <img
           src={login}
@@ -106,29 +168,40 @@ function Login1() {
           className="login-image"
         />
 
+        {/* BOTTOM LOGO */}
+
         <img
           src={logo1}
           alt="Victinet Logo"
           className="bottom-logo"
         />
 
+        {/* TITLE */}
+
         <h1 className="text-white login-title">
-          Greater Technology Starts with <br />
+          Greater Technology Starts with
+          <br />
 
           <strong
             className="fw-bold my-2"
-            style={{ color: "#1F96CB" }}
+            style={{
+              color: "#1F96CB",
+            }}
           >
             Great
           </strong>{" "}
 
           <strong
             className="fw-bold my-2"
-            style={{ color: "#2EAB74" }}
+            style={{
+              color: "#2EAB74",
+            }}
           >
             People
           </strong>
         </h1>
+
+        {/* COPYRIGHT */}
 
         <p className="text-white login-right-text">
           Copyright @ 2026
@@ -136,22 +209,33 @@ function Login1() {
 
       </div>
 
-      {/* RIGHT SIDE */}
+      {/* =================================
+          RIGHT SIDE
+      ================================= */}
+
       <div className="login-right">
 
         <div className="login-card">
 
-          {/* VICTINET LOGO */}
+          {/* =================================
+              VICTINET LOGO
+          ================================= */}
+
           <img
             src={logo}
             alt="Victinet Logo"
             className="login-logo"
           />
 
-          {/* WELCOME */}
+          {/* =================================
+              WELCOME MESSAGE
+          ================================= */}
+
           <h4
             className="logo-name text-center fw-300"
-            style={{ color: "#2EAB74" }}
+            style={{
+              color: "#2EAB74",
+            }}
           >
             Welcome{" "}
 
@@ -165,11 +249,16 @@ function Login1() {
             </span>
           </h4>
 
+          {/* SUBTITLE */}
+
           <p className="text-center para">
             Sign in to your account to continue
           </p>
 
-          {/* ERROR MESSAGE */}
+          {/* =================================
+              ERROR MESSAGE
+          ================================= */}
+
           <div className="login-message-space">
 
             {message && (
@@ -184,27 +273,37 @@ function Login1() {
                   }}
                 />
 
-                <span>{message}</span>
+                <span>
+                  {message}
+                </span>
 
               </p>
             )}
 
           </div>
 
-          {/* LOGIN FORM */}
+          {/* =================================
+              LOGIN FORM
+          ================================= */}
+
           <form
             onSubmit={handleLogin}
             className="my-auto"
           >
 
-            {/* EMPLOYEE ID */}
+            {/* =================================
+                EMPLOYEE ID
+            ================================= */}
+
             <label className="input-label">
               EMPLOYEE ID
             </label>
 
             <div
               className={`input-box ${
-                empIdError ? "input-error" : ""
+                empIdError
+                  ? "input-error"
+                  : ""
               }`}
             >
 
@@ -213,6 +312,7 @@ function Login1() {
                 value={empId}
                 onChange={(e) => {
                   setEmpId(e.target.value);
+
                   setEmpIdError(false);
                   setMessage("");
                 }}
@@ -230,22 +330,32 @@ function Login1() {
 
             </div>
 
-            {/* PASSWORD */}
+            {/* =================================
+                PASSWORD
+            ================================= */}
+
             <label className="input-label">
               PASSWORD
             </label>
 
             <div
               className={`input-box ${
-                passwordError ? "input-error" : ""
+                passwordError
+                  ? "input-error"
+                  : ""
               }`}
             >
 
               <input
-                type={showPassword ? "text" : "password"}
+                type={
+                  showPassword
+                    ? "text"
+                    : "password"
+                }
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
+
                   setPasswordError(false);
                   setMessage("");
                 }}
@@ -263,10 +373,13 @@ function Login1() {
               />
 
               {/* PASSWORD EYE */}
+
               <span
                 className="password-icon"
                 onClick={() =>
-                  setShowPassword(!showPassword)
+                  setShowPassword(
+                    !showPassword
+                  )
                 }
               >
 
@@ -280,7 +393,10 @@ function Login1() {
 
             </div>
 
-            {/* REMEMBER ME / FORGOT PASSWORD */}
+            {/* =================================
+                REMEMBER ME / FORGOT PASSWORD
+            ================================= */}
+
             <div className="login-links">
 
               <label className="signin-text">
@@ -305,7 +421,10 @@ function Login1() {
 
             </div>
 
-            {/* LOGIN BUTTON */}
+            {/* =================================
+                LOGIN BUTTON
+            ================================= */}
+
             <div className="login-button-container">
 
               <button
@@ -313,20 +432,27 @@ function Login1() {
                 className="login-button"
                 disabled={loading}
               >
-                {loading ? "LOGGING IN..." : "LOGIN"}
+                {loading
+                  ? "LOGGING IN..."
+                  : "LOGIN"}
               </button>
 
             </div>
 
           </form>
 
-          {/* HR SUPPORT */}
+          {/* =================================
+              HR SUPPORT
+          ================================= */}
+
           <h5 className="text-center need">
+
             Need a Help?{" "}
 
             <span>
               Contact HR Support
             </span>
+
           </h5>
 
         </div>

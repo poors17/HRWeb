@@ -27,7 +27,7 @@ import holidaysIcon from "../assets/dashboard/holidays.svg";
 import helpdeskIcon from "../assets/dashboard/support-svg.svg";
 import hrmsLogo from "../assets/dashboard/HRMS logo.svg";
 
-import { Headphones, Settings } from "lucide-react";
+import { Headphones } from "lucide-react";
 
 import "./Sidebar.css";
 
@@ -187,17 +187,15 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
           <img src={hrmsLogo} alt="HRMS" />
         </div>
 
-        {!collapsed && (
-          <div className="hrms-text">
-            <span className="hrms-title">
-              HRMS
-            </span>
+      <div className="hrms-text">
+  <span className="hrms-title">
+    HRMS
+  </span>
 
-            <span className="hrms-subtitle">
-              Employee Portal
-            </span>
-          </div>
-        )}
+  <span className="hrms-subtitle">
+    Employee Portal
+  </span>
+</div>
 
       </div>
 
@@ -384,14 +382,7 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
       {!collapsed && (
         <div className="sidebar-bottom">
 
-          {/* SETTINGS */}
-
-          <button
-            type="button"
-            className="settings-button"
-          >
-            <Settings size={23} />
-          </button>
+        
 
 
           {/* HELP */}

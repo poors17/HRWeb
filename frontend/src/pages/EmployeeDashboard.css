@@ -6437,3 +6437,876 @@ max-height: 342px;
 
   box-sizing: border-box;
 }
+
+/* ============================================================
+   FINAL SIDEBAR / MAIN LAYOUT FIX
+   Sidebar:
+   Expanded = 240px
+   Collapsed = 72px
+
+   Header + Main + Footer move together.
+============================================================ */
+
+
+/* ============================================================
+   DESKTOP BASE
+============================================================ */
+
+.employee-page {
+  width: 100%;
+  min-width: 0;
+  height: 100vh;
+
+  margin: 0;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   SIDEBAR
+============================================================ */
+
+.employee-page .employee-sidebar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 240px !important;
+  min-width: 240px !important;
+  max-width: 240px !important;
+
+  height: 100vh;
+
+  z-index: 1000;
+
+  transition:
+    width 0.25s ease,
+    min-width 0.25s ease;
+}
+
+
+/* ============================================================
+   COLLAPSED SIDEBAR
+============================================================ */
+
+.employee-page.sidebar-collapsed .employee-sidebar {
+  width: 72px !important;
+  min-width: 72px !important;
+  max-width: 72px !important;
+}
+
+
+/* ============================================================
+   RIGHT SIDE
+============================================================ */
+
+.employee-page .employee-right {
+  position: relative;
+
+  width: calc(100% - 240px) !important;
+  max-width: calc(100% - 240px) !important;
+
+  min-width: 0;
+
+  height: 100vh;
+
+  margin-left: 240px !important;
+
+  display: flex;
+  flex-direction: column;
+
+  overflow: hidden;
+
+  transition:
+    width 0.25s ease,
+    margin-left 0.25s ease;
+}
+
+
+/* ============================================================
+   COLLAPSED RIGHT SIDE
+============================================================ */
+
+.employee-page.sidebar-collapsed .employee-right {
+  width: calc(100% - 72px) !important;
+  max-width: calc(100% - 72px) !important;
+
+  margin-left: 72px !important;
+}
+
+
+/* ============================================================
+   HEADER
+============================================================ */
+
+.employee-page .employee-header {
+  position: fixed;
+
+  top: 0;
+
+  left: 240px !important;
+  right: 0;
+
+  width: auto !important;
+
+  height: 72px;
+  min-height: 72px;
+
+  z-index: 900;
+
+  transition:
+    left 0.25s ease,
+    width 0.25s ease;
+}
+
+
+/* ============================================================
+   COLLAPSED HEADER
+============================================================ */
+
+.employee-page.sidebar-collapsed .employee-header {
+  left: 72px !important;
+  right: 0;
+
+  width: auto !important;
+}
+
+
+/* ============================================================
+   MAIN CONTENT
+============================================================ */
+
+.employee-page .employee-main {
+  width: 100% !important;
+
+  height: calc(100vh - 72px - 62px);
+
+  margin-top: 72px;
+  margin-bottom: 62px;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  flex: none;
+}
+
+
+/* ============================================================
+   FOOTER
+============================================================ */
+
+.employee-page .employee-footer {
+  position: fixed;
+
+  left: 240px !important;
+  right: 0;
+
+  bottom: 0;
+
+  width: auto !important;
+
+  height: 62px;
+  min-height: 62px;
+
+  z-index: 900;
+
+  transition:
+    left 0.25s ease,
+    width 0.25s ease;
+}
+
+
+/* ============================================================
+   COLLAPSED FOOTER
+============================================================ */
+
+.employee-page.sidebar-collapsed .employee-footer {
+  left: 72px !important;
+  right: 0;
+
+  width: auto !important;
+}
+
+
+/* ============================================================
+   DASHBOARD CONTENT
+============================================================ */
+
+.employee-dashboard-content {
+  width: 100%;
+
+  min-width: 0;
+
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   DASHBOARD CARDS
+   Keep your existing Figma card sizes.
+============================================================ */
+
+.dashboard-cards {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+
+/* ============================================================
+   1440 × 1024 DESKTOP
+============================================================ */
+
+@media (min-width: 1201px) {
+
+  .employee-page {
+    width: 100%;
+    height: 100vh;
+  }
+
+  .employee-page .employee-right {
+    width: calc(100% - 240px) !important;
+    margin-left: 240px !important;
+  }
+
+  .employee-page.sidebar-collapsed .employee-right {
+    width: calc(100% - 72px) !important;
+    margin-left: 72px !important;
+  }
+
+  .employee-page .employee-header {
+    left: 240px !important;
+    right: 0 !important;
+  }
+
+  .employee-page.sidebar-collapsed .employee-header {
+    left: 72px !important;
+    right: 0 !important;
+  }
+
+  .employee-page .employee-footer {
+    left: 240px !important;
+    right: 0 !important;
+  }
+
+  .employee-page.sidebar-collapsed .employee-footer {
+    left: 72px !important;
+    right: 0 !important;
+  }
+}
+
+/* ============================================================
+   ATTENDANCE CARD - TEXT FIX
+============================================================ */
+
+/* Employee information */
+.attendance-employee-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.attendance-employee-name {
+  width: auto !important;
+
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* Department / designation */
+.attendance-employee-role {
+  width: auto !important;
+  max-width: 105px;
+
+  white-space: normal !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+
+  line-height: 15px;
+}
+
+
+/* Date section */
+.attendance-date-info {
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.attendance-date-info span,
+.attendance-date-info div {
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   CHECK IN / CHECK OUT
+============================================================ */
+
+.attendance-time-info {
+  min-width: 0;
+}
+
+.attendance-time-info .time-label {
+  white-space: nowrap;
+}
+
+.attendance-time-info .time-value {
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   WORKING HOURS
+============================================================ */
+
+.attendance-working-hours {
+  min-width: 0;
+}
+
+.attendance-working-hours .hours-value {
+  white-space: nowrap;
+}
+
+.attendance-working-hours .hours-progress-text {
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   SHIFT
+============================================================ */
+
+.attendance-shift-info {
+  min-width: 0;
+}
+
+.attendance-shift-info .shift-time {
+  white-space: nowrap;
+}
+
+.attendance-shift-info .shift-name {
+  white-space: nowrap;
+  overflow: visible;
+}
+
+
+/* ============================================================
+   GENERAL CARD TEXT PROTECTION
+============================================================ */
+
+.attendance-card * {
+  box-sizing: border-box;
+}
+
+.attendance-card p,
+.attendance-card span,
+.attendance-card div {
+  text-overflow: clip;
+}
+
+/* ============================================================
+   FINAL ATTENDANCE CARD FIX
+   CARD SIZE = 288px × 342px
+   SHIFT TIMING GAP FIX
+============================================================ */
+
+
+/* ------------------------------------------------------------
+   ATTENDANCE CARD
+------------------------------------------------------------ */
+
+.employee-page .figma-attendance-card {
+  position: relative !important;
+
+  width: 288px !important;
+  min-width: 288px !important;
+  max-width: 288px !important;
+
+  height: 342px !important;
+  min-height: 342px !important;
+  max-height: 342px !important;
+
+  overflow: hidden !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* ------------------------------------------------------------
+   TITLE
+------------------------------------------------------------ */
+
+.employee-page .attendance-card-title {
+  width: 100% !important;
+  height: 35px !important;
+  min-height: 35px !important;
+
+  margin: 0 !important;
+  padding: 5px 10px 3px !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+
+  box-sizing: border-box !important;
+}
+
+
+/* ------------------------------------------------------------
+   EMPLOYEE ROW
+------------------------------------------------------------ */
+
+.employee-page .attendance-employee {
+  width: auto !important;
+
+  height: 65px !important;
+  min-height: 65px !important;
+
+  margin: 0 10px !important;
+  padding: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  overflow: visible !important;
+}
+
+
+/* ------------------------------------------------------------
+   EMPLOYEE DETAILS
+------------------------------------------------------------ */
+
+.employee-page .attendance-employee-details {
+  width: 91px !important;
+  min-width: 91px !important;
+  max-width: 91px !important;
+
+  margin-left: 8px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+
+  overflow: visible !important;
+}
+
+.employee-page .attendance-employee-details strong {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.employee-page .attendance-employee-details span {
+  white-space: nowrap !important;
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+.employee-page .attendance-employee-details small {
+  width: 100% !important;
+
+  white-space: normal !important;
+
+  overflow: visible !important;
+  text-overflow: clip !important;
+}
+
+
+/* ------------------------------------------------------------
+   DATE
+------------------------------------------------------------ */
+
+.employee-page .attendance-date {
+  min-width: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  gap: 6px !important;
+
+  overflow: visible !important;
+}
+
+.employee-page .attendance-date div {
+  min-width: 0 !important;
+  overflow: visible !important;
+}
+
+.employee-page .attendance-date strong,
+.employee-page .attendance-date span {
+  white-space: nowrap !important;
+  overflow: visible !important;
+}
+
+
+/* ------------------------------------------------------------
+   CHECK IN / CHECK OUT
+------------------------------------------------------------ */
+
+.employee-page .attendance-check-row {
+  width: 278px !important;
+  min-width: 278px !important;
+  max-width: 278px !important;
+
+  height: 67px !important;
+  min-height: 67px !important;
+  max-height: 67px !important;
+
+  margin: 5px 5px 0 !important;
+
+  box-sizing: border-box !important;
+
+  flex-shrink: 0 !important;
+}
+
+
+/* ------------------------------------------------------------
+   WORKING HOURS
+------------------------------------------------------------ */
+
+.employee-page .working-hours {
+  width: auto !important;
+
+  height: 56px !important;
+  min-height: 56px !important;
+  max-height: 56px !important;
+
+  margin: 4px 10px 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  flex-shrink: 0 !important;
+}
+
+
+/* Working hours content */
+
+.employee-page .working-hours-content {
+  min-width: 0 !important;
+
+  flex: 1 !important;
+
+  overflow: visible !important;
+}
+
+
+/* ------------------------------------------------------------
+   SHIFT TIMING
+   IMPORTANT FIX
+------------------------------------------------------------ */
+
+.employee-page .shift-timing {
+  position: absolute !important;
+
+  left: 5px !important;
+  right: 5px !important;
+
+  bottom: 54px !important;
+
+  width: auto !important;
+  min-width: 0 !important;
+  max-width: none !important;
+
+  height: 52px !important;
+  min-height: 52px !important;
+  max-height: 52px !important;
+
+  margin: 0 !important;
+  padding: 7px 10px !important;
+
+  display: flex !important;
+  align-items: center !important;
+
+  box-sizing: border-box !important;
+
+  border-radius: 9px !important;
+
+  overflow: visible !important;
+
+  z-index: 2 !important;
+}
+
+
+/* Shift icon */
+
+.employee-page .shift-icon {
+  width: 28px !important;
+  height: 28px !important;
+
+  min-width: 28px !important;
+
+  flex-shrink: 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+
+/* Shift content */
+
+.employee-page .shift-content {
+  min-width: 0 !important;
+
+  margin-left: 5px !important;
+
+  display: flex !important;
+  flex-direction: column !important;
+
+  overflow: visible !important;
+}
+
+.employee-page .shift-content span,
+.employee-page .shift-content strong,
+.employee-page .shift-content small {
+  overflow: visible !important;
+  white-space: nowrap !important;
+}
+
+
+/* ------------------------------------------------------------
+   VIEW DETAILS
+   FIXED BOTTOM FOOTER
+------------------------------------------------------------ */
+
+.employee-page .attendance-view-details {
+  position: absolute !important;
+
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+
+  width: 100% !important;
+
+  height: 43px !important;
+  min-height: 43px !important;
+
+  margin: 0 !important;
+  padding: 0 24px 0 0 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+
+  box-sizing: border-box !important;
+
+  z-index: 5 !important;
+}
+
+
+/* ------------------------------------------------------------
+   EMPTY CARD
+------------------------------------------------------------ */
+
+.employee-page .figma-empty-card {
+  width: 288px !important;
+  min-width: 288px !important;
+  max-width: 288px !important;
+
+  height: 342px !important;
+  min-height: 342px !important;
+  max-height: 342px !important;
+}
+
+
+/* ============================================================
+   DARK MODE
+============================================================ */
+
+.employee-page.dark-mode .shift-timing {
+  background: #263548 !important;
+}
+
+.employee-page.dark-mode .attendance-view-details {
+  background: #1e4b61 !important;
+  color: #5eead4 !important;
+}
+/* ============================================================
+   RESPONSIVE - EMPLOYEE DASHBOARD
+============================================================ */
+
+@media (max-width: 1200px) {
+
+  .figma-attendance-card {
+    width: 288px;
+    min-width: 288px;
+    max-width: 288px;
+  }
+
+  .attendance-employee-details {
+    width: 82px;
+    min-width: 82px;
+    max-width: 82px;
+  }
+
+  .attendance-date {
+    min-width: 0;
+  }
+}
+
+
+@media (max-width: 992px) {
+
+  .figma-attendance-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 288px;
+  }
+
+  .attendance-check-row {
+    width: calc(100% - 10px);
+    min-width: 0;
+    max-width: none;
+  }
+
+  .attendance-employee-details {
+    width: auto;
+    min-width: 0;
+    max-width: 100px;
+  }
+
+  .attendance-date {
+    flex: 1;
+    min-width: 0;
+  }
+}
+
+
+@media (max-width: 768px) {
+
+  .figma-attendance-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 288px;
+  }
+
+  .attendance-employee-details {
+    width: 80px;
+    min-width: 80px;
+    max-width: 80px;
+  }
+
+  .attendance-check-row {
+    width: calc(100% - 10px);
+    min-width: 0;
+  }
+
+  .attendance-date {
+    min-width: 0;
+  }
+
+  .working-hours {
+    margin-left: 8px;
+    margin-right: 8px;
+  }
+}
+
+
+@media (max-width: 576px) {
+
+  .figma-attendance-card {
+    width: 100%;
+    min-width: 0;
+    max-width: 288px;
+  }
+
+  .attendance-employee-details {
+    width: 75px;
+    min-width: 75px;
+    max-width: 75px;
+  }
+
+  .attendance-date strong {
+    font-size: 7px;
+  }
+
+  .attendance-date span {
+    font-size: 7px;
+  }
+}
+
+/* ============================================================
+   RESPONSIVE - EMPLOYEE DASHBOARD
+============================================================ */
+
+/* Desktop - Figma reference: 1440 × 1024 */
+@media (min-width: 1201px) {
+
+  /* Keep the Figma desktop card size */
+  .figma-attendance-card {
+    width: 288px;
+    height: 342px;
+  }
+}
+
+
+/* Laptop */
+@media (max-width: 1200px) {
+
+  .figma-attendance-card {
+    width: 288px;
+    max-width: 100%;
+  }
+}
+
+
+/* Tablet */
+@media (max-width: 992px) {
+
+  .figma-attendance-card {
+    width: 100%;
+    max-width: 288px;
+  }
+
+  .attendance-employee-details {
+    min-width: 0;
+  }
+}
+
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .figma-attendance-card {
+    width: 100%;
+    max-width: 288px;
+  }
+
+  .attendance-check-row {
+    width: calc(100% - 10px);
+  }
+
+  .attendance-employee-details {
+    min-width: 0;
+  }
+}
+
+
+/* Small mobile */
+@media (max-width: 576px) {
+
+  .figma-attendance-card {
+    width: 100%;
+    max-width: 288px;
+  }
+
+  .attendance-employee-details {
+    min-width: 0;
+  }
+
+  .attendance-date {
+    min-width: 0;
+  }
+}
