@@ -213,9 +213,9 @@ const EmployeeDashboard = ({ employee = null }) => {
           <div className="dashboard-date">
 
            <img
-    src={calendar}
+    src={calenderIcon}
     alt="Calendar"
-    className="calendar-icon"
+      className="dashboard-calendar-icon"
   />
 
             <div className="dashboard-date-content">

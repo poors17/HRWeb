@@ -34,7 +34,7 @@ function Login1() {
   const users = [
     {
       empId: "10002",
-      password: "123456",
+      password: "1234",
       role: "Employee",
     },
     {
