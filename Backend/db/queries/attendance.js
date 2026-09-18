@@ -65,9 +65,15 @@ async function getAttendanceByEmployee(employeeId, filters = {}) {
   }
 
   const result = await pool.query(
-    `SELECT a.*, e.employee_code, e.full_name
+    `SELECT a.*, e.employee_code, e.full_name,
+            d.name AS department_name, dg.name AS designation_name,
+            s.name AS shift_name, s.start_time AS shift_start_time,
+            s.end_time AS shift_end_time
      FROM attendance a
      LEFT JOIN employees e ON e.id = a.employee_id
+     LEFT JOIN departments d ON d.id = e.department_id
+     LEFT JOIN designations dg ON dg.id = e.designation_id
+     LEFT JOIN shifts s ON s.id = e.shift_id
      WHERE ${conditions.join(' AND ')}
      ORDER BY a.date DESC`,
     values
