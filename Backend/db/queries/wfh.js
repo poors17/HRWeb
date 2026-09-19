@@ -61,19 +61,25 @@ async function updateWfhStage(id, stage, status, approvedBy) {
   };
   const columns = stageColumns[stage];
   if (!columns) throw new Error('Invalid WFH approval stage');
+  if (approvedBy == null) throw new Error('WFH approver user id is required');
 
-  const result = await pool.query(
-    `UPDATE wfh_requests
-     SET ${columns[0]} = $1,
-         ${columns[1]} = $2,
-         ${columns[2]} = NOW(),
-         approved_by = CASE WHEN $1 = 'Approved' THEN $2 ELSE approved_by END,
-         updated_at = NOW()
-     WHERE id = $3
-     RETURNING *`,
-    [status, approvedBy, id]
-  );
-  return result.rows[0] || null;
+  try {
+    const result = await pool.query(
+      `UPDATE wfh_requests
+       SET ${columns[0]} = $1,
+           ${columns[1]} = $2,
+           ${columns[2]} = NOW(),
+           approved_by = CASE WHEN $1 = 'Approved' THEN $2 ELSE approved_by END,
+           updated_at = NOW()
+       WHERE id = $3
+       RETURNING *`,
+      [status, approvedBy, id]
+    );
+    return result.rows[0] || null;
+  } catch (err) {
+    console.error('WFH approve error:', err.message, err.code, err.detail, err.constraint, err.where);
+    throw err;
+  }
 }
 
 async function getEmployeeIdByUserId(userId) {
