@@ -98,11 +98,19 @@ async function updateWfhApproval(req, res, status) {
     const updatedRequest = await wfh.updateWfhStage(req.params.id, stage, status, req.user.id);
     if (!updatedRequest) return res.status(404).json({ message: 'WFH request not found' });
     if (status === 'Approved' && updatedRequest.status === 'Approved') {
-      for (const date of datesBetween(request.start_date, request.end_date)) {
-        await attendance.markWfh(request.employee_id, date);
+      try {
+        for (const date of datesBetween(request.start_date, request.end_date)) {
+          await attendance.markWfh(request.employee_id, date);
+        }
+      } catch (err) {
+        console.error('WFH post-approve side effect failed:', err.message, err.code, err.detail);
       }
     }
-    notifyUser(request.user_id, `WFH request ${status.toLowerCase()}`, `Your WFH request was ${status.toLowerCase()}.`, 'WFH', updatedRequest.id);
+    try {
+      await notifyUser(request.user_id, `WFH request ${status.toLowerCase()}`, `Your WFH request was ${status.toLowerCase()}.`, 'WFH', updatedRequest.id);
+    } catch (err) {
+      console.error('WFH post-approve side effect failed:', err.message, err.code, err.detail);
+    }
     return res.json(updatedRequest);
   } catch (err) {
     console.error('WFH approve error:', err.message, err.code, err.detail, err.constraint, err.where);
