@@ -389,68 +389,70 @@
 
 
 /* ============================================================
-   RIGHT SIDE
+   RIGHT SIDE — STATUS + DATE
    ============================================================ */
 
 .attendance-details-date-section {
+
   width: 285px;
+
   min-width: 285px;
+
   height: 63px;
 
   box-sizing: border-box;
 
   display: flex;
+
   flex-direction: column;
-  align-items: flex-end;
+
+  align-items: flex-start;
+
   justify-content: flex-start;
 
-  gap: 10px;
+  gap: 8px;
 }
-
 
 /* ============================================================
    PRESENT BADGE
    ============================================================ */
 
 .attendance-details-status {
-  width: 125px;
-  height: 29px;
 
-  min-width: 125px;
+  width: 99px;
+  height: 29px;
+  min-width: 99px;
 
   box-sizing: border-box;
-
-  padding: 6px 5px;
+  padding: 6px 10px;
 
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
 
-  gap: 10px;
+  align-self: flex-start;   /* ADD THIS */
+
+  gap: 8px;
 
   border: none;
   border-radius: 15px;
 
   font-family: "Inter", sans-serif;
-
   font-size: 12px;
   font-weight: 500;
-
   line-height: 17px;
 
   letter-spacing: 0.05em;
-
   white-space: nowrap;
 }
-
 
 /* Present */
 
 .attendance-details-status.status-present {
   background: rgba(180, 235, 190, 0.70);
-
   color: #168957;
 }
+
 
 .attendance-details-status.status-present span {
   width: 13px;
@@ -469,8 +471,8 @@
    ============================================================ */
 
 .attendance-details-date {
-  width: 284.61px;
-  height: 23.13px;
+  width: auto;
+  height: 23px;
 
   box-sizing: border-box;
 
@@ -486,21 +488,21 @@
 }
 
 
-/* Calendar */
+/* DATE RANGE ICON */
 
-.attendance-details-date svg {
+.attendance-details-date img {
   width: 20px;
   height: 20px;
 
+  min-width: 20px;
+
   flex-shrink: 0;
 
-  color: #334155;
-
-  stroke-width: 2;
+  object-fit: contain;
 }
 
 
-/* Date text */
+/* DATE TEXT */
 
 .attendance-details-date strong {
   height: 23px;
@@ -521,7 +523,6 @@
 
   white-space: nowrap;
 }
-
 /* ============================================================
    TOP SUMMARY CARDS
    ============================================================ */
@@ -809,24 +810,6 @@
 
 
 /* ============================================================
-   INFORMATION GRID
-   ============================================================ */
-/* ============================================================
-   INFORMATION GRID - FIXED LAYOUT
-   ============================================================ */
-/* ============================================================
-   INFORMATION GRID - UPDATED GAP
-   ============================================================ */
-
-/* ============================================================
-   GRID WITH TIGHT GAP (MATCHES 2ND IMAGE)
-   ============================================================ */
-
-/* ============================================================
-   CARD SPACING & GRID FIX
-   ============================================================ */
-
-/* ============================================================
    CONTAINER FIX: PREVENT RIGHT OVERFLOW
    ============================================================ */
 
@@ -841,36 +824,50 @@
    PERFECT FIT GRID (MATCHES LAST IMAGE)
    ============================================================ */
 
+/* ============================================================
+   ATTENDANCE DETAILS GRID
+   RESPONSIVE + SIDEBAR SAFE
+   ============================================================ */
+
 .attendance-details-grid {
   width: 100%;
   max-width: 100%;
-  box-sizing: border-box;
+  min-width: 0;
+
   margin-top: 10px;
 
+  box-sizing: border-box;
+
   display: grid;
-  /* Equal column distribution prevents overflow */
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  
-  grid-template-rows: 183px 90px auto;
+
+  /*
+     1st column  = Remark
+     2nd column  = Timeline
+     3rd + 4th   = Attendance History
+  */
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr)
+    minmax(0, 1.5fr)
+    minmax(0, 1.5fr);
+
+  grid-template-rows:
+    183px
+    90px
+    237px;
 
   grid-template-areas:
-    "login location shift status"
-    "progress progress shift status"
-    "remark timeline history history";
+    "login    location  shift    status"
+    "progress progress  shift    status"
+    "remark   timeline  history  history";
 
-  column-gap: 6px;
-  row-gap: 6px;
+  column-gap: 8px;
+  row-gap: 10px;
+
+  overflow: visible;
 }
 
-/* IMPORTANT FIX: Individual card sizes fixed for clean fit */
-.attendance-history-card {
-  grid-area: history;
-  width: 100% !important;
-  max-width: 100% !important;
-  min-width: 0 !important; /* Prevents push-out on small screens */
-  box-sizing: border-box;
-  overflow: hidden;
-}
+
 
 /* Clean up card right-edges & shadows */
 .attendance-detail-card,
@@ -1833,50 +1830,53 @@
   line-height: 11px;
 }
 
-
 /* ============================================================
-   ATTENDANCE HISTORY — FINAL FIGMA LAYOUT
+   ATTENDANCE HISTORY CARD
+   SIDEBAR EXPAND / COLLAPSE SAFE
    ============================================================ */
 
 .attendance-history-card {
   grid-area: history;
 
+  /* Grid controls the width automatically */
   width: 100%;
-  min-width: 0;
   max-width: 100%;
+  min-width: 0;
 
   height: 237px;
   min-height: 237px;
   max-height: 237px;
 
-  box-sizing: border-box;
-
   margin: 0;
   padding: 5px;
 
-  position: relative;
+  box-sizing: border-box;
 
   background: #EFF5FA;
 
   border: 1px solid #D7E0E4;
   border-radius: 10px;
 
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.25);
 
   overflow: hidden;
 
+  display: flex;
+  flex-direction: column;
+
+  /* IMPORTANT */
   justify-self: stretch;
   align-self: start;
 }
 
 /* ============================================================
-   HISTORY HEADER
-   Figma: 693 × 45px
+   ATTENDANCE HISTORY HEADER
+   EXACT HEADER SIZE + COLOUR
    ============================================================ */
 
 .attendance-history-header {
   width: 100%;
-  max-width: 100%;
   height: 45px;
   min-height: 45px;
   max-height: 45px;
@@ -1891,39 +1891,42 @@
 
   gap: 10px;
 
-  background: #DCEEF7;
+  /* SAME AS REMARK HEADER */
+  background: #F1DCE0;
 
   border-radius: 10px 10px 0 0;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
 }
-
-
 /* ============================================================
-   HISTORY HEADING
+   HISTORY LEFT CONTENT
    ============================================================ */
 
 .attendance-history-heading {
   min-width: 0;
+  flex: 1 1 auto;
 
   display: flex;
   align-items: center;
 
   gap: 10px;
-}
 
+  overflow: hidden;
+}
 
 /* ============================================================
    HISTORY ICON
-   Figma: 25.43 × 26px
    ============================================================ */
 
 .attendance-history-heading .history-title-icon {
-  width: 25.43px;
+  width: 26px;
   height: 26px;
-
-  min-width: 25.43px;
+  min-width: 26px;
   min-height: 26px;
 
-  border-radius: 25px;
+  flex-shrink: 0;
 
   display: flex;
   align-items: center;
@@ -1931,8 +1934,9 @@
 
   box-sizing: border-box;
 
-  background: #C8E8F6;
+  border-radius: 50%;
 
+  background: #C8E8F6;
   color: #1F96CB;
 }
 
@@ -1945,25 +1949,23 @@
   color: #1F96CB;
 }
 
+.attendance-history-heading > div:last-child {
+  min-width: 0;
+  flex: 1 1 auto;
 
-/* ============================================================
-   HISTORY TITLE
-   Figma: Inter / Medium / 13px
-   ============================================================ */
+  overflow: hidden;
+}
 
 .attendance-history-heading h3 {
-  width: 132px;
-  height: 16px;
+  width: auto;
+  max-width: 100%;
 
   margin: 0;
   padding: 0;
 
   font-family: "Inter", sans-serif;
-
   font-size: 13px;
   font-weight: 500;
-  font-style: normal;
-
   line-height: 16px;
 
   letter-spacing: 0.05em;
@@ -1971,27 +1973,21 @@
   color: #000000;
 
   white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-
-/* ============================================================
-   HISTORY DESCRIPTION
-   Figma: Inter / Medium / 10px
-   ============================================================ */
-
 .attendance-history-heading p {
-  width: 486px;
-  height: 12px;
+  width: auto;
+  max-width: 100%;
 
   margin: 1px 0 0;
   padding: 0;
 
   font-family: "Inter", sans-serif;
-
   font-size: 10px;
   font-weight: 500;
-  font-style: normal;
-
   line-height: 12px;
 
   letter-spacing: 0.05em;
@@ -1999,23 +1995,26 @@
   color: #66696B;
 
   white-space: nowrap;
-}
 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
 /* ============================================================
    VIEW ALL HISTORY BUTTON
-   Figma: 118 × 22px
    ============================================================ */
 
 .view-history-button {
   width: 118px;
-  height: 22px;
-
   min-width: 118px;
-  min-height: 22px;
-
   max-width: 118px;
+
+  height: 22px;
+  min-height: 22px;
   max-height: 22px;
+
+  flex: 0 0 118px;
+  flex-shrink: 0;
 
   box-sizing: border-box;
 
@@ -2023,25 +2022,20 @@
   padding: 5px 10px;
 
   display: inline-flex;
-
   align-items: center;
   justify-content: center;
 
-  gap: 10px;
+  gap: 8px;
 
   border: none;
   border-radius: 5px;
 
   background: #BDE3F4;
-
   color: #1F96CB;
 
   font-family: "Inter", sans-serif;
-
   font-size: 10px;
   font-weight: 600;
-  font-style: normal;
-
   line-height: 12px;
 
   letter-spacing: 0.05em;
@@ -2051,11 +2045,10 @@
   cursor: pointer;
 }
 
-
-/* NO ANIMATION */
 .view-history-button:hover {
   background: #BDE3F4;
 }
+
 
 
 /* ============================================================
@@ -2067,7 +2060,7 @@
   max-width: 100%;
   min-width: 0;
 
-  height: 149px;
+  height: 192px;
 
   box-sizing: border-box;
 
@@ -2083,8 +2076,8 @@
 
 .attendance-history-table {
   width: 100%;
-  min-width: 0;
   max-width: 100%;
+  min-width: 0;
 
   box-sizing: border-box;
 
@@ -2097,12 +2090,36 @@
 
 
 /* ============================================================
+   HISTORY TABLE - 4 COLUMNS
+   ============================================================ */
+
+.attendance-history-table th:nth-child(1),
+.attendance-history-table td:nth-child(1) {
+  width: 23%;
+}
+
+.attendance-history-table th:nth-child(2),
+.attendance-history-table td:nth-child(2) {
+  width: 25%;
+}
+
+.attendance-history-table th:nth-child(3),
+.attendance-history-table td:nth-child(3) {
+  width: 27%;
+}
+
+.attendance-history-table th:nth-child(4),
+.attendance-history-table td:nth-child(4) {
+  width: 25%;
+}
+
+
+/* ============================================================
    TABLE HEADER
-   Figma: 691 × 32px
    ============================================================ */
 
 .attendance-history-table thead {
-  width: 691px;
+  width: 100%;
   height: 32px;
 }
 
@@ -2125,54 +2142,19 @@
 
   font-size: 10px;
   font-weight: 600;
-  font-style: normal;
 
   line-height: 12px;
 
   letter-spacing: 0.05em;
 
   white-space: nowrap;
+
+  overflow: visible;
 }
 
 
 /* ============================================================
-   EXACT COLUMN WIDTHS
-   ============================================================ */
-
-.attendance-history-table th:nth-child(1),
-.attendance-history-table td:nth-child(1) {
-  width: 123px;
-}
-
-.attendance-history-table th:nth-child(2),
-.attendance-history-table td:nth-child(2) {
-  width: 133px;
-}
-
-.attendance-history-table th:nth-child(3),
-.attendance-history-table td:nth-child(3) {
-  width: 132px;
-}
-
-.attendance-history-table th:nth-child(4),
-.attendance-history-table td:nth-child(4) {
-  width: 97px;
-}
-
-.attendance-history-table th:nth-child(5),
-.attendance-history-table td:nth-child(5) {
-  width: 98px;
-}
-
-.attendance-history-table th:nth-child(6),
-.attendance-history-table td:nth-child(6) {
-  width: 61px;
-}
-
-
-/* ============================================================
-   TABLE BODY ROW
-   Figma: approximately 689 × 40px
+   TABLE BODY
    ============================================================ */
 
 .attendance-history-table tbody tr {
@@ -2197,7 +2179,6 @@
 
   font-size: 10px;
   font-weight: 600;
-  font-style: normal;
 
   line-height: 12px;
 
@@ -2205,13 +2186,14 @@
 
   white-space: nowrap;
 
-  overflow: hidden;
+  overflow: visible;
+
   text-overflow: clip;
 }
 
 
 /* ============================================================
-   APPROVED STATUS
+   APPROVED
    ============================================================ */
 
 .history-approved {
@@ -2244,8 +2226,6 @@
 
   white-space: nowrap;
 }
-
-
 /* ============================================================
    DARK MODE
    ============================================================ */
@@ -3245,10 +3225,10 @@ grid-template-columns:
     box-sizing: border-box;
 
     grid-template-columns:
-      minmax(0, 1fr)
-      minmax(0, 1fr)
-      minmax(0, 1fr)
-      minmax(0, 1fr);
+  215px
+  215px
+  minmax(260px, 1fr)
+  minmax(260px, 1fr);
 
     column-gap: 8px;
     row-gap: 10px;
@@ -3549,6 +3529,7 @@ grid-template-columns:
 
   background: #DCEEF7;
 
+  font-size: 16px;
   flex-shrink: 0;
 }
 
@@ -3750,46 +3731,56 @@ grid-template-columns:
   pointer-events: none;
 }
 
-
 /* ============================================================
-   ATTENDANCE HISTORY — RESPONSIVE & CONTAINED
+   ATTENDANCE HISTORY CARD
+   LEFT SHIFT + AUTO EXPANSION
    ============================================================ */
 
 .attendance-history-card {
+
   grid-area: history;
 
-  width: 100%;
+  /*
+     Keep the grid structure unchanged.
+     Only move History visually to the left.
+  */
+  width: calc(100% + 40px);
+  max-width: calc(100% + 40px);
   min-width: 0;
-  max-width: 100%;
 
   height: 237px;
   min-height: 237px;
+  max-height: 237px;
+
+  margin: 0 0 0 -40px;
+  padding: 5px;
 
   box-sizing: border-box;
 
-  margin: 0;
-  padding: 5px;
+  justify-self: start;
+  align-self: start;
 
-  position: relative;
+  overflow: hidden;
 
   background: #EFF5FA;
 
   border: 1px solid #D7E0E4;
   border-radius: 10px;
 
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-
-  overflow: hidden;
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.25);
 
   display: flex;
   flex-direction: column;
 }
-
-/* HEADER CONTAINMENT */
+/* ============================================================
+   HISTORY HEADER
+   ============================================================ */
 
 .attendance-history-header {
   width: 100%;
-  min-width: 0;
+  max-width: 100%;
+
   height: 45px;
   min-height: 45px;
 
@@ -3801,144 +3792,388 @@ grid-template-columns:
   align-items: center;
   justify-content: space-between;
 
-  gap: 8px;
+  gap: 10px;
 
-  background: #DCEEF7;
+  background: #dceef7;
 
   border-radius: 10px 10px 0 0;
+
+  overflow: hidden;
 }
+
+
+/* ============================================================
+   HISTORY HEADING
+   ============================================================ */
 
 .attendance-history-heading {
   min-width: 0;
-  flex: 1;
+
+  flex: 1 1 auto;
 
   display: flex;
   align-items: center;
 
-  gap: 8px;
+  gap: 10px;
+
+  overflow: hidden;
 }
 
+
 .attendance-history-heading .history-title-icon {
-  width: 26px;
+  width: 25px;
   height: 26px;
 
-  min-width: 26px;
+  min-width: 25px;
 
-  border-radius: 50%;
+  border-radius: 25px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  background: #C8E8F6;
+  background: #c8e8f6;
 
-  color: #1F96CB;
+  color: #1f96cb;
 }
 
-.attendance-history-heading .history-text-wrapper {
-  min-width: 0;
-  flex: 1;
+
+.attendance-history-heading .history-title-icon svg {
+  width: 17px;
+  height: 17px;
+
+  color: #1f96cb;
 }
 
-/* Fixed width-a remove panni text truncate panroam */
+
+/* TITLE */
+
 .attendance-history-heading h3 {
-  width: auto;
   margin: 0;
-  padding: 0;
 
   font-family: "Inter", sans-serif;
-  font-size: 13px;
-  font-weight: 600;
 
-  color: #000000;
+  font-size: 13px;
+  font-weight: 500;
+
+  line-height: 16px;
+
+  letter-spacing: 0.05em;
+
+  color: #000;
 
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
+
+/* DESCRIPTION */
+
 .attendance-history-heading p {
-  width: auto;
   margin: 1px 0 0;
-  padding: 0;
 
   font-family: "Inter", sans-serif;
+
   font-size: 10px;
   font-weight: 500;
 
-  color: #66696B;
+  line-height: 12px;
+
+  letter-spacing: 0.05em;
+
+  color: #66696b;
 
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+
+ overflow: visible;
+text-overflow: clip;
 }
 
-.view-history-button {
-  flex-shrink: 0; /* Button exterior overflow aagadha maadhiri dynamic positioning */
 
+/* ============================================================
+   VIEW ALL HISTORY BUTTON
+   ============================================================ */
+
+.view-history-button {
+  width: 118px;
+  min-width: 118px;
   height: 22px;
-  padding: 0 10px;
+
+  flex-shrink: 0;
+
+  box-sizing: border-box;
+
+  padding: 5px 10px;
 
   display: inline-flex;
   align-items: center;
   justify-content: center;
 
-  border: none;
-  border-radius: 6px;
+  gap: 8px;
 
-  background: #B3E2CF;
-  color: #168957;
+  border: none;
+  border-radius: 5px;
+
+  background: #bde3f4;
+
+  color: #1f96cb;
 
   font-family: "Inter", sans-serif;
+
   font-size: 10px;
   font-weight: 600;
 
-  cursor: pointer;
+  line-height: 12px;
+
   white-space: nowrap;
+
+  cursor: pointer;
 }
+
+.view-history-button:hover {
+  background: #bde3f4;
+}
+
 
 /* ============================================================
-   RESPONSIVE TABLE WRAPPER & PROPORTIONAL COLUMNS
+   HISTORY TABLE WRAPPER
    ============================================================ */
 
-.history-table-wrapper {
+.attendance-history-table-wrap {
   width: 100%;
+  max-width: 100%;
   min-width: 0;
-  flex: 1;
 
-  overflow: hidden; /* Scrollbar varaamal card boundary-kulla stop pannum */
+  height: 149px;
+
+  box-sizing: border-box;
+
+  padding: 0 5px 10px;
+
+  overflow: hidden;
 }
 
-.history-table {
+
+/* ============================================================
+   HISTORY TABLE
+   ============================================================ */
+
+.attendance-history-table {
   width: 100%;
-  table-layout: fixed; /* Dynamic width auto-adjust */
+  max-width: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+
   border-collapse: collapse;
+  table-layout: fixed;
+
+  margin: 0;
 }
 
-/* Column Proportion Alignment */
-.history-table th:nth-child(1),
-.history-table td:nth-child(1) { width: 22%; } /* Date & Time */
 
-.history-table th:nth-child(2),
-.history-table td:nth-child(2) { width: 18%; } /* Action */
+/* ============================================================
+   RESPONSIVE COLUMN WIDTHS
+   ============================================================ */
 
-.history-table th:nth-child(3),
-.history-table td:nth-child(3) { width: 22%; } /* Details */
+.attendance-history-table th:nth-child(1),
+.attendance-history-table td:nth-child(1) {
+  width: 18%;
+}
 
-.history-table th:nth-child(4),
-.history-table td:nth-child(4) { width: 15%; } /* Changed By */
+.attendance-history-table th:nth-child(2),
+.attendance-history-table td:nth-child(2) {
+  width: 19%;
+}
 
-.history-table th:nth-child(5),
-.history-table td:nth-child(5) { width: 13%; } /* Reason */
+.attendance-history-table th:nth-child(3),
+.attendance-history-table td:nth-child(3) {
+  width: 19%;
+}
 
-.history-table th:nth-child(6),
-.history-table td:nth-child(6) { width: 10%; } /* Status */
+.attendance-history-table th:nth-child(4),
+.attendance-history-table td:nth-child(4) {
+  width: 15%;
+}
 
-.history-table th,
-.history-table td {
-  padding: 6px 8px;
+.attendance-history-table th:nth-child(5),
+.attendance-history-table td:nth-child(5) {
+  width: 17%;
+}
+
+.attendance-history-table th:nth-child(6),
+.attendance-history-table td:nth-child(6) {
+  width: 12%;
+}
+
+
+/* ============================================================
+   TABLE HEADER
+   ============================================================ */
+
+.attendance-history-table th {
+  height: 32px;
+
+  box-sizing: border-box;
+
+  padding: 10px 5px;
+
   text-align: left;
+  vertical-align: middle;
+
+  background: #d2eaf5;
+
+  color: #000;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  line-height: 12px;
+
+  letter-spacing: 0.05em;
+
   white-space: nowrap;
+
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   TABLE BODY
+   ============================================================ */
+
+.attendance-history-table tbody tr {
+  height: 40px;
+}
+
+
+.attendance-history-table td {
+  height: 40px;
+
+  box-sizing: border-box;
+
+  padding: 10px 5px;
+
+  vertical-align: middle;
+
+  border-bottom: 1px solid #d7e0e4;
+
+  color: #66696b;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  line-height: 12px;
+
+  letter-spacing: 0.05em;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ============================================================
+   APPROVED
+   ============================================================ */
+
+.history-approved {
+  display: inline-flex;
+
+  max-width: 100%;
+  height: 20px;
+
+  box-sizing: border-box;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 8px;
+
+  border-radius: 10px;
+
+  background: #a4e9c1;
+
+  color: #0b3d20;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  line-height: 12px;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   MOBILE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .attendance-history-card {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .attendance-history-header {
+    padding: 0 8px;
+    gap: 6px;
+  }
+
+  .attendance-history-heading {
+    gap: 7px;
+  }
+
+  .attendance-history-heading p {
+    max-width: 100%;
+  }
+
+  .view-history-button {
+    width: 105px;
+    min-width: 105px;
+
+    font-size: 9px;
+  }
+
+  .attendance-history-table th,
+  .attendance-history-table td {
+    padding: 8px 4px;
+    font-size: 9px;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .attendance-history-header {
+    height: auto;
+    min-height: 45px;
+
+    padding: 6px 8px;
+  }
+
+  .attendance-history-heading p {
+    display: none;
+  }
+
+  .view-history-button {
+    width: 95px;
+    min-width: 95px;
+
+    font-size: 8px;
+  }
+
+  .attendance-history-table th,
+  .attendance-history-table td {
+    padding: 7px 3px;
+    font-size: 8px;
+  }
 }
