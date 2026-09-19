@@ -5,6 +5,21 @@ async function getEmployeeIdByUserId(userId) {
   return result.rows[0]?.id || null;
 }
 
+async function getWfhRequestForDate(employeeId, date) {
+  const result = await pool.query(
+    `SELECT status
+     FROM wfh_requests
+     WHERE employee_id = $1
+       AND start_date <= $2
+       AND end_date >= $2
+       AND status <> 'Approved'
+     ORDER BY created_at DESC
+     LIMIT 1`,
+    [employeeId, date]
+  );
+  return result.rows[0] || null;
+}
+
 async function getTodayAttendanceByEmployee(employeeId) {
   const result = await pool.query(
     `SELECT punch_in, punch_out, status, working_hours
@@ -18,10 +33,10 @@ async function getTodayAttendanceByEmployee(employeeId) {
 
 async function markPunchIn(employeeId, date, time) {
   const result = await pool.query(
-    `INSERT INTO attendance (employee_id, date, punch_in, status)
-     VALUES ($1, $2, $3, 'Present')
+    `INSERT INTO attendance (employee_id, date, punch_in, status, login_source)
+     VALUES ($1, $2, $3, 'Present', 'Web')
      ON CONFLICT (employee_id, date)
-     DO UPDATE SET punch_in = EXCLUDED.punch_in, status = 'Present'
+     DO UPDATE SET punch_in = EXCLUDED.punch_in, status = 'Present', login_source = 'Web'
      RETURNING *`,
     [employeeId, date, time]
   );
@@ -32,6 +47,7 @@ async function markPunchOut(employeeId, date, time) {
   const result = await pool.query(
     `UPDATE attendance
      SET punch_out = $1,
+       login_source = 'Web',
          working_hours = ROUND((EXTRACT(EPOCH FROM ($1::timestamp - punch_in)) / 3600)::numeric, 2)
      WHERE employee_id = $2 AND date = $3
      RETURNING *`,
@@ -95,6 +111,7 @@ async function getAttendanceByDate(date) {
 
 module.exports = {
   getEmployeeIdByUserId,
+  getWfhRequestForDate,
   getTodayAttendanceByEmployee,
   markPunchIn,
   markPunchOut,

@@ -66,33 +66,43 @@ async function getPendingWfh(req, res) {
   }
 }
 
-async function approveWfh(req, res) {
+function approvalStageForUser(request, user, requestedStage) {
+  if (requestedStage && !['level1', 'level2', 'hr'].includes(requestedStage)) return null;
+  if (requestedStage) return requestedStage;
+  if (user.role === 'HR' || user.role === 'Super Admin') return 'hr';
+  if (user.role !== 'Manager') return null;
+  if (request.level1_manager_user_id === user.id) return requestedStage || 'level1';
+  if (request.level2_manager_user_id === user.id) return requestedStage || 'level2';
+  return null;
+}
+
+function canApproveStage(request, user, stage) {
+  if (user.role === 'HR' || user.role === 'Super Admin') return stage === 'hr' || Boolean(user.role === 'Super Admin');
+  if (user.role !== 'Manager') return false;
+  return (stage === 'level1' && request.level1_manager_user_id === user.id)
+    || (stage === 'level2' && request.level2_manager_user_id === user.id);
+}
+
+async function updateWfhApproval(req, res, status) {
   try {
     const request = await wfh.getWfhRequestById(req.params.id);
     if (!request) return res.status(404).json({ message: 'WFH request not found' });
-    if (request.status === 'Rejected') return res.status(409).json({ message: 'Rejected WFH request cannot be approved' });
-    if (request.status === 'Approved') return res.json(request);
-
-    const approvedRequest = await wfh.updateWfhStatus(req.params.id, 'Approved', req.user.id);
-    for (const date of datesBetween(request.start_date, request.end_date)) {
-      await attendance.markWfh(request.employee_id, date);
+    const stage = approvalStageForUser(request, req.user, req.body.stage);
+    if (!stage || !canApproveStage(request, req.user, stage)) {
+      return res.status(403).json({ message: 'You are not authorized to approve this WFH approval stage' });
     }
-    notifyUser(request.user_id, 'WFH request approved', 'Your WFH request was approved.', 'WFH', approvedRequest.id);
-    return res.json(approvedRequest);
-  } catch (error) {
-    return handleError(res, error, 'Unable to approve WFH request');
-  }
-}
+    if (request[`${stage}_status`] === status) return res.json(request);
 
-async function rejectWfh(req, res) {
-  try {
-    const existingRequest = await wfh.getWfhRequestById(req.params.id);
-    if (!existingRequest) return res.status(404).json({ message: 'WFH request not found' });
-    const request = await wfh.updateWfhStatus(req.params.id, 'Rejected', req.user.id);
-    notifyUser(existingRequest.user_id, 'WFH request rejected', 'Your WFH request was rejected.', 'WFH', request.id);
-    return res.json(request);
+    const updatedRequest = await wfh.updateWfhStage(req.params.id, stage, status, req.user.id);
+    if (status === 'Approved' && updatedRequest.status === 'Approved') {
+      for (const date of datesBetween(request.start_date, request.end_date)) {
+        await attendance.markWfh(request.employee_id, date);
+      }
+    }
+    notifyUser(request.user_id, `WFH request ${status.toLowerCase()}`, `Your WFH request was ${status.toLowerCase()}.`, 'WFH', updatedRequest.id);
+    return res.json(updatedRequest);
   } catch (error) {
-    return handleError(res, error, 'Unable to reject WFH request');
+    return handleError(res, error, 'Unable to update WFH approval');
   }
 }
 
@@ -100,6 +110,6 @@ module.exports = {
   applyWfh,
   getMyWfhRequests,
   getPendingWfh,
-  approveWfh,
-  rejectWfh,
+  approveWfh: (req, res) => updateWfhApproval(req, res, 'Approved'),
+  rejectWfh: (req, res) => updateWfhApproval(req, res, 'Rejected'),
 };

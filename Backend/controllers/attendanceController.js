@@ -16,6 +16,15 @@ async function employeeIdForRequest(req, res) {
   return employeeId;
 }
 
+async function rejectUnapprovedWfhPunch(employeeId, date, res) {
+  const request = await attendance.getWfhRequestForDate(employeeId, date);
+  if (request && request.status !== 'Approved') {
+    res.status(403).json({ message: 'Punching is not allowed while the WFH request for this date is awaiting approval or rejected' });
+    return true;
+  }
+  return false;
+}
+
 async function punchIn(req, res) {
   const { date, time } = req.body;
   if (!date || !time) return res.status(400).json({ message: 'date and time are required' });
@@ -23,6 +32,7 @@ async function punchIn(req, res) {
   try {
     const employeeId = await employeeIdForRequest(req, res);
     if (!employeeId) return null;
+    if (await rejectUnapprovedWfhPunch(employeeId, date, res)) return null;
     return res.status(201).json(await attendance.markPunchIn(employeeId, date, time));
   } catch (error) {
     return handleError(res, error, 'Unable to record punch-in');
@@ -36,6 +46,7 @@ async function punchOut(req, res) {
   try {
     const employeeId = await employeeIdForRequest(req, res);
     if (!employeeId) return null;
+    if (await rejectUnapprovedWfhPunch(employeeId, date, res)) return null;
     const record = await attendance.markPunchOut(employeeId, date, time);
     if (!record) return res.status(404).json({ message: 'No punch-in found for that date' });
     return res.json(record);
