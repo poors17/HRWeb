@@ -16,6 +16,9 @@ const Header = ({ darkMode, setDarkMode }) => {
   const navigate = useNavigate();
 
   const [profileOpen, setProfileOpen] = React.useState(false);
+  const userName = localStorage.getItem("name") || "User";
+  const userRole = localStorage.getItem("role") || "Employee";
+  const department = localStorage.getItem("department") || "";
 
   // ==========================================
   // LOGOUT
@@ -28,6 +31,7 @@ const Header = ({ darkMode, setDarkMode }) => {
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("empId");
     localStorage.removeItem("role");
+    localStorage.removeItem("department");
 
     // Close profile menu
     setProfileOpen(false);
@@ -142,11 +146,17 @@ const Header = ({ darkMode, setDarkMode }) => {
           <div className="profile-details">
 
             <div className="employee-name">
-              Employee Name
+              {userName}
             </div>
 
             <div className="employee-role">
-              Employee <span>•</span> Department
+              {department ? (
+                <>
+                  {userRole} <span>•</span> {department}
+                </>
+              ) : (
+                userRole
+              )}
             </div>
 
           </div>

@@ -125,7 +125,15 @@ async function getMyLeaveRequests(req, res) {
   try {
     const employeeId = await employeeIdForRequest(req, res);
     if (!employeeId) return null;
-    return res.json(await leave.getLeaveRequestsByEmployee(employeeId));
+    const requests = await leave.getLeaveRequestsByEmployee(employeeId);
+    return res.json(requests.map((request) => ({
+      ...request,
+      reporting_manager_name: request.reporting_manager_name || 'Not assigned',
+      handover_employee_name: request.handover_employee_name || null,
+      handover_employee_code: request.handover_employee_code || null,
+      approver_name: request.approver_name || request.approver_employee_name || null,
+      approver_employee_code: request.approver_employee_code || null,
+    })));
   } catch (error) {
     return handleError(res, error, 'Unable to fetch leave requests');
   }
@@ -133,38 +141,70 @@ async function getMyLeaveRequests(req, res) {
 
 async function getPendingApprovals(req, res) {
   try {
-    return res.json(await leave.getPendingLeaveRequests());
+    const requests = await leave.getPendingLeaveRequests();
+    if (req.user.role === 'Manager') {
+      const managerEmployee = await employees.getEmployeeByUserId ? employees.getEmployeeByUserId(req.user.id) : null;
+      const managerId = managerEmployee ? managerEmployee.id : null;
+      const filtered = requests.filter((request) => {
+        if (!request.employee_id) return false;
+        if (!managerId) return false;
+        return Number(request.reporting_manager_id || request.manager_id || request.employee_reporting_manager_id) === Number(managerId);
+      });
+      return res.json(filtered);
+    }
+    return res.json(requests);
   } catch (error) {
     return handleError(res, error, 'Unable to fetch pending leave requests');
   }
 }
 
 async function approveLeave(req, res) {
-  const status = req.body.status || 'HR Approved';
-  if (!['Manager Approved', 'HR Approved'].includes(status)) {
+  const rawStatus = req.body.status || 'HR Approved';
+  const allowedStatusForRole = {
+    Manager: 'Manager Approved',
+    'HR': 'HR Approved',
+    'Super Admin': 'HR Approved',
+  };
+
+  if (!['Manager Approved', 'HR Approved'].includes(rawStatus)) {
     return res.status(400).json({ message: 'status must be Manager Approved or HR Approved' });
+  }
+
+  if (allowedStatusForRole[req.user.role] && rawStatus !== allowedStatusForRole[req.user.role]) {
+    return res.status(403).json({ message: 'You are not allowed to approve with that status for your role' });
   }
 
   try {
     const request = await leave.getLeaveRequestById(req.params.id);
     if (!request) return res.status(404).json({ message: 'Leave request not found' });
     if (request.status === 'Rejected') return res.status(409).json({ message: 'Rejected leave cannot be approved' });
-    if (request.status === 'HR Approved') return res.json(request);
-
-    if (status === 'HR Approved') {
-      const year = new Date(request.start_date).getFullYear();
-      const balance = await leave.deductLeaveBalance(
-        request.employee_id,
-        request.leave_type_id,
-        year,
-        request.total_days
-      );
-      if (!balance) return res.status(400).json({ message: 'Insufficient or missing leave balance' });
+    if (request.status === 'Manager Approved' || request.status === 'HR Approved') {
+      return res.status(400).json({ message: 'This leave request has already been approved' });
     }
 
-    const updatedRequest = await leave.updateLeaveRequestStatus(req.params.id, status, req.user.id);
-    logAction(req, 'APPROVE', 'Leave', updatedRequest.id, `Leave request ${status}`);
-    notifyUser(request.user_id, 'Leave request approved', `Your leave request was ${status.toLowerCase()}.`, 'Leave', updatedRequest.id);
+    if (req.user.role === 'Manager') {
+      const managerEmployee = await employees.getEmployeeByUserId ? employees.getEmployeeByUserId(req.user.id) : null;
+      if (!managerEmployee) {
+        return res.status(403).json({ message: 'Manager profile not found' });
+      }
+      const employeeRecord = await employees.getEmployeeById(request.employee_id);
+      if (!employeeRecord || Number(employeeRecord.reporting_manager_id) !== Number(managerEmployee.id)) {
+        return res.status(403).json({ message: 'You can only approve leave requests for your team members' });
+      }
+    }
+
+    const year = new Date(request.start_date).getFullYear();
+    const balance = await leave.deductLeaveBalance(
+      request.employee_id,
+      request.leave_type_id,
+      year,
+      request.total_days
+    );
+    if (!balance) return res.status(400).json({ message: 'Insufficient or missing leave balance' });
+
+    const updatedRequest = await leave.updateLeaveRequestStatus(req.params.id, rawStatus, req.user.id);
+    logAction(req, 'APPROVE', 'Leave', updatedRequest.id, `Leave request ${rawStatus}`);
+    notifyUser(request.user_id, 'Leave request approved', `Your leave request was ${rawStatus.toLowerCase()}.`, 'Leave', updatedRequest.id);
     return res.json(updatedRequest);
   } catch (error) {
     return handleError(res, error, 'Unable to approve leave request');
@@ -175,6 +215,24 @@ async function rejectLeave(req, res) {
   try {
     const existingRequest = await leave.getLeaveRequestById(req.params.id);
     if (!existingRequest) return res.status(404).json({ message: 'Leave request not found' });
+    if (existingRequest.status === 'Rejected') return res.status(400).json({ message: 'This leave request has already been rejected' });
+
+    if (req.user.role === 'Manager') {
+      const managerEmployee = await employees.getEmployeeByUserId ? employees.getEmployeeByUserId(req.user.id) : null;
+      if (!managerEmployee) {
+        return res.status(403).json({ message: 'Manager profile not found' });
+      }
+      const employeeRecord = await employees.getEmployeeById(existingRequest.employee_id);
+      if (!employeeRecord || Number(employeeRecord.reporting_manager_id) !== Number(managerEmployee.id)) {
+        return res.status(403).json({ message: 'You can only reject leave requests for your team members' });
+      }
+    }
+
+    if (existingRequest.status === 'Manager Approved' || existingRequest.status === 'HR Approved') {
+      const year = new Date(existingRequest.start_date).getFullYear();
+      await leave.restoreLeaveBalance(existingRequest.employee_id, existingRequest.leave_type_id, year, existingRequest.total_days);
+    }
+
     const request = await leave.updateLeaveRequestStatus(req.params.id, 'Rejected', req.user.id);
     logAction(req, 'REJECT', 'Leave', request.id, 'Leave request rejected');
     notifyUser(existingRequest.user_id, 'Leave request rejected', 'Your leave request was rejected.', 'Leave', request.id);
@@ -189,6 +247,24 @@ async function getLeaveTypes(req, res) {
     return res.json(await leave.getLeaveTypes());
   } catch (error) {
     return handleError(res, error, 'Unable to fetch leave types');
+  }
+}
+
+async function getHandoverEmployees(req, res) {
+  try {
+    const currentEmployeeId = await employeeIdForRequest(req, res);
+    if (!currentEmployeeId) return null;
+    const employeesList = await employees.getAllEmployees({ employment_status: 'Active' });
+    const filtered = employeesList
+      .filter((employee) => Number(employee.id) !== Number(currentEmployeeId))
+      .map((employee) => ({
+        id: employee.id,
+        employee_code: employee.employee_code,
+        full_name: employee.full_name,
+      }));
+    return res.json(filtered);
+  } catch (error) {
+    return handleError(res, error, 'Unable to fetch active employees');
   }
 }
 
@@ -217,5 +293,6 @@ module.exports = {
   approveLeave,
   rejectLeave,
   getLeaveTypes,
+  getHandoverEmployees,
   getLeaveBalance,
 };

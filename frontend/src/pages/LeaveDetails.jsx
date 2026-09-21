@@ -92,9 +92,11 @@ const LeaveDetails = () => {
       setBalances(myBalances);
 
       const selectedRequest = leaveRequest || myRequests[0] || null;
-      if (selectedRequest) {
+      if (selectedRequest && !leaveRequest) {
         setLeaveRequest(selectedRequest);
+      }
 
+      if (selectedRequest) {
         if (selectedRequest.employee_id) {
           const employeeResponse = await fetch(`${API_URL}/api/employees/${selectedRequest.employee_id}`, {
             headers: getAuthHeaders(),
@@ -139,14 +141,26 @@ const LeaveDetails = () => {
   const reason = leaveRequest?.reason || "Not provided";
   const status = leaveRequest?.status || "Pending";
   const appliedOn = leaveRequest?.created_at ? formatDateTime(leaveRequest.created_at) : "Not available";
-  const employeeName = employeeProfile?.full_name || "Employee Name";
-  const employeeCode = employeeProfile?.employee_code || "-";
-  const departmentName = employeeProfile?.department_name || "IT";
-  const designationName = employeeProfile?.designation_name || "Software Engineer";
-  const reportingManagerName = employeeProfile?.reporting_manager_id ? "Manager" : "Ruthrasri";
-  const contactNumber = leaveRequest?.contact_number || "+91 98777 77777";
-  const handoverName = handoverProfile?.full_name || "Employee Name";
-  const handoverCode = handoverProfile?.employee_code || "001010";
+  const employeeName = employeeProfile?.full_name || leaveRequest?.employee_name || "Employee Name";
+  const employeeCode = employeeProfile?.employee_code || leaveRequest?.employee_code || "-";
+  const departmentName = employeeProfile?.department_name || "Not assigned";
+  const designationName = employeeProfile?.designation_name || "Not assigned";
+  const reportingManagerName = leaveRequest?.reporting_manager_name || "Not assigned";
+  const contactNumber = leaveRequest?.contact_number || null;
+  const handoverName = leaveRequest?.handover_employee_name || handoverProfile?.full_name || null;
+  const handoverCode = leaveRequest?.handover_employee_code || handoverProfile?.employee_code || null;
+  const hasHandover = Boolean(handoverName && handoverCode);
+  const hasAppliedVia = Boolean(leaveRequest?.applied_via);
+  const approvalRecordExists = Boolean(
+    leaveRequest?.approved_by && (leaveRequest?.approved_at || leaveRequest?.updated_at)
+  );
+  const managerStepCompleted = Boolean(
+    leaveRequest?.approved_by && (status === "Manager Approved" || status === "HR Approved" || status === "Rejected") && (leaveRequest?.approved_at || leaveRequest?.updated_at)
+  );
+  const hrStepCompleted = Boolean(
+    leaveRequest?.approved_by && (status === "HR Approved" || status === "Rejected") && (leaveRequest?.approved_at || leaveRequest?.updated_at)
+  );
+  const approverName = leaveRequest?.approver_name || leaveRequest?.approver_employee_name || null;
 
   return (
     <Layout>
@@ -266,24 +280,28 @@ const LeaveDetails = () => {
                   <strong>{appliedOn}</strong>
                 </div>
 
-                <div className="leave-info-row">
-                  <span>Applied Via</span>
-                  <strong>Employee Portal (web)</strong>
-                </div>
+                {hasAppliedVia ? (
+                  <div className="leave-info-row">
+                    <span>Applied Via</span>
+                    <strong>{leaveRequest.applied_via}</strong>
+                  </div>
+                ) : null}
 
-                <div className="leave-info-row">
-                  <span>Contact During Leave</span>
-                  <strong>{contactNumber}</strong>
-                </div>
+                {contactNumber ? (
+                  <div className="leave-info-row">
+                    <span>Contact During Leave</span>
+                    <strong>{contactNumber}</strong>
+                  </div>
+                ) : null}
 
                 <div className="leave-info-row">
                   <span>Work Handover</span>
-                  <strong className="leave-approved-small">✓ {handoverProfile ? "Assigned" : "Completed"}</strong>
+                  <strong className="leave-approved-small">{hasHandover ? "✓ Assigned" : "Not assigned"}</strong>
                 </div>
 
                 <div className="leave-info-row">
                   <span>Handover To</span>
-                  <strong>{handoverProfile ? `${handoverName} (ID - ${handoverCode})` : `${handoverName} (ID - ${handoverCode})`}</strong>
+                  <strong>{hasHandover ? `${handoverName} (${handoverCode})` : "Not assigned"}</strong>
                 </div>
 
                 <div className="leave-info-row">
@@ -323,36 +341,40 @@ const LeaveDetails = () => {
 
                 <div className="approval-item">
                   <div className="approval-line">
-                    <span className="approval-circle">✓</span>
+                    <span className="approval-circle" style={{ background: managerStepCompleted ? '#20A765' : '#C7CCD1' }}>
+                      {managerStepCompleted ? '✓' : '•'}
+                    </span>
                   </div>
                   <div className="approval-content">
                     <h4>Reviewed by Manager</h4>
-                    <p>{appliedOn}</p>
-                    <span>Reviewed by manager after submission.</span>
+                    <p>{managerStepCompleted ? (leaveRequest?.updated_at ? formatDateTime(leaveRequest.updated_at) : appliedOn) : "Waiting for manager review"}</p>
+                    <span>{managerStepCompleted && approverName ? `Reviewed by ${approverName}.` : "Pending manager review."}</span>
                   </div>
                   <div className="approval-person">
                     <div className="approval-person-avatar">👤</div>
                     <div>
-                      <strong>Manager</strong>
-                      <span>Approver</span>
+                      <strong>{approverName || "Manager"}</strong>
+                      <span>{approverName ? "Approver" : "Pending"}</span>
                     </div>
                   </div>
                 </div>
 
                 <div className="approval-item">
                   <div className="approval-line">
-                    <span className="approval-circle">✓</span>
+                    <span className="approval-circle" style={{ background: hrStepCompleted ? '#20A765' : '#C7CCD1' }}>
+                      {hrStepCompleted ? '✓' : '•'}
+                    </span>
                   </div>
                   <div className="approval-content">
                     <h4>Status</h4>
-                    <p>{appliedOn}</p>
-                    <span>{status}</span>
+                    <p>{hrStepCompleted ? (leaveRequest?.updated_at ? formatDateTime(leaveRequest.updated_at) : appliedOn) : "Waiting for HR / Manager update"}</p>
+                    <span>{hrStepCompleted ? status : "Pending decision."}</span>
                   </div>
                   <div className="approval-person">
                     <div className="approval-person-avatar">👤</div>
                     <div>
-                      <strong>HR / Manager</strong>
-                      <span>Approver</span>
+                      <strong>{approverName || "HR / Manager"}</strong>
+                      <span>{approverName ? "Approver" : "Pending"}</span>
                     </div>
                   </div>
                 </div>

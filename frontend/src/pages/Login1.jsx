@@ -94,7 +94,13 @@ function Login1() {
       localStorage.setItem("token", data.token);
       localStorage.setItem("refreshToken", data.refreshToken);
       localStorage.setItem("empId", user.employeeCode || empId);
-      localStorage.setItem("role", user.role);
+      localStorage.setItem("name", user.name || "User");
+      localStorage.setItem("role", user.role || "Employee");
+      if (user.department) {
+        localStorage.setItem("department", user.department);
+      } else {
+        localStorage.removeItem("department");
+      }
 
       if (user.role === "Super Admin" || user.role === "Admin") {
         navigate("/dashboard", { replace: true });

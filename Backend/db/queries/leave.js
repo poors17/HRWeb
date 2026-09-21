@@ -27,9 +27,24 @@ async function createLeaveRequest(data) {
 
 async function getLeaveRequestsByEmployee(employeeId) {
   const result = await pool.query(
-    `SELECT lr.*, lt.name AS leave_type_name
+    `SELECT lr.*,
+            lt.name AS leave_type_name,
+            emp.full_name AS employee_name,
+            emp.employee_code,
+            manager.full_name AS reporting_manager_name,
+            manager.employee_code AS reporting_manager_code,
+            handover.full_name AS handover_employee_name,
+            handover.employee_code AS handover_employee_code,
+            approver_user.name AS approver_name,
+            approver_emp.full_name AS approver_employee_name,
+            approver_emp.employee_code AS approver_employee_code
      FROM leave_requests lr
      LEFT JOIN leave_types lt ON lt.id = lr.leave_type_id
+     LEFT JOIN employees emp ON emp.id = lr.employee_id
+     LEFT JOIN employees manager ON manager.id = emp.reporting_manager_id
+     LEFT JOIN employees handover ON handover.id = lr.handover_employee_id
+     LEFT JOIN users approver_user ON approver_user.id = lr.approved_by
+     LEFT JOIN employees approver_emp ON approver_emp.user_id = approver_user.id
      WHERE lr.employee_id = $1
      ORDER BY lr.created_at DESC`,
     [employeeId]
@@ -119,6 +134,17 @@ async function deductLeaveBalance(employeeId, leaveTypeId, year, days) {
   return result.rows[0] || null;
 }
 
+async function restoreLeaveBalance(employeeId, leaveTypeId, year, days) {
+  const result = await pool.query(
+    `UPDATE leave_balances
+     SET used_days = GREATEST(used_days - $4, 0)
+     WHERE employee_id = $1 AND leave_type_id = $2 AND year = $3
+     RETURNING *`,
+    [employeeId, leaveTypeId, year, days]
+  );
+  return result.rows[0] || null;
+}
+
 module.exports = {
   getEmployeeIdByUserId,
   createLeaveRequest,
@@ -130,4 +156,5 @@ module.exports = {
   ensureLeaveBalancesForEmployee,
   getLeaveBalance,
   deductLeaveBalance,
+  restoreLeaveBalance,
 };
