@@ -9,7 +9,7 @@ import {
 import Layout from "../styles/Layout";
 
 import "./ApplyLeave.css";
-import calendarIcon from "../assets/dashboard/vector.svg";
+import calendarIcon from "../assets/dashboard/Vector.svg";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
