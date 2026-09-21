@@ -2,7 +2,6 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import {
   ArrowLeft,
-  CalendarDays,
   FileText,
   History,
   Eye,
@@ -271,18 +270,18 @@ const AttendanceDetails = ({ employee = null }) => {
 
             {/* DATE */}
 
-            <div className="attendance-details-date">
+           <div className="attendance-details-date">
 
-              <CalendarDays
-                size={22}
-                strokeWidth={2}
-              />
+  <img
+    src={dateRangeIcon}
+    alt="Date"
+  />
 
-              <strong>
-                {attendanceData.date}
-              </strong>
+  <strong>
+    {attendanceData.date}
+  </strong>
 
-            </div>
+</div>
 
           </div>
 
@@ -1128,16 +1127,9 @@ const AttendanceDetails = ({ employee = null }) => {
                     </th>
 
                     <th>
-                      CHANGED BY
-                    </th>
-
-                    <th>
                       REASON
                     </th>
 
-                    <th>
-                      STATUS
-                    </th>
 
                   </tr>
 
@@ -1160,21 +1152,13 @@ const AttendanceDetails = ({ employee = null }) => {
                       Check-in time: 09:02 AM
                     </td>
 
-                    <td>
-                      Arun Kumar (Self)
-                    </td>
+                  
 
                     <td>
                       Forgot to check-in
                     </td>
 
-                    <td>
-
-                      <span className="history-approved">
-                        Approved
-                      </span>
-
-                    </td>
+                   
 
                   </tr>
 

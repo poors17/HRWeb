@@ -22,7 +22,7 @@ import victinetLogo from "../assets/dashboard/Victinet Logo.svg";
 import homeIcon from "../assets/dashboard/home-svg.svg";
 import profileIcon from "../assets/dashboard/profile-svg.svg";
 import attendanceIcon from "../assets/dashboard/time-svg.svg";
-import leaveIcon from "../assets/dashboard/leave-svg.svg";
+import leaveIcon from "../assets/dashboard/Vector.svg";
 import payslipIcon from "../assets/dashboard/pay-svg.svg";
 
 import documentIcon from "../assets/dashboard/document.svg";
@@ -63,7 +63,7 @@ const EmployeeDashboard = ({ employee = null }) => {
     employeeId: employee?.employeeId || "001010",
     department:
       employee?.department ||
-      "IT Department  |  Software Engineer",
+      "IT Department | Software Engineer",
 
     date:
       employee?.date ||
@@ -160,7 +160,9 @@ const EmployeeDashboard = ({ employee = null }) => {
   const handleViewAttendance = () => {
     navigate("/attendance");
   };
-
+const handleViewLeave = () => {
+  navigate("/apply-leave");
+};
   return (
     <Layout>
 
@@ -257,13 +259,6 @@ const EmployeeDashboard = ({ employee = null }) => {
             Manage Dashboard
           </button>
 
-          <button
-            type="button"
-            className="dashboard-action add-widget"
-            aria-label="Add widget"
-          >
-            +
-          </button>
 
           <button
             type="button"
@@ -625,14 +620,153 @@ const EmployeeDashboard = ({ employee = null }) => {
 
           </div>
 
+<div className="leave-balance-card">
+
+  {/* HEADER */}
+  <div className="leave-card-header">
+
+    <div className="leave-card-icon">
+      <img src={leaveIcon} alt="Leave" />
+    </div>
+
+    <h2 className="leave-card-title">
+      Leave Balance
+    </h2>
+
+  </div>
+
+
+  {/* APPLY LEAVE */}
+  <div className="leave-apply-section">
+  <button
+    type="button"
+    className="apply-leave-button"
+    onClick={handleViewLeave}
+  >
+    Apply Leave
+  </button>
+</div>
+
+
+  {/* REMAINING */}
+  <div className="leave-remaining-section">
+
+    <div className="leave-remaining-days">
+      12 Days
+    </div>
+
+    <div className="leave-remaining-label">
+      Remaining
+    </div>
+
+  </div>
+
+
+  {/* LEAVE LEVELS */}
+  <div className="leave-level-section">
+
+    {/* CASUAL */}
+    <div className="leave-balance-row">
+
+      <span className="leave-balance-label">
+        Casual
+      </span>
+
+      <div className="leave-progress-wrapper">
+
+        <div className="leave-progress-track">
+          <div
+            className="leave-progress-fill variant-green"
+            style={{ width: "60%" }}
+          />
+        </div>
+
+        <span className="leave-balance-value">
+          6 / 10
+        </span>
+
+      </div>
+
+    </div>
+
+
+    {/* SICK */}
+    <div className="leave-balance-row">
+
+      <span className="leave-balance-label">
+        Sick
+      </span>
+
+      <div className="leave-progress-wrapper">
+
+        <div className="leave-progress-track">
+          <div
+            className="leave-progress-fill variant-blue"
+            style={{ width: "40%" }}
+          />
+        </div>
+
+        <span className="leave-balance-value">
+          4 / 10
+        </span>
+
+      </div>
+
+    </div>
+
+
+    {/* EARNED */}
+    <div className="leave-balance-row">
+
+      <span className="leave-balance-label">
+        Earned
+      </span>
+
+      <div className="leave-progress-wrapper">
+
+        <div className="leave-progress-track">
+          <div
+            className="leave-progress-fill variant-cyan"
+            style={{ width: "20%" }}
+          />
+        </div>
+
+        <span className="leave-balance-value">
+          2 / 10
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+<div className="leave-card-footer">
+  <button
+    type="button"
+    className="view-leave-button"
+    onClick={handleViewLeave}
+  >
+    <span>View Leave</span>
+    <ArrowRight
+      size={28}
+      strokeWidth={1.7}
+    />
+  </button>
+</div>
+</div>
 
           {/* ==================================================
-              EMPTY CARDS
+              THIRD CARD
           =================================================== */}
 
           <div className="figma-empty-card"></div>
 
-          <div className="figma-empty-card"></div>
+
+          {/* ==================================================
+              FOURTH CARD
+          =================================================== */}
 
           <div className="figma-empty-card"></div>
 

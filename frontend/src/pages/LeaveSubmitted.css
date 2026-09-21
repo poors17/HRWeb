@@ -1,0 +1,571 @@
+/* ============================================================ 
+   LEAVE REQUEST SUBMITTED PAGE 
+   Figma Reference: 
+   Center Frame = 562px wide 
+   ============================================================ */ 
+ 
+.leave-submitted-page { 
+  width: 100%; 
+  min-height: 100%; 
+  box-sizing: border-box; 
+ 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+ 
+  padding: 10px; 
+ 
+  background: #EEF6FB; 
+ 
+  overflow-x: hidden; 
+  overflow-y: auto; 
+} 
+ 
+ 
+/* ============================================================ 
+   SUCCESS / CONFIRMATION CONTENT 
+   ============================================================ */ 
+ 
+.leave-submitted-page { 
+  gap: 10px; 
+} 
+ 
+ 
+/* ============================================================
+   SUCCESS ICON FRAME
+   Figma:
+   Width  = 562px
+   Height = 113px
+   ============================================================ */
+
+.leave-submitted-success-icon {
+  width: 562px;
+  height: 113px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   SUCCESS ICON OUTER CIRCLE
+   Figma:
+   Width  = 106px
+   Height = 106px
+   Radius = 100px
+   Color  = #53E474
+   Opacity = 30%
+   ============================================================ */
+
+.leave-submitted-success-icon::before {
+  content: "";
+
+  position: absolute;
+
+  width: 106px;
+  height: 106px;
+
+  border-radius: 100px;
+
+  background: rgba(83, 228, 116, 0.30);
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+}
+/* ============================================================
+   SUCCESS ICON SVG
+   ============================================================ */
+
+.leave-submitted-check-icon {
+  width: 72.06px;
+  height: 72.02px;
+
+  display: block;
+
+  position: relative;
+
+  z-index: 2;
+
+  flex-shrink: 0;
+}
+
+ 
+/* ============================================================
+   SUCCESS TITLE
+   Figma:
+   Width      = 308px
+   Height     = 29px
+   Font       = Inter
+   Weight     = 700
+   Size       = 24px
+   Line height = 100%
+   Color      = #2EAB74
+   ============================================================ */
+
+.leave-submitted-title {
+  width: 308px;
+  height: 29px;
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 24px;
+  line-height: 29px;
+
+  font-weight: 700;
+
+  color: #2EAB74;
+
+  text-align: center;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+ 
+ 
+/* ============================================================
+   SUCCESS DESCRIPTION
+   Figma:
+   Width      = 420px
+   Height     = 38px
+   Font       = Inter
+   Weight     = 500
+   Size       = 16px
+   Line height = 100%
+   Color      = #66696B
+   Alignment  = Center
+   ============================================================ */
+
+.leave-submitted-description {
+  width: 420px;
+  height: 38px;
+
+  box-sizing: border-box;
+
+  margin: 0;
+
+  padding: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+  line-height: 19px;
+
+  font-weight: 500;
+
+  color: #66696B;
+
+  text-align: center;
+
+  white-space: normal;
+
+  flex-shrink: 0;
+}
+ 
+/* ============================================================ 
+   LEAVE SUMMARY CARD 
+   Figma: 
+   Width = 562px 
+   Height = 417px 
+   Radius = 20px 
+   Padding = 10px 
+   Background = #EFF5FA 
+   ============================================================ */ 
+ 
+.leave-submitted-card {
+  width: 562px;
+  height: 417px;
+
+  min-width: 562px;
+  min-height: 417px;
+  max-width: 562px;
+  max-height: 417px;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+
+  background: #EFF5FA;
+
+  border: 1px solid rgba(102, 105, 107, 0.30);
+
+  border-radius: 20px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  flex-shrink: 0;
+
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.25),
+    0 -1px 4px rgba(0, 0, 0, 0.25);
+}
+ 
+/* ============================================================
+   SUMMARY ROW
+   Figma:
+   Width       = 378px
+   Height      = 53px
+   Flow        = Horizontal
+   Padding     = 10px
+   Border      = 1px bottom
+   Border color = #DFDFDF
+   ============================================================ */
+
+.leave-submitted-row {
+  width: 378px;
+  height: 53px;
+
+  box-sizing: border-box;
+
+  display: grid;
+
+  grid-template-columns: 188px 1fr;
+
+  align-items: center;
+
+  padding: 10px;
+
+  border-bottom: 1px solid #DFDFDF;
+
+  flex-shrink: 0;
+
+  background: transparent;
+}
+ 
+ 
+/* Last row */ 
+ 
+.leave-submitted-row:last-child { 
+  border-bottom: none; 
+} 
+ 
+ 
+/* ============================================================ 
+   LABEL 
+   ============================================================ */ 
+ 
+.leave-submitted-label {
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+  line-height: 16px;
+
+  font-weight: 600;
+
+  color: #000000;
+
+  text-align: left;
+
+  white-space: nowrap;
+}
+ 
+/* ============================================================ 
+   VALUE 
+   ============================================================ */ 
+ 
+.leave-submitted-value {
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+  line-height: 16px;
+
+  font-weight: 600;
+
+  color: #000000;
+
+  text-align: left;
+
+  white-space: nowrap;
+}
+/* ============================================================ 
+   STATUS 
+   ============================================================ */ 
+ 
+.leave-submitted-status-row {
+  border-bottom: none;
+
+  align-items: center;
+}
+
+.leave-submitted-status {
+  transform: translateX(-13px);
+}
+ 
+/* ============================================================
+   STATUS CONTAINER
+   Figma:
+   Width       = 157px
+   Height      = 35px
+   Radius      = 20px
+   Padding     = 8px 10px
+   Gap         = 10px
+   Background  = #EF6905 / 15%
+   ============================================================ */
+
+.leave-submitted-status {
+  width: 157px;
+  height: 35px;
+
+  box-sizing: border-box;
+
+  padding: 8px 10px;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(239, 105, 5, 0.15);
+
+  border-radius: 20px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+  line-height: 16px;
+
+  font-weight: 600;
+
+  color: #EF6905;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+ 
+/* ============================================================ 
+   ACTION BUTTON FRAME 
+   Figma: 
+   Width = 562px 
+   Height = 156px 
+   Padding: 
+   Top = 20px 
+   Right = 10px 
+   Bottom = 10px 
+   Left = 10px 
+   ============================================================ */ 
+ 
+.leave-submitted-actions { 
+  width: 562px; 
+  height: 156px; 
+ 
+  box-sizing: border-box; 
+ 
+  padding: 20px 10px 10px; 
+ 
+  display: flex; 
+  flex-direction: column; 
+ 
+  align-items: center; 
+ 
+  justify-content: space-between; 
+ 
+  flex-shrink: 0; 
+} 
+ 
+ 
+/* ============================================================
+   VIEW LEAVE DETAILS BUTTON
+
+   Figma:
+   Width       = 364px
+   Height      = 55px
+   Radius      = 15px
+   Padding     = 10px
+   Background  = #0681FD
+
+   Text:
+   Font        = Inter
+   Weight      = 600 / Semi Bold
+   Size        = 20px
+   Line height = 100%
+   Color       = #FFFFFF
+   ============================================================ */
+
+.leave-submitted-view-button {
+  width: 364px;
+  height: 55px;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 15px;
+
+  background: #0681FD;
+
+  color: #FFFFFF;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 20px;
+  line-height: 20px;
+
+  font-weight: 600;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  box-shadow: none;
+}
+
+.leave-submitted-view-button:hover {
+  background: #0575E6;
+}
+ 
+ 
+ 
+/* ============================================================
+   BACK TO DASHBOARD BUTTON
+
+   Figma:
+   Width       = 364px
+   Height      = 55px
+   Radius      = 15px
+   Padding     = 10px
+   Background  = #EFF5FA
+
+   Text:
+   Font        = Inter
+   Weight      = 500 / Medium
+   Size        = 20px
+   Line height = 100%
+   Color       = #000000
+   ============================================================ */
+
+.leave-submitted-dashboard-button {
+  width: 364px;
+  height: 55px;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+
+  border: none;
+  border-radius: 15px;
+
+  background: #EFF5FA;
+
+  color: #000000;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 20px;
+  line-height: 20px;
+
+  font-weight: 500;
+
+  text-align: center;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.25),
+    0 0 4px rgba(0, 0, 0, 0.25);
+}
+
+.leave-submitted-dashboard-button:hover {
+  background: #EFF5FA;
+} 
+ 
+ 
+/* ============================================================ 
+   TABLET 
+   ============================================================ */ 
+ 
+@media (max-width: 768px) { 
+ 
+  .leave-submitted-page { 
+    padding: 10px; 
+  } 
+ 
+  .leave-submitted-success-icon, 
+  .leave-submitted-title, 
+  .leave-submitted-actions { 
+    width: min(562px, 100%); 
+  } 
+ 
+  .leave-submitted-card { 
+    width: min(562px, 100%); 
+    min-width: 0; 
+    max-width: 562px; 
+  } 
+ 
+  .leave-submitted-row { 
+    padding: 0 25px; 
+  } 
+ 
+} 
+ 
+ 
+/* ============================================================ 
+   SMALL MOBILE 
+   ============================================================ */ 
+ 
+@media (max-width: 480px) { 
+ 
+  .leave-submitted-page { 
+    padding: 10px; 
+  } 
+ 
+  .leave-submitted-success-icon, 
+  .leave-submitted-title, 
+  .leave-submitted-actions { 
+    width: 100%; 
+  } 
+ 
+  .leave-submitted-card { 
+    width: 100%; 
+    min-width: 0; 
+  } 
+ 
+  .leave-submitted-row { 
+    grid-template-columns: 1fr 1fr; 
+    padding: 0 15px; 
+  } 
+ 
+  .leave-submitted-label, 
+  .leave-submitted-value { 
+    font-size: 11px; 
+  } 
+ 
+  .leave-submitted-view-button, 
+  .leave-submitted-dashboard-button { 
+    width: 198px; 
+  } 
+ 
+}

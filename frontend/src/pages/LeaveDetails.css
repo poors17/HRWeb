@@ -1,0 +1,703 @@
+/* ============================================================
+   LEAVE DETAILS PAGE
+   ============================================================ */
+
+.leave-details-page {
+  width: 100%;
+  min-height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px;
+
+  background: #EEF6FB;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  font-family: "Inter", sans-serif;
+}
+
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+
+.leave-details-breadcrumb {
+  width: 100%;
+  height: 35px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 7px;
+
+  padding: 0 5px;
+
+  box-sizing: border-box;
+
+  font-size: 11px;
+}
+
+.leave-details-back {
+  border: none;
+
+  background: transparent;
+
+  color: #0681FD;
+
+  font-size: 18px;
+
+  cursor: pointer;
+
+  padding: 0;
+}
+
+.leave-details-breadcrumb-blue {
+  color: #0681FD;
+
+  font-weight: 500;
+}
+
+.leave-details-breadcrumb-arrow {
+  color: #171717;
+}
+
+.leave-details-breadcrumb-current {
+  color: #171717;
+
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   PAGE HEADER
+   ============================================================ */
+
+.leave-details-header {
+  width: 100%;
+
+  min-height: 70px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 8px 15px;
+
+  background: #E4F2FA;
+}
+
+.leave-details-header h1 {
+  margin: 0 0 3px;
+
+  font-size: 18px;
+
+  line-height: 22px;
+
+  font-weight: 700;
+
+  color: #171717;
+}
+
+.leave-details-header p {
+  margin: 0;
+
+  font-size: 10px;
+
+  line-height: 14px;
+
+  color: #66696B;
+}
+
+.leave-details-header-status {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+}
+
+.leave-id-badge,
+.approved-badge {
+  height: 22px;
+
+  padding: 4px 10px;
+
+  box-sizing: border-box;
+
+  border-radius: 6px;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  font-size: 9px;
+
+  white-space: nowrap;
+}
+
+.leave-id-badge {
+  background: #DFE8ED;
+
+  color: #66696B;
+}
+
+.approved-badge {
+  background: #C9F2D9;
+
+  color: #198754;
+
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   EMPLOYEE INFORMATION
+   ============================================================ */
+
+.leave-details-employee {
+  width: 100%;
+
+  min-height: 64px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  background: #F3F8FC;
+
+  border-bottom: 1px solid #D3DDE2;
+}
+
+.leave-details-profile {
+  width: 180px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding-left: 5px;
+}
+
+.leave-details-avatar {
+  width: 55px;
+  height: 55px;
+
+  border-radius: 50%;
+
+  background: #DDEAF1;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 25px;
+
+  flex-shrink: 0;
+}
+
+.leave-details-employee-name h2 {
+  margin: 0;
+
+  font-size: 13px;
+
+  line-height: 17px;
+
+  font-weight: 700;
+}
+
+.leave-details-employee-name p {
+  margin: 1px 0 3px;
+
+  font-size: 9px;
+
+  color: #66696B;
+}
+
+.leave-details-employee-name span {
+  display: inline-flex;
+
+  padding: 3px 8px;
+
+  border-radius: 4px;
+
+  background: #D9F1FC;
+
+  color: #0681FD;
+
+  font-size: 8px;
+}
+
+
+/* ============================================================
+   EMPLOYEE INFO COLUMNS
+   ============================================================ */
+
+.leave-details-employee-info {
+  flex: 1;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, 1fr);
+
+  min-height: 45px;
+}
+
+.leave-details-employee-info > div {
+  padding: 5px 20px;
+
+  border-left: 1px solid #8D969B;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+}
+
+.leave-details-employee-info small {
+  font-size: 8px;
+
+  color: #66696B;
+
+  margin-bottom: 5px;
+}
+
+.leave-details-employee-info strong {
+  font-size: 9px;
+
+  color: #171717;
+
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   CONTENT GRID
+   ============================================================ */
+
+.leave-details-content {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 12px 5px 20px;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(0, 1fr);
+
+  gap: 12px;
+}
+
+
+/* ============================================================
+   COMMON CARD
+   ============================================================ */
+
+.leave-details-card {
+  width: 100%;
+
+  min-height: 125px;
+
+  box-sizing: border-box;
+
+  background: #F3F8FC;
+
+  border: 1px solid #D2DDE2;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+
+/* ============================================================
+   CARD HEADER
+   ============================================================ */
+
+.leave-details-card-header {
+  width: 100%;
+
+  min-height: 29px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 5px 9px;
+
+  background: #DCEEF7;
+}
+
+.leave-details-card-icon {
+  font-size: 13px;
+}
+
+.leave-details-card-header h3 {
+  margin: 0;
+
+  font-size: 10px;
+
+  line-height: 14px;
+
+  font-weight: 600;
+
+  color: #171717;
+}
+
+.leave-details-card-header button {
+  margin-left: auto;
+
+  border: none;
+
+  background: #C6E8FA;
+
+  color: #0681FD;
+
+  border-radius: 4px;
+
+  padding: 3px 8px;
+
+  font-size: 8px;
+
+  cursor: pointer;
+}
+
+
+/* ============================================================
+   INFORMATION LIST
+   ============================================================ */
+
+.leave-info-list {
+  padding: 5px 8px;
+}
+
+.leave-info-row {
+  min-height: 17px;
+
+  display: grid;
+
+  grid-template-columns: 105px 1fr;
+
+  align-items: center;
+
+  gap: 5px;
+
+  font-size: 8px;
+}
+
+.leave-info-row > span {
+  color: #171717;
+}
+
+.leave-info-row > strong {
+  font-weight: 500;
+
+  color: #171717;
+}
+
+.leave-type-blue {
+  color: #0681FD !important;
+
+  background: #D9F1FC;
+
+  width: fit-content;
+
+  padding: 2px 6px;
+
+  border-radius: 3px;
+}
+
+.leave-reason {
+  background: #E1E6E9;
+
+  padding: 4px 7px;
+
+  border-radius: 3px;
+
+  width: fit-content;
+}
+
+.leave-approved-small {
+  color: #198754 !important;
+
+  background: #C9F2D9;
+
+  padding: 2px 7px;
+
+  width: fit-content;
+
+  border-radius: 4px;
+}
+
+
+/* ============================================================
+   APPROVAL CARD
+   ============================================================ */
+
+.leave-approval-card {
+  grid-column: 1 / 2;
+
+  min-height: 145px;
+}
+
+
+/* ============================================================
+   APPROVAL HEADER
+   ============================================================ */
+
+.approval-header-text {
+  margin-left: auto;
+
+  color: #198754;
+
+  font-size: 8px;
+
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   APPROVAL TIMELINE
+   ============================================================ */
+
+.approval-timeline {
+  padding: 6px 8px;
+}
+
+.approval-item {
+  min-height: 39px;
+
+  display: grid;
+
+  grid-template-columns:
+    20px
+    1fr
+    95px;
+
+  align-items: center;
+
+  position: relative;
+}
+
+.approval-line {
+  height: 100%;
+
+  display: flex;
+
+  justify-content: center;
+
+  position: relative;
+}
+
+.approval-line::after {
+  content: "";
+
+  position: absolute;
+
+  top: 19px;
+  bottom: -1px;
+
+  width: 1px;
+
+  background: #20A765;
+}
+
+.approval-item:last-child
+.approval-line::after {
+  display: none;
+}
+
+.approval-circle {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+
+  background: #20A765;
+
+  color: #FFFFFF;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 8px;
+
+  z-index: 2;
+}
+
+.approval-content h4 {
+  margin: 0;
+
+  font-size: 9px;
+
+  font-weight: 700;
+}
+
+.approval-content p {
+  margin: 1px 0;
+
+  font-size: 7px;
+
+  color: #66696B;
+}
+
+.approval-content span {
+  font-size: 7px;
+
+  color: #66696B;
+}
+
+
+/* ============================================================
+   APPROVAL PERSON
+   ============================================================ */
+
+.approval-person {
+  height: 30px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 5px;
+
+  padding: 3px 6px;
+
+  background: #DCEEF7;
+
+  border-radius: 4px;
+}
+
+.approval-person-avatar {
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  background: #D5E3EA;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+}
+
+.approval-person strong {
+  display: block;
+
+  font-size: 8px;
+}
+
+.approval-person span {
+  display: block;
+
+  font-size: 7px;
+
+  color: #66696B;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 900px) {
+
+  .leave-details-employee {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .leave-details-profile {
+    width: 100%;
+
+    padding: 8px;
+  }
+
+  .leave-details-employee-info {
+    width: 100%;
+  }
+
+}
+
+
+@media (max-width: 768px) {
+
+  .leave-details-header {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 8px;
+  }
+
+  .leave-details-content {
+    grid-template-columns: 1fr;
+  }
+
+  .leave-approval-card {
+    grid-column: auto;
+  }
+
+  .leave-details-employee-info {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 480px) {
+
+  .leave-details-page {
+    padding: 8px;
+  }
+
+  .leave-details-employee-info {
+    grid-template-columns: 1fr;
+  }
+
+  .leave-info-row {
+    grid-template-columns: 95px 1fr;
+  }
+
+  .approval-item {
+    grid-template-columns:
+      20px
+      1fr;
+  }
+
+  .approval-person {
+    display: none;
+  }
+
+}

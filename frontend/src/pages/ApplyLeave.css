@@ -1,0 +1,1039 @@
+/* ============================================================
+   APPLY LEAVE PAGE
+   IMPORTANT:
+   All selectors are Apply Leave specific.
+   Do NOT use Dashboard classes here.
+   ============================================================ */
+
+
+.apply-leave-page {
+  width: 100%;
+  min-height: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 20px 0;
+
+  background: #eef6fb;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  scrollbar-width: none;
+}
+
+
+.apply-leave-page::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ============================================================
+   PAGE HEADING
+   ============================================================ */
+
+.apply-leave-heading {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  background: rgba(31, 150, 203, 0.05);
+
+  border-radius: 5px;
+
+  padding: 0;
+}
+
+
+/* ============================================================
+   BREADCRUMB
+   ============================================================ */
+
+.apply-leave-breadcrumb {
+  width: 100%;
+  height: 40px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 0 10px;
+
+  margin: 0;
+}
+
+.apply-leave-breadcrumb-back {
+  width: 24px;
+  height: 24px;
+
+  flex: 0 0 24px;
+
+  padding: 0;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+
+  background: transparent;
+
+  color: #1F96CB;
+
+  cursor: pointer;
+}
+
+
+.apply-leave-breadcrumb-parent {
+  padding: 0;
+
+  border: none;
+
+  background: transparent;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 100%;
+
+  font-weight: 600;
+
+  color: #1F96CB;
+
+  cursor: pointer;
+}
+
+.apply-leave-breadcrumb-separator {
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 100%;
+
+  font-weight: 600;
+
+  color: #000000;
+}
+
+.apply-leave-breadcrumb-current {
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 100%;
+
+  font-weight: 600;
+
+  color: #000000;
+}
+
+
+/* ============================================================
+   PAGE TITLE
+   ============================================================ */
+
+.apply-leave-title {
+  width: 100%;
+
+  box-sizing: border-box;
+
+  padding: 10px 10px 10px 20px;
+}
+
+
+.apply-leave-title h1 {
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 24px;
+
+  line-height: 100%;
+
+  font-weight: 700;
+
+  color: #000000;
+}
+
+.apply-leave-title p {
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #66696B;
+}
+/* ============================================================
+   MAIN GRID
+   ============================================================ */
+
+.apply-leave-grid {
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    570px
+    402px;
+
+  column-gap: 115px;
+
+  align-items: start;
+
+  margin-top: 10px;
+}
+/* ============================================================
+   LEFT FORM CARD
+   ============================================================ */
+
+.apply-leave-form-card {
+  width: 570px;
+
+  height: 393px;
+
+  box-sizing: border-box;
+
+  padding: 10px 15px;
+
+  background: #f2f8fc;
+
+  border: 1px solid #d2d9dd;
+
+  border-radius: 15px;
+
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ============================================================
+   FORM ROW
+   ============================================================ */
+
+.apply-leave-form-row {
+  width: 540px;
+
+  height: 65px;
+
+  box-sizing: border-box;
+
+  display: grid;
+
+  grid-template-columns: 200px 340px;
+
+  align-items: center;
+
+  margin: 0;
+}
+
+
+.apply-leave-form-row label {
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #0B4C68;
+}
+
+.apply-leave-form-row label span {
+  color: #EF2020;
+}
+
+/* ============================================================
+   LEAVE TYPE SELECT
+   ============================================================ */
+
+.apply-leave-select-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+
+.apply-leave-select-wrapper select {
+  width: 340px;
+
+  height: 50px;
+
+  box-sizing: border-box;
+
+  appearance: none;
+
+  -webkit-appearance: none;
+
+  padding: 0 42px 0 10px;
+
+  border: 2px solid #c7d0d6;
+
+  border-radius: 5px;
+
+  background: #f4f8fb;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 400;
+
+  color: #000000;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.apply-leave-select-arrow {
+  position: absolute;
+
+  top: 50%;
+
+  right: 10px;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+
+  color: #000;
+}
+
+
+/* ============================================================
+   DATE INPUT
+   ============================================================ */
+
+.apply-leave-date-wrapper {
+  position: relative;
+
+  width: 100%;
+}
+
+.apply-leave-date-display {
+  width: 340px;
+
+  height: 50px;
+
+  box-sizing: border-box;
+
+  padding: 0 40px 0 10px;
+
+  border: 2px solid #c7d0d6;
+
+  border-radius: 5px;
+
+  background: #f4f8fb;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 400;
+
+  color: #000000;
+
+  outline: none;
+}
+
+.apply-leave-native-date {
+  position: absolute;
+
+  width: 100%;
+
+  height: 100%;
+
+  inset: 0;
+
+  opacity: 0;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+.apply-leave-native-date::-webkit-calendar-picker-indicator {
+  opacity: 0;
+
+  cursor: pointer;
+}
+
+.apply-leave-calendar-icon {
+  position: absolute;
+
+  width: 17px;
+
+  height: 17px;
+
+  top: 50%;
+
+  right: 10px;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+
+  object-fit: contain;
+
+  z-index: 3;
+}
+
+/* ============================================================
+   DURATION
+   ============================================================ */
+
+.apply-leave-duration {
+  width: 340px;
+
+  height: 50px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 0 10px;
+
+  border: 2px solid #a8e2fa;
+
+  border-radius: 8px;
+
+  background: #dff5ff;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 15px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #0B4C68;
+}
+
+/* ============================================================
+   REASON
+   ============================================================ */
+
+.apply-leave-reason-row {
+  width: 540px;
+
+  height: 113px;
+
+  box-sizing: border-box;
+
+  align-items: start;
+
+  margin: 0;
+}
+
+
+.apply-leave-reason-row label {
+  padding-top: 9px;
+}
+
+
+.apply-leave-reason-row textarea {
+  width: 340px;
+
+  height: 113px;
+
+  box-sizing: border-box;
+
+  resize: none;
+
+  padding: 10px;
+
+  border: 2px solid #c7d0d6;
+
+  border-radius: 8px;
+
+  background: #f4f8fb;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 500;
+
+  color: #000000;
+
+  outline: none;
+}
+
+.apply-leave-reason-row
+textarea::placeholder {
+  color: #000000;
+
+  opacity: 1;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 500;
+}
+
+
+/* ============================================================
+   RIGHT COLUMN
+   ============================================================ */
+
+.apply-leave-right-column {
+  width: 402px;
+  height: 409px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 0 0 10px 0;
+}
+
+
+/* ============================================================
+   APPLY LEAVE BALANCE CARD
+   IMPORTANT:
+   This is intentionally NOT .leave-balance-card.
+   ============================================================ */
+
+.apply-leave-balance-card {
+  width: 402px;
+  height: 285px;
+
+  min-height: 285px;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  background: transparent;
+
+  border: none;
+
+  border-radius: 10px;
+}
+
+
+/* ============================================================
+   BALANCE HEADER
+   ============================================================ */
+
+.apply-leave-balance-header {
+  width: 402px;
+  height: 48px;
+
+  min-height: 48px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  padding: 10px 10px 10px 15px;
+
+  background: rgba(31, 150, 203, 0.20);
+
+  border-radius: 10px 10px 0 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 20px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #000000;
+}
+
+/* ============================================================
+   BALANCE CONTENT
+   ============================================================ */
+
+.apply-leave-balance-content {
+  width: 402px;
+  height: 237px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 10px;
+
+  background: #f3f8fc;
+
+  border: 1px solid rgba(255, 255, 255, 0.20);
+
+  border-top: none;
+
+  border-radius: 0 0 10px 10px;
+
+  box-shadow:
+    0 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+/* ============================================================
+   BALANCE ROW
+   ============================================================ */
+
+.apply-leave-balance-row {
+  width: 382px;
+  height: 45px;
+
+  min-height: 45px;
+  max-height: 45px;
+
+  flex: 0 0 45px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  padding: 10px;
+
+  gap: 10px;
+}
+
+
+.apply-leave-balance-row span {
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #0B4C68;
+
+  letter-spacing: 0;
+}
+
+
+.apply-leave-balance-row strong {
+  white-space: nowrap;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #000000;
+
+  letter-spacing: 0;
+}
+
+
+.apply-leave-balance-row small {
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #66696B;
+
+  letter-spacing: 0;
+}
+/* ============================================================
+   WORK HANDOVER
+   ============================================================ */
+
+.apply-leave-handover {
+  width: 402px;
+  height: 114px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 20px 10px;
+
+  margin: 0;
+}
+
+.apply-leave-handover label {
+  display: block;
+
+  width: 145px;
+  height: 25px;
+
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #0B4C68;
+
+  letter-spacing: 0;
+}
+.apply-leave-handover-select {
+  position: relative;
+
+  width: 382px;
+  height: 49px;
+
+  box-sizing: border-box;
+}
+
+
+.apply-leave-handover-select select {
+  width: 382px;
+  height: 49px;
+
+  box-sizing: border-box;
+
+  appearance: none;
+  -webkit-appearance: none;
+
+  padding: 10px;
+  padding-right: 42px;
+
+  border: 2px solid rgba(102, 105, 107, 0.30);
+
+  border-radius: 10px;
+
+  background: #f3f8fc;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 500;
+
+  color: #66696B;
+
+  letter-spacing: 0;
+
+  outline: none;
+
+  cursor: pointer;
+}
+
+.apply-leave-handover-arrow {
+  position: absolute;
+
+  width: 18px;
+  height: 18px;
+
+  top: 50%;
+  right: 10px;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+
+  color: #66696B;
+}
+
+/* ============================================================
+   CONTACT DURING LEAVE
+   ============================================================ */
+
+.apply-leave-contact {
+  display: flex;
+
+  align-items: center;
+
+  margin-top: 47px;
+
+  padding-left: 10px;
+
+  gap: 25px;
+}
+
+.apply-leave-contact label {
+  width: 170px;
+
+  min-width: 170px;
+
+  flex-shrink: 0;
+
+  white-space: nowrap;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #0B4C68;
+}
+
+.apply-leave-contact-input {
+  width: 322px;
+
+  height: 45px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 25px;
+
+  padding: 15px 10px;
+
+  border: 2px solid rgba(102, 105, 107, 0.30);
+
+  border-radius: 10px;
+
+  background: #f3f8fc;
+
+  color: #66696B;
+}
+
+.apply-leave-contact-input input {
+  flex: 1;
+
+  width: 100%;
+
+  border: none;
+
+  outline: none;
+
+  background: transparent;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 500;
+
+  color: rgba(0, 0, 0, 0.74);
+}
+/* ============================================================
+   BOTTOM ACTIONS
+   ============================================================ */
+
+.apply-leave-actions {
+  position: relative;
+
+  width: 100%;
+
+  height: 76px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: flex-end;
+
+  gap: 26px;
+
+  margin-top: 128px;
+
+  padding: 10px 30px 10px 10px;
+
+  border-top: none;
+}
+
+.apply-leave-actions::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 100%;
+  height: 2px;
+
+  background: linear-gradient(
+    90deg,
+    #EFF5FA 0%,
+    #1F96CB 50%,
+    #EFF5FA 100%
+  );
+
+  border-radius: 999px;
+
+  pointer-events: none;
+}
+/* ============================================================
+   CANCEL
+   ============================================================ */
+
+/* ============================================================
+   CANCEL BUTTON
+   ============================================================ */
+
+.apply-leave-cancel {
+  width: 96px;
+
+  height: 40px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid #d0d5d9;
+
+  border-radius: 12px;
+
+  background: linear-gradient(
+    180deg,
+    #f6f7f8 0%,
+    #d9dde0 100%
+  );
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #000000;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.18);
+}
+
+
+.apply-leave-cancel:hover {
+  background: linear-gradient(
+    180deg,
+    #f6f7f8 0%,
+    #d9dde0 100%
+  );
+}
+
+/* ============================================================
+   SUBMIT LEAVE BUTTON
+   ============================================================ */
+
+.apply-leave-submit {
+  width: 170px;
+
+  height: 45px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 10px 15px;
+
+  border: none;
+
+  border-radius: 12px;
+
+  background: #0681FD;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+
+  line-height: 25px;
+
+  font-weight: 700;
+
+  color: #ffffff;
+
+  cursor: pointer;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.12);
+}
+
+
+.apply-leave-submit:hover {
+  background: #0681FD;
+}
+
+
+.apply-leave-submit:hover {
+  background: #087ce4;
+}
+
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+.dark-mode .apply-leave-page {
+  background: #111827;
+}
+
+
+.dark-mode .apply-leave-heading {
+  background: #1f2937;
+}
+
+
+.dark-mode .apply-leave-heading h1,
+.dark-mode .apply-leave-breadcrumb-current,
+.dark-mode .apply-leave-breadcrumb-separator {
+  color: #fff;
+}
