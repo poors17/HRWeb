@@ -63,7 +63,7 @@ const EmployeeDashboard = ({ employee = null }) => {
     employeeId: employee?.employeeId || "001010",
     department:
       employee?.department ||
-      "IT Department",
+      "IT Department | Software Engineer",
 
     date:
       employee?.date ||
@@ -161,7 +161,7 @@ const EmployeeDashboard = ({ employee = null }) => {
     navigate("/attendance");
   };
 const handleViewLeave = () => {
-  navigate("/leave");
+  navigate("/apply-leave");
 };
   return (
     <Layout>
@@ -638,10 +638,14 @@ const handleViewLeave = () => {
 
   {/* APPLY LEAVE */}
   <div className="leave-apply-section">
-    <button className="apply-leave-button">
-      Apply Leave
-    </button>
-  </div>
+  <button
+    type="button"
+    className="apply-leave-button"
+    onClick={handleViewLeave}
+  >
+    Apply Leave
+  </button>
+</div>
 
 
   {/* REMAINING */}
