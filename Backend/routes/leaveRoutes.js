@@ -7,12 +7,14 @@ const {
   getPendingApprovals,
   approveLeave,
   rejectLeave,
+  getLeaveTypes,
   getLeaveBalance,
 } = require('../controllers/leaveController');
 
 const router = express.Router();
 
 router.use(authenticateToken);
+router.get('/types', getLeaveTypes);
 router.post('/apply', applyLeave);
 router.get('/my', getMyLeaveRequests);
 router.get('/pending', requireRoles('HR', 'Manager', 'Super Admin'), getPendingApprovals);

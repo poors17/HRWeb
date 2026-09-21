@@ -8,10 +8,19 @@ async function getEmployeeIdByUserId(userId) {
 async function createLeaveRequest(data) {
   const result = await pool.query(
     `INSERT INTO leave_requests
-       (employee_id, leave_type_id, start_date, end_date, total_days, reason)
-     VALUES ($1, $2, $3, $4, $5, $6)
+       (employee_id, leave_type_id, start_date, end_date, total_days, reason, handover_employee_id, contact_number)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
      RETURNING *`,
-    [data.employeeId, data.leaveTypeId, data.startDate, data.endDate, data.totalDays, data.reason || null]
+    [
+      data.employeeId,
+      data.leaveTypeId,
+      data.startDate,
+      data.endDate,
+      data.totalDays,
+      data.reason || null,
+      data.handoverEmployeeId || null,
+      data.contactNumber || null,
+    ]
   );
   return result.rows[0];
 }
@@ -62,6 +71,30 @@ async function updateLeaveRequestStatus(id, status, approvedBy) {
   return result.rows[0] || null;
 }
 
+async function getLeaveTypes() {
+  const result = await pool.query(
+    `SELECT id, name AS leave_type_name, default_days_per_year AS total_days
+     FROM leave_types
+     ORDER BY name`,
+    []
+  );
+  return result.rows;
+}
+
+async function ensureLeaveBalancesForEmployee(employeeId, year) {
+  const result = await pool.query(
+    `INSERT INTO leave_balances (employee_id, leave_type_id, year, total_days, used_days)
+     SELECT $1, lt.id, $2, lt.default_days_per_year, 0
+     FROM leave_types lt
+     LEFT JOIN leave_balances lb
+       ON lb.employee_id = $1 AND lb.leave_type_id = lt.id AND lb.year = $2
+     WHERE lb.id IS NULL
+     ON CONFLICT (employee_id, leave_type_id, year) DO NOTHING`,
+    [employeeId, year]
+  );
+  return result.rowCount || 0;
+}
+
 async function getLeaveBalance(employeeId, year) {
   const result = await pool.query(
     `SELECT lb.*, lt.name AS leave_type_name, lt.default_days_per_year
@@ -93,6 +126,8 @@ module.exports = {
   getPendingLeaveRequests,
   getLeaveRequestById,
   updateLeaveRequestStatus,
+  getLeaveTypes,
+  ensureLeaveBalancesForEmployee,
   getLeaveBalance,
   deductLeaveBalance,
 };
