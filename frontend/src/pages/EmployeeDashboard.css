@@ -2063,9 +2063,8 @@
   min-width: 288px;
   max-width: 288px;
 
-  height: 342px;
   min-height: 342px;
-  max-height: 342px;
+  height: auto;
 
   display: flex;
   flex-direction: column;
@@ -2074,7 +2073,7 @@
   padding: 0;
 
   box-sizing: border-box;
-  overflow: hidden;
+  overflow: visible;
 
   background: #f4f9fc;
   border: 1px solid #dce8ed;
@@ -2257,13 +2256,13 @@
 
 .leave-level-section {
   width: 288px;
-  height: 130px;
+  height: auto;
   min-height: 130px;
-  max-height: 130px;
 
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 8px;
 
   padding: 10px;
 

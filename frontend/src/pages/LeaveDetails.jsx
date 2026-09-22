@@ -43,6 +43,24 @@ const LeaveDetails = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const requestedLeaveId = React.useMemo(() => {
+    const searchParams = new URLSearchParams(location.search || "");
+    const queryId = searchParams.get("id");
+
+    if (queryId && queryId !== "undefined") {
+      return Number(queryId);
+    }
+
+    const stateId =
+      location.state?.leaveRequest?.id ||
+      location.state?.request?.id ||
+      location.state?.leaveId ||
+      location.state?.id ||
+      null;
+
+    return stateId ? Number(stateId) : null;
+  }, [location.search, location.state]);
+
   const [leaveRequest, setLeaveRequest] = React.useState(
     location.state?.leaveRequest || location.state?.request || null
   );
@@ -92,8 +110,22 @@ const LeaveDetails = () => {
 
       setBalances(myBalances);
 
-      const selectedRequest = leaveRequest || myRequests[0] || null;
-      if (selectedRequest && !leaveRequest) {
+      const selectedRequest = requestedLeaveId
+        ? myRequests.find((request) => Number(request.id) === Number(requestedLeaveId)) ||
+          leaveRequest ||
+          location.state?.leaveRequest ||
+          location.state?.request ||
+          myRequests[0] ||
+          null
+        : leaveRequest || location.state?.leaveRequest || location.state?.request || myRequests[0] || null;
+
+      if (!selectedRequest) {
+        setLeaveRequest(null);
+        setError("No leave requests found.");
+        return;
+      }
+
+      if (!leaveRequest || Number(leaveRequest.id) !== Number(selectedRequest.id)) {
         setLeaveRequest(selectedRequest);
       }
 
@@ -309,12 +341,10 @@ const LeaveDetails = () => {
                   <strong>{appliedOn}</strong>
                 </div>
 
-                {hasAppliedVia ? (
-                  <div className="leave-info-row">
-                    <span>Applied Via</span>
-                    <strong>{leaveRequest.applied_via}</strong>
-                  </div>
-                ) : null}
+                <div className="leave-info-row">
+                  <span>Applied Via</span>
+                  <strong>Employee Portal (web)</strong>
+                </div>
 
                 {contactNumber ? (
                   <div className="leave-info-row">
@@ -509,17 +539,17 @@ const LeaveDetails = () => {
               </div>
             </section>
 
-            {attachments.length ? (
-              <section className="leave-details-attachment-card">
-                <div className="attachment-header">
-                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="attachment-header-icon">
-                    <path d="M21.44 11.05L12.25 20.24C10.3 22.19 7.14 22.19 5.19 20.24C3.24 18.29 3.24 15.13 5.19 13.18L14.38 3.99C15.69 2.68 17.81 2.68 19.12 3.99C20.43 5.3 20.43 7.42 19.12 8.73L9.93 17.92C9.28 18.57 8.22 18.57 7.57 17.92C6.92 17.27 6.92 16.21 7.57 15.56L16.05 7.08" stroke="#1B70F5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <h3>Attachment</h3>
-                </div>
+            <section className="leave-details-attachment-card">
+              <div className="attachment-header">
+                <svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" className="attachment-header-icon">
+                  <path d="M21.44 11.05L12.25 20.24C10.3 22.19 7.14 22.19 5.19 20.24C3.24 18.29 3.24 15.13 5.19 13.18L14.38 3.99C15.69 2.68 17.81 2.68 19.12 3.99C20.43 5.3 20.43 7.42 19.12 8.73L9.93 17.92C9.28 18.57 8.22 18.57 7.57 17.92C6.92 17.27 6.92 16.21 7.57 15.56L16.05 7.08" stroke="#1B70F5" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <h3>Attachment</h3>
+              </div>
 
-                <div className="attachment-list">
-                  {attachments.map((file, index) => (
+              <div className="attachment-list">
+                {attachments.length ? (
+                  attachments.map((file, index) => (
                     <div className="attachment-file-card" key={`${file.name || "attachment"}-${index}`}>
                       <div className="attachment-pdf-icon">
                         <span>File</span>
@@ -541,10 +571,12 @@ const LeaveDetails = () => {
                         </svg>
                       </a>
                     </div>
-                  ))}
-                </div>
-              </section>
-            ) : null}
+                  ))
+                ) : (
+                  <div className="attachment-file-meta" style={{ padding: "12px 8px", textAlign: "center" }}>No attachments</div>
+                )}
+              </div>
+            </section>
 
             <div className="leave-details-actions">
               <button type="button" className="download-leave-button">

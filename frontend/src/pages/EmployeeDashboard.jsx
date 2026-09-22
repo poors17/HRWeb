@@ -9,6 +9,13 @@ import {
 import Layout from "../styles/Layout";
 import "./EmployeeDashboard.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+const getAuthHeaders = () => ({
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+});
+
 // ============================================================
 // LOGO
 // ============================================================
@@ -53,6 +60,64 @@ import calenderIcon from "../assets/cards/calender.png";
 
 const EmployeeDashboard = ({ employee = null }) => {
   const navigate = useNavigate();
+  const [leaveBalances, setLeaveBalances] = React.useState([]);
+  const [leaveBalanceLoading, setLeaveBalanceLoading] = React.useState(true);
+  const [leaveBalanceError, setLeaveBalanceError] = React.useState("");
+
+  const loadLeaveBalances = React.useCallback(async () => {
+    try {
+      setLeaveBalanceLoading(true);
+      setLeaveBalanceError("");
+
+      const response = await fetch(`${API_URL}/api/leave/balance?year=${new Date().getFullYear()}`, {
+        method: "GET",
+        headers: getAuthHeaders(),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.status === 401) {
+        setLeaveBalanceError("Your session has expired. Please sign in again.");
+        localStorage.removeItem("token");
+        localStorage.removeItem("isLoggedIn");
+        navigate("/login", { replace: true });
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to load leave balances");
+      }
+
+      const mappedBalances = Array.isArray(data)
+        ? data.map((item) => ({
+            id: Number(item.leave_type_id ?? item.id),
+            name: item.leave_type_name || item.name || "Leave",
+            totalDays: Number(item.total_days ?? 0),
+            usedDays: Number(item.used_days ?? 0),
+            remaining: Number(
+              item.remaining ??
+                (Number(item.total_days ?? 0) - Number(item.used_days ?? 0))
+            ),
+          }))
+        : [];
+
+      setLeaveBalances(mappedBalances);
+    } catch (loadError) {
+      setLeaveBalanceError(loadError.message || "Unable to load leave balances");
+      setLeaveBalances([]);
+    } finally {
+      setLeaveBalanceLoading(false);
+    }
+  }, [navigate]);
+
+  React.useEffect(() => {
+    loadLeaveBalances();
+  }, [loadLeaveBalances]);
+
+  const totalRemainingDays = leaveBalances.reduce(
+    (sum, item) => sum + Number(item.remaining ?? 0),
+    0
+  );
 
   // ==========================================================
   // ATTENDANCE DATA
@@ -656,11 +721,15 @@ const handleViewLeave = () => {
   <div className="leave-remaining-section">
 
     <div className="leave-remaining-days">
-      12 Days
+      {leaveBalanceLoading
+        ? "Loading..."
+        : leaveBalanceError
+          ? "0 Days"
+          : `${totalRemainingDays} ${totalRemainingDays === 1 ? "Day" : "Days"}`}
     </div>
 
     <div className="leave-remaining-label">
-      Remaining
+      {leaveBalanceLoading ? "Loading leave balances..." : leaveBalanceError ? "Unable to load leave balance" : "Remaining"}
     </div>
 
   </div>
@@ -668,81 +737,47 @@ const handleViewLeave = () => {
 
   {/* LEAVE LEVELS */}
   <div className="leave-level-section">
-
-    {/* CASUAL */}
-    <div className="leave-balance-row">
-
-      <span className="leave-balance-label">
-        Casual
-      </span>
-
-      <div className="leave-progress-wrapper">
-
-        <div className="leave-progress-track">
-          <div
-            className="leave-progress-fill variant-green"
-            style={{ width: "60%" }}
-          />
-        </div>
-
-        <span className="leave-balance-value">
-          6 / 10
-        </span>
-
+    {leaveBalanceLoading ? (
+      <div className="leave-balance-row">
+        <span className="leave-balance-label">Loading...</span>
       </div>
-
-    </div>
-
-
-    {/* SICK */}
-    <div className="leave-balance-row">
-
-      <span className="leave-balance-label">
-        Sick
-      </span>
-
-      <div className="leave-progress-wrapper">
-
-        <div className="leave-progress-track">
-          <div
-            className="leave-progress-fill variant-blue"
-            style={{ width: "40%" }}
-          />
-        </div>
-
-        <span className="leave-balance-value">
-          4 / 10
-        </span>
-
+    ) : leaveBalanceError ? (
+      <div className="leave-balance-row">
+        <span className="leave-balance-label">{leaveBalanceError}</span>
       </div>
-
-    </div>
-
-
-    {/* EARNED */}
-    <div className="leave-balance-row">
-
-      <span className="leave-balance-label">
-        Earned
-      </span>
-
-      <div className="leave-progress-wrapper">
-
-        <div className="leave-progress-track">
-          <div
-            className="leave-progress-fill variant-cyan"
-            style={{ width: "20%" }}
-          />
-        </div>
-
-        <span className="leave-balance-value">
-          2 / 10
-        </span>
-
+    ) : leaveBalances.length === 0 ? (
+      <div className="leave-balance-row">
+        <span className="leave-balance-label">No leave balances available.</span>
       </div>
+    ) : (
+      leaveBalances.map((entry, index) => {
+        const remaining = Number(entry.remaining ?? 0);
+        const total = Number(entry.totalDays ?? 0);
+        const width = total > 0 ? Math.max(0, Math.min(100, (remaining / total) * 100)) : 0;
+        const variantClass = ["variant-green", "variant-blue", "variant-cyan"][index % 3];
 
-    </div>
+        return (
+          <div className="leave-balance-row" key={entry.id || entry.name || index}>
+            <span className="leave-balance-label">
+              {entry.name}
+            </span>
 
+            <div className="leave-progress-wrapper">
+              <div className="leave-progress-track">
+                <div
+                  className={`leave-progress-fill ${variantClass}`}
+                  style={{ width: `${width}%` }}
+                />
+              </div>
+
+              <span className="leave-balance-value">
+                {remaining} / {total}
+              </span>
+            </div>
+          </div>
+        );
+      })
+    )}
   </div>
 
 
