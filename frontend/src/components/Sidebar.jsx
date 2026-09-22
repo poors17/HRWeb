@@ -137,17 +137,25 @@ const Sidebar = ({ collapsed, setCollapsed }) => {
     }
   };
 
-  const isActive = (item) => {
-    if (item.path === "/attendance") {
-      return location.pathname === "/attendance";
-    }
+ const isActive = (item) => {
+  if (item.label === "Leave") {
+    return (
+      location.pathname === "/leave" ||
+      location.pathname === "/leave-details" ||
+      location.pathname.startsWith("/leave/")
+    );
+  }
 
-    if (item.path === "/employee-dashboard") {
-      return location.pathname === "/employee-dashboard";
-    }
+  if (item.path === "/attendance") {
+    return location.pathname === "/attendance";
+  }
 
-    return false;
-  };
+  if (item.path === "/employee-dashboard") {
+    return location.pathname === "/employee-dashboard";
+  }
+
+  return false;
+};
 
   const getIconClass = (item) => {
     if (item.label === "Leave") {
