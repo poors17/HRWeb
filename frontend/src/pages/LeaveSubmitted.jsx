@@ -152,17 +152,17 @@ const LeaveSubmitted = () => {
 
 
           {/* APPLIED ON */}
-          <div className="leave-submitted-row">
+         <div className="leave-submitted-row">
 
-            <span className="leave-submitted-label">
-              Applied On
-            </span>
+  <span className="leave-submitted-label">
+    Applied On
+  </span>
 
-            <span className="leave-submitted-value">
-              {appliedOn}
-            </span>
+  <span className="leave-submitted-value leave-submitted-applied-on">
+    {appliedOn}
+  </span>
 
-          </div>
+</div>
 
 
           {/* STATUS */}

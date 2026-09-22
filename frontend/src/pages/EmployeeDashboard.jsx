@@ -761,11 +761,118 @@ const handleViewLeave = () => {
 </div>
 </div>
 
-          {/* ==================================================
-              THIRD CARD
-          =================================================== */}
+      {/* ==================================================
+    LEAVE PAYSLIP CARD
+=================================================== */}
 
-          <div className="figma-empty-card"></div>
+<div className="leave-payslip-card">
+
+  {/* HEADER */}
+  <div className="payslip-card-header">
+
+    <div className="payslip-card-icon">
+      <img
+        src={payslipIcon}
+        alt="Leave Payslip"
+      />
+    </div>
+
+    <h2 className="payslip-card-title">
+      Leave Payslip
+    </h2>
+
+  </div>
+
+
+  {/* MONTH / SALARY */}
+  <div className="payslip-month-section">
+
+    <strong className="payslip-month">
+      August 2026
+    </strong>
+
+    <span className="payslip-subtitle">
+      Net Salary Credited
+    </span>
+
+  </div>
+
+
+  {/* PAYSLIP ITEMS */}
+  <div className="payslip-list">
+
+    {/* LATEST PAYSLIP */}
+    <div className="payslip-item">
+
+      <div className="payslip-calendar-icon">
+        <img
+  src={dateRangeIcon}
+  alt="Payslip"
+/>
+      </div>
+
+      <div className="payslip-item-content">
+
+        <strong>
+          payslip available
+        </strong>
+
+        <span>
+          Download your latest payslip.
+        </span>
+
+      </div>
+
+    </div>
+
+
+    {/* PREVIOUS PAYSLIP */}
+    <div className="payslip-item">
+
+      <div className="payslip-calendar-icon">
+       <img
+  src={dateRangeIcon}
+  alt="Payslip"
+/>
+      </div>
+
+      <div className="payslip-item-content">
+
+        <strong>
+          payslip available
+        </strong>
+
+        <span>
+          21 sep 2026
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  {/* FOOTER */}
+  <div className="payslip-card-footer">
+
+    <button
+      type="button"
+      className="payslip-view-button"
+    >
+      <span>
+        View Leave
+      </span>
+
+      <ArrowRight
+        size={28}
+        strokeWidth={1.7}
+      />
+    </button>
+
+  </div>
+
+</div>
 
 
           {/* ==================================================

@@ -1608,7 +1608,15 @@
   flex-direction: column;
   justify-content: center;
 
-  overflow: hidden;
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: none;
+}
+
+.attendance-employee-details::-webkit-scrollbar {
+  display: none;
 }
 
 
@@ -1618,6 +1626,8 @@
   display: block;
 
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
 
   margin: 0;
 
@@ -1627,9 +1637,10 @@
 
   color: #111111;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
 }
 
 
@@ -1639,6 +1650,8 @@
   display: block;
 
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
 
   margin: 1px 0 0;
 
@@ -1648,9 +1661,10 @@
 
   color: #111111;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
 }
 
 
@@ -1660,6 +1674,8 @@
   display: block;
 
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
 
   margin: 1px 0 0;
 
@@ -1669,11 +1685,11 @@
 
   color: #666666;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
 }
-
 
 /* ============================================================
    DIVIDER
@@ -1756,14 +1772,13 @@
 
   color: #111111;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
 }
 
-
 /* Today */
-
 .attendance-date span {
   display: block;
 
@@ -1778,9 +1793,10 @@
 
   color: #777777;
 
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
 }
 .attendance-check-row {
   width: calc(100% - 10px);
@@ -1833,9 +1849,20 @@
 }
 .check-content {
   min-width: 0;
+  min-height: 0;
+  max-height: 51px;
   margin-left: 6px;
   display: flex;
   flex-direction: column;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: none;
+}
+
+.check-content::-webkit-scrollbar {
+  display: none;
 }
 .check-content span {
   font-family: "Poppins", Arial, sans-serif;
@@ -1845,7 +1872,15 @@
   color: #666666;
 }
 .check-content strong {
-  white-space: nowrap;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 12px;
   font-weight: 700;
@@ -1894,9 +1929,13 @@
 .working-hours-content {
   flex: 1;
   min-width: 0;
+  min-height: 0;
   margin-left: 10px;
   display: flex;
+
   flex-direction: column;
+
+  overflow: hidden;
 }
 .working-hours-content > span {
   font-family: "Poppins", Arial, sans-serif;
@@ -1906,6 +1945,15 @@
   color: #666666;
 }
 .working-hours-content > strong {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 17px;
   font-weight: 700;
@@ -2003,19 +2051,37 @@
   color: #666666;
 }
 .shift-content strong {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 10px;
   font-weight: 700;
   line-height: 14px;
   color: #111111;
-  white-space: nowrap;
 }
+
 .shift-content small {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 8px;
   font-weight: 400;
   line-height: 11px;
-  color: #666666;
+  color: #777777;
 }
 .attendance-location {
   display: none;
@@ -2675,34 +2741,39 @@
   height: 56px;
 }
 .attendance-employee-details {
-  width: 76px;
-  min-width: 76px;
+  width: 92px;
+  min-width: 92px;
+  max-width: 92px;
+
   margin-left: 8px;
+
+  flex: 0 0 92px;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
-  overflow: hidden;
+
+  min-height: 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: none;
 }
-.attendance-employee-details strong {
-  font-family: "Poppins", Arial, sans-serif;
-  font-size: 10px;
-  font-weight: 600;
-  line-height: 14px;
-  color: #111111;
+
+.attendance-employee-details::-webkit-scrollbar {
+  display: none;
 }
-.attendance-employee-details span {
-  font-family: "Poppins", Arial, sans-serif;
-  font-size: 11px;
-  font-weight: 600;
-  line-height: 15px;
-  color: #111111;
-}
+.attendance-employee-details strong,
+.attendance-employee-details span,
 .attendance-employee-details small {
-  font-family: "Poppins", Arial, sans-serif;
-  font-size: 9px;
-  font-weight: 400;
-  line-height: 13px;
-  color: #666666;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
 }
 .attendance-info-divider {
   width: 1px;
@@ -2733,7 +2804,15 @@
   overflow: hidden;
 }
 .attendance-date strong {
-  white-space: nowrap;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 8px;
   font-weight: 600;
@@ -2741,6 +2820,15 @@
   color: #111111;
 }
 .attendance-date span {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 8px;
   font-weight: 400;
@@ -2825,8 +2913,17 @@
   color: #666666;
 }
 .check-content strong {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
   margin: 0;
-  white-space: nowrap;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 12px;
   font-weight: 700;
@@ -2902,6 +2999,15 @@
   color: #777777;
 }
 .working-hours-content > strong {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 17px;
   font-weight: 700;
@@ -2992,14 +3098,32 @@
   color: #73777a;
 }
 .shift-content strong {
-  white-space: nowrap;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 10px;
   font-weight: 700;
   line-height: 14px;
   color: #111111;
 }
+
 .shift-content small {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  white-space: normal;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  text-overflow: clip;
+
   font-family: "Poppins", Arial, sans-serif;
   font-size: 8px;
   font-weight: 400;
@@ -3718,4 +3842,503 @@
 }
 .attendance-card p, .attendance-card span, .attendance-card div {
   text-overflow: clip;
+}
+/* ============================================================
+   LEAVE PAYSLIP CARD
+   FIGMA EXACT - 288 x 340
+   ============================================================ */
+
+.leave-payslip-card {
+  width: 288px;
+  min-width: 288px;
+  max-width: 288px;
+
+  height: 340px;
+  min-height: 340px;
+  max-height: 340px;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  background: #f4f9fc;
+
+  border: 1px solid #dce8ed;
+  border-radius: 10px;
+
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.14);
+
+  font-family: "Inter", Arial, sans-serif;
+}
+
+
+/* ============================================================
+   PAYSLIP HEADER
+   Figma: 288 x 56/61
+   ============================================================ */
+
+.payslip-card-header {
+  width: 100%;
+  height: 61px;
+  min-height: 61px;
+  max-height: 61px;
+
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  box-sizing: border-box;
+
+  background: rgba(83, 228, 116, 0.20);
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   PAYSLIP HEADER ICON
+   Figma: 37 x 40
+   ============================================================ */
+
+.payslip-card-icon {
+  width: 37px;
+  min-width: 37px;
+  max-width: 37px;
+
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 10px;
+
+  background: rgba(83, 228, 116, 0.30);
+
+  box-sizing: border-box;
+
+  flex-shrink: 0;
+}
+
+.payslip-card-icon img {
+  width: 29px;
+  height: 33px;
+
+  display: block;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   PAYSLIP TITLE
+   Figma: 145 x 24
+   Inter / 20px / 600 / 5%
+   ============================================================ */
+
+.payslip-card-title {
+  width: 145px;
+  min-width: 145px;
+  max-width: 145px;
+
+  height: 24px;
+  min-height: 24px;
+  max-height: 24px;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: "Inter", Arial, sans-serif;
+  font-size: 20px;
+  font-weight: 600;
+  font-style: normal;
+
+  line-height: 24px;
+
+  letter-spacing: 0.05em;
+
+  color: #000000;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   MONTH / SALARY SECTION
+   Figma: 288 x 61
+   ============================================================ */
+
+.payslip-month-section {
+  width: 288px;
+  height: 61px;
+  min-height: 61px;
+  max-height: 61px;
+
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  box-sizing: border-box;
+
+  flex-shrink: 0;
+
+  background: transparent;
+}
+
+
+/* ============================================================
+   AUGUST 2026
+   ============================================================ */
+
+.payslip-month {
+  width: 166px;
+  height: 24px;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 24px;
+  font-weight: 700;
+  font-style: normal;
+
+  line-height: 20px;
+
+  letter-spacing: 0.05em;
+
+  color: #032a3c;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   NET SALARY CREDITED
+   ============================================================ */
+
+.payslip-subtitle {
+  width: 166px;
+  height: 20px;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 13px;
+  font-weight: 700;
+  font-style: normal;
+
+  line-height: 20px;
+
+  letter-spacing: 0.05em;
+
+  color: #66696b;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   PAYSLIP LIST
+   Figma: 288 x 163
+   ============================================================ */
+
+.payslip-list {
+  width: 288px;
+  height: 163px;
+  min-height: 163px;
+  max-height: 163px;
+
+  padding: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  box-sizing: border-box;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   PAYSLIP ITEM
+   Figma: 268 x 60
+   ============================================================ */
+
+.payslip-item {
+  width: 268px;
+  height: 60px;
+  min-width: 268px;
+  max-width: 268px;
+
+  min-height: 60px;
+  max-height: 60px;
+
+  padding: 10px 14px;
+
+  display: flex;
+  align-items: center;
+
+  justify-content: flex-start;
+
+  gap: 10px;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  background: rgba(89, 208, 243, 0.20);
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   PAYSLIP ITEM ICON
+   Figma: approximately 29 x 33
+   ============================================================ */
+
+.payslip-calendar-icon {
+  width: 29px;
+  min-width: 29px;
+  max-width: 29px;
+
+  height: 33px;
+  min-height: 33px;
+  max-height: 33px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  flex-shrink: 0;
+}
+
+.payslip-calendar-icon img {
+  width: 29px;
+  height: 33px;
+
+  display: block;
+
+  object-fit: contain;
+
+  flex-shrink: 0;
+
+  /* Figma icon color: #218257 */
+  filter: brightness(0) saturate(100%)
+          invert(39%)
+          sepia(23%)
+          saturate(1088%)
+          hue-rotate(106deg)
+          brightness(88%)
+          contrast(91%);
+}
+
+/* ============================================================
+   PAYSLIP TEXT
+   Figma: approximately 197 x 40
+   ============================================================ */
+
+.payslip-item-content {
+  width: 197px;
+  min-width: 0;
+  max-width: 197px;
+
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   PAYSLIP AVAILABLE
+   ============================================================ */
+
+.payslip-item-content strong {
+  width: 197px;
+  height: 20px;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 14px;
+  font-weight: 700;
+  font-style: normal;
+
+  line-height: 20px;
+
+  letter-spacing: 0;
+
+  color: #000000;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   PAYSLIP DESCRIPTION / DATE
+   ============================================================ */
+
+.payslip-item-content span {
+  width: 197px;
+  height: 20px;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 14px;
+  font-weight: 400;
+  font-style: normal;
+
+  line-height: 20px;
+
+  letter-spacing: 0;
+
+  color: #66696b;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   PAYSLIP FOOTER
+   Figma: 288 x 52
+   ============================================================ */
+
+.payslip-card-footer {
+  width: 288px;
+  height: 52px;
+  min-height: 52px;
+  max-height: 52px;
+
+  margin-top: auto;
+
+  padding: 0 10px;
+
+  display: flex;
+  align-items: center;
+
+  box-sizing: border-box;
+
+  background: rgba(83, 228, 116, 0.20);
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   VIEW LEAVE
+   Figma: 74 x 20 text + arrow
+   ============================================================ */
+
+.payslip-view-button {
+  width: auto;
+  min-width: 0;
+  height: 52px;
+
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
+  gap: 10px;
+
+  border: none;
+  outline: none;
+
+  background: transparent;
+
+  box-sizing: border-box;
+
+  cursor: pointer;
+
+  font-family: "Inter", Arial, sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+  font-style: normal;
+
+  line-height: 20px;
+
+  letter-spacing: 0.05em;
+
+  color: #218257;
+}
+
+
+/* ============================================================
+   FOOTER ARROW
+   ============================================================ */
+
+.payslip-view-button svg {
+  width: 28px;
+  height: 28px;
+
+  flex-shrink: 0;
+
+  color: #218257;
+  stroke: #218257;
+
+  stroke-width: 1.7;
+}
+
+
+/* ============================================================
+   FOOTER HOVER
+   ============================================================ */
+
+.payslip-view-button:hover {
+  background: transparent;
+  color: #218257;
+}
+
+.payslip-view-button:hover svg {
+  color: #218257;
+  stroke: #218257;
+  transform: none;
 }
