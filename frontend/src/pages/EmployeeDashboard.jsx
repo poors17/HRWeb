@@ -160,8 +160,12 @@ const EmployeeDashboard = ({ employee = null }) => {
   const handleViewAttendance = () => {
     navigate("/attendance");
   };
-const handleViewLeave = () => {
+const handleApplyLeave = () => {
   navigate("/apply-leave");
+};
+
+const handleViewLeave = () => {
+  navigate("/leave-details");
 };
   return (
     <Layout>
@@ -641,7 +645,7 @@ const handleViewLeave = () => {
   <button
     type="button"
     className="apply-leave-button"
-    onClick={handleViewLeave}
+    onClick={handleApplyLeave}
   >
     Apply Leave
   </button>

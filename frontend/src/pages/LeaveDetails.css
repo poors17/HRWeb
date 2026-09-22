@@ -10,7 +10,13 @@
 
   padding: 10px;
 
-  background: #EEF6FB;
+  background: linear-gradient(
+    to bottom,
+    #E5F0F8 0px,
+    #E5F0F8 124px,
+    #EEF6FB 124px,
+    #EEF6FB 100%
+  );
 
   overflow-x: hidden;
   overflow-y: auto;
@@ -18,66 +24,111 @@
   font-family: "Inter", sans-serif;
 }
 
-
 /* ============================================================
    BREADCRUMB
    ============================================================ */
 
 .leave-details-breadcrumb {
   width: 100%;
-  height: 35px;
+  height: 38px;
+
+  box-sizing: border-box;
 
   display: flex;
   align-items: center;
 
-  gap: 7px;
+  gap: 10px;
 
-  padding: 0 5px;
+  padding: 0 10px;
 
-  box-sizing: border-box;
+  margin-bottom: 10px;
 
-  font-size: 11px;
+  background: #E5F0F8;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 16px;
+  line-height: 19px;
+
+  font-weight: 500;
+
+  letter-spacing: 0;
+
+  color: #000000;
 }
 
 .leave-details-back {
-  border: none;
+  width: 24px;
+  height: 24px;
 
+  border: none;
   background: transparent;
 
-  color: #0681FD;
+  color: #1B70F5;
 
-  font-size: 18px;
+  font-size: 24px;
+  line-height: 24px;
 
   cursor: pointer;
-
   padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  flex-shrink: 0;
+}
+.leave-details-breadcrumb-blue {
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  font-size: inherit;
+  font-weight: inherit;
+  color: #1B70F5;
+  cursor: pointer;
+  outline: none;
+  box-shadow: none;
 }
 
-.leave-details-breadcrumb-blue {
-  color: #0681FD;
+/* Click / focus / hover - UI change ஆகக்கூடாது */
+.leave-details-breadcrumb-blue:hover,
+.leave-details-breadcrumb-blue:focus,
+.leave-details-breadcrumb-blue:active {
+  color: #1B70F5;
+  background: transparent;
+  text-decoration: none;
+  outline: none;
+  box-shadow: none;
+}
+.leave-details-breadcrumb-arrow {
+  color: #000000;
 
   font-weight: 500;
-}
-
-.leave-details-breadcrumb-arrow {
-  color: #171717;
 }
 
 .leave-details-breadcrumb-current {
-  color: #171717;
+  color: #000000;
 
   font-weight: 500;
 }
-
 
 /* ============================================================
    PAGE HEADER
    ============================================================ */
 
+/* ============================================================
+   PAGE HEADER
+   Figma:
+   Main content frame = 1180px
+   Header height ≈ 66px
+   ============================================================ */
+
 .leave-details-header {
   width: 100%;
-
-  min-height: 70px;
+  height: 66px;
+  min-height: 66px;
 
   box-sizing: border-box;
 
@@ -87,206 +138,442 @@
 
   justify-content: space-between;
 
-  padding: 8px 15px;
+  padding: 10px;
 
-  background: #E4F2FA;
+  gap: 10px;
+
+  background: #E5F0F8;
+
+  border-radius: 10px;
+
+  flex-shrink: 0;
+}
+/* ============================================================
+   HEADER CONTENT
+   Figma: 583px × 54px
+   ============================================================ */
+
+.leave-details-header-content {
+  width: 583px;
+  height: 54px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+
+  flex-shrink: 0;
 }
 
+/* ============================================================
+   HEADER TITLE
+   ============================================================ */
+
 .leave-details-header h1 {
-  margin: 0 0 3px;
+  width: auto;
+  height: 25px;
 
-  font-size: 18px;
+  margin: 0;
 
-  line-height: 22px;
+  font-family: "Inter", sans-serif;
+
+  font-size: 24px;
+  line-height: 25px;
 
   font-weight: 700;
 
-  color: #171717;
+  letter-spacing: 0;
+
+  color: #000000;
 }
 
+/* ============================================================
+   HEADER DESCRIPTION
+   ============================================================ */
 .leave-details-header p {
   margin: 0;
 
-  font-size: 10px;
+  font-family: "Inter", sans-serif;
 
-  line-height: 14px;
+  font-size: 14px;
+  line-height: 25px;
+
+  font-weight: 600;
+
+  letter-spacing: 0;
 
   color: #66696B;
 }
+
+/* ============================================================
+   HEADER STATUS AREA
+   ============================================================ */
 
 .leave-details-header-status {
   display: flex;
 
   align-items: center;
+  justify-content: flex-end;
 
-  gap: 7px;
-}
+  gap: 10px;
 
-.leave-id-badge,
-.approved-badge {
-  height: 22px;
-
-  padding: 4px 10px;
-
-  box-sizing: border-box;
-
-  border-radius: 6px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  font-size: 9px;
-
-  white-space: nowrap;
-}
-
-.leave-id-badge {
-  background: #DFE8ED;
-
-  color: #66696B;
-}
-
-.approved-badge {
-  background: #C9F2D9;
-
-  color: #198754;
-
-  font-weight: 600;
+  flex-shrink: 0;
 }
 
 
 /* ============================================================
-   EMPLOYEE INFORMATION
+   LEAVE ID
+   Figma container:
+   Width  = 167px
+   Height = 35px
+   Radius = 10px
+
+   Padding:
+   5px 15px
+
+   Gap = 10px
+   ============================================================ */
+
+.leave-id-badge {
+  width: 167px;
+  height: 35px;
+
+  box-sizing: border-box;
+
+  padding: 5px 15px;
+
+  border-radius: 10px;
+
+  background: #DFE8ED;
+
+  color: #66696B;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 14px;
+  line-height: 25px;
+
+  font-weight: 600;
+
+  letter-spacing: 0;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   APPROVED BADGE
+   Figma:
+   Width  = 148px
+   Height = 36px
+   Radius = 10px
+
+   Padding:
+   5px 20px
+
+   Gap = 10px
+
+   Background:
+   #53E474 / 20%
+   ============================================================ */
+
+.approved-badge {
+  width: 148px;
+  height: 36px;
+
+  box-sizing: border-box;
+
+  padding: 5px 20px;
+
+  border-radius: 10px;
+
+  background: rgba(83, 228, 116, 0.20);
+
+  color: #218257;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 14px;
+  line-height: 25px;
+
+  font-weight: 700;
+
+  letter-spacing: 0;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+.approved-badge svg {
+  width: 25px;
+  height: 26px;
+
+  flex: 0 0 25px;
+
+  display: block;
+
+  flex-shrink: 0;
+}
+/* ============================================================
+   EMPLOYEE INFORMATION CARD
+   Figma:
+   Width  = Fill / 1180px
+   Height ≈ 132px
+   Radius = 10px
    ============================================================ */
 
 .leave-details-employee {
   width: 100%;
-
-  min-height: 64px;
+  height: 111px;
+  min-height: 111px;
 
   box-sizing: border-box;
 
   display: flex;
-
   align-items: center;
 
-  background: #F3F8FC;
+  background: #F5FAFD;
 
-  border-bottom: 1px solid #D3DDE2;
+  border: 1px solid #D3DDE2;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.18);
+
+  overflow: hidden;
+
+  flex-shrink: 0;
 }
 
+
+/* ============================================================
+   PROFILE AREA
+   ============================================================ */
 .leave-details-profile {
-  width: 180px;
+  width: 320px;
+  height: 101px;
+
+  box-sizing: border-box;
 
   display: flex;
-
   align-items: center;
 
-  gap: 10px;
+  gap: 15px;
 
-  padding-left: 5px;
+  padding: 5px 10px;
+
+  flex-shrink: 0;
 }
 
+.leave-details-employee-name {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  gap: 0;
+}
+
+/* ============================================================
+   AVATAR
+   ============================================================ */
+
 .leave-details-avatar {
-  width: 55px;
-  height: 55px;
+  width: 95px;
+  height: 95px;
 
   border-radius: 50%;
 
   background: #DDEAF1;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
   font-size: 25px;
 
+  overflow: hidden;
+
   flex-shrink: 0;
 }
+
+/* ============================================================
+   EMPLOYEE NAME
+   ============================================================ */
 
 .leave-details-employee-name h2 {
   margin: 0;
 
-  font-size: 13px;
+  font-family: "Inter", sans-serif;
 
-  line-height: 17px;
+  font-size: 20px;
+  line-height: 25px;
 
   font-weight: 700;
+
+  color: #000000;
 }
+/* ============================================================
+   EMPLOYEE ID
+   ============================================================ */
 
 .leave-details-employee-name p {
-  margin: 1px 0 3px;
+  margin: 2px 0 6px;
 
-  font-size: 9px;
+  font-family: "Inter", sans-serif;
+
+  font-size: 15px;
+  line-height: 25px;
+
+  font-weight: 600;
+
+  letter-spacing: 5%;
 
   color: #66696B;
 }
 
+/* ============================================================
+   DESIGNATION BADGE
+   ============================================================ */
+
 .leave-details-employee-name span {
   display: inline-flex;
 
-  padding: 3px 8px;
+  align-items: center;
+  justify-content: flex-start;
 
-  border-radius: 4px;
+  width: 136px;
+  min-width: 136px;
+  max-width: 136px;
+
+  height: 25px;
+  min-height: 25px;
+  max-height: 25px;
+
+  box-sizing: border-box;
+
+  padding: 0 2px;
+
+  border-radius: 10px;
 
   background: #D9F1FC;
 
-  color: #0681FD;
+  color: #1B70F5;
 
-  font-size: 8px;
+  font-family: "Inter", sans-serif;
+
+  font-size: 14px;
+  line-height: 25px;
+
+  font-weight: 600;
+
+  letter-spacing: 3%;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
 }
 
 
 /* ============================================================
-   EMPLOYEE INFO COLUMNS
+   EMPLOYEE INFORMATION COLUMNS
    ============================================================ */
 
 .leave-details-employee-info {
   flex: 1;
+  width: auto;
+  min-width: 0;
+  height: 63px;
+
+  box-sizing: border-box;
 
   display: grid;
 
-  grid-template-columns:
-    repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
 
-  min-height: 45px;
+  flex-shrink: 1;
 }
 
-.leave-details-employee-info > div {
-  padding: 5px 20px;
 
-  border-left: 1px solid #8D969B;
+/* ============================================================
+   EACH INFORMATION COLUMN
+   ============================================================ */
+
+.leave-details-employee-info > div {
+  min-width: 0;
+
+  height: 63px;
+
+  box-sizing: border-box;
+
+  padding: 10px 30px;
+
+  border-left: 1px solid #000000;
 
   display: flex;
 
   flex-direction: column;
 
   justify-content: center;
+
+  gap: 10px;
 }
+.leave-details-employee-info > div:first-child {
+  padding-left: 65px;
+}
+/* LABEL */
 
 .leave-details-employee-info small {
-  font-size: 8px;
+  font-family: "Inter", sans-serif;
+
+  font-size: 14px;
+  line-height: 25px;
+
+  font-weight: 500;
 
   color: #66696B;
 
-  margin-bottom: 5px;
+  margin: 0;
 }
 
+
+/* VALUE */
+
 .leave-details-employee-info strong {
-  font-size: 9px;
+  font-family: "Inter", sans-serif;
 
-  color: #171717;
+  font-size: 14px;
+  line-height: 25px;
 
-  font-weight: 600;
+  color: #000000;
+
+  font-weight: 700;
 }
 
 
 /* ============================================================
    CONTENT GRID
+   Approval Status = 491px
+   Leave Balance = 468px
+   Attachment = 119px
    ============================================================ */
 
 .leave-details-content {
@@ -294,50 +581,425 @@
 
   box-sizing: border-box;
 
-  padding: 12px 5px 20px;
+  padding: 10px 10px 10px 20px;
 
   display: grid;
 
   grid-template-columns:
-    minmax(0, 1fr)
-    minmax(0, 1fr);
+    491px
+    468px
+    119px;
 
-  gap: 12px;
+  grid-template-rows:
+    auto
+    auto;
+
+  column-gap: 10px;
+
+  row-gap: 10px;
+
+  align-items: start;
+
+  justify-content: start;
+}
+
+/* ============================================================
+   ATTACHMENT CARD
+   ============================================================ */
+
+.leave-details-attachment-card {
+  grid-column: 3 / 4;
+  grid-row: 1 / 3;
+
+  width: 119px;
+  min-width: 119px;
+  max-width: 119px;
+
+  height: 501px;
+  min-height: 501px;
+  max-height: 501px;
+
+  box-sizing: border-box;
+
+  background: #EFF5FA;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  flex-shrink: 0;
+
+  transform: translateX(-30px);
 }
 
 
 /* ============================================================
-   COMMON CARD
+   ATTACHMENT HEADER
    ============================================================ */
 
-.leave-details-card {
-  width: 100%;
+.leave-details-attachment-card .attachment-header {
+  width: 117px;
+  height: 80px;
+  min-height: 80px;
+  max-height: 80px;
 
-  min-height: 125px;
+  box-sizing: border-box;
+  padding: 5px;
+
+  background: #DBECF5;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  flex-shrink: 0;
+}
+
+
+/* PAPERCLIP */
+
+.leave-details-attachment-card .attachment-header-icon {
+  width: 32px;
+  height: 32px;
+
+  display: block;
+
+  flex-shrink: 0;
+}
+
+
+/* ATTACHMENT TITLE */
+
+.leave-details-attachment-card .attachment-header h3 {
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 14px;
+  line-height: 20px;
+
+  font-weight: 600;
+
+  color: #000000;
+
+  text-align: center;
+
+  white-space: nowrap;
+}
+
+
+/* ============================================================
+   ATTACHMENT LIST
+   ============================================================ */
+
+/* ============================================================
+   ATTACHMENT LIST
+   Figma: vertically distributed PDF cards
+   ============================================================ */
+
+.leave-details-attachment-card .attachment-list {
+  width: 100%;
+  height: auto;
 
   box-sizing: border-box;
 
-  background: #F3F8FC;
+  padding: 10px 5px 15px;
 
-  border: 1px solid #D2DDE2;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 0;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  flex: 1;
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.leave-details-attachment-card .attachment-list::-webkit-scrollbar {
+  display: none;
+}
+
+
+/* ============================================================
+   INDIVIDUAL PDF CARD
+   ============================================================ */
+
+.leave-details-attachment-card .attachment-file-card {
+  position: relative;
+
+  width: 99px;
+  min-width: 99px;
+  max-width: 99px;
+
+  height: 104px;
+  min-height: 104px;
+  max-height: 104px;
+
+  box-sizing: border-box;
+
+  padding: 6px 8px;
+
+  background: #DBECF5;
+
+  border: 1px solid #D3DDE2;
+
+  border-radius: 10px;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.25);
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   RED FILE ICON
+   ============================================================ */
+
+.leave-details-attachment-card .attachment-pdf-icon {
+  position: absolute;
+
+  top: 8px;
+  left: 10px;
+
+  width: 30px;
+  height: 36px;
+
+  box-sizing: border-box;
+
+  background: #D84B4B;
+
+  border-radius: 3px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+
+/* SMALL FOLDED CORNER */
+
+.leave-details-attachment-card .attachment-pdf-icon::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  width: 11px;
+  height: 11px;
+
+  background: #B83C45;
+
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+
+/* FILE TEXT */
+
+.leave-details-attachment-card .attachment-pdf-icon span {
+  position: relative;
+
+  z-index: 1;
+
+  margin-top: 5px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 8px;
+  line-height: 10px;
+
+  font-weight: 500;
+
+  color: #FFFFFF;
+
+  text-align: center;
+}
+
+
+/* ============================================================
+   DOWNLOAD BUTTON
+   ============================================================ */
+
+.leave-details-attachment-card .attachment-download-button {
+  position: absolute;
+
+  top: 9px;
+  right: 8px;
+
+  width: 23px;
+  height: 23px;
+
+  min-width: 23px;
+  min-height: 23px;
+
+  box-sizing: border-box;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: none;
+
+  border-radius: 5px;
+
+  background: transparent;
+
+  text-decoration: none;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+}
+
+
+.leave-details-attachment-card
+.attachment-download-button svg {
+  width: 23px;
+  height: 23px;
+
+  display: block;
+}
+
+
+/* ============================================================
+   FILE INFORMATION
+   ============================================================ */
+
+.leave-details-attachment-card .attachment-file-info {
+  position: absolute;
+
+  left: 8px;
+  right: 8px;
+
+  top: 50px;
+
+  width: auto;
+
+  box-sizing: border-box;
+}
+
+
+/* ============================================================
+   FILE NAME
+   ============================================================ */
+
+.leave-details-attachment-card .attachment-file-name {
+  width: 100%;
+
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 10px;
+  line-height: 12px;
+
+  font-weight: 600;
+
+  color: #004B70;
+
+  text-align: left;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  display: -webkit-box;
+
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+
+  overflow: hidden;
+}
+
+
+/* ============================================================
+   FILE META
+   ============================================================ */
+
+.leave-details-attachment-card .attachment-file-meta {
+  width: 100%;
+
+  margin-top: 2px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 8px;
+  line-height: 11px;
+
+  font-weight: 500;
+
+  color: #66696B;
+
+  text-align: left;
+
+  white-space: normal;
+
+  overflow-wrap: break-word;
+}
+/* ============================================================
+   COMMON CARD
+   ============================================================ */
+.leave-details-card {
+  width: 421px;
+  height: 220px;
+  min-width: 421px;
+  min-height: 220px;
+  max-width: 421px;
+  max-height: 220px;
+
+  box-sizing: border-box;
+
+  background: #EFF5FA;
+
+  border: 1px solid #CCD8DF;
 
   border-radius: 10px;
 
   overflow: hidden;
 
   box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.12);
+    0 2px 4px rgba(0, 0, 0, 0.18);
+
+  flex-shrink: 0;
 }
-
-
+.apply-leave-details-card {
+  height: 236px;
+  min-height: 236px;
+  max-height: 236px;
+}
 /* ============================================================
    CARD HEADER
    ============================================================ */
 
 .leave-details-card-header {
   width: 100%;
-
-  min-height: 29px;
+  height: 45px;
+  min-height: 45px;
 
   box-sizing: border-box;
 
@@ -345,114 +1007,334 @@
 
   align-items: center;
 
-  gap: 5px;
+  gap: 10px;
 
-  padding: 5px 9px;
+  padding: 5px 10px;
 
   background: #DCEEF7;
 }
 
 .leave-details-card-icon {
-  font-size: 13px;
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  flex-shrink: 0;
+
+  filter: brightness(0) saturate(100%)
+          invert(39%)
+          sepia(96%)
+          saturate(3000%)
+          hue-rotate(205deg)
+          brightness(98%)
+          contrast(96%);
 }
 
 .leave-details-card-header h3 {
   margin: 0;
 
-  font-size: 10px;
+  font-family: "Inter", sans-serif;
 
-  line-height: 14px;
+  font-size: 16px;
+  line-height: 25px;
 
   font-weight: 600;
 
-  color: #171717;
+  letter-spacing: 0;
+
+  color: #000000;
+}
+.approval-status-icon {
+  width: 29.46px;
+  height: 23.52px;
+
+  min-width: 29.46px;
+  min-height: 23.52px;
+
+  max-width: 29.46px;
+  max-height: 23.52px;
+
+  flex: 0 0 29.46px;
+
+  display: block;
+
+  flex-shrink: 0;
+}
+/* ============================================================
+   APPROVAL STATUS HEADER TITLE
+   ============================================================ */
+
+.leave-approval-card .leave-details-card-header h3 {
+  width: 109px;
+  height: 25px;
+
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+  font-size: 14px;
+  line-height: 25px;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0;
+
+  color: #000000;
+
+  white-space: nowrap;
 }
 
 .leave-details-card-header button {
   margin-left: auto;
 
+  width: 167px;
+  height: 35px;
+
+  min-width: 167px;
+  max-width: 167px;
+
+  box-sizing: border-box;
+
   border: none;
 
   background: #C6E8FA;
+  color: #1B70F5;
 
-  color: #0681FD;
+  border-radius: 10px;
 
-  border-radius: 4px;
+  padding: 5px 15px;
 
-  padding: 3px 8px;
+  font-family: "Inter", sans-serif;
 
-  font-size: 8px;
+  font-size: 13px;
+  line-height: 25px;
+
+  font-weight: 600;
+
+  letter-spacing: 0;
 
   cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  white-space: nowrap;
 }
 
+/* Edit icon */
+.edit-request-button svg {
+  width: 20px;
+  height: 20px;
 
+  min-width: 20px;
+  min-height: 20px;
+
+  flex: 0 0 20px;
+
+  color: #1B70F5;
+
+  display: block;
+}
 /* ============================================================
    INFORMATION LIST
    ============================================================ */
 
 .leave-info-list {
-  padding: 5px 8px;
+  width: 100%;
+  height: 145.5px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 5px 10px 10px;
+
+  gap: 0;
 }
 
 .leave-info-row {
-  min-height: 17px;
+  width: 393px;
+  min-width: 393px;
+
+  min-height: 25px;
+
+  box-sizing: border-box;
 
   display: grid;
-
-  grid-template-columns: 105px 1fr;
+  grid-template-columns: 140px 1fr;
 
   align-items: center;
+  column-gap: 10px;
 
-  gap: 5px;
-
-  font-size: 8px;
+  flex-shrink: 0;
 }
 
+.leave-info-row:has(.leave-reason) {
+  height: 37px;
+  min-height: 37px;
+}
+
+.leave-info-row:has(.leave-approved-small) {
+  height: 28px;
+  min-height: 28px;
+}
 .leave-info-row > span {
-  color: #171717;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  line-height: 100%;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0;
+  color: #000000;
+  text-align: left;
+  white-space: nowrap;
 }
 
 .leave-info-row > strong {
-  font-weight: 500;
-
-  color: #171717;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  line-height: 100%;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0;
+  color: #000000;
+  text-align: left;
+  justify-self: start;
 }
 
 .leave-type-blue {
-  color: #0681FD !important;
+  width: 89px;
+  height: 19px;
 
-  background: #D9F1FC;
+  min-width: 89px;
+  max-width: 89px;
 
-  width: fit-content;
+  min-height: 19px;
+  max-height: 19px;
 
-  padding: 2px 6px;
+  box-sizing: border-box;
 
-  border-radius: 3px;
+  padding: 3px 10px;
+
+  border-radius: 5px;
+
+  background: rgba(89, 208, 243, 0.25);
+
+  color: #1ABCFE !important;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 10px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  line-height: 13px;
+
+  font-weight: 500;
+
+  letter-spacing: 0;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
 }
-
 .leave-reason {
-  background: #E1E6E9;
+  width: 215px;
+  height: 37px;
 
-  padding: 4px 7px;
+  box-sizing: border-box;
 
-  border-radius: 3px;
+  background: #66696B26;
+  border-radius: 5px;
 
-  width: fit-content;
+  padding: 5px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  line-height: 100%;
+  font-weight: 500;
+  color: #000000;
+
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
 }
+.apply-leave-remark {
+  width: 200px;
+  height: 45px;
 
+  box-sizing: border-box;
+
+  padding: 5px 10px;
+
+  background: #66696B26;
+  border-radius: 5px;
+
+  display: flex;
+  align-items: center;
+
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  line-height: 16px;
+  font-weight: 600;
+  font-style: normal;
+  letter-spacing: 0;
+
+  color: #000000;
+  text-align: left;
+
+  white-space: normal;
+  overflow: hidden;
+}
 .leave-approved-small {
-  color: #198754 !important;
+  min-width: 102px;
+  height: 23px;
+  min-height: 23px;
+  max-height: 23px;
 
-  background: #C9F2D9;
+  box-sizing: border-box;
 
-  padding: 2px 7px;
+  padding: 0 10px;
 
-  width: fit-content;
+  border-radius: 10px;
 
-  border-radius: 4px;
+  background: rgba(83, 228, 116, 0.20);
+  color: #216731 !important;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  line-height: 23px;
+  font-weight: 700;
+
+  white-space: nowrap;
 }
 
+.leave-approved-small svg {
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 18px;
+
+  display: block;
+}
 
 /* ============================================================
    APPROVAL CARD
@@ -460,11 +1342,413 @@
 
 .leave-approval-card {
   grid-column: 1 / 2;
+  grid-row: 2;
 
-  min-height: 145px;
+  width: 491px;
+  height: 254px;
+
+  min-width: 491px;
+  max-width: 491px;
+
+  min-height: 254px;
+  max-height: 254px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+
+}
+
+/* ============================================================
+   LEAVE BALANCE CARD
+   Figma: 468px × 221px
+   ============================================================ */
+
+.leave-details-balance-card {
+  grid-column: 2 / 3;
+  grid-row: 2;
+
+  width: 468px;
+  height: 221px;
+
+  min-width: 468px;
+  max-width: 468px;
+
+  min-height: 221px;
+  max-height: 221px;
+
+  box-sizing: border-box;
+
+  background: #EFF5FA;
+
+  border: 1px solid #CCD8DF;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.18);
+
+  flex-shrink: 0;
+   
+}
+/* ============================================================
+   LEAVE BALANCE HEADER
+   Figma: 468px × 46px
+   ============================================================ */
+
+.leave-details-balance-card .leave-balance-header {
+  width: 100%;
+  height: 46px;
+
+  min-height: 46px;
+  max-height: 46px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
+
+  padding: 5px 10px;
+
+  gap: 10px;
+
+  background: #DBECF5;
+
+  overflow: hidden;
+}
+/* ============================================================
+   LEAVE BALANCE ICON
+   ============================================================ */
+
+.leave-balance-icon {
+  width: 24px;
+  height: 24px;
+
+  min-width: 24px;
+  min-height: 24px;
+
+  max-width: 24px;
+  max-height: 24px;
+
+  flex: 0 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  overflow: hidden;
+}
+
+.leave-balance-icon svg {
+  width: 24px;
+  height: 24px;
+
+  display: block;
+}
+
+/* ============================================================
+   LEAVE BALANCE TITLE
+   ============================================================ */
+
+.leave-balance-header h3 {
+  margin: 0;
+
+  width: auto;
+  height: 25px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 14px;
+  line-height: 25px;
+
+  font-weight: 600;
+
+  color: #000000;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
 }
 
 
+/* ============================================================
+   LEAVE BALANCE DATE
+   ============================================================ */
+
+.leave-balance-date {
+  margin-left: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  line-height: 16px;
+
+  font-weight: 500;
+
+  color: #000000;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+
+/* ============================================================
+   VIEW ALL BUTTON
+   ============================================================ */
+
+.leave-balance-view-all {
+  width: 92px;
+  height: 35px;
+
+  min-width: 92px;
+  max-width: 92px;
+
+  box-sizing: border-box;
+
+  margin-left: auto;
+
+  border: none;
+
+  border-radius: 10px;
+
+  background: #C6E8FA;
+
+  color: #1B70F5;
+
+  padding: 5px 15px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 12px;
+  line-height: 25px;
+
+  font-weight: 600;
+
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+.leave-balance-view-all:hover {
+  background: #B7E1F7;
+}
+/* ============================================================
+   LEAVE BALANCE CONTENT
+   Figma: 175px
+   ============================================================ */
+
+.leave-balance-content {
+  width: 100%;
+  height: 175px;
+
+  box-sizing: border-box;
+
+  padding: 0 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: flex-start;
+
+  gap: 0;
+
+  overflow: hidden;
+}
+/* ============================================================
+   LEAVE BALANCE ROW
+   Figma: 468px × 43.75px
+   ============================================================ */
+
+.leave-balance-row {
+  width: 100%;
+  height: 43.75px;
+
+  min-height: 43.75px;
+  max-height: 43.75px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  flex-shrink: 0;
+}
+
+
+.leave-balance-row-top {
+  width: auto;
+  height: 20px;
+
+  min-height: 20px;
+
+  box-sizing: border-box;
+
+  display: contents;
+}
+
+.leave-balance-row-top > span {
+  order: 1;
+
+  width: 105px;
+  min-width: 105px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  line-height: 16px;
+
+  font-weight: 600;
+
+  color: #66696B;
+
+  white-space: nowrap;
+
+  text-align: left;
+
+  flex-shrink: 0;
+}
+
+.leave-balance-row-top > strong {
+  order: 3;
+
+  width: 75px;
+  min-width: 75px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  line-height: 16px;
+
+  font-weight: 600;
+
+  color: #66696B;
+
+  white-space: nowrap;
+
+  text-align: right;
+
+  flex-shrink: 0;
+}
+.leave-balance-row-top > strong small {
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  line-height: 16px;
+
+  font-weight: 600;
+
+  color: #66696B;
+}
+
+/* ============================================================
+   PROGRESS BAR BACKGROUND
+   ============================================================ */
+
+.leave-balance-progress {
+  order: 2;
+
+  width: 180px;
+  height: 8px;
+
+  min-width: 180px;
+  max-width: 180px;
+
+  min-height: 8px;
+  max-height: 8px;
+
+  box-sizing: border-box;
+
+  background: #D8DEE1;
+
+  border-radius: 10px;
+
+  overflow: hidden;
+
+  flex-shrink: 0;
+}
+.leave-balance-progress-fill {
+  height: 8px;
+
+  min-height: 8px;
+  max-height: 8px;
+
+  box-sizing: border-box;
+
+  border-radius: 10px;
+
+  transition: width 0.2s ease;
+}
+
+/* Casual Leave */
+.leave-balance-row:nth-child(1)
+.leave-balance-progress-fill {
+  background: #2FB27F;
+}
+
+/* Sick Leave */
+.leave-balance-row:nth-child(2)
+.leave-balance-progress-fill {
+  background: #59D0F3;
+}
+
+/* Annual Leave */
+.leave-balance-row:nth-child(3)
+.leave-balance-progress-fill {
+  background: #2099D1;
+}
+
+/* Compensatory Leave */
+.leave-balance-row:nth-child(4)
+.leave-balance-progress-fill {
+  background: #2FB27F;
+}
+
+/* ============================================================
+   APPROVAL STATUS HEADER
+   ============================================================ */
+
+.leave-approval-card .leave-details-card-header {
+  width: 491px;
+  height: 51px;
+  min-height: 51px;
+  max-height: 51px;
+
+  box-sizing: border-box;
+
+  padding: 3px 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  background: rgba(31, 150, 203, 0.10);
+
+  flex-shrink: 0;
+}
 /* ============================================================
    APPROVAL HEADER
    ============================================================ */
@@ -472,31 +1756,77 @@
 .approval-header-text {
   margin-left: auto;
 
-  color: #198754;
+  display: flex;
+  align-items: center;
 
-  font-size: 8px;
+  gap: 10px;
+
+  color: #218257;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  line-height: 16px;
 
   font-weight: 600;
+  font-style: normal;
+
+  letter-spacing: 0;
+
+  white-space: nowrap;
 }
 
+.approval-header-check {
+  width: 17.25px;
+  height: 17.25px;
+
+  min-width: 17.25px;
+  min-height: 17.25px;
+
+  max-width: 17.25px;
+  max-height: 17.25px;
+
+  flex: 0 0 17.25px;
+
+  display: block;
+}
 
 /* ============================================================
    APPROVAL TIMELINE
    ============================================================ */
 
 .approval-timeline {
-  padding: 6px 8px;
+  width: 491px;
+  height: 181px;
+  min-height: 181px;
+  max-height: 181px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 2px 10px;
+
+  flex-shrink: 0;
 }
 
 .approval-item {
-  min-height: 39px;
+  width: 100%;
+  min-height: 49px;
+
+  box-sizing: border-box;
 
   display: grid;
 
   grid-template-columns:
-    20px
-    1fr
-    95px;
+    23px
+    minmax(0, 1fr)
+    auto;
+
+  column-gap: 9px;
 
   align-items: center;
 
@@ -518,112 +1848,415 @@
 
   position: absolute;
 
-  top: 19px;
-  bottom: -1px;
+  top: 23px;
+  bottom: -17px;
 
-  width: 1px;
+  left: 50%;
+
+  width: 2px;
+
+  transform: translateX(-50%);
 
   background: #20A765;
-}
 
+  z-index: 1;
+}
 .approval-item:last-child
 .approval-line::after {
   display: none;
 }
 
 .approval-circle {
-  width: 13px;
-  height: 13px;
+  width: 23px;
+  height: 23px;
+
+  min-width: 23px;
+  min-height: 23px;
+
+  box-sizing: border-box;
 
   border-radius: 50%;
 
-  background: #20A765;
-
-  color: #FFFFFF;
+  background: #218257;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
-  font-size: 8px;
-
   z-index: 2;
+}
+
+.approval-circle svg {
+  width: 14px;
+  height: 14px;
+
+  display: block;
+
+  flex: 0 0 14px;
 }
 
 .approval-content h4 {
   margin: 0;
 
-  font-size: 9px;
+  font-family: "Inter", sans-serif;
+
+  font-size: 13px;
+  line-height: 22px;
 
   font-weight: 700;
-}
+  font-style: normal;
 
+  letter-spacing: 0;
+
+  color: #000000;
+
+  text-align: left;
+}
 .approval-content p {
   margin: 1px 0;
 
-  font-size: 7px;
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  line-height: 16px;
+
+  font-weight: 500;
+  font-style: normal;
+
+  letter-spacing: 0;
 
   color: #66696B;
+
+  text-align: left;
 }
 
 .approval-content span {
-  font-size: 7px;
+  display: block;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 10px;
+  line-height: 16px;
+
+  font-weight: 600;
+  font-style: normal;
+
+  letter-spacing: 0;
 
   color: #66696B;
-}
 
+  text-align: left;
+}
 
 /* ============================================================
    APPROVAL PERSON
    ============================================================ */
 
 .approval-person {
-  height: 30px;
+  width: fit-content;
+  min-width: 0;
+
+  height: 49px;
+  min-height: 49px;
+
+  box-sizing: border-box;
 
   display: flex;
-
   align-items: center;
 
   gap: 5px;
 
-  padding: 3px 6px;
+  padding: 6px 9px;
 
-  background: #DCEEF7;
+  background: rgba(31, 150, 203, 0.15);
 
-  border-radius: 4px;
+  border-radius: 5px;
+
+  justify-self: end;
+
+  flex-shrink: 0;
 }
 
+
 .approval-person-avatar {
-  width: 22px;
-  height: 22px;
+  width: 34px;
+  height: 34px;
+
+  min-width: 34px;
+  min-height: 34px;
 
   border-radius: 50%;
 
   background: #D5E3EA;
 
   display: flex;
-
   align-items: center;
   justify-content: center;
 
-  font-size: 11px;
+  overflow: hidden;
+
+  flex-shrink: 0;
 }
+
+.approval-person-avatar img {
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  border-radius: 50%;
+
+  display: block;
+}
+
 
 .approval-person strong {
   display: block;
 
-  font-size: 8px;
+  font-family: "Inter", sans-serif;
+
+  font-size: 14px;
+  line-height: 16px;
+
+  font-weight: 600;
+  font-style: normal;
+
+  letter-spacing: 0;
+
+  color: #000000;
+
+  white-space: nowrap;
 }
 
 .approval-person span {
   display: block;
 
-  font-size: 7px;
+  font-family: "Inter", sans-serif;
+
+  font-size: 11px;
+  line-height: 16px;
+
+  font-weight: 600;
+  font-style: normal;
+
+  letter-spacing: 0;
 
   color: #66696B;
+
+  white-space: nowrap;
+}
+/* ============================================================
+   LEAVE ACTION BUTTONS
+   Positioned directly below Leave Balance card
+   ============================================================ */
+
+.leave-details-actions {
+  width: 468px;
+  height: 80px;
+
+  box-sizing: border-box;
+
+  margin-left: 551px;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+
+  justify-content: flex-start;
+
+  gap: 50px;
+
+  padding: 10px 0;
+
+  flex-shrink: 0;
+}
+/* ============================================================
+   DOWNLOAD LEAVE DETAILS BUTTON
+   Figma: 257px × 44px
+   ============================================================ */
+
+.download-leave-button {
+  width: 257px;
+  height: 44px;
+
+  min-width: 257px;
+  max-width: 257px;
+
+  min-height: 44px;
+  max-height: 44px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 10px;
+
+  border: 1px solid rgba(27, 112, 245, 0.50);
+
+  border-radius: 10px;
+
+  background: rgba(27, 112, 245, 0.15);
+
+  color: #1B70F5;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 17px;
+  line-height: 12px;
+
+  font-weight: 500;
+
+  font-style: normal;
+
+  letter-spacing: 0;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
 }
 
+
+/* Download icon */
+
+.download-leave-button svg {
+  width: 19px;
+  height: 22px;
+
+  min-width: 19px;
+  min-height: 22px;
+
+  max-width: 19px;
+  max-height: 22px;
+
+  flex: 0 0 19px;
+
+  display: block;
+}
+
+
+/* Download text */
+
+.download-leave-button span {
+  width: 201px;
+  height: 12px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 17px;
+
+  line-height: 12px;
+
+  font-weight: 500;
+
+  color: #1B70F5;
+
+  white-space: nowrap;
+
+  text-align: left;
+}
+
+
+/* ============================================================
+   CANCEL LEAVE BUTTON
+   Figma: 172px × 45px
+   ============================================================ */
+
+.cancel-leave-button {
+  width: 172px;
+  height: 45px;
+
+  min-width: 172px;
+  max-width: 172px;
+
+  min-height: 45px;
+  max-height: 45px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: row;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 10px;
+
+  border: 1px solid rgba(217, 0, 0, 0.50);
+
+  border-radius: 10px;
+
+  background: rgba(217, 0, 0, 0.15);
+
+  color: #D90000;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 17px;
+  line-height: 12px;
+
+  font-weight: 500;
+
+  font-style: normal;
+
+  letter-spacing: 0;
+
+  cursor: pointer;
+
+  white-space: nowrap;
+
+  flex-shrink: 0;
+}
+
+
+/* Cancel icon */
+
+.cancel-leave-button svg {
+  width: 20.44px;
+  height: 23px;
+
+  min-width: 20.44px;
+  min-height: 23px;
+
+  max-width: 20.44px;
+  max-height: 23px;
+
+  flex: 0 0 20.44px;
+
+  display: block;
+}
+
+
+/* Cancel text */
+
+.cancel-leave-button span {
+  width: 114px;
+  height: 12px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 17px;
+
+  line-height: 12px;
+
+  font-weight: 500;
+
+  color: #D90000;
+
+  white-space: nowrap;
+
+  text-align: left;
+}
 
 /* ============================================================
    RESPONSIVE
