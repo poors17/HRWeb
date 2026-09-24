@@ -30,7 +30,8 @@
 
 .leave-details-breadcrumb {
   width: 100%;
-  height: 38px;
+  height: 66px;
+  min-height: 66px;
 
   box-sizing: border-box;
 
@@ -39,26 +40,25 @@
 
   gap: 10px;
 
-  padding: 0 10px;
+  padding: 10px;
 
-  margin-bottom: 10px;
+  margin-bottom: 0;
 
   background: #E5F0F8;
 
-  font-family: "Inter", sans-serif;
+  border-radius: 10px 10px 0 0;
 
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   line-height: 19px;
-
   font-weight: 500;
 
-  letter-spacing: 0;
+  color: #1B70F5;
 
-  color: #000000;
+  flex-shrink: 0;
 }
-
 .leave-details-back {
-  width: 24px;
+  width: 23px;
   height: 24px;
 
   border: none;
@@ -366,15 +366,16 @@
    PROFILE AREA
    ============================================================ */
 .leave-details-profile {
-  width: 320px;
+  width: 314px;
   height: 101px;
 
   box-sizing: border-box;
 
   display: flex;
+  flex-direction: row;
   align-items: center;
 
-  gap: 15px;
+  gap: 10px;
 
   padding: 5px 10px;
 
@@ -382,14 +383,21 @@
 }
 
 .leave-details-employee-name {
-  min-width: 0;
+  width: 199px;
+  height: 101px;
+
+  box-sizing: border-box;
 
   display: flex;
   flex-direction: column;
 
-  justify-content: center;
+  justify-content: space-between;
+  align-items: flex-start;
 
-  gap: 0;
+  padding: 0 10px;
+  gap: 6px;
+
+  flex-shrink: 0;
 }
 
 /* ============================================================
@@ -420,78 +428,104 @@
    ============================================================ */
 
 .leave-details-employee-name h2 {
+  width: 169px;
+  height: 25px;
+
   margin: 0;
 
-  font-family: "Inter", sans-serif;
+  box-sizing: border-box;
 
+  font-family: "Inter", sans-serif;
+  font-style: normal;
+  font-weight: 700;
   font-size: 20px;
   line-height: 25px;
-
-  font-weight: 700;
+  letter-spacing: 0.05em;
 
   color: #000000;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 /* ============================================================
    EMPLOYEE ID
    ============================================================ */
 
 .leave-details-employee-name p {
-  margin: 2px 0 6px;
+  width: 93px;
+  height: 25px;
+
+  margin: 0;
+  padding: 0 5px;
+
+  box-sizing: border-box;
+
+  display: flex;
+  align-items: center;
 
   font-family: "Inter", sans-serif;
-
+  font-style: normal;
+  font-weight: 600;
   font-size: 15px;
   line-height: 25px;
-
-  font-weight: 600;
-
-  letter-spacing: 5%;
+  letter-spacing: 0.05em;
 
   color: #66696B;
+
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* ============================================================
    DESIGNATION BADGE
    ============================================================ */
 
+/* ============================================================
+   DESIGNATION / ROLE BADGE
+   Dynamic value - Figma based
+   ============================================================ */
+
 .leave-details-employee-name span {
   display: inline-flex;
 
-  align-items: center;
-  justify-content: flex-start;
-
-  width: 136px;
+  width: fit-content;
   min-width: 136px;
-  max-width: 136px;
+  max-width: 179px;
 
-  height: 25px;
-  min-height: 25px;
-  max-height: 25px;
+  height: 35px;
+  min-height: 35px;
+  max-height: 35px;
 
   box-sizing: border-box;
 
-  padding: 0 2px;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 10px;
+
+  background: rgba(26, 188, 254, 0.1);
 
   border-radius: 10px;
 
-  background: #D9F1FC;
-
-  color: #1B70F5;
-
   font-family: "Inter", sans-serif;
+  font-style: normal;
 
   font-size: 14px;
   line-height: 25px;
-
   font-weight: 600;
 
-  letter-spacing: 3%;
+  letter-spacing: 0.05em;
+
+  color: #1B70F5;
 
   white-space: nowrap;
 
-  flex-shrink: 0;
-}
+  overflow: hidden;
+  text-overflow: ellipsis;
 
+  flex-shrink: 1;
+}
 
 /* ============================================================
    EMPLOYEE INFORMATION COLUMNS
@@ -507,11 +541,18 @@
 
   display: grid;
 
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  align-items: stretch;
+
+  padding: 0 10px;
+
+  gap: 6px;
+
+  border-left: 1px solid #000000;
 
   flex-shrink: 1;
 }
-
 
 /* ============================================================
    EACH INFORMATION COLUMN
@@ -526,48 +567,45 @@
 
   padding: 10px 30px;
 
-  border-left: 1px solid #000000;
-
   display: flex;
-
   flex-direction: column;
 
   justify-content: center;
+  align-items: flex-start;
 
   gap: 10px;
+
+  border-right: 1px solid #000000;
 }
-.leave-details-employee-info > div:first-child {
-  padding-left: 65px;
+.leave-details-employee-info > div:last-child {
+  border-right: none;
 }
 /* LABEL */
-
 .leave-details-employee-info small {
   font-family: "Inter", sans-serif;
 
-  font-size: 14px;
+  font-size: 15px;
   line-height: 25px;
 
-  font-weight: 500;
+  font-weight: 600;
 
   color: #66696B;
 
   margin: 0;
 }
 
-
-/* VALUE */
-
 .leave-details-employee-info strong {
   font-family: "Inter", sans-serif;
 
-  font-size: 14px;
+  font-size: 15px;
   line-height: 25px;
+
+  font-weight: 600;
 
   color: #000000;
 
-  font-weight: 700;
+  margin: 0;
 }
-
 
 /* ============================================================
    CONTENT GRID
@@ -931,7 +969,7 @@
   display: -webkit-box;
 
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 2;
+
 
   overflow: hidden;
 }
@@ -976,14 +1014,13 @@
 
   background: #EFF5FA;
 
-  border: 1px solid #CCD8DF;
+  border: none;
 
   border-radius: 10px;
 
   overflow: hidden;
 
-  box-shadow:
-    0 2px 4px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 
   flex-shrink: 0;
 }
@@ -1011,12 +1048,15 @@
 
   padding: 5px 10px;
 
-  background: #DCEEF7;
+  background: rgba(31, 150, 203, 0.1);
+
+  border-radius: 10px 10px 0 0;
 }
 
 .leave-details-card-icon {
-  width: 24px;
-  height: 24px;
+  width: 17.83px;
+  height: 20.06px;
+
   object-fit: contain;
   flex-shrink: 0;
 
@@ -1034,7 +1074,7 @@
 
   font-family: "Inter", sans-serif;
 
-  font-size: 16px;
+  font-size: 14px;
   line-height: 25px;
 
   font-weight: 600;
@@ -1084,27 +1124,27 @@
 .leave-details-card-header button {
   margin-left: auto;
 
-  width: 167px;
-  height: 35px;
+  width: 115px;
+  height: 26px;
 
-  min-width: 167px;
-  max-width: 167px;
+  min-width: 115px;
+  max-width: 115px;
 
   box-sizing: border-box;
 
   border: none;
 
-  background: #C6E8FA;
+  background: rgba(27, 112, 245, 0.1);
   color: #1B70F5;
 
-  border-radius: 10px;
+  border-radius: 5px;
 
-  padding: 5px 15px;
+  padding: 5px 10px;
 
   font-family: "Inter", sans-serif;
 
   font-size: 13px;
-  line-height: 25px;
+  line-height: 16px;
 
   font-weight: 600;
 
@@ -1123,13 +1163,13 @@
 
 /* Edit icon */
 .edit-request-button svg {
-  width: 20px;
-  height: 20px;
+  width: 14px;
+  height: 14px;
 
-  min-width: 20px;
-  min-height: 20px;
+  min-width: 14px;
+  min-height: 14px;
 
-  flex: 0 0 20px;
+  flex: 0 0 14px;
 
   color: #1B70F5;
 
@@ -1141,7 +1181,7 @@
 
 .leave-info-list {
   width: 100%;
-  height: 145.5px;
+  height: 177px;
 
   box-sizing: border-box;
 
@@ -1149,62 +1189,157 @@
   flex-direction: column;
 
   justify-content: space-between;
+  align-items: flex-start;
 
   padding: 5px 10px 10px;
 
-  gap: 0;
+  gap: 5px;
+
+  align-self: stretch;
+  flex-grow: 0;
 }
 
 .leave-info-row {
-  width: 393px;
-  min-width: 393px;
-
-  min-height: 25px;
-
   box-sizing: border-box;
 
-  display: grid;
-  grid-template-columns: 140px 1fr;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 
+  justify-content: space-between;
   align-items: center;
-  column-gap: 10px;
+  align-content: center;
+
+  padding: 0;
+  gap: 10px;
 
   flex-shrink: 0;
 }
 
 .leave-info-row:has(.leave-reason) {
-  height: 37px;
-  min-height: 37px;
-}
+  width: 393px;
+  height: 34px;
+  min-height: 34px;
 
+  align-items: flex-start;
+  align-content: flex-start;
+}
 .leave-info-row:has(.leave-approved-small) {
-  height: 28px;
-  min-height: 28px;
+  width: 272px;
+  height: 23px;
+  min-height: 23px;
 }
 .leave-info-row > span {
   font-family: "Inter", sans-serif;
   font-size: 12px;
-  line-height: 100%;
-  font-weight: 700;
+  line-height: 15px;
+  font-weight: 500;
   font-style: normal;
   letter-spacing: 0;
   color: #000000;
-  text-align: left;
+  text-align: center;
   white-space: nowrap;
 }
 
 .leave-info-row > strong {
   font-family: "Inter", sans-serif;
-  font-size: 12px;
-  line-height: 100%;
-  font-weight: 700;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
   font-style: normal;
   letter-spacing: 0;
   color: #000000;
-  text-align: left;
-  justify-self: start;
+  text-align: center;
+  white-space: nowrap;
 }
 
+.leave-info-row:has(.leave-type-blue) {
+  width: 263px;
+  height: 19px;
+  min-height: 19px;
+}
+/* ============================================================
+   FROM DATE ROW
+   ============================================================ */
+
+.leave-info-row:nth-child(2) {
+  width: 275px;
+  height: 15px;
+  min-height: 15px;
+}
+
+.leave-info-row:nth-child(2) > span {
+  width: 60px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.leave-info-row:nth-child(2) > strong {
+  width: 100px;
+  height: 13px;
+  flex-shrink: 0;
+
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+/* ============================================================
+   TO DATE ROW
+   ============================================================ */
+
+.leave-info-row:nth-child(3) {
+  width: 269px;
+  height: 15px;
+  min-height: 15px;
+}
+
+.leave-info-row:nth-child(3) > span {
+  width: 45px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.leave-info-row:nth-child(3) > strong {
+  width: 94px;
+  height: 13px;
+  flex-shrink: 0;
+
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+  text-align: center;
+}
+
+
+/* ============================================================
+   DURATION ROW
+   ============================================================ */
+
+.leave-info-row:nth-child(4) {
+  width: 216px;
+  height: 15px;
+  min-height: 15px;
+}
+
+.leave-info-row:nth-child(4) > span {
+  width: 50px;
+  height: 15px;
+  flex-shrink: 0;
+}
+
+.leave-info-row:nth-child(4) > strong {
+  width: 40px;
+  height: 15px;
+  flex-shrink: 0;
+
+  font-size: 12px;
+  line-height: 15px;
+  font-weight: 500;
+  text-align: center;
+}
 .leave-type-blue {
   width: 89px;
   height: 19px;
@@ -1247,29 +1382,79 @@
 }
 .leave-reason {
   width: 215px;
-  height: 37px;
+  height: 34px;
+
+  min-width: 215px;
+  max-width: 215px;
 
   box-sizing: border-box;
 
-  background: #66696B26;
-  border-radius: 5px;
-
   padding: 5px;
 
+  background: rgba(102, 105, 107, 0.15);
+  border-radius: 5px;
+
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  justify-content: flex-start;
 
   gap: 10px;
 
   font-family: "Inter", sans-serif;
-  font-size: 12px;
-  line-height: 100%;
+  font-size: 10px;
+  line-height: 12px;
   font-weight: 500;
+
   color: #000000;
 
   text-align: left;
+
+  /* IMPORTANT */
+  white-space: normal;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  flex-shrink: 0;
+}
+.leave-info-row > strong.leave-reason {
+  width: 215px;
+  height: 34px;
+
+  box-sizing: border-box;
+
+  white-space: normal !important;
+  overflow: hidden;
+
+  overflow-wrap: break-word;
+  word-break: break-word;
+
+  text-overflow: clip;
+
+  text-align: left;
+
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+  padding: 5px;
+}
+.leave-reason-text {
+  width: 163px;
+  height: 12px;
+
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  line-height: 12px;
+  font-weight: 500;
+
+  color: #000000;
+
+  text-align: center;
+
   white-space: nowrap;
   overflow: hidden;
+  text-overflow: ellipsis;
 }
 .apply-leave-remark {
   width: 200px;
@@ -1299,18 +1484,21 @@
   overflow: hidden;
 }
 .leave-approved-small {
-  min-width: 102px;
+  width: 93px;
+  min-width: 93px;
+  max-width: 93px;
+
   height: 23px;
   min-height: 23px;
   max-height: 23px;
 
   box-sizing: border-box;
 
-  padding: 0 10px;
+  padding: 3px 9px;
 
-  border-radius: 10px;
+  border-radius: 5px;
 
-  background: rgba(83, 228, 116, 0.20);
+  background: rgba(83, 228, 116, 0.3);
   color: #216731 !important;
 
   display: inline-flex;
@@ -1321,17 +1509,21 @@
 
   font-family: "Inter", sans-serif;
   font-size: 12px;
-  line-height: 23px;
+  line-height: 15px;
   font-weight: 700;
 
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .leave-approved-small svg {
-  width: 18px;
-  height: 18px;
+  width: 15px;
+  height: 15px;
 
-  flex: 0 0 18px;
+  min-width: 15px;
+  min-height: 15px;
+
+  flex: 0 0 15px;
 
   display: block;
 }
@@ -2319,9 +2511,9 @@
     grid-template-columns: 1fr;
   }
 
-  .leave-info-row {
-    grid-template-columns: 95px 1fr;
-  }
+ .leave-info-row {
+  width: 100%;
+}
 
   .approval-item {
     grid-template-columns:
@@ -2333,4 +2525,276 @@
     display: none;
   }
 
+}
+
+/* ============================================================
+   RESPONSIVE - FINAL
+   The Figma layout (491 + 468 + 119px columns) needs ~1130px of
+   content width. Below that:
+   <=1400px : 2 columns, attachment card spans the full width
+   <=768px  : single column
+   Selectors are scoped to .leave-details-content because
+   .leave-balance-card is also styled by the dashboard CSS.
+============================================================ */
+
+@media (max-width: 1400px) {
+
+  .leave-details-header {
+    height: auto;
+    min-height: 66px;
+    flex-wrap: wrap;
+  }
+
+  .leave-details-header-content {
+    flex: 1 1 320px;
+    width: auto;
+    min-width: 0;
+    height: auto;
+  }
+
+  .leave-details-header-status {
+    flex-wrap: wrap;
+  }
+
+  .leave-details-content {
+    padding: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-template-areas:
+      "info     apply"
+      "approval balance"
+      "attach   attach"
+      "actions  actions";
+    justify-content: stretch;
+  }
+
+  .leave-details-content > * {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    transform: none;
+  }
+
+  .leave-details-content > .leave-details-card { grid-area: info; }
+  .leave-details-content > .apply-leave-details-card { grid-area: apply; }
+  .leave-details-content > .leave-approval-card { grid-area: approval; }
+  .leave-details-content > .leave-balance-card { grid-area: balance; }
+  .leave-details-content > .leave-details-attachment-card { grid-area: attach; }
+  .leave-details-content > .leave-details-actions { grid-area: actions; }
+
+  .leave-details-content > .leave-details-attachment-card {
+    min-height: 160px;
+  }
+
+  .leave-details-content .attachment-header,
+  .leave-details-content .leave-approval-card .leave-details-card-header,
+  .leave-details-content .approval-timeline,
+  .leave-details-content .leave-info-row {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .leave-details-content .approval-timeline,
+  .leave-details-content .leave-balance-content {
+    height: auto;
+  }
+
+  .leave-details-content .leave-reason,
+  .leave-details-content .apply-leave-remark {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .leave-details-content .leave-balance-progress {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 60px;
+  }
+
+  .leave-details-content > .leave-details-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .leave-details-content {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "info"
+      "apply"
+      "approval"
+      "balance"
+      "attach"
+      "actions";
+  }
+
+  .leave-details-employee {
+    height: auto;
+    min-height: 0;
+  }
+
+  .leave-details-profile {
+    height: auto;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .leave-details-employee-name,
+  .leave-details-employee-name span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .leave-details-header h1 {
+    font-size: 20px;
+  }
+
+  .leave-details-header p {
+    line-height: 18px;
+  }
+
+  .leave-id-badge,
+  .approved-badge {
+    width: auto;
+  }
+
+  .leave-details-content > .leave-details-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .download-leave-button,
+  .cancel-leave-button,
+  .download-leave-button span,
+  .cancel-leave-button span {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 1400px) {
+
+  /* Employee strip: profile on top, info items wrap below */
+  .leave-details-employee {
+    height: auto;
+    min-height: 111px;
+    flex-wrap: wrap;
+  }
+
+  .leave-details-employee-info {
+    flex: 1 1 100%;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    row-gap: 8px;
+    padding: 0 10px 10px;
+  }
+
+  .leave-details-employee-info > div {
+    height: auto;
+    min-height: 56px;
+  }
+
+  .leave-details-employee-info > div:first-child {
+    padding-left: 30px;
+  }
+
+  /* Card bodies grow with their content */
+  .leave-details-content .leave-info-list {
+    height: auto;
+  }
+
+  .leave-details-content .leave-reason,
+  .leave-details-content .apply-leave-remark {
+    height: auto;
+    min-height: 37px;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .leave-details-content .leave-info-row {
+    column-gap: 8px;
+  }
+
+  .leave-details-content .leave-info-row > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Approval timeline: approver chip goes under the step text */
+  .leave-details-content .approval-item {
+    height: auto;
+    grid-template-columns: 23px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 6px;
+  }
+
+  .leave-details-content .approval-timeline {
+    min-height: 0;
+    max-height: none;
+  }
+
+  .leave-details-content .approval-item {
+    flex-shrink: 0;
+  }
+
+  .leave-details-content .approval-line {
+    grid-row: 1 / span 2;
+  }
+
+  .leave-details-content .leave-info-row:has(.leave-reason),
+  .leave-details-content .leave-info-row:has(.apply-leave-remark) {
+    height: auto;
+  }
+
+  .leave-details-content .approval-person {
+    grid-column: 2;
+    justify-self: start;
+    max-width: 100%;
+    margin: 0 0 8px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .leave-details-header-content {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .leave-details-employee-info > div,
+  .leave-details-employee-info > div:first-child {
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 4px 8px;
+    border-left: none;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .leave-details-content .leave-info-row {
+    grid-template-columns: minmax(84px, 38%) minmax(0, 1fr);
+  }
+
+  .leave-details-content .leave-details-card-header {
+    flex-wrap: wrap;
+    height: auto;
+    gap: 8px;
+  }
+
+  .leave-details-content .edit-request-button {
+    width: auto;
+    min-width: 0;
+    padding: 6px 12px;
+  }
 }

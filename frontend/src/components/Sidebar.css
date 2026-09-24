@@ -1098,11 +1098,58 @@
 }
 
 
+/* ============================================================
+   MOBILE - TRUE COLLAPSED SIDEBAR
+   ============================================================ */
+
 @media (max-width: 768px) {
 
   .employee-sidebar.sidebar-collapsed {
     width: 72px !important;
     min-width: 72px !important;
     max-width: 72px !important;
+    flex: 0 0 72px !important;
+  }
+
+  /* Hide HRMS text in collapsed mobile sidebar */
+  .employee-sidebar.sidebar-collapsed .hrms-text {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    width: 0 !important;
+  }
+
+  /* Keep only HRMS icon */
+  .employee-sidebar.sidebar-collapsed .hrms-section {
+    width: 72px !important;
+    margin: 0 !important;
+    padding: 5px 0 !important;
+  }
+
+  /* Hide section headings */
+  .employee-sidebar.sidebar-collapsed .section-title {
+    display: none !important;
+  }
+
+  /* Center collapsed icons */
+  .employee-sidebar.sidebar-collapsed .collapsed-item {
+    width: 100% !important;
+    justify-content: center !important;
+    padding: 0 !important;
+  }
+
+  .employee-sidebar.sidebar-collapsed .collapsed-icon {
+    width: 21px;
+    height: 21px;
+  }
+
+  /* Hide expanded menu items */
+  .employee-sidebar.sidebar-collapsed .sidebar-item {
+    display: none !important;
+  }
+
+  /* Hide help section */
+  .employee-sidebar.sidebar-collapsed .sidebar-bottom {
+    display: none !important;
   }
 }

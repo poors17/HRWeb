@@ -9,6 +9,13 @@ import {
 import Layout from "../styles/Layout";
 import "./EmployeeDashboard.css";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
+const getAuthHeaders = () => ({
+  "Content-Type": "application/json",
+  Authorization: `Bearer ${localStorage.getItem("token") || ""}`,
+});
+
 // ============================================================
 // LOGO
 // ============================================================
@@ -53,6 +60,64 @@ import calenderIcon from "../assets/cards/calender.png";
 
 const EmployeeDashboard = ({ employee = null }) => {
   const navigate = useNavigate();
+  const [leaveBalances, setLeaveBalances] = React.useState([]);
+  const [leaveBalanceLoading, setLeaveBalanceLoading] = React.useState(true);
+  const [leaveBalanceError, setLeaveBalanceError] = React.useState("");
+
+  const loadLeaveBalances = React.useCallback(async () => {
+    try {
+      setLeaveBalanceLoading(true);
+      setLeaveBalanceError("");
+
+      const response = await fetch(`${API_URL}/api/leave/balance?year=${new Date().getFullYear()}`, {
+        method: "GET",
+        headers: getAuthHeaders(),
+      });
+
+      const data = await response.json().catch(() => ({}));
+
+      if (response.status === 401) {
+        setLeaveBalanceError("Your session has expired. Please sign in again.");
+        localStorage.removeItem("token");
+        localStorage.removeItem("isLoggedIn");
+        navigate("/login", { replace: true });
+        return;
+      }
+
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to load leave balances");
+      }
+
+      const mappedBalances = Array.isArray(data)
+        ? data.map((item) => ({
+            id: Number(item.leave_type_id ?? item.id),
+            name: item.leave_type_name || item.name || "Leave",
+            totalDays: Number(item.total_days ?? 0),
+            usedDays: Number(item.used_days ?? 0),
+            remaining: Number(
+              item.remaining ??
+                (Number(item.total_days ?? 0) - Number(item.used_days ?? 0))
+            ),
+          }))
+        : [];
+
+      setLeaveBalances(mappedBalances);
+    } catch (loadError) {
+      setLeaveBalanceError(loadError.message || "Unable to load leave balances");
+      setLeaveBalances([]);
+    } finally {
+      setLeaveBalanceLoading(false);
+    }
+  }, [navigate]);
+
+  React.useEffect(() => {
+    loadLeaveBalances();
+  }, [loadLeaveBalances]);
+
+  const totalRemainingDays = leaveBalances.reduce(
+    (sum, item) => sum + Number(item.remaining ?? 0),
+    0
+  );
 
   // ==========================================================
   // ATTENDANCE DATA
@@ -157,6 +222,13 @@ const EmployeeDashboard = ({ employee = null }) => {
   // VIEW ATTENDANCE DETAILS
   // ==========================================================
 
+  const today = new Date();
+  const hour = today.getHours();
+  const greeting = hour < 12 ? "Good Morning" : hour < 17 ? "Good Afternoon" : "Good Evening";
+  const firstName = (localStorage.getItem("name") || "").trim().split(/\s+/)[0] || "there";
+  const todayDay = today.toLocaleDateString("en-GB", { weekday: "long" });
+  const todayDate = today.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+
   const handleViewAttendance = () => {
     navigate("/attendance");
   };
@@ -185,11 +257,11 @@ const handleViewLeave = () => {
           <div className="welcome-content">
 
             <div className="welcome-small">
-              Good Morning,
+              {greeting},
             </div>
 
             <div className="welcome-title">
-              Name!
+              {firstName}!
               <span className="welcome-hand">
                 👋
               </span>
@@ -227,11 +299,11 @@ const handleViewLeave = () => {
             <div className="dashboard-date-content">
 
               <span className="dashboard-day">
-                Monday
+                {todayDay}
               </span>
 
               <strong>
-                10 Sep 2026
+                {todayDate}
               </strong>
 
               <span className="date-gradient-line"></span>
@@ -656,11 +728,15 @@ const handleViewLeave = () => {
   <div className="leave-remaining-section">
 
     <div className="leave-remaining-days">
-      12 Days
+      {leaveBalanceLoading
+        ? "Loading..."
+        : leaveBalanceError
+          ? "0 Days"
+          : `${totalRemainingDays} ${totalRemainingDays === 1 ? "Day" : "Days"}`}
     </div>
 
     <div className="leave-remaining-label">
-      Remaining
+      {leaveBalanceLoading ? "Loading leave balances..." : leaveBalanceError ? "Unable to load leave balance" : "Remaining"}
     </div>
 
   </div>
@@ -668,81 +744,47 @@ const handleViewLeave = () => {
 
   {/* LEAVE LEVELS */}
   <div className="leave-level-section">
-
-    {/* CASUAL */}
-    <div className="leave-balance-row">
-
-      <span className="leave-balance-label">
-        Casual
-      </span>
-
-      <div className="leave-progress-wrapper">
-
-        <div className="leave-progress-track">
-          <div
-            className="leave-progress-fill variant-green"
-            style={{ width: "60%" }}
-          />
-        </div>
-
-        <span className="leave-balance-value">
-          6 / 10
-        </span>
-
+    {leaveBalanceLoading ? (
+      <div className="leave-balance-row">
+        <span className="leave-balance-label">Loading...</span>
       </div>
-
-    </div>
-
-
-    {/* SICK */}
-    <div className="leave-balance-row">
-
-      <span className="leave-balance-label">
-        Sick
-      </span>
-
-      <div className="leave-progress-wrapper">
-
-        <div className="leave-progress-track">
-          <div
-            className="leave-progress-fill variant-blue"
-            style={{ width: "40%" }}
-          />
-        </div>
-
-        <span className="leave-balance-value">
-          4 / 10
-        </span>
-
+    ) : leaveBalanceError ? (
+      <div className="leave-balance-row">
+        <span className="leave-balance-label">{leaveBalanceError}</span>
       </div>
-
-    </div>
-
-
-    {/* EARNED */}
-    <div className="leave-balance-row">
-
-      <span className="leave-balance-label">
-        Earned
-      </span>
-
-      <div className="leave-progress-wrapper">
-
-        <div className="leave-progress-track">
-          <div
-            className="leave-progress-fill variant-cyan"
-            style={{ width: "20%" }}
-          />
-        </div>
-
-        <span className="leave-balance-value">
-          2 / 10
-        </span>
-
+    ) : leaveBalances.length === 0 ? (
+      <div className="leave-balance-row">
+        <span className="leave-balance-label">No leave balances available.</span>
       </div>
+    ) : (
+      leaveBalances.map((entry, index) => {
+        const remaining = Number(entry.remaining ?? 0);
+        const total = Number(entry.totalDays ?? 0);
+        const width = total > 0 ? Math.max(0, Math.min(100, (remaining / total) * 100)) : 0;
+        const variantClass = ["variant-green", "variant-blue", "variant-cyan"][index % 3];
 
-    </div>
+        return (
+          <div className="leave-balance-row" key={entry.id || entry.name || index}>
+            <span className="leave-balance-label">
+              {entry.name}
+            </span>
 
+            <div className="leave-progress-wrapper">
+              <div className="leave-progress-track">
+                <div
+                  className={`leave-progress-fill ${variantClass}`}
+                  style={{ width: `${width}%` }}
+                />
+              </div>
+
+              <span className="leave-balance-value">
+                {remaining} / {total}
+              </span>
+            </div>
+          </div>
+        );
+      })
+    )}
   </div>
 
 
@@ -760,126 +802,6 @@ const handleViewLeave = () => {
   </button>
 </div>
 </div>
-
-      {/* ==================================================
-    LEAVE PAYSLIP CARD
-=================================================== */}
-
-<div className="leave-payslip-card">
-
-  {/* HEADER */}
-  <div className="payslip-card-header">
-
-    <div className="payslip-card-icon">
-      <img
-        src={payslipIcon}
-        alt="Leave Payslip"
-      />
-    </div>
-
-    <h2 className="payslip-card-title">
-      Leave Payslip
-    </h2>
-
-  </div>
-
-
-  {/* MONTH / SALARY */}
-  <div className="payslip-month-section">
-
-    <strong className="payslip-month">
-      August 2026
-    </strong>
-
-    <span className="payslip-subtitle">
-      Net Salary Credited
-    </span>
-
-  </div>
-
-
-  {/* PAYSLIP ITEMS */}
-  <div className="payslip-list">
-
-    {/* LATEST PAYSLIP */}
-    <div className="payslip-item">
-
-      <div className="payslip-calendar-icon">
-        <img
-  src={dateRangeIcon}
-  alt="Payslip"
-/>
-      </div>
-
-      <div className="payslip-item-content">
-
-        <strong>
-          payslip available
-        </strong>
-
-        <span>
-          Download your latest payslip.
-        </span>
-
-      </div>
-
-    </div>
-
-
-    {/* PREVIOUS PAYSLIP */}
-    <div className="payslip-item">
-
-      <div className="payslip-calendar-icon">
-       <img
-  src={dateRangeIcon}
-  alt="Payslip"
-/>
-      </div>
-
-      <div className="payslip-item-content">
-
-        <strong>
-          payslip available
-        </strong>
-
-        <span>
-          21 sep 2026
-        </span>
-
-      </div>
-
-    </div>
-
-  </div>
-
-
-  {/* FOOTER */}
-  <div className="payslip-card-footer">
-
-    <button
-      type="button"
-      className="payslip-view-button"
-    >
-      <span>
-        View Leave
-      </span>
-
-      <ArrowRight
-        size={28}
-        strokeWidth={1.7}
-      />
-    </button>
-
-  </div>
-
-</div>
-
-
-          {/* ==================================================
-              FOURTH CARD
-          =================================================== */}
-
-          <div className="figma-empty-card"></div>
 
         </section>
 

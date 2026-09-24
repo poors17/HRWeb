@@ -12,7 +12,7 @@ import victinetLogo from "../assets/dashboard/Victinet Logo.svg";
 import homeIcon from "../assets/dashboard/home-svg.svg";
 import profileIcon from "../assets/dashboard/profile-svg.svg";
 import attendanceIcon from "../assets/dashboard/time-svg.svg";
-import leaveIcon from "../assets/dashboard/vector.svg";
+import leaveIcon from "../assets/dashboard/Vector.svg";
 import payslipIcon from "../assets/dashboard/pay-svg.svg";
 
 import documentIcon from "../assets/dashboard/document.svg";
@@ -52,6 +52,7 @@ const menuSections = [
       {
         label: "Leave",
         icon: leaveIcon,
+        path: "/leave-details",
         iconClass: "leave-menu-icon",
       },
       {

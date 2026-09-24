@@ -8,14 +8,18 @@ import {
   Bell,
   ChevronDown,
   CircleUserRound,
+  Menu,
 } from "lucide-react";
 
 import "./Header.css";
 
-const Header = ({ darkMode, setDarkMode }) => {
+const Header = ({ darkMode, setDarkMode, onMenuClick }) => {
   const navigate = useNavigate();
 
   const [profileOpen, setProfileOpen] = React.useState(false);
+  const userName = localStorage.getItem("name") || "User";
+  const userRole = localStorage.getItem("role") || "Employee";
+  const department = localStorage.getItem("department") || "";
 
   // ==========================================
   // LOGOUT
@@ -28,6 +32,8 @@ const Header = ({ darkMode, setDarkMode }) => {
     localStorage.removeItem("refreshToken");
     localStorage.removeItem("empId");
     localStorage.removeItem("role");
+    localStorage.removeItem("department");
+    localStorage.removeItem("name");
 
     // Close profile menu
     setProfileOpen(false);
@@ -38,6 +44,22 @@ const Header = ({ darkMode, setDarkMode }) => {
 
   return (
     <header className="employee-header">
+
+      {/* ==========================================
+          MOBILE MENU (visible on small screens)
+      ========================================== */}
+
+      <button
+        type="button"
+        className="header-menu-button"
+        onClick={onMenuClick}
+        aria-label="Open menu"
+      >
+        <Menu
+          size={24}
+          strokeWidth={2}
+        />
+      </button>
 
       {/* ==========================================
           SEARCH
@@ -142,11 +164,17 @@ const Header = ({ darkMode, setDarkMode }) => {
           <div className="profile-details">
 
             <div className="employee-name">
-              Employee Name
+              {userName}
             </div>
 
             <div className="employee-role">
-              Employee <span>•</span> Department
+              {department ? (
+                <>
+                  {userRole} <span>•</span> {department}
+                </>
+              ) : (
+                userRole
+              )}
             </div>
 
           </div>

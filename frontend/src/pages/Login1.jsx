@@ -26,34 +26,10 @@ function Login1() {
   const [loading, setLoading] = useState(false);
 
   // ================================
-  // FRONTEND TEST USERS
-  // ================================
-  // These are only for frontend testing.
-  // No backend or API is required.
-
-  const users = [
-    {
-      empId: "10002",
-      password: "1234",
-      role: "Employee",
-    },
-    {
-      empId: "admin",
-      password: "admin123",
-      role: "Admin",
-    },
-    {
-      empId: "superadmin",
-      password: "super123",
-      role: "Super Admin",
-    },
-  ];
-
-  // ================================
   // LOGIN FUNCTION
   // ================================
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     // Reset previous errors
@@ -90,61 +66,54 @@ function Login1() {
       return;
     }
 
-    // ================================
-    // FRONTEND LOGIN
-    // ================================
-
     setLoading(true);
 
-    // Small delay to show login loading state
-    setTimeout(() => {
-      const user = users.find(
-        (item) =>
-          item.empId === empId &&
-          item.password === password
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            employeeId: empId,
+            password,
+          }),
+        }
       );
+      const data = await response.json();
 
-      // ================================
-      // INVALID LOGIN
-      // ================================
-
-      if (!user) {
-        setMessage(
-          "ID or Password incorrect. Please try again"
-        );
-
-        setEmpIdError(true);
-        setPasswordError(true);
-
-        setLoading(false);
-
-        return;
+      if (!response.ok) {
+        throw new Error(data.message || "Unable to sign in");
       }
 
-      // ================================
-      // SAVE LOGIN INFORMATION
-      // ================================
+      const user = data.user;
 
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("empId", user.empId);
-      localStorage.setItem("role", user.role);
-
-      // ================================
-      // NAVIGATION
-      // ================================
-
-      if (user.role === "Super Admin") {
-        navigate("/dashboard", { replace: true });
-      } else if (user.role === "Admin") {
-        navigate("/dashboard", { replace: true });
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("refreshToken", data.refreshToken);
+      localStorage.setItem("empId", user.employeeCode || empId);
+      localStorage.setItem("name", user.name || "User");
+      localStorage.setItem("role", user.role || "Employee");
+      if (user.department) {
+        localStorage.setItem("department", user.department);
       } else {
-        navigate("/employee-dashboard", {
-          replace: true,
-        });
+        localStorage.removeItem("department");
       }
 
+      if (user.role === "Super Admin" || user.role === "Admin") {
+        navigate("/dashboard", { replace: true });
+      } else {
+        navigate("/employee-dashboard", { replace: true });
+      }
+    } catch (error) {
+      setMessage(error.message || "Unable to sign in. Please try again");
+      setEmpIdError(true);
+      setPasswordError(true);
+    } finally {
       setLoading(false);
-    }, 500);
+    }
   };
 
   // ================================

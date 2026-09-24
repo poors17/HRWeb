@@ -385,8 +385,8 @@
     gap: 4px;
   }
 
+  /* Keep the profile arrow: it is the only way to reach Logout. */
   .profile-details,
-  .profile-arrow-button,
   .header-divider {
     display: none;
   }
@@ -530,5 +530,153 @@
 
   .profile-details {
     display: none;
+  }
+}
+
+/* ============================================================
+   MOBILE MENU BUTTON + COMPACT HEADER
+============================================================ */
+
+.header-menu-button {
+  display: none;
+
+  width: 40px;
+  height: 40px;
+
+  flex-shrink: 0;
+
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #171717;
+
+  cursor: pointer;
+}
+
+.header-menu-button:hover {
+  background: #d2f6ed;
+  color: #003f58;
+}
+
+.employee-page.dark-mode .header-menu-button {
+  color: #f8fafc;
+}
+
+.employee-page.dark-mode .header-menu-button:hover {
+  background: #263f45;
+  color: #5eead4;
+}
+
+@media (max-width: 992px) {
+
+  .employee-header {
+    gap: 12px;
+    padding-left: 20px;
+  }
+
+  .header-search {
+    flex: 1 1 auto;
+    min-width: 0;
+    max-width: 280px;
+  }
+
+  .header-actions {
+    flex-shrink: 0;
+    gap: 8px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .employee-header {
+    gap: 8px;
+    padding: 0 10px;
+  }
+
+  .header-menu-button {
+    display: flex;
+  }
+
+  .header-search {
+    max-width: none;
+    height: 40px;
+    padding: 0 12px;
+    gap: 8px;
+  }
+
+  .header-actions {
+    gap: 2px;
+  }
+
+  .header-divider,
+  .profile-details {
+    display: none;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .header-search {
+    width: auto;
+  }
+
+  .header-icon-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header-icon-button svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .employee-profile {
+    gap: 2px;
+  }
+
+  .profile-image {
+    width: 34px;
+    height: 34px;
+  }
+
+  .profile-image svg {
+    width: 22px;
+    height: 22px;
+  }
+}
+
+@media (max-width: 400px) {
+
+  .employee-header {
+    gap: 4px;
+    padding: 0 6px;
+  }
+
+  .header-search {
+    padding: 0 10px;
+  }
+
+  .header-search svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .header-actions {
+    gap: 0;
+  }
+
+  .header-icon-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .profile-arrow-button {
+    width: 24px;
+    margin-left: 0;
   }
 }

@@ -299,11 +299,8 @@
    ============================================================ */
 
 .attendance-details-employee-info h2 {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
+  width: auto;
   height: 29px;
-  max-height: 29px;
 
   margin: 0;
   padding: 0;
@@ -319,19 +316,7 @@
 
   color: #000000;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
-}
-
-.attendance-details-employee-info h2::-webkit-scrollbar {
-  display: none;
+  white-space: nowrap;
 }
 
 
@@ -340,11 +325,8 @@
    ============================================================ */
 
 .attendance-details-employee-info p {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
+  width: auto;
   height: 22px;
-  max-height: 22px;
 
   margin: 4px 0 0;
   padding: 0;
@@ -360,19 +342,7 @@
 
   color: #66696b;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
-}
-
-.attendance-details-employee-info p::-webkit-scrollbar {
-  display: none;
+  white-space: nowrap;
 }
 
 
@@ -382,17 +352,13 @@
 
 .attendance-details-employee-info span {
   width: 283px;
-  max-width: 283px;
-  min-width: 0;
   height: 18px;
-  max-height: 18px;
 
   margin: 3px 0 0;
   padding: 0;
 
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
 
   gap: 9px;
 
@@ -409,20 +375,9 @@
 
   color: #66696b;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
+  white-space: nowrap;
 }
 
-.attendance-details-employee-info span::-webkit-scrollbar {
-  display: none;
-}
 
 /* Vertical divider */
 
@@ -550,11 +505,7 @@
 /* DATE TEXT */
 
 .attendance-details-date strong {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
   height: 23px;
-  max-height: 23px;
 
   margin: 0;
   padding: 0;
@@ -570,19 +521,7 @@
 
   color: #000000;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
-}
-
-.attendance-details-date strong::-webkit-scrollbar {
-  display: none;
+  white-space: nowrap;
 }
 /* ============================================================
    TOP SUMMARY CARDS
@@ -788,11 +727,6 @@
 }
 
 .attendance-summary-content strong {
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  max-height: 23px;
-
   font-size: 19px;
   font-weight: 700;
 
@@ -800,19 +734,7 @@
 
   color: #0d2f3f;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
-}
-
-.attendance-summary-content strong::-webkit-scrollbar {
-  display: none;
+  white-space: nowrap;
 }
 
 .attendance-summary-content small {
@@ -1411,24 +1333,14 @@
 
   color: #000000;
 
-white-space: normal;
-overflow-wrap: anywhere;
-word-break: break-word;
-text-overflow: clip;
-
-overflow-y: auto;
-overflow-x: hidden;
-
-scrollbar-width: none;
+  white-space: nowrap;
 
   text-align: right;
 
   flex-shrink: 0;
 }
 
-.attendance-login-card .attendance-detail-row strong::-webkit-scrollbar {
-  display: none;
-}
+
 /* ============================================================
    WORKING HOURS PROGRESS
    ============================================================ */
@@ -1555,31 +1467,13 @@ scrollbar-width: none;
 .attendance-working-progress > span {
   display: block;
 
-  width: 100%;
-  max-width: 100%;
-  min-width: 0;
-  max-height: 15px;
-
   margin-top: 2px;
 
   font-size: 12px;
-  line-height: 15px;
+
   color: #66696b;
-
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
 }
 
-.attendance-working-progress > span::-webkit-scrollbar {
-  display: none;
-}
 .attendance-working-progress {
   background: #EFF5FA;
 }
@@ -2929,16 +2823,10 @@ grid-template-columns:
 
 .attendance-login-card .login-source-content .attendance-detail-row strong {
   width: auto;
-  max-width: 100%;
-  min-width: 0;
-
   height: 17px;
-  max-height: 17px;
-
+  min-width: 0;
   margin: 0;
   padding: 0;
-
-  box-sizing: border-box;
 
   font-family: "Inter", sans-serif;
   font-size: 12px;
@@ -2948,20 +2836,9 @@ grid-template-columns:
   letter-spacing: 0;
 
   color: #000000;
-
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
+  white-space: nowrap;
   text-align: left;
-
-  flex: 1 1 auto;
-
-  scrollbar-width: none;
+  flex-shrink: 0;
 }
 /* ============================================================
    LOCATION INFORMATION
@@ -3116,18 +2993,15 @@ grid-template-columns:
 /* ============================================================
    LOCATION VALUE
    ============================================================ */
+
 .location-card .attendance-detail-row strong {
   width: 133px;
-  max-width: 133px;
-  min-width: 0;
-
   height: 15px;
-  max-height: 15px;
+
+  min-width: 0;
 
   margin: 0;
   padding: 0;
-
-  box-sizing: border-box;
 
   font-family: "Inter", sans-serif;
   font-size: 12px;
@@ -3139,25 +3013,11 @@ grid-template-columns:
 
   color: #000000;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
+  white-space: nowrap;
   text-align: left;
 
   flex-shrink: 0;
-
-  scrollbar-width: none;
 }
-
-.location-card .attendance-detail-row strong::-webkit-scrollbar {
-  display: none;
-}
-
 
 /* ============================================================
    ADDRESS ROW
@@ -3184,40 +3044,22 @@ grid-template-columns:
 .location-card .attendance-detail-row:last-child strong,
 .location-card .address-value {
   width: 133px;
-  max-width: 133px;
-  min-width: 0;
-
   height: 26px;
-  max-height: 26px;
 
   margin: 0;
   padding: 0;
 
-  box-sizing: border-box;
-
   font-family: "Inter", sans-serif;
   font-size: 12px;
   font-weight: 500;
+
   line-height: 13px;
   letter-spacing: 0;
 
   color: #000000;
 
   white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
   text-align: left;
-
-  scrollbar-width: none;
-}
-.location-card .attendance-detail-row:last-child strong::-webkit-scrollbar,
-.location-card .address-value::-webkit-scrollbar {
-  display: none;
 }
 
 .attendance-status-card {
@@ -3323,17 +3165,10 @@ grid-template-columns:
 
 .shift-card .attendance-detail-row strong {
   min-width: 0;
-  max-width: 100%;
-
-  height: 15px;
-  max-height: 15px;
-
   flex: 1 1 auto;
 
   margin: 0;
   padding: 0;
-
-  box-sizing: border-box;
 
   font-family: "Inter", sans-serif;
   font-size: 12px;
@@ -3342,35 +3177,9 @@ grid-template-columns:
   letter-spacing: 0.05em;
   color: #000000;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  text-align: left;
-
-  scrollbar-width: none;
-}
-.shift-card .attendance-detail-row strong::-webkit-scrollbar {
-  display: none;
-}
-
-/* ============================================================
-   SHIFT TIMING - SHOW COMPLETE TIME
-   ============================================================ */
-
-.shift-card .attendance-detail-row:nth-of-type(3) strong {
-  min-width: max-content;
-  max-width: none;
-
   white-space: nowrap;
-  overflow: visible;
-  text-overflow: clip;
+  text-align: left;
 }
-
 /* First row starts below header */
 .shift-card .attendance-detail-card-title + .attendance-detail-row {
   margin-top: 10px;
@@ -3546,12 +3355,13 @@ grid-template-columns:
 
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
 
-  gap: 0;
+  gap: 8px;
 
   border-bottom: 1px solid #DFDFDF;
 }
+
 
 /* First row starts 10px below header */
 
@@ -3561,11 +3371,9 @@ grid-template-columns:
 
 
 /* ---------- LABEL ---------- */
-.status-card .attendance-detail-row span {
-  width: 178px;
-  min-width: 178px;
-  max-width: 178px;
 
+.status-card .attendance-detail-row span {
+  width: auto;
   height: 15px;
 
   margin: 0;
@@ -3589,13 +3397,11 @@ grid-template-columns:
 
 
 /* ---------- VALUE ---------- */
+
 .status-card .attendance-detail-row strong {
   width: auto;
-  max-width: calc(100% - 178px);
-  min-width: 0;
-
   height: 15px;
-  max-height: 15px;
+  min-width: 0;
 
   margin: 0;
   padding: 0;
@@ -3611,23 +3417,11 @@ grid-template-columns:
 
   color: #000000;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
+  white-space: nowrap;
 
   text-align: left;
 
-  flex: 1 1 auto;
-
-  scrollbar-width: none;
-}
-
-.status-card .attendance-detail-row strong::-webkit-scrollbar {
-  display: none;
+  flex-shrink: 0;
 }
 
 
@@ -3836,9 +3630,6 @@ grid-template-columns:
    ============================================================ */
 
 .attendance-timeline-card .timeline-item > strong {
-  min-width: 0;
-  max-width: 100%;
-
   margin: 0;
   padding: 0;
 
@@ -3853,20 +3644,9 @@ grid-template-columns:
 
   color: #000000;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
+  white-space: nowrap;
 }
 
-.attendance-timeline-card .timeline-item > strong::-webkit-scrollbar {
-  display: none;
-}
 
 /* ============================================================
    ACTION
@@ -3887,9 +3667,6 @@ grid-template-columns:
 
 
 .attendance-timeline-card .timeline-item > div b {
-  min-width: 0;
-  max-width: 100%;
-
   margin: 0;
   padding: 0;
 
@@ -3904,19 +3681,7 @@ grid-template-columns:
 
   color: #000000;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
-}
-
-.attendance-timeline-card .timeline-item > div b::-webkit-scrollbar {
-  display: none;
+  white-space: nowrap;
 }
 
 
@@ -3925,9 +3690,6 @@ grid-template-columns:
    ============================================================ */
 
 .attendance-timeline-card .timeline-item > div small {
-  min-width: 0;
-  max-width: 100%;
-
   margin: 0;
   padding: 0;
 
@@ -3942,20 +3704,9 @@ grid-template-columns:
 
   color: #66696B;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
-
-  overflow-y: auto;
-  overflow-x: hidden;
-
-  scrollbar-width: none;
+  white-space: nowrap;
 }
 
-.attendance-timeline-card .timeline-item > div small::-webkit-scrollbar {
-  display: none;
-}
 
 /* ============================================================
    VERTICAL LINE
@@ -4297,6 +4048,7 @@ text-overflow: clip;
   height: 40px;
 }
 
+
 .attendance-history-table td {
   height: 40px;
 
@@ -4319,13 +4071,10 @@ text-overflow: clip;
 
   letter-spacing: 0.05em;
 
-  white-space: normal;
-  overflow-wrap: anywhere;
-  word-break: break-word;
-  text-overflow: clip;
+  white-space: nowrap;
 
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 
@@ -4426,5 +4175,121 @@ text-overflow: clip;
   .attendance-history-table td {
     padding: 7px 3px;
     font-size: 8px;
+  }
+}
+
+
+/* ============================================================
+   RESPONSIVE - FINAL
+   Must stay at the end of the file: earlier breakpoints are
+   re-declared further down and would otherwise win.
+   <=1360px : 2-column card grid
+   <=768px  : summary boxes / cards fill the width
+   <=600px  : single column
+============================================================ */
+
+@media (max-width: 1360px) {
+
+  .attendance-details-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "login location"
+      "shift status"
+      "progress progress"
+      "remark timeline"
+      "history history";
+    height: auto;
+  }
+
+  .attendance-details-grid > * {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .attendance-details-grid .attendance-detail-row {
+    width: auto;
+  }
+
+  .attendance-details-grid > .attendance-login-card { grid-area: login; }
+  .attendance-details-grid > .location-card { grid-area: location; }
+  .attendance-details-grid > .shift-card { grid-area: shift; }
+  .attendance-details-grid > .status-card { grid-area: status; }
+  .attendance-details-grid > .attendance-working-progress { grid-area: progress; }
+  .attendance-details-grid > .attendance-remark-card { grid-area: remark; }
+  .attendance-details-grid > .attendance-timeline-card { grid-area: timeline; }
+  .attendance-details-grid > .attendance-history-card { grid-area: history; }
+
+  .attendance-detail-row strong,
+  .address-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .attendance-history-table-wrap {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .attendance-details-summary {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .attendance-details-employee,
+  .attendance-details-employee-left,
+  .attendance-details-employee-info {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .attendance-details-employee {
+    height: auto;
+    min-height: 0;
+  }
+
+  .attendance-details-employee-info h2,
+  .attendance-details-employee-info p,
+  .attendance-details-employee-info span {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .attendance-details-employee-info span {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .attendance-details-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "login"
+      "location"
+      "shift"
+      "status"
+      "progress"
+      "remark"
+      "timeline"
+      "history";
+  }
+
+  .attendance-details-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .attendance-history-table {
+    min-width: 480px;
   }
 }
