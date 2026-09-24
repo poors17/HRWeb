@@ -1,12 +1,13 @@
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
 
-export function isLoggedIn() {
+// LocalStorage-la irunthu login status-ah check panra function
+const checkAuth = () => {
   return localStorage.getItem("isLoggedIn") === "true";
-}
+};
 
 function ProtectedRoute() {
-  return isLoggedIn() ? (
+  return checkAuth() ? (
     <Outlet />
   ) : (
     <Navigate to="/login" replace />
@@ -14,7 +15,7 @@ function ProtectedRoute() {
 }
 
 export function PublicRoute() {
-  return isLoggedIn() ? (
+  return checkAuth() ? (
     <Navigate to="/employee-dashboard" replace />
   ) : (
     <Outlet />

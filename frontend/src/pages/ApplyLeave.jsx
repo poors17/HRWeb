@@ -20,46 +20,24 @@ const getAuthHeaders = () => ({
 
 const formatDate = (date) => {
   if (!date) return "";
-
   const [year, month, day] = date.split("-");
-  const dateObject = new Date(
-    Number(year),
-    Number(month) - 1,
-    Number(day)
-  );
-
-  return dateObject.toLocaleDateString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-  });
+  const dateObject = new Date(Number(year), Number(month) - 1, Number(day));
+  return dateObject.toLocaleDateString("en-GB", { day: "2-digit", month: "short", year: "numeric" });
 };
 
 const formatDateTime = (value) => {
   if (!value) return "Not available";
-
   const dateObject = new Date(value);
-  if (Number.isNaN(dateObject.getTime())) {
-    return value;
-  }
-
-  return dateObject.toLocaleString("en-GB", {
-    day: "2-digit",
-    month: "short",
-    year: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
+  if (Number.isNaN(dateObject.getTime())) return value;
+  return dateObject.toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" });
 };
 
 const calculateDuration = (from, to) => {
   if (!from || !to) return 0;
-
   const fromDateObject = new Date(`${from}T00:00:00`);
   const toDateObject = new Date(`${to}T00:00:00`);
   const difference = toDateObject.getTime() - fromDateObject.getTime();
   const days = Math.floor(difference / (1000 * 60 * 60 * 24)) + 1;
-
   return days > 0 ? days : 0;
 };
 
@@ -69,10 +47,13 @@ const ApplyLeave = () => {
   const [leaveTypes, setLeaveTypes] = React.useState([]);
   const [leaveType, setLeaveType] = React.useState("");
   const [leaveTypeId, setLeaveTypeId] = React.useState("");
-  const [fromDate, setFromDate] = React.useState("");
-  const [toDate, setToDate] = React.useState("");
-  const [reason, setReason] = React.useState("");
-  const [contactNumber, setContactNumber] = React.useState("");
+  
+  // DEFAULT VALUES SET PANNIYACHU FOR UI TESTING
+  const [fromDate, setFromDate] = React.useState("2026-09-24");
+  const [toDate, setToDate] = React.useState("2026-09-25");
+  const [reason, setReason] = React.useState("Personal work");
+  
+  const [contactNumber, setContactNumber] = React.useState("+91 98777 77777");
   const [handoverOptions, setHandoverOptions] = React.useState([]);
   const [handoverEmployeeId, setHandoverEmployeeId] = React.useState("");
   const [loading, setLoading] = React.useState(true);
@@ -81,11 +62,7 @@ const ApplyLeave = () => {
   const [submitting, setSubmitting] = React.useState(false);
 
   const redirectToLogin = React.useCallback(() => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("token");
-    localStorage.removeItem("refreshToken");
-    localStorage.removeItem("empId");
-    localStorage.removeItem("role");
+    localStorage.clear();
     navigate("/login", { replace: true });
   }, [navigate]);
 
@@ -94,10 +71,7 @@ const ApplyLeave = () => {
 
   const handleFromDateChange = (value) => {
     setFromDate(value);
-
-    if (toDate && value > toDate) {
-      setToDate(value);
-    }
+    if (toDate && value > toDate) setToDate(value);
   };
 
   const handleToDateChange = (value) => {
@@ -105,141 +79,78 @@ const ApplyLeave = () => {
       setToDate(fromDate);
       return;
     }
-
     setToDate(value);
   };
 
+  // ==========================================================
+  // 1. LOAD LEAVE DATA & HANDOVER EMPLOYEES (API COMMENTED)
+  // ==========================================================
   const loadLeaveData = React.useCallback(async () => {
     try {
       setLoading(true);
       setError("");
 
+      /* =========================================================
+         ORIGINAL BACKEND API CODE - COMMENTED FOR FRONTEND WORK
+      ========================================================= 
       const [leaveTypesResponse, leaveBalancesResponse, employeesResponse] = await Promise.all([
-        fetch(`${API_URL}/api/leave/types`, {
-          method: "GET",
-          headers: getAuthHeaders(),
-        }),
-        fetch(`${API_URL}/api/leave/balance?year=${new Date().getFullYear()}`, {
-          method: "GET",
-          headers: getAuthHeaders(),
-        }),
-        fetch(`${API_URL}/api/employees?employment_status=Active`, {
-          method: "GET",
-          headers: getAuthHeaders(),
-        }),
+        fetch(`${API_URL}/api/leave/types`, { method: "GET", headers: getAuthHeaders() }),
+        fetch(`${API_URL}/api/leave/balance?year=${new Date().getFullYear()}`, { method: "GET", headers: getAuthHeaders() }),
+        fetch(`${API_URL}/api/employees?employment_status=Active`, { method: "GET", headers: getAuthHeaders() }),
       ]);
+      ========================================================= */
 
-      const leaveTypesData = await leaveTypesResponse.json().catch(() => ({}));
-      const balancesData = await leaveBalancesResponse.json().catch(() => ({}));
-      const employeesData = await employeesResponse.json().catch(() => ({}));
+      // DUMMY DATA FOR FRONTEND UI
+      const dummyLeaveBalances = [
+        { id: 1, name: "Casual Leave", totalDays: 12, remaining: 8 },
+        { id: 2, name: "Sick Leave", totalDays: 10, remaining: 6 },
+        { id: 3, name: "Annual Leave", totalDays: 20, remaining: 14 },
+        { id: 4, name: "Compensatory leave", totalDays: 5, remaining: 2 },
+      ];
 
-      if (leaveTypesResponse.status === 401 || leaveBalancesResponse.status === 401 || employeesResponse.status === 401) {
-        setError("Your session has expired. Please sign in again.");
-        redirectToLogin();
-        return;
-      }
+      const dummyEmployees = [
+        { id: 1, employeeCode: "001010", fullName: "Demo name" },
+        { id: 2, employeeCode: "001011", fullName: "John Doe" },
+      ];
 
-      if (!leaveTypesResponse.ok) {
-        throw new Error(leaveTypesData.message || "Unable to load leave types");
-      }
+      setTimeout(() => {
+        setLeaveTypes(dummyLeaveBalances);
+        setHandoverOptions(dummyEmployees);
+        setLeaveType(dummyLeaveBalances[0].name);
+        setLeaveTypeId(String(dummyLeaveBalances[0].id));
+        setHandoverEmployeeId(String(dummyEmployees[0].id));
+        setLoading(false);
+      }, 500);
 
-      if (!leaveBalancesResponse.ok) {
-        throw new Error(balancesData.message || "Unable to load leave balances");
-      }
-
-      if (!employeesResponse.ok) {
-        throw new Error(employeesData.message || "Unable to load employees");
-      }
-
-      const mappedLeaveTypes = Array.isArray(leaveTypesData) ? leaveTypesData.map((item) => ({
-        id: Number(item.id ?? item.leave_type_id),
-        name: item.leave_type_name || item.name || "Leave",
-        totalDays: Number(item.total_days ?? item.default_days_per_year ?? 0),
-      })) : [];
-
-      const mappedBalances = Array.isArray(balancesData) ? balancesData.map((item) => ({
-        id: Number(item.leave_type_id ?? item.id),
-        name: item.leave_type_name || item.name || "Leave",
-        totalDays: Number(item.total_days ?? 0),
-        usedDays: Number(item.used_days ?? 0),
-        remaining: Number(item.remaining ?? (Number(item.total_days ?? 0) - Number(item.used_days ?? 0))),
-      })) : [];
-
-      const mappedHandoverOptions = Array.isArray(employeesData)
-        ? employeesData
-            .filter((employee) => employee?.employment_status === "Active")
-            .filter((employee) => employee?.employee_code !== localStorage.getItem("empId"))
-            .map((employee) => ({
-              id: Number(employee.id),
-              employeeCode: employee.employee_code,
-              fullName: employee.full_name,
-            }))
-        : [];
-
-      const balanceByTypeId = new Map(mappedBalances.map((item) => [item.id, item]));
-      const leaveTypesWithBalance = mappedLeaveTypes.map((item) => {
-        const balance = balanceByTypeId.get(item.id);
-        return balance
-          ? { ...item, totalDays: balance.totalDays || item.totalDays, remaining: balance.remaining }
-          : item;
-      });
-
-      setLeaveTypes(leaveTypesWithBalance);
-      setHandoverOptions(mappedHandoverOptions);
-
-      if (mappedLeaveTypes.length > 0) {
-        const defaultType = mappedLeaveTypes[0];
-        setLeaveType(defaultType.name);
-        setLeaveTypeId(String(defaultType.id));
-      }
-
-      if (mappedHandoverOptions.length > 0) {
-        setHandoverEmployeeId((current) => current || String(mappedHandoverOptions[0].id));
-      }
-
-      if (mappedLeaveTypes.length === 0 && mappedBalances.length > 0) {
-        setLeaveTypes(mappedBalances);
-      }
     } catch (loadError) {
-      setError(loadError.message || "Unable to load leave data");
-    } finally {
+      setError("Unable to load leave data");
       setLoading(false);
     }
-  }, [redirectToLogin]);
+  }, []);
 
   React.useEffect(() => {
     loadLeaveData();
   }, [loadLeaveData]);
 
+  // ==========================================================
+  // 2. SUBMIT LEAVE (API COMMENTED, NAVIGATE TO SUBMITTED PAGE)
+  // ==========================================================
   const handleSubmitLeave = async () => {
-    if (!leaveTypeId || !fromDate || !reason.trim()) {
-      setSubmitError("Please fill all required leave fields.");
-      return;
-    }
-
-    if (!toDate && fromDate) {
-      setSubmitError("");
-    }
-
-    const effectiveDuration = calculateDuration(fromDate, toDate || fromDate);
-
-    if (effectiveDuration <= 0) {
-      setSubmitError("End date must be on or after the start date.");
-      return;
-    }
-
     try {
       setSubmitting(true);
       setSubmitError("");
 
+      /* =========================================================
+         ORIGINAL BACKEND API CODE - COMMENTED FOR FRONTEND WORK
+      ========================================================= 
       const response = await fetch(`${API_URL}/api/leave/apply`, {
         method: "POST",
         headers: getAuthHeaders(),
         body: JSON.stringify({
           leaveTypeId: Number(leaveTypeId),
           startDate: fromDate,
-          endDate: toDate || fromDate,
-          totalDays: effectiveDuration,
+          endDate: effectiveToDate,
+          totalDays: duration,
           reason: reason.trim(),
           handoverEmployeeId: handoverEmployeeId ? Number(handoverEmployeeId) : null,
           contactNumber: contactNumber.trim() || null,
@@ -247,31 +158,27 @@ const ApplyLeave = () => {
       });
 
       const data = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(data.message || "Unable to submit");
+      ========================================================= */
 
-      if (response.status === 401 || /Invalid or expired authentication token/i.test(data.message || "")) {
-        setSubmitError("Your session has expired. Please sign in again.");
-        redirectToLogin();
-        return;
-      }
+      // DUMMY SUBMIT SUCCESS - NAVIGATE TO LEAVE SUBMITTED PAGE
+      setTimeout(() => {
+        setSubmitting(false);
+        navigate("/leave-submitted", {
+          state: {
+            leaveRequest: { id: 999 },
+            leaveType: leaveType || "Casual Leave",
+            fromDate: formatDate(fromDate),
+            toDate: formatDate(effectiveToDate),
+            duration: `${duration > 0 ? duration : 2} Days`,
+            appliedOn: "24 Sep 2026, 01:15 PM",
+            status: "Pending",
+          },
+        });
+      }, 1000);
 
-      if (!response.ok) {
-        throw new Error(data.message || "Unable to submit leave request");
-      }
-
-      navigate("/leave-submitted", {
-        state: {
-          leaveRequest: data,
-          leaveType: leaveType || data.leave_type_name || "Leave",
-          fromDate: formatDate(data.start_date || fromDate),
-          toDate: formatDate(data.end_date || toDate || fromDate),
-          duration: `${Number(data.total_days ?? effectiveDuration)} ${Number(data.total_days ?? effectiveDuration) === 1 ? "Day" : "Days"}`,
-          appliedOn: formatDateTime(data.created_at),
-          status: data.status || "Pending",
-        },
-      });
     } catch (submitErrorMessage) {
       setSubmitError(submitErrorMessage.message || "Unable to submit leave request");
-    } finally {
       setSubmitting(false);
     }
   };
@@ -310,18 +217,14 @@ const ApplyLeave = () => {
 
         <section className="apply-leave-grid">
           <div className="apply-leave-form-card">
+            
             <div className="apply-leave-form-row">
-              <label>
-                Leave Type <span>*</span>
-              </label>
-
+              <label>Leave Type <span>*</span></label>
               <div className="apply-leave-select-wrapper">
                 <select
                   value={leaveType}
                   onChange={(event) => {
-                    const selected = leaveTypes.find(
-                      (item) => item.name === event.target.value
-                    );
+                    const selected = leaveTypes.find((item) => item.name === event.target.value);
                     setLeaveType(event.target.value);
                     setLeaveTypeId(selected ? String(selected.id) : "");
                   }}
@@ -331,22 +234,16 @@ const ApplyLeave = () => {
                     <option value="">No leave types available</option>
                   ) : (
                     leaveTypes.map((item) => (
-                      <option key={item.id} value={item.name}>
-                        {item.name}
-                      </option>
+                      <option key={item.id} value={item.name}>{item.name}</option>
                     ))
                   )}
                 </select>
-
                 <ChevronDown className="apply-leave-select-arrow" size={18} strokeWidth={2.5} />
               </div>
             </div>
 
             <div className="apply-leave-form-row">
-              <label>
-                From Date <span>*</span>
-              </label>
-
+              <label>From Date <span>*</span></label>
               <div className="apply-leave-date-wrapper">
                 <input
                   type="text"
@@ -354,7 +251,6 @@ const ApplyLeave = () => {
                   readOnly
                   className="apply-leave-date-display"
                 />
-
                 <input
                   type="date"
                   value={fromDate}
@@ -362,16 +258,12 @@ const ApplyLeave = () => {
                   className="apply-leave-native-date"
                   max={toDate || undefined}
                 />
-
                 <img src={calendarIcon} alt="Calendar" className="apply-leave-calendar-icon" />
               </div>
             </div>
 
             <div className="apply-leave-form-row">
-              <label>
-                To Date <span>*</span>
-              </label>
-
+              <label>To Date <span>*</span></label>
               <div className="apply-leave-date-wrapper">
                 <input
                   type="text"
@@ -379,7 +271,6 @@ const ApplyLeave = () => {
                   readOnly
                   className="apply-leave-date-display"
                 />
-
                 <input
                   type="date"
                   value={toDate}
@@ -387,7 +278,6 @@ const ApplyLeave = () => {
                   className="apply-leave-native-date"
                   min={fromDate || undefined}
                 />
-
                 <img src={calendarIcon} alt="Calendar" className="apply-leave-calendar-icon" />
               </div>
             </div>
@@ -395,15 +285,12 @@ const ApplyLeave = () => {
             <div className="apply-leave-form-row">
               <label>Duration</label>
               <div className="apply-leave-duration">
-                {duration} {duration === 1 ? "Day" : "Days"}
+                {duration > 0 ? duration : 2} {(duration > 0 ? duration : 2) === 1 ? "Day" : "Days"}
               </div>
             </div>
 
             <div className="apply-leave-form-row apply-leave-reason-row">
-              <label>
-                Reason <span>*</span>
-              </label>
-
+              <label>Reason <span>*</span></label>
               <textarea
                 value={reason}
                 onChange={(event) => setReason(event.target.value)}
@@ -413,9 +300,9 @@ const ApplyLeave = () => {
           </div>
 
           <div className="apply-leave-right-column">
+            
             <div className="apply-leave-balance-card">
               <div className="apply-leave-balance-header">Leave Balance</div>
-
               <div className="apply-leave-balance-content">
                 {loading ? (
                   <div>Loading leave balances...</div>
@@ -430,9 +317,7 @@ const ApplyLeave = () => {
                     return (
                       <div key={item.id} className="apply-leave-balance-row">
                         <span>{item.name}</span>
-                        <strong>
-                          {available} <small>/ {total} days</small>
-                        </strong>
+                        <strong>{available} <small>/ {total} days</small></strong>
                       </div>
                     );
                   })
@@ -442,7 +327,6 @@ const ApplyLeave = () => {
 
             <div className="apply-leave-handover">
               <label>Work Handover To</label>
-
               <div className="apply-leave-handover-select">
                 <select
                   value={handoverEmployeeId}
@@ -459,7 +343,6 @@ const ApplyLeave = () => {
                     ))
                   )}
                 </select>
-
                 <ChevronDown size={18} strokeWidth={2.5} className="apply-leave-handover-arrow" />
               </div>
             </div>
@@ -468,7 +351,6 @@ const ApplyLeave = () => {
 
         <section className="apply-leave-contact">
           <label>Contact During Leave</label>
-
           <div className="apply-leave-contact-input">
             <Phone size={21} strokeWidth={2} color="#66696B" />
             <input
@@ -484,14 +366,13 @@ const ApplyLeave = () => {
           <button type="button" className="apply-leave-cancel" onClick={() => navigate("/employee-dashboard")}>
             Cancel
           </button>
-
           <button type="button" className="apply-leave-submit" onClick={handleSubmitLeave} disabled={submitting || loading}>
             <Download size={22} strokeWidth={2.5} />
             <span>{submitting ? "Submitting..." : "Submit Leave"}</span>
           </button>
         </section>
 
-        {submitError ? <div style={{ marginTop: "12px", color: "#d93025" }}>{submitError}</div> : null}
+        {submitError ? <div style={{ marginTop: "12px", color: "#d93025", paddingLeft: "10px" }}>{submitError}</div> : null}
       </div>
     </Layout>
   );

@@ -13,7 +13,7 @@ function Login1() {
   const navigate = useNavigate();
 
   // ================================
-  // STATE
+  // STATE (BLANK DEFAULT VALUES)
   // ================================
 
   const [empId, setEmpId] = useState("");
@@ -43,32 +43,29 @@ function Login1() {
 
     if (!empId && !password) {
       setMessage("Enter the ID and Password");
-
       setEmpIdError(true);
       setPasswordError(true);
-
       return;
     }
 
     if (!empId) {
       setMessage("Enter the ID");
-
       setEmpIdError(true);
-
       return;
     }
 
     if (!password) {
       setMessage("Enter the Password");
-
       setPasswordError(true);
-
       return;
     }
 
     setLoading(true);
 
     try {
+      /* =========================================================
+         BACKEND API CODE - COMMENTED FOR FRONTEND WORK
+      ========================================================= 
       const response = await fetch(
         `${import.meta.env.VITE_API_URL}/api/auth/login`,
         {
@@ -89,30 +86,61 @@ function Login1() {
       }
 
       const user = data.user;
+      ========================================================= */
+
+      // =========================================================
+      // DUMMY LOGIN DATA & VALIDATION - FOR UI TESTING
+      // =========================================================
+      
+      // ID check
+      if (empId !== "10002") {
+        setEmpIdError(true);
+        throw new Error("Invalid Employee ID");
+      }
+
+      // Password check
+      if (password !== "1234") {
+        setPasswordError(true);
+        throw new Error("Invalid Password");
+      }
+
+      // INGA THAAN "Admin User" NU IRUNTHATHA "Employee Name" NU MAATHIYACHU
+      const user = {
+        employeeCode: empId,
+        name: "Employee Name", 
+        role: "Employee",
+        department: "IT Department",
+      };
+      
+      const dummyToken = "dummy-token-12345";
+      const dummyRefreshToken = "dummy-refresh-12345";
 
       localStorage.setItem("isLoggedIn", "true");
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("refreshToken", data.refreshToken);
-      localStorage.setItem("empId", user.employeeCode || empId);
-      localStorage.setItem("name", user.name || "User");
-      localStorage.setItem("role", user.role || "Employee");
+      localStorage.setItem("token", dummyToken);
+      localStorage.setItem("refreshToken", dummyRefreshToken);
+      localStorage.setItem("empId", user.employeeCode);
+      localStorage.setItem("name", user.name);
+      localStorage.setItem("role", user.role);
+      
       if (user.department) {
         localStorage.setItem("department", user.department);
       } else {
         localStorage.removeItem("department");
       }
 
-      if (user.role === "Super Admin" || user.role === "Admin") {
-        navigate("/dashboard", { replace: true });
-      } else {
-        navigate("/employee-dashboard", { replace: true });
-      }
+      // 1-second delay animation
+      setTimeout(() => {
+        if (user.role === "Super Admin" || user.role === "Admin") {
+          navigate("/dashboard", { replace: true });
+        } else {
+          navigate("/employee-dashboard", { replace: true });
+        }
+      }, 1000);
+      
     } catch (error) {
       setMessage(error.message || "Unable to sign in. Please try again");
-      setEmpIdError(true);
-      setPasswordError(true);
     } finally {
-      setLoading(false);
+      setTimeout(() => setLoading(false), 1000);
     }
   };
 
@@ -129,23 +157,17 @@ function Login1() {
 
       <div className="login-left">
 
-        {/* BACKGROUND IMAGE */}
-
         <img
           src={login}
           alt="Login Illustration"
           className="login-image"
         />
 
-        {/* BOTTOM LOGO */}
-
         <img
           src={logo1}
           alt="Victinet Logo"
           className="bottom-logo"
         />
-
-        {/* TITLE */}
 
         <h1 className="text-white login-title">
           Greater Technology Starts with
@@ -170,8 +192,6 @@ function Login1() {
           </strong>
         </h1>
 
-        {/* COPYRIGHT */}
-
         <p className="text-white login-right-text">
           Copyright @ 2026
         </p>
@@ -186,19 +206,11 @@ function Login1() {
 
         <div className="login-card">
 
-          {/* =================================
-              VICTINET LOGO
-          ================================= */}
-
           <img
             src={logo}
             alt="Victinet Logo"
             className="login-logo"
           />
-
-          {/* =================================
-              WELCOME MESSAGE
-          ================================= */}
 
           <h4
             className="logo-name text-center fw-300"
@@ -218,15 +230,11 @@ function Login1() {
             </span>
           </h4>
 
-          {/* SUBTITLE */}
-
           <p className="text-center para">
             Sign in to your account to continue
           </p>
 
-          {/* =================================
-              ERROR MESSAGE
-          ================================= */}
+          {/* ERROR MESSAGE */}
 
           <div className="login-message-space">
 
@@ -251,18 +259,12 @@ function Login1() {
 
           </div>
 
-          {/* =================================
-              LOGIN FORM
-          ================================= */}
+          {/* LOGIN FORM */}
 
           <form
             onSubmit={handleLogin}
             className="my-auto"
           >
-
-            {/* =================================
-                EMPLOYEE ID
-            ================================= */}
 
             <label className="input-label">
               EMPLOYEE ID
@@ -281,11 +283,10 @@ function Login1() {
                 value={empId}
                 onChange={(e) => {
                   setEmpId(e.target.value);
-
                   setEmpIdError(false);
                   setMessage("");
                 }}
-                autoComplete="username"
+                autoComplete="off"
                 style={{
                   width: "335px",
                   height: "44px",
@@ -298,10 +299,6 @@ function Login1() {
               />
 
             </div>
-
-            {/* =================================
-                PASSWORD
-            ================================= */}
 
             <label className="input-label">
               PASSWORD
@@ -324,11 +321,10 @@ function Login1() {
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
-
                   setPasswordError(false);
                   setMessage("");
                 }}
-                autoComplete="current-password"
+                autoComplete="off"
                 style={{
                   width: "335px",
                   height: "44px",
@@ -340,8 +336,6 @@ function Login1() {
                   color: "#000000",
                 }}
               />
-
-              {/* PASSWORD EYE */}
 
               <span
                 className="password-icon"
@@ -361,10 +355,6 @@ function Login1() {
               </span>
 
             </div>
-
-            {/* =================================
-                REMEMBER ME / FORGOT PASSWORD
-            ================================= */}
 
             <div className="login-links">
 
@@ -390,10 +380,6 @@ function Login1() {
 
             </div>
 
-            {/* =================================
-                LOGIN BUTTON
-            ================================= */}
-
             <div className="login-button-container">
 
               <button
@@ -409,10 +395,6 @@ function Login1() {
             </div>
 
           </form>
-
-          {/* =================================
-              HR SUPPORT
-          ================================= */}
 
           <h5 className="text-center need">
 

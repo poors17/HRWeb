@@ -329,6 +329,22 @@
 
   flex-shrink: 0;
 }
+
+.approved-badge-icon {
+  width: 18px;
+  height: 18px;
+
+  min-width: 18px;
+  min-height: 18px;
+
+  max-width: 18px;
+  max-height: 18px;
+
+  display: block;
+  flex: 0 0 18px;
+
+  object-fit: contain;
+}
 /* ============================================================
    EMPLOYEE INFORMATION CARD
    Figma:
@@ -1411,7 +1427,8 @@
 
   /* IMPORTANT */
   white-space: normal;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   overflow-wrap: anywhere;
   word-break: break-word;
 
@@ -1424,7 +1441,8 @@
   box-sizing: border-box;
 
   white-space: normal !important;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 
   overflow-wrap: break-word;
   word-break: break-word;
@@ -1481,7 +1499,79 @@
   text-align: left;
 
   white-space: normal;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+/* ============================================================
+   APPLY LEAVE DETAILS - VALUE ALIGNMENT
+   Same value alignment style as Leave Information
+   ============================================================ */
+
+.apply-leave-details-card .leave-info-row {
+  width: 100%;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 10px;
+}
+
+/* Label */
+.apply-leave-details-card .leave-info-row > span:first-child {
+  width: 150px;
+  min-width: 150px;
+  max-width: 150px;
+
+  flex-shrink: 0;
+
+  text-align: left;
+  white-space: nowrap;
+}
+
+/* Normal values */
+.apply-leave-details-card .leave-info-row > strong:not(.leave-approved-small):not(.apply-leave-remark) {
+  width: auto;
+  min-width: 0;
+  max-width: none;
+
+  flex: 1 1 auto;
+
+  text-align: left;
+  white-space: nowrap;
+
+  font-family: "Inter", sans-serif;
+  font-size: 11px;
+  line-height: 13px;
+  font-weight: 500;
+  color: #000000;
+}
+/* APPLY LEAVE DETAILS - REMARK VALUE */
+.leave-info-row > strong.apply-leave-remark {
+  width: 200px;
+  height: 45px;
+
+  min-width: 0;
+  max-width: 200px;
+
+  box-sizing: border-box;
+
+  display: block;
+
+  padding: 5px 10px;
+
+  white-space: normal !important;
+
+  overflow-x: hidden;
+  overflow-y: auto;
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  text-overflow: clip;
+
+  text-align: left;
+
+  line-height: 16px;
 }
 .leave-approved-small {
   width: 93px;
@@ -1516,16 +1606,22 @@
   flex-shrink: 0;
 }
 
-.leave-approved-small svg {
+.leave-approved-small svg,
+.leave-approved-small img {
   width: 15px;
   height: 15px;
 
   min-width: 15px;
   min-height: 15px;
 
+  max-width: 15px;
+  max-height: 15px;
+
   flex: 0 0 15px;
 
   display: block;
+
+  object-fit: contain;
 }
 
 /* ============================================================
@@ -2002,6 +2098,9 @@
 
   padding: 2px 10px;
 
+  overflow-x: hidden;
+overflow-y: scroll;
+
   flex-shrink: 0;
 }
 
@@ -2078,13 +2177,29 @@
   z-index: 2;
 }
 
-.approval-circle svg {
+.approval-circle svg,
+.approval-circle img {
   width: 14px;
   height: 14px;
 
-  display: block;
+  min-width: 14px;
+  min-height: 14px;
 
+  max-width: 14px;
+  max-height: 14px;
+
+  display: block;
   flex: 0 0 14px;
+
+  object-fit: contain;
+}
+
+.approval-check {
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1;
+  display: block;
 }
 
 .approval-content h4 {
@@ -2511,33 +2626,114 @@
     grid-template-columns: 1fr;
   }
 
- .leave-info-row {
-  width: 100%;
-}
+  /* Leave Information - mobile alignment */
+  .leave-info-row {
+    width: 100%;
+    height: auto;
+    min-height: 20px;
+
+    display: grid;
+    grid-template-columns: 76px minmax(0, 1fr);
+    column-gap: 8px;
+
+    align-items: center;
+    justify-content: initial;
+
+    flex-wrap: nowrap;
+  }
+
+  /* Remove desktop fixed widths */
+  .leave-info-row:nth-child(2),
+  .leave-info-row:nth-child(3),
+  .leave-info-row:nth-child(4),
+  .leave-info-row:has(.leave-type-blue),
+  .leave-info-row:has(.leave-reason),
+  .leave-info-row:has(.leave-approved-small) {
+    width: 100%;
+    height: auto;
+    min-height: 20px;
+  }
+
+  /* LABEL */
+  .leave-info-row > span {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: none !important;
+
+    text-align: left !important;
+    justify-self: start;
+
+    white-space: nowrap;
+  }
+
+  /* VALUE */
+  .leave-info-row > strong {
+    width: auto !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+
+    text-align: left !important;
+    justify-self: start;
+
+    white-space: nowrap;
+  }
+
+  /* Leave Type */
+  .leave-info-row .leave-type-blue {
+    width: 89px !important;
+    min-width: 89px !important;
+    max-width: 89px !important;
+
+    justify-self: start;
+    text-align: center !important;
+  }
+
+  /* Reason */
+  .leave-info-row > strong.leave-reason,
+  .leave-info-row .leave-reason {
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+
+    height: 34px;
+
+    justify-self: stretch;
+
+    text-align: left !important;
+
+    white-space: normal !important;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  /* Approved */
+  .leave-info-row .leave-approved-small {
+    width: 93px !important;
+    min-width: 93px !important;
+    max-width: 93px !important;
+
+    justify-self: start;
+    text-align: center !important;
+  }
 
   .approval-item {
     grid-template-columns:
       20px
       1fr;
   }
-
-  .approval-person {
-    display: none;
-  }
-
 }
 
 /* ============================================================
    RESPONSIVE - FINAL
    The Figma layout (491 + 468 + 119px columns) needs ~1130px of
    content width. Below that:
-   <=1400px : 2 columns, attachment card spans the full width
+   <=1024px : 2 columns, attachment card spans the full width
    <=768px  : single column
    Selectors are scoped to .leave-details-content because
    .leave-balance-card is also styled by the dashboard CSS.
 ============================================================ */
 
-@media (max-width: 1400px) {
+@media (max-width: 1024px) {
 
   .leave-details-header {
     height: auto;
@@ -2598,7 +2794,6 @@
     min-width: 0;
   }
 
-  .leave-details-content .approval-timeline,
   .leave-details-content .leave-balance-content {
     height: auto;
   }
@@ -2683,7 +2878,7 @@
   }
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1024px) {
 
   /* Employee strip: profile on top, info items wrap below */
   .leave-details-employee {
@@ -2713,13 +2908,15 @@
     height: auto;
   }
 
-  .leave-details-content .leave-reason,
-  .leave-details-content .apply-leave-remark {
-    height: auto;
-    min-height: 37px;
-    white-space: normal;
-    line-height: 1.35;
-  }
+ .leave-details-content .leave-reason,
+.leave-details-content .apply-leave-remark {
+  white-space: normal;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
 
   .leave-details-content .leave-info-row {
     column-gap: 8px;
@@ -2731,17 +2928,16 @@
   }
 
   /* Approval timeline: approver chip goes under the step text */
-  .leave-details-content .approval-item {
-    height: auto;
-    grid-template-columns: 23px minmax(0, 1fr);
-    column-gap: 10px;
-    row-gap: 6px;
-  }
+.leave-details-content .approval-item {
+  height: auto;
 
-  .leave-details-content .approval-timeline {
-    min-height: 0;
-    max-height: none;
-  }
+  /* Circle | Approval details | Person card */
+  grid-template-columns: 23px minmax(0, 1fr) auto;
+
+  column-gap: 10px;
+  row-gap: 6px;
+}
+
 
   .leave-details-content .approval-item {
     flex-shrink: 0;
@@ -2756,12 +2952,14 @@
     height: auto;
   }
 
-  .leave-details-content .approval-person {
-    grid-column: 2;
-    justify-self: start;
-    max-width: 100%;
-    margin: 0 0 8px;
-  }
+ .leave-details-content .approval-person {
+  grid-column: 3;
+  justify-self: end;
+  align-self: center;
+
+  max-width: 100%;
+  margin: 0;
+}
 }
 
 @media (max-width: 768px) {
@@ -2778,6 +2976,8 @@
     padding: 4px 8px;
     border-left: none;
   }
+
+  
 }
 
 @media (max-width: 480px) {
@@ -2786,15 +2986,563 @@
     grid-template-columns: minmax(84px, 38%) minmax(0, 1fr);
   }
 
-  .leave-details-content .leave-details-card-header {
-    flex-wrap: wrap;
-    height: auto;
-    gap: 8px;
-  }
+ .leave-details-content .leave-details-card-header {
+  flex-wrap: nowrap;
+  height: auto;
+  gap: 8px;
+  align-items: center;
+}
 
   .leave-details-content .edit-request-button {
     width: auto;
     min-width: 0;
     padding: 6px 12px;
+  }
+}
+
+
+/* ============================================================
+   APPROVAL STATUS - MOBILE FINAL
+   Keep the approval card full-width on mobile.
+   The timeline remains internally scrollable when needed.
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .leave-details-content > .leave-approval-card {
+    grid-area: approval;
+
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+
+    height: 254px;
+    min-height: 254px;
+    max-height: 254px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+  }
+
+  .leave-details-content
+  .leave-approval-card
+  .leave-details-card-header {
+    width: 100%;
+    min-width: 0;
+
+    box-sizing: border-box;
+  }
+
+  .leave-details-content .approval-timeline {
+    width: 100%;
+    min-width: 0;
+
+    height: 181px;
+    min-height: 181px;
+    max-height: 181px;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+.leave-details-content .approval-item {
+  width: 100%;
+  min-width: 0;
+
+  /* Circle | Text | Person card */
+  grid-template-columns: 23px minmax(0, 1fr) auto;
+
+  column-gap: 10px;
+}
+
+  .leave-details-content .approval-content {
+    min-width: 0;
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   APPROVAL STATUS - DESKTOP FINAL
+   Keep Figma alignment
+   Compact spacing
+   Internal vertical scroll only
+   ============================================================ */
+
+@media (min-width: 769px) {
+
+  /* ------------------------------------------------------------
+     APPROVAL TIMELINE
+     ------------------------------------------------------------ */
+
+  .leave-details-content .approval-timeline {
+    width: 100%;
+    height: 181px;
+    min-height: 181px;
+    max-height: 181px;
+
+    box-sizing: border-box;
+
+    padding: 2px 10px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    flex: 0 0 181px;
+  }
+
+
+  /* ------------------------------------------------------------
+     EACH APPROVAL ROW
+     ------------------------------------------------------------ */
+
+  .leave-details-content .approval-item {
+
+    width: 100%;
+
+    height: 44px;
+    min-height: 44px;
+    max-height: 44px;
+
+    box-sizing: border-box;
+
+    display: grid;
+
+    /*
+      Circle | Approval text | Person
+    */
+    grid-template-columns:
+      23px
+      minmax(0, 1fr)
+      120px;
+
+    column-gap: 8px;
+
+    align-items: center;
+
+    flex: 0 0 44px;
+
+    position: relative;
+  }
+
+
+  /* ------------------------------------------------------------
+     APPROVAL TEXT
+     ------------------------------------------------------------ */
+
+  .leave-details-content .approval-content {
+
+    width: 100%;
+    min-width: 0;
+
+    height: 44px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    overflow: hidden;
+  }
+
+
+  .leave-details-content .approval-content h4 {
+
+    margin: 0;
+
+    height: 16px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 12px;
+    line-height: 16px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+
+  .leave-details-content .approval-content p {
+
+    margin: 0;
+
+    height: 13px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+    line-height: 13px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+
+  .leave-details-content .approval-content span {
+
+    display: block;
+
+    height: 13px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 9px;
+    line-height: 13px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+
+ /* ------------------------------------------------------------
+   PERSON CARD - RIGHT SIDE
+   ------------------------------------------------------------ */
+
+.leave-details-content .approval-person {
+
+  grid-column: 3;
+
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+
+  height: 49px;
+  min-height: 49px;
+  max-height: 49px;
+
+  box-sizing: border-box;
+
+  padding: 6px 8px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+
+  justify-self: end;
+  align-self: center;
+
+  margin: 0;
+
+  overflow: hidden;
+}
+
+
+/* ------------------------------------------------------------
+   PERSON AVATAR
+   ------------------------------------------------------------ */
+
+.leave-details-content .approval-person-avatar {
+
+  width: 34px;
+  height: 34px;
+
+  min-width: 34px;
+  min-height: 34px;
+
+  max-width: 34px;
+  max-height: 34px;
+
+  flex: 0 0 34px;
+}
+
+
+/* ------------------------------------------------------------
+   PERSON NAME
+   ------------------------------------------------------------ */
+
+.leave-details-content .approval-person strong {
+
+  max-width: 85px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 13px;
+  line-height: 15px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ------------------------------------------------------------
+   DESIGNATION
+   ------------------------------------------------------------ */
+
+.leave-details-content .approval-person span {
+
+  max-width: 85px;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 10px;
+  line-height: 13px;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+}
+/* ============================================================
+   APPROVAL STATUS - DESKTOP SCROLL + SPACING
+   Show approximately 3 approval items at a time.
+   4th / additional items are accessed using scrollbar.
+   Mobile layout is NOT affected.
+   ============================================================ */
+
+@media (min-width: 769px) {
+
+  .leave-details-content .approval-timeline {
+    width: 100%;
+    height: 181px;
+    min-height: 181px;
+    max-height: 181px;
+
+    box-sizing: border-box;
+
+    padding: 2px 10px;
+
+    overflow-x: hidden;
+    overflow-y: scroll;
+
+    flex: 0 0 181px;
+
+    /* Keep the scrollbar visible */
+    scrollbar-width: auto;
+  }
+
+  /* Chrome / Edge scrollbar */
+  .leave-details-content .approval-timeline::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .leave-details-content .approval-timeline::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .leave-details-content .approval-timeline::-webkit-scrollbar-thumb {
+    background: #8A8F93;
+    border-radius: 10px;
+  }
+
+  .leave-details-content .approval-timeline::-webkit-scrollbar-thumb:hover {
+    background: #6F7478;
+  }
+
+
+  /* ------------------------------------------------------------
+     APPROVAL ITEM
+     Increase vertical spacing so 4 items cannot fit together.
+     ------------------------------------------------------------ */
+
+  .leave-details-content .approval-item {
+    width: 100%;
+
+    height: 60px;
+    min-height: 60px;
+    max-height: 60px;
+
+    box-sizing: border-box;
+
+    display: grid;
+
+   grid-template-columns:
+  23px
+  minmax(0, 1fr)
+  140px;
+
+    column-gap: 8px;
+
+    align-items: center;
+
+    flex: 0 0 60px;
+
+    position: relative;
+  }
+
+
+  /* ------------------------------------------------------------
+     APPROVAL TEXT
+     ------------------------------------------------------------ */
+
+  .leave-details-content .approval-content {
+    width: 100%;
+    min-width: 0;
+
+    height: 60px;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    overflow: hidden;
+  }
+
+
+  .leave-details-content .approval-content h4 {
+    margin: 0;
+
+    height: 18px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 13px;
+    line-height: 18px;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  .leave-details-content .approval-content p {
+    margin: 0;
+
+    height: 15px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 11px;
+    line-height: 15px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  .leave-details-content .approval-content span {
+    display: block;
+
+    height: 15px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+    line-height: 15px;
+
+    font-weight: 500;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  /* ------------------------------------------------------------
+     PERSON CARD - RIGHT SIDE
+     ------------------------------------------------------------ */
+
+ .leave-details-content .approval-person {
+  grid-column: 3;
+
+  width: 140px;
+  min-width: 140px;
+  max-width: 140px;
+
+    height: 49px;
+    min-height: 49px;
+    max-height: 49px;
+
+    box-sizing: border-box;
+
+    padding: 6px 8px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 5px;
+
+    justify-self: end;
+    align-self: center;
+
+    margin: 0;
+
+    overflow: hidden;
+  }
+
+
+  /* ------------------------------------------------------------
+     PERSON AVATAR
+     ------------------------------------------------------------ */
+
+.leave-details-content .approval-person-avatar {
+  width: 34px;
+  height: 34px;
+
+  min-width: 34px;
+  min-height: 34px;
+
+  max-width: 34px;
+  max-height: 34px;
+
+  flex: 0 0 34px;
+}
+
+
+  /* ------------------------------------------------------------
+     PERSON NAME
+     ------------------------------------------------------------ */
+
+  .leave-details-content .approval-person strong {
+  max-width: 85px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 13px;
+    line-height: 15px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  /* ------------------------------------------------------------
+     DESIGNATION
+     ------------------------------------------------------------ */
+
+ .leave-details-content .approval-person span {
+  max-width: 85px;
+
+    font-family: "Inter", sans-serif;
+
+    font-size: 10px;
+    line-height: 13px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
