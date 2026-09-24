@@ -222,6 +222,13 @@ const EmployeeDashboard = ({ employee = null }) => {
   // VIEW ATTENDANCE DETAILS
   // ==========================================================
 
+  const today = new Date();
+  const hour = today.getHours();
+  const greeting = hour < 12 ? "Good Morning" : hour < 17 ? "Good Afternoon" : "Good Evening";
+  const firstName = (localStorage.getItem("name") || "").trim().split(/\s+/)[0] || "there";
+  const todayDay = today.toLocaleDateString("en-GB", { weekday: "long" });
+  const todayDate = today.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+
   const handleViewAttendance = () => {
     navigate("/attendance");
   };
@@ -250,11 +257,11 @@ const handleViewLeave = () => {
           <div className="welcome-content">
 
             <div className="welcome-small">
-              Good Morning,
+              {greeting},
             </div>
 
             <div className="welcome-title">
-              Name!
+              {firstName}!
               <span className="welcome-hand">
                 👋
               </span>
@@ -292,11 +299,11 @@ const handleViewLeave = () => {
             <div className="dashboard-date-content">
 
               <span className="dashboard-day">
-                Monday
+                {todayDay}
               </span>
 
               <strong>
-                10 Sep 2026
+                {todayDate}
               </strong>
 
               <span className="date-gradient-line"></span>
@@ -795,19 +802,6 @@ const handleViewLeave = () => {
   </button>
 </div>
 </div>
-
-          {/* ==================================================
-              THIRD CARD
-          =================================================== */}
-
-          <div className="figma-empty-card"></div>
-
-
-          {/* ==================================================
-              FOURTH CARD
-          =================================================== */}
-
-          <div className="figma-empty-card"></div>
 
         </section>
 

@@ -8,11 +8,12 @@ import {
   Bell,
   ChevronDown,
   CircleUserRound,
+  Menu,
 } from "lucide-react";
 
 import "./Header.css";
 
-const Header = ({ darkMode, setDarkMode }) => {
+const Header = ({ darkMode, setDarkMode, onMenuClick }) => {
   const navigate = useNavigate();
 
   const [profileOpen, setProfileOpen] = React.useState(false);
@@ -32,6 +33,7 @@ const Header = ({ darkMode, setDarkMode }) => {
     localStorage.removeItem("empId");
     localStorage.removeItem("role");
     localStorage.removeItem("department");
+    localStorage.removeItem("name");
 
     // Close profile menu
     setProfileOpen(false);
@@ -42,6 +44,22 @@ const Header = ({ darkMode, setDarkMode }) => {
 
   return (
     <header className="employee-header">
+
+      {/* ==========================================
+          MOBILE MENU (visible on small screens)
+      ========================================== */}
+
+      <button
+        type="button"
+        className="header-menu-button"
+        onClick={onMenuClick}
+        aria-label="Open menu"
+      >
+        <Menu
+          size={24}
+          strokeWidth={2}
+        />
+      </button>
 
       {/* ==========================================
           SEARCH

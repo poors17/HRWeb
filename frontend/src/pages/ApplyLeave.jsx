@@ -176,7 +176,15 @@ const ApplyLeave = () => {
             }))
         : [];
 
-      setLeaveTypes(mappedLeaveTypes);
+      const balanceByTypeId = new Map(mappedBalances.map((item) => [item.id, item]));
+      const leaveTypesWithBalance = mappedLeaveTypes.map((item) => {
+        const balance = balanceByTypeId.get(item.id);
+        return balance
+          ? { ...item, totalDays: balance.totalDays || item.totalDays, remaining: balance.remaining }
+          : item;
+      });
+
+      setLeaveTypes(leaveTypesWithBalance);
       setHandoverOptions(mappedHandoverOptions);
 
       if (mappedLeaveTypes.length > 0) {
@@ -185,8 +193,8 @@ const ApplyLeave = () => {
         setLeaveTypeId(String(defaultType.id));
       }
 
-      if (mappedHandoverOptions.length > 0 && !handoverEmployeeId) {
-        setHandoverEmployeeId(String(mappedHandoverOptions[0].id));
+      if (mappedHandoverOptions.length > 0) {
+        setHandoverEmployeeId((current) => current || String(mappedHandoverOptions[0].id));
       }
 
       if (mappedLeaveTypes.length === 0 && mappedBalances.length > 0) {
@@ -197,7 +205,7 @@ const ApplyLeave = () => {
     } finally {
       setLoading(false);
     }
-  }, [handoverEmployeeId, redirectToLogin]);
+  }, [redirectToLogin]);
 
   React.useEffect(() => {
     loadLeaveData();

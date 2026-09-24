@@ -4177,3 +4177,119 @@ text-overflow: clip;
     font-size: 8px;
   }
 }
+
+
+/* ============================================================
+   RESPONSIVE - FINAL
+   Must stay at the end of the file: earlier breakpoints are
+   re-declared further down and would otherwise win.
+   <=1360px : 2-column card grid
+   <=768px  : summary boxes / cards fill the width
+   <=600px  : single column
+============================================================ */
+
+@media (max-width: 1360px) {
+
+  .attendance-details-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "login location"
+      "shift status"
+      "progress progress"
+      "remark timeline"
+      "history history";
+    height: auto;
+  }
+
+  .attendance-details-grid > * {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .attendance-details-grid .attendance-detail-row {
+    width: auto;
+  }
+
+  .attendance-details-grid > .attendance-login-card { grid-area: login; }
+  .attendance-details-grid > .location-card { grid-area: location; }
+  .attendance-details-grid > .shift-card { grid-area: shift; }
+  .attendance-details-grid > .status-card { grid-area: status; }
+  .attendance-details-grid > .attendance-working-progress { grid-area: progress; }
+  .attendance-details-grid > .attendance-remark-card { grid-area: remark; }
+  .attendance-details-grid > .attendance-timeline-card { grid-area: timeline; }
+  .attendance-details-grid > .attendance-history-card { grid-area: history; }
+
+  .attendance-detail-row strong,
+  .address-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .attendance-history-table-wrap {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .attendance-details-summary {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+
+  .attendance-details-employee,
+  .attendance-details-employee-left,
+  .attendance-details-employee-info {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .attendance-details-employee {
+    height: auto;
+    min-height: 0;
+  }
+
+  .attendance-details-employee-info h2,
+  .attendance-details-employee-info p,
+  .attendance-details-employee-info span {
+    overflow-wrap: anywhere;
+    white-space: normal;
+  }
+
+  .attendance-details-employee-info span {
+    max-width: 100%;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+
+  .attendance-details-grid {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "login"
+      "location"
+      "shift"
+      "status"
+      "progress"
+      "remark"
+      "timeline"
+      "history";
+  }
+
+  .attendance-details-summary {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .attendance-history-table {
+    min-width: 480px;
+  }
+}

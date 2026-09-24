@@ -52,6 +52,7 @@ const menuSections = [
       {
         label: "Leave",
         icon: leaveIcon,
+        path: "/leave-details",
         iconClass: "leave-menu-icon",
       },
       {

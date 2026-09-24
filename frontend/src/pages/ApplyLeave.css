@@ -1037,3 +1037,197 @@ textarea::placeholder {
 .dark-mode .apply-leave-breadcrumb-separator {
   color: #fff;
 }
+
+/* ============================================================
+   RESPONSIVE
+   The Figma layout (570px form + 402px balance column) needs
+   ~1090px of content width. Below that the fixed widths become
+   fluid, the two columns wrap, and on phones each label sits
+   above its field.
+============================================================ */
+
+@media (max-width: 1360px) {
+
+  .apply-leave-grid {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 24px;
+  }
+
+  .apply-leave-form-card {
+    flex: 1 1 480px;
+    width: auto;
+    max-width: 570px;
+    height: auto;
+  }
+
+  .apply-leave-form-row,
+  .apply-leave-reason-row {
+    width: 100%;
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .apply-leave-select-wrapper select,
+  .apply-leave-date-display,
+  .apply-leave-duration,
+  .apply-leave-reason-row textarea {
+    width: 100%;
+  }
+
+  .apply-leave-right-column {
+    flex: 1 1 340px;
+    width: auto;
+    max-width: 402px;
+    height: auto;
+    gap: 8px;
+  }
+
+  .apply-leave-balance-card,
+  .apply-leave-balance-header,
+  .apply-leave-balance-content {
+    width: 100%;
+  }
+
+  .apply-leave-balance-card,
+  .apply-leave-balance-content {
+    height: auto;
+    min-height: 0;
+  }
+
+  .apply-leave-balance-row {
+    width: auto;
+  }
+
+  .apply-leave-handover {
+    width: 100%;
+    height: auto;
+    gap: 8px;
+  }
+
+  .apply-leave-handover-select,
+  .apply-leave-handover-select select {
+    width: 100%;
+  }
+
+  .apply-leave-contact {
+    flex-wrap: wrap;
+    gap: 10px 25px;
+    margin-top: 32px;
+  }
+
+  .apply-leave-contact-input {
+    flex: 0 1 322px;
+    width: auto;
+    min-width: 0;
+  }
+
+  .apply-leave-actions {
+    margin-top: 48px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .apply-leave-page {
+    padding: 10px 12px 0;
+  }
+
+  .apply-leave-grid {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .apply-leave-form-card,
+  .apply-leave-right-column {
+    flex: none;
+    width: 100%;
+    max-width: none;
+  }
+
+  .apply-leave-actions {
+    margin-top: 32px;
+    padding: 10px 0;
+  }
+}
+
+@media (max-width: 576px) {
+
+  .apply-leave-breadcrumb {
+    height: auto;
+    min-height: 40px;
+    flex-wrap: wrap;
+    padding: 8px 10px;
+  }
+
+  .apply-leave-breadcrumb-parent,
+  .apply-leave-breadcrumb-separator,
+  .apply-leave-breadcrumb-current {
+    font-size: 14px;
+  }
+
+  .apply-leave-title {
+    padding: 6px 10px 10px;
+  }
+
+  .apply-leave-title h1 {
+    font-size: 20px;
+  }
+
+  .apply-leave-title p {
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .apply-leave-form-card {
+    padding: 12px;
+  }
+
+  .apply-leave-form-row,
+  .apply-leave-reason-row {
+    height: auto;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .apply-leave-form-row label,
+  .apply-leave-handover label,
+  .apply-leave-contact label {
+    font-size: 14px;
+  }
+
+  .apply-leave-handover {
+    padding: 12px 0;
+  }
+
+  .apply-leave-contact {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+    margin-top: 12px;
+    padding-left: 0;
+  }
+
+  .apply-leave-contact label {
+    width: auto;
+    min-width: 0;
+  }
+
+  .apply-leave-contact-input {
+    flex: none;
+    width: 100%;
+  }
+
+  .apply-leave-actions {
+    justify-content: stretch;
+    gap: 12px;
+  }
+
+  .apply-leave-cancel,
+  .apply-leave-submit {
+    flex: 1 1 0;
+    width: auto;
+    min-width: 0;
+  }
+}

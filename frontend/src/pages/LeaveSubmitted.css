@@ -569,3 +569,25 @@
   } 
  
 }
+
+/* ============================================================
+   RESPONSIVE - FLUID TEXT AND ROWS
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .leave-submitted-description {
+    width: 100%;
+    max-width: 420px;
+  }
+
+  .leave-submitted-row {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .leave-submitted-value {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}

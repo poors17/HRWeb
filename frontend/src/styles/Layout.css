@@ -361,136 +361,89 @@ body {
 
 
 /* ============================================================
-   MOBILE
-   576px - 768px
+   MOBILE  (<= 768px)
+   The sidebar becomes an off-canvas drawer opened from the
+   header menu button, so the content gets the full width.
 ============================================================ */
 
 @media (max-width: 768px) {
 
-  .employee-page {
-    width: 100%;
+  .employee-page,
+  .employee-right {
     height: 100vh;
-
-    overflow: hidden;
+    height: 100dvh;
   }
 
-  /*
-     Mobile sidebar stays collapsed.
-     The right content uses the remaining width.
-  */
+  .employee-page aside.employee-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
 
-  .employee-sidebar {
-    flex: 0 0 72px !important;
+    z-index: 1000;
 
-    width: 72px !important;
-    min-width: 72px !important;
-    max-width: 72px !important;
+    flex: none;
+
+    width: min(280px, 85vw) !important;
+    min-width: 0 !important;
+    max-width: 85vw !important;
+
+    height: 100vh;
+    height: 100dvh;
+
+    transform: translateX(-100%);
+    visibility: hidden;
+
+    transition:
+      transform 0.25s ease,
+      visibility 0s linear 0.25s;
+  }
+
+  .employee-page.mobile-nav-open aside.employee-sidebar {
+    transform: translateX(0);
+    visibility: visible;
+
+    box-shadow: 0 0 32px rgba(15, 23, 42, 0.35);
+
+    transition:
+      transform 0.25s ease,
+      visibility 0s;
+  }
+
+  .sidebar-backdrop {
+    position: fixed;
+    inset: 0;
+
+    z-index: 999;
+
+    background: rgba(15, 23, 42, 0.45);
   }
 
   .employee-right {
     flex: 1 1 auto;
 
-    width: auto;
-    min-width: 0;
-
-    height: 100vh;
-  }
-
-  .employee-header {
-    flex: 0 0 59px;
-
     width: 100%;
     min-width: 0;
   }
 
-  .employee-main {
-    flex: 1 1 auto;
-
-    width: 100%;
-    min-width: 0;
-
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-
-  .employee-footer {
-    flex: 0 0 56px;
-
-    width: 100%;
-    height: 56px;
-    min-height: 56px;
+  .employee-right .employee-footer {
+    flex: 0 0 auto;
+    height: auto;
+    min-height: 44px;
   }
 }
 
 
 /* ============================================================
-   SMALL MOBILE
-   <= 576px
+   SMALL MOBILE  (<= 576px)
 ============================================================ */
 
 @media (max-width: 576px) {
 
-  .employee-sidebar {
-    flex: 0 0 64px !important;
-
-    width: 64px !important;
-    min-width: 64px !important;
-    max-width: 64px !important;
-  }
-
-  .employee-right {
-    flex: 1 1 auto;
-
-    width: auto;
-    min-width: 0;
-  }
-
-  .employee-header {
+  .employee-right .employee-header {
     flex-basis: 56px;
 
     height: 56px;
     min-height: 56px;
-  }
-
-  .employee-main {
-    width: 100%;
-    min-width: 0;
-  }
-
-  .employee-footer {
-    flex-basis: 52px;
-
-    height: 52px;
-    min-height: 52px;
-  }
-}
-
-
-/* ============================================================
-   VERY SMALL DEVICES
-============================================================ */
-
-@media (max-width: 400px) {
-
-  .employee-sidebar {
-    flex-basis: 60px !important;
-
-    width: 60px !important;
-    min-width: 60px !important;
-    max-width: 60px !important;
-  }
-
-  .employee-header {
-    flex-basis: 54px;
-
-    height: 54px;
-    min-height: 54px;
-  }
-
-  .employee-footer {
-    flex-basis: 48px;
-
-    height: 48px;
-    min-height: 48px;
   }
 }

@@ -2334,3 +2334,275 @@
   }
 
 }
+
+/* ============================================================
+   RESPONSIVE - FINAL
+   The Figma layout (491 + 468 + 119px columns) needs ~1130px of
+   content width. Below that:
+   <=1400px : 2 columns, attachment card spans the full width
+   <=768px  : single column
+   Selectors are scoped to .leave-details-content because
+   .leave-balance-card is also styled by the dashboard CSS.
+============================================================ */
+
+@media (max-width: 1400px) {
+
+  .leave-details-header {
+    height: auto;
+    min-height: 66px;
+    flex-wrap: wrap;
+  }
+
+  .leave-details-header-content {
+    flex: 1 1 320px;
+    width: auto;
+    min-width: 0;
+    height: auto;
+  }
+
+  .leave-details-header-status {
+    flex-wrap: wrap;
+  }
+
+  .leave-details-content {
+    padding: 10px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+    grid-template-areas:
+      "info     apply"
+      "approval balance"
+      "attach   attach"
+      "actions  actions";
+    justify-content: stretch;
+  }
+
+  .leave-details-content > * {
+    width: auto;
+    min-width: 0;
+    max-width: none;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    margin: 0;
+    transform: none;
+  }
+
+  .leave-details-content > .leave-details-card { grid-area: info; }
+  .leave-details-content > .apply-leave-details-card { grid-area: apply; }
+  .leave-details-content > .leave-approval-card { grid-area: approval; }
+  .leave-details-content > .leave-balance-card { grid-area: balance; }
+  .leave-details-content > .leave-details-attachment-card { grid-area: attach; }
+  .leave-details-content > .leave-details-actions { grid-area: actions; }
+
+  .leave-details-content > .leave-details-attachment-card {
+    min-height: 160px;
+  }
+
+  .leave-details-content .attachment-header,
+  .leave-details-content .leave-approval-card .leave-details-card-header,
+  .leave-details-content .approval-timeline,
+  .leave-details-content .leave-info-row {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .leave-details-content .approval-timeline,
+  .leave-details-content .leave-balance-content {
+    height: auto;
+  }
+
+  .leave-details-content .leave-reason,
+  .leave-details-content .apply-leave-remark {
+    width: auto;
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .leave-details-content .leave-balance-progress {
+    flex: 1 1 auto;
+    width: auto;
+    min-width: 60px;
+  }
+
+  .leave-details-content > .leave-details-actions {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 16px 32px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .leave-details-content {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "info"
+      "apply"
+      "approval"
+      "balance"
+      "attach"
+      "actions";
+  }
+
+  .leave-details-employee {
+    height: auto;
+    min-height: 0;
+  }
+
+  .leave-details-profile {
+    height: auto;
+    min-height: 0;
+    min-width: 0;
+  }
+
+  .leave-details-employee-name,
+  .leave-details-employee-name span {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .leave-details-header h1 {
+    font-size: 20px;
+  }
+
+  .leave-details-header p {
+    line-height: 18px;
+  }
+
+  .leave-id-badge,
+  .approved-badge {
+    width: auto;
+  }
+
+  .leave-details-content > .leave-details-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .download-leave-button,
+  .cancel-leave-button,
+  .download-leave-button span,
+  .cancel-leave-button span {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 1400px) {
+
+  /* Employee strip: profile on top, info items wrap below */
+  .leave-details-employee {
+    height: auto;
+    min-height: 111px;
+    flex-wrap: wrap;
+  }
+
+  .leave-details-employee-info {
+    flex: 1 1 100%;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    row-gap: 8px;
+    padding: 0 10px 10px;
+  }
+
+  .leave-details-employee-info > div {
+    height: auto;
+    min-height: 56px;
+  }
+
+  .leave-details-employee-info > div:first-child {
+    padding-left: 30px;
+  }
+
+  /* Card bodies grow with their content */
+  .leave-details-content .leave-info-list {
+    height: auto;
+  }
+
+  .leave-details-content .leave-reason,
+  .leave-details-content .apply-leave-remark {
+    height: auto;
+    min-height: 37px;
+    white-space: normal;
+    line-height: 1.35;
+  }
+
+  .leave-details-content .leave-info-row {
+    column-gap: 8px;
+  }
+
+  .leave-details-content .leave-info-row > * {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* Approval timeline: approver chip goes under the step text */
+  .leave-details-content .approval-item {
+    height: auto;
+    grid-template-columns: 23px minmax(0, 1fr);
+    column-gap: 10px;
+    row-gap: 6px;
+  }
+
+  .leave-details-content .approval-timeline {
+    min-height: 0;
+    max-height: none;
+  }
+
+  .leave-details-content .approval-item {
+    flex-shrink: 0;
+  }
+
+  .leave-details-content .approval-line {
+    grid-row: 1 / span 2;
+  }
+
+  .leave-details-content .leave-info-row:has(.leave-reason),
+  .leave-details-content .leave-info-row:has(.apply-leave-remark) {
+    height: auto;
+  }
+
+  .leave-details-content .approval-person {
+    grid-column: 2;
+    justify-self: start;
+    max-width: 100%;
+    margin: 0 0 8px;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .leave-details-header-content {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  .leave-details-employee-info > div,
+  .leave-details-employee-info > div:first-child {
+    justify-content: flex-start;
+    gap: 4px;
+    padding: 4px 8px;
+    border-left: none;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .leave-details-content .leave-info-row {
+    grid-template-columns: minmax(84px, 38%) minmax(0, 1fr);
+  }
+
+  .leave-details-content .leave-details-card-header {
+    flex-wrap: wrap;
+    height: auto;
+    gap: 8px;
+  }
+
+  .leave-details-content .edit-request-button {
+    width: auto;
+    min-width: 0;
+    padding: 6px 12px;
+  }
+}
